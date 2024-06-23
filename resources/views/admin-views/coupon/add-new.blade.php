@@ -1,474 +1,315 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('Coupon Add'))
+@section('title', translate('coupon_Add'))
 
-@push('css_or_js')
-    <link href="{{asset('public/assets/back-end')}}/css/select2.min.css" rel="stylesheet"/>
-@endpush
-@push('css_or_js')
-<style>
-    .forAll{
-        display: none;
-    }
-    
-    .city-non-active{
-            display: none;
-    }
-    .city-active{
-        
-        display: block;
-    }
-</style>
-@endpush
 @section('content')
     <div class="content container-fluid">
-        <!-- Page Header -->
-        <div class="page-header">
-            <div class="row align-items-center">
-                <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title"><i
-                            class="tio-add-circle-outlined"></i> {{\App\CPU\translate('Add')}} {{\App\CPU\translate('New')}} {{\App\CPU\translate('Coupon')}}
-                    </h1>
-                </div>
-            </div>
+        <div class="mb-3">
+            <h2 class="h1 mb-0 text-capitalize d-flex align-items-center gap-2">
+                <img src="{{dynamicAsset(path: 'public/assets/back-end/img/coupon_setup.png')}}" alt="">
+                {{translate('coupon_setup')}}
+            </h2>
         </div>
-        <!-- End Page Header -->
 
-        <!-- Content Row -->
-        <div class="row gx-2 gx-lg-3">
+        <div class="row">
             <div class="col-sm-12 col-lg-12 mb-3 mb-lg-2">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{route('admin.coupon.store-coupon')}}" method="post">
+                        <form action="{{route('admin.coupon.add')}}" method="POST">
                             @csrf
 
                             <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('Type')}}</label>
-                                        <select class="form-control" name="coupon_type"
-                                                style="width: 100%" required>
-                                            {{--<option value="delivery_charge_free">Delivery Charge Free</option>--}}
-                                            <option value="discount_on_purchase">{{\App\CPU\translate('Discount_on_Purchase')}}</option>
-                                        </select>
-                                    </div>
+                                <div class="col-md-6 col-lg-4 form-group">
+                                    <label for="name"
+                                           class="title-color font-weight-medium d-flex">{{translate('coupon_type')}}</label>
+                                    <select class="form-control" id="coupon_type" name="coupon_type" required>
+                                        <option disabled selected>{{translate('select_coupon_type')}}</option>
+                                        <option
+                                            value="discount_on_purchase">{{translate('discount_on_Purchase')}}</option>
+                                        <option value="free_delivery">{{translate('free_Delivery')}}</option>
+                                        <option value="first_order">{{translate('first_Order')}}</option>
+                                    </select>
                                 </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('Title')}}</label>
-                                        <input type="text" name="title" class="form-control" id="title"
-                                               placeholder="{{\App\CPU\translate('Title')}}" required>
-                                    </div>
+                                <div class="col-md-6 col-lg-4 form-group">
+                                    <label for="name"
+                                           class="title-color font-weight-medium d-flex">{{translate('coupon_title')}}</label>
+                                    <input type="text" name="title" class="form-control" value="{{ old('title') }}"
+                                           id="title"
+                                           placeholder="{{translate('title')}}" required>
                                 </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('Code')}}</label>
-                                        <input type="text" name="code" value="{{\Illuminate\Support\Str::random(10)}}"
-                                               class="form-control" id="code"
-                                               placeholder="" required>
+                                <div class="col-md-6 col-lg-4 form-group">
+                                    <div class="d-flex justify-content-between">
+                                        <label for="name"
+                                               class="title-color font-weight-medium text-capitalize">{{translate('coupon_code')}}</label>
+                                        <a href="javascript:void(0)" class="float-right c1 fz-12" id="generateCode">{{translate('generate_code')}}</a>
                                     </div>
+                                    <input type="text" name="code" value=""
+                                           class="form-control" id="code"
+                                           placeholder="{{translate('ex')}}: EID100" required>
                                 </div>
-                            </div>
+                                <div class="col-md-6 col-lg-4 form-group first_order">
+                                    <label for="name"
+                                           class="title-color font-weight-medium d-flex">{{translate('coupon_bearer')}}</label>
+                                    <select class="form-control" name="coupon_bearer" id="coupon_bearer">
+                                        <option disabled selected>{{translate('select_coupon_bearer')}}</option>
+                                        <option value="seller">{{translate('vendor')}}</option>
+                                        <option value="inhouse">{{translate('admin')}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-lg-4 form-group coupon_by first_order">
+                                    <label for="name"
+                                           class="title-color font-weight-medium d-flex">{{translate('vendor')}}</label>
+                                    <select
+                                        class="js-example-basic-multiple js-states js-example-responsive form-control"
+                                        name="seller_id" id="vendor_wise_coupon">
+                                        <option disabled selected>{{translate('select_vendor')}}</option>
+                                    </select>
+                                </div>
 
-                            <div class="row">
-                                <div class="col-md-3 col-6">
-                                    <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('start_date')}}</label>
-                                        <input id="start_date" type="date" name="start_date" class="form-control" 
-                                               placeholder="{{\App\CPU\translate('start date')}}" required>
-                                    </div>
+                                <div class="col-md-6 col-lg-4 form-group coupon_type first_order">
+                                    <label for="name"
+                                           class="title-color font-weight-medium d-flex">{{translate('customer')}}</label>
+                                    <select
+                                        class="js-example-basic-multiple js-states js-example-responsive form-control"
+                                        name="customer_id">
+                                        <option disabled selected>{{translate('select_customer')}}</option>
+                                        <option value="0">{{translate('all_customer')}}</option>
+                                        @foreach($customers as $customer)
+                                            <option
+                                                value="{{ $customer->id }}">{{ $customer->f_name. ' '. $customer->l_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="col-md-3 col-6">
-                                    <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('expire_date')}}</label>
-                                        <input id="expire_date" type="date" name="expire_date" class="form-control" 
-                                               placeholder="{{\App\CPU\translate('expire date')}}" required>
-                                    </div>
+                                <div class="col-md-6 col-lg-4 form-group first_order">
+                                    <label
+                                        for="exampleFormControlInput1"
+                                        class="title-color font-weight-medium d-flex">{{translate('limit_for_same_user')}}</label>
+                                    <input type="number" name="limit" value="{{ old('limit') }}" min="0"
+                                           id="coupon_limit" class="form-control"
+                                           placeholder="{{translate('ex')}}: 10">
                                 </div>
-                                <div class="col-md-3 col-6">
-                                    <div class="form-group">
-                                        <label
-                                            for="exampleFormControlInput1">{{\App\CPU\translate('limit')}} {{\App\CPU\translate('for')}} {{\App\CPU\translate('same')}} {{\App\CPU\translate('user')}}</label>
-                                        <input type="number" name="limit" id="coupon_limit" class="form-control"
-                                               placeholder="{{\App\CPU\translate('EX')}}: {{\App\CPU\translate('10')}}">
-                                    </div>
+                                <div class="col-md-6 col-lg-4 form-group free_delivery">
+                                    <label for="name"
+                                           class="title-color font-weight-medium d-flex">{{translate('discount_type')}}</label>
+                                    <select id="discount_type" class="form-control w-100" name="discount_type">
+                                        <option value="amount">{{translate('amount')}}</option>
+                                        <option value="percentage">{{translate('percentage')}} (%)</option>
+                                    </select>
                                 </div>
-                                <div class="col-md-3 col-6">
-                                    <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('discount_type')}}</label>
-                                        <select id="discount_type" class="form-control" name="discount_type"
-                                                onchange="checkDiscountType(this.value)"
-                                                style="width: 100%">
-                                            <option value="amount">{{\App\CPU\translate('Amount')}}</option>
-                                            <option value="percentage">{{\App\CPU\translate('percentage')}}</option>
-                                        </select>
-                                    </div>
+                                <div class="col-md-6 col-lg-4 form-group free_delivery">
+                                    <label for="name"
+                                           class="title-color font-weight-medium d-flex">{{translate('discount_Amount')}}
+                                        <span id="discount_percent"> (%)</span></label>
+                                    <input type="number" min="1" max="1000000" name="discount"
+                                           value="{{ old('discount') }}" class="form-control"
+                                           id="discount"
+                                           placeholder="{{translate('ex')}} : 500">
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-3 col-6">
-                                    <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('Discount')}}</label>
-                                        <input type="number" step="any" min="1" max="1000000" name="discount" class="form-control"
-                                               id="discount"
-                                               placeholder="{{\App\CPU\translate('discount')}}" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-6">
-                                    <label for="name">{{\App\CPU\translate('minimum_purchase')}}</label>
-                                    <input type="number" min="1" max="1000000" name="min_purchase" class="form-control"
+                                <div class="col-md-6 col-lg-4 form-group">
+                                    <label for="name"
+                                           class="title-color font-weight-medium d-flex">{{translate('minimum_purchase')}}
+                                        ($)</label>
+                                    <input type="number" min="1" max="1000000" name="min_purchase"
+                                           value="{{ old('min_purchase') }}" class="form-control"
                                            id="minimum purchase"
-                                           placeholder="{{\App\CPU\translate('minimum purchase')}}" required>
+                                           placeholder="{{translate('ex')}} : 100">
                                 </div>
-                                <div id="max-discount" class="col-md-3 col-6">
-                                    <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('maximum_discount')}}</label>
-                                        <input type="number" min="1" max="1000000" name="max_discount" 
-                                               class="form-control" id="maximum discount"
-                                               placeholder="{{\App\CPU\translate('maximum discount')}}" >
-                                    </div>
+                                <div class="col-md-6 col-lg-4 form-group free_delivery" id="max-discount">
+                                    <label for="name"
+                                           class="title-color font-weight-medium d-flex">{{translate('maximum_discount')}}
+                                        ($)</label>
+                                    <input type="number" min="1" max="1000000" name="max_discount"
+                                           value="{{ old('max_discount') }}"
+                                           class="form-control" id="maximum discount"
+                                           placeholder="{{translate('ex')}} : 5000">
                                 </div>
-
-                                <div id="max-discount" class="col-md-3 col-6">
-                                    <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('Quantity')}}</label>
-                                        <input type="number" min="1" max="1000000" name="qty" 
-                                               class="form-control" id="Quantity"
-                                               placeholder="{{\App\CPU\translate('Quantity')}}" >
-                                    </div>
+                                <div class="col-md-6 col-lg-4 form-group">
+                                    <label for="name"
+                                           class="title-color font-weight-medium d-flex">{{translate('start_date')}}</label>
+                                    <input id="start_date" type="date" name="start_date" value="{{ old('start_date') }}"
+                                           class="form-control"
+                                           placeholder="{{translate('start_date')}}" required>
                                 </div>
-                                
-                                
-                                <div class="col-md-3 col-6">
-                                    <label>{{\App\CPU\translate('ForAll')}}</label>
-                                    <select class="form-control" id="ForAll" name="forall">
-                                        <option value="1">{{\App\CPU\translate('yes')}}</option>
-                                        <option value="0">{{\App\CPU\translate('no')}}</option>
-                                    </select>
+                                <div class="col-md-6 col-lg-4 form-group">
+                                    <label for="name"
+                                           class="title-color font-weight-medium d-flex">{{translate('expire_date')}}</label>
+                                    <input id="expire_date" type="date" name="expire_date"
+                                           value="{{ old('expire_date') }}" class="form-control"
+                                           placeholder="{{translate('expire_date')}}" required>
                                 </div>
-                                <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('fromDateRegister')}}</label>
-                                    <input type="date" name="fromDate2" value="{{$seaerchData['fromDate'] ? $seaerchData['fromDate'] : ""}}"  id="from_date"
-                                            class="form-control" >
-                                </div>
-                                <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('toDateRegister')}}</label>
-                                    <input type="date"  name="toDate2" value="{{$seaerchData['toDate'] ? $seaerchData['toDate'] : ""}}" id="to_date"
-                                            class="form-control" > 
-                                </div>
-                                <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('fromOrder')}}</label>
-                                    <input type="number" name="fromOrder2" value=""  id="from_date"
-                                            class="form-control" >
-                                </div>
-                                <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('toOrder')}}</label>
-                                    <input type="number"  name="toOrder2" value="" id="to_date"
-                                    class="form-control" > 
-                                </div>
-                                <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('fromOrderprice')}}</label>
-                                    <input type="number" name="fromOrderprice2" value=""  id="from_date"
-                                            class="form-control" >
-                                </div>
-                                <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('toOrderprice')}}</label>
-                                    <input type="number"  name="toOrderprice2" value="" id="to_date"
-                                    class="form-control" > 
-                                </div>
-                                <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('city')}}</label>
-                                    <select class="form-select form-control select-areas" name="city2[]" multiple type="city" id="si-city"
-                                        style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
-                                        >
-                                        <option ></option>
-                                        @foreach ($governorates as $governorate)
-                                            <option value="{{$governorate->id}}">{{$governorate->governorate_name_ar}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('area')}}</label>
-                                    <select class="form-select form-control select-areas" name="area2[]" multiple type="country" id="si-area"
-                                        style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
-                                        >
-                                        <option ></option>
-                                        @foreach ($cities as $city)
-                                            <option class="city-non-active" data-parent="{{$city->governorate_id}}" value="{{$city->id}}">{{$city->city_name_ar}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('Type')}}</label>
-                                    <select class="form-select form-control" name="type2" type="type" id="si-Type"
-                                        style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
-                                        >
-                                        <option selected></option>
-                                        @foreach ($customertypes as $customertype)
-                                            <option  value="{{$customertype->id}}">{{$customertype->ar_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-    
-                            
-
                             </div>
 
-                            <div class="">
-                                <button type="submit" class="btn btn-primary float-right">{{\App\CPU\translate('Submit')}}</button>
+                            <div class="d-flex align-items-center justify-content-end flex-wrap gap-10">
+                                <button type="reset" class="btn btn-secondary px-4">{{translate('reset')}}</button>
+                                <button type="submit" class="btn btn--primary px-4">{{translate('submit')}}</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        
 
-        <div class="row" style="margin-top: 20px">
+        <div class="row mt-20">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="row justify-content-between align-items-center flex-grow-1">
-                            <div class="col-lg-3 mb-3 mb-lg-0">
-                                <h5>{{\App\CPU\translate('coupons_table')}} <span style="color: red;">({{ $cou->total() }})</span>
-                                </h5>
-                            </div>
-                            <div class="col-lg-6">
-                                <!-- Search -->
-                                <form action="{{ url()->current() }}" method="GET">
-                                    <div class="input-group input-group-merge input-group-flush">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <i class="tio-search"></i>
-                                            </div>
+                    <div class="px-3 py-4">
+                        <div class="d-flex flex-wrap  gap-3 align-items-center">
+                            <h5 class="mb-0 text-capitalize d-flex gap-2 mr-auto">
+                                {{translate('coupon_list')}}
+                                <span class="badge badge-soft-dark radius-50 fz-12 ml-1">{{ $coupons->total() }}</span>
+                            </h5>
+                            <form action="{{ url()->current() }}" method="GET">
+                                <div class="input-group input-group-merge input-group-custom">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="tio-search"></i>
                                         </div>
-                                        <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                               placeholder="{{\App\CPU\translate('Search by Title or Code or Discount Type')}}"
-                                               value="{{ $search }}" aria-label="Search orders" required>
-                                        <button type="submit" class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
                                     </div>
-                                </form>
-                                <!-- End Search -->
+                                    <input id="datatableSearch_" type="search" name="searchValue" class="form-control"
+                                           placeholder="{{translate('search_by_Title_or_Code_or_Discount_Type')}}"
+                                           value="{{ request('searchValue') }}" aria-label="Search orders" required>
+                                    <button type="submit" class="btn btn--primary">{{translate('search')}}</button>
+                                </div>
+                            </form>
+                            <div>
+                                <button type="button" class="btn btn-outline--primary text-nowrap btn-block"
+                                        data-toggle="dropdown">
+                                    <i class="tio-download-to"></i>
+                                    {{translate('export')}}
+                                    <i class="tio-chevron-down"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a class="dropdown-item"
+                                           href="{{ route('admin.coupon.export',['searchValue'=>request('searchValue')]) }}">
+                                            <img width="14" src="{{dynamicAsset(path: 'public/assets/back-end/img/excel.png')}}"
+                                                 alt="">
+                                            {{translate('excel')}}
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body" style="padding: 0">
-                        <div class="table-responsive">
-                            <table id="datatable"
-                                   class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
-                                   style="width: 100%">
-                                <thead class="thead-light">
+
+                    <div class="table-responsive">
+                        <table id="datatable"
+                               class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table {{ Session::get('direction') === 'rtl' ? 'text-right' : 'text-left' }}">
+                            <thead class="thead-light thead-50 text-capitalize">
+                            <tr>
+                                <th>{{translate('SL')}}</th>
+                                <th>{{translate('coupon')}}</th>
+                                <th>{{translate('coupon_type')}}</th>
+                                <th>{{translate('duration')}}</th>
+                                <th>{{translate('user_limit')}}</th>
+                                <th class="text-center">{{translate('discount_bearer')}}</th>
+                                <th>{{translate('status')}}</th>
+                                <th class="text-center">{{translate('action')}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($coupons as $key => $coupon )
                                 <tr>
-                                    <th>{{\App\CPU\translate('SL')}}#</th>
-                                    <th>{{\App\CPU\translate('coupon_type')}}</th>
-                                    <th>{{\App\CPU\translate('Title')}}</th>
-                                    <th>{{\App\CPU\translate('Code')}}</th>
-                                    <th>{{ \App\CPU\translate('user') }} {{ \App\CPU\translate('limit') }}</th>
-                                    <th>{{\App\CPU\translate('minimum_purchase')}}</th>
-                                    <th>{{\App\CPU\translate('maximum_discount')}}</th>
-                                    <th>{{\App\CPU\translate('Discount')}}</th>
-                                    <th>{{\App\CPU\translate('discount_type')}}</th>
-                                    <th>{{\App\CPU\translate('start_date')}}</th>
-                                    <th>{{\App\CPU\translate('expire_date')}}</th>
-                                    <th>{{\App\CPU\translate('Status')}}</th>
-                                    <th>{{\App\CPU\translate('Action')}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($cou as $k=>$c)
-                                    <tr>
-                                        <td >{{$cou->firstItem() + $k}}</td>
-                                        <td style="text-transform: capitalize">{{str_replace('_',' ',$c['coupon_type'])}}</td>
-                                        <td class="text-capitalize">
-                                            {{substr($c['title'],0,20)}}
-                                        </td>
-                                        <td>{{$c['code']}}</td>
-                                        <td>{{ $c['limit'] }}</td>
-                                        <td>{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($c['min_purchase']))}}</td>
-                                        <td>{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($c['max_discount']))}}</td>
-                                        <td>{{$c['discount_type']=='amount'?\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($c['discount'])):$c['discount']}}</td>
-                                        <td>{{$c['discount_type']}}</td>
-                                        <td>{{date('d-M-y',strtotime($c['start_date']))}}</td>
-                                        <td>{{date('d-M-y',strtotime($c['expire_date']))}}</td>
-                                        <td>
-                                            <label class="toggle-switch toggle-switch-sm">
-                                                <input type="checkbox" class="toggle-switch-input"
-                                                       onclick="location.href='{{route('admin.coupon.status',[$c['id'],$c->status?0:1])}}'"
-                                                       class="toggle-switch-input" {{$c->status?'checked':''}}>
-                                                <span class="toggle-switch-label">
-                                            <span class="toggle-switch-indicator"></span>
-                                            </span>
+                                    <td>{{$coupons->firstItem() + $key }}</td>
+                                    <td>
+                                        <div>{{substr($coupon['title'],0,20)}}</div>
+                                        <strong>{{translate('code')}}: {{$coupon['code']}}</strong>
+                                    </td>
+                                    <td class="text-capitalize">{{translate(str_replace('_',' ',$coupon['coupon_type']))}}</td>
+                                    <td>
+                                        <div class="d-flex flex-wrap gap-1">
+                                            <span>{{date('d M, y',strtotime($coupon['start_date']))}} - </span>
+                                            <span>{{date('d M, y',strtotime($coupon['expire_date']))}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span>{{translate('limit')}}:
+                                            <strong>{{ $coupon['limit'] }},</strong>
+                                        </span>
+
+                                        <span class="ml-1">{{translate('used')}}:
+                                            <strong>{{ $coupon['order_count'] }}</strong>
+                                        </span>
+                                    </td>
+                                    <td class="text-center">{{ translate($coupon['coupon_bearer'] == 'inhouse' ? 'admin':$coupon['coupon_bearer']) }}</td>
+                                    <td>
+                                        <form
+                                            action="{{route('admin.coupon.status',[$coupon['id'],$coupon['status']?0:1])}}"
+                                            method="GET" id="coupon_status{{$coupon['id']}}-form"
+                                            class="coupon_status_form">
+                                            <label class="switcher">
+                                                <input type="checkbox" class="switcher_input toggle-switch-message"
+                                                       id="coupon_status{{$coupon['id']}}" name="status" value="1"
+                                                       {{ $coupon['status'] == 1 ? 'checked':'' }}
+                                                       data-modal-id="toggle-status-modal"
+                                                       data-toggle-id="coupon_status{{$coupon['id']}}"
+                                                       data-on-image="coupon-status-on.png"
+                                                       data-off-image="coupon-status-off.png"
+                                                       data-on-title="{{translate('Want_to_Turn_ON_Coupon_Status').'?'}}"
+                                                       data-off-title="{{translate('Want_to_Turn_OFF_Coupon_Status').'?'}}"
+                                                       data-on-message="<p>{{translate('if_enabled_this_coupon_will_be_available_on_the_website_and_customer_app')}}</p>"
+                                                       data-off-message="<p>{{translate('if_disabled_this_coupon_will_be_hidden_from_the_website_and_customer_app')}}</p>"
+                                                >
+                                                <span class="switcher_control"></span>
                                             </label>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a class="btn btn-primary btn-sm edit m-1"
-                                                href="{{route('admin.coupon.update',[$c['id']])}}"
-                                                title="{{ \App\CPU\translate('Edit')}}"
-                                                >
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-10 justify-content-center">
+                                            <button class="btn btn-outline--primary square-btn btn-sm mr-1 get-quick-view" data-id="{{ $coupon['id'] }}">
+                                                <img src="{{dynamicAsset(path: 'public/assets/back-end/img/eye.svg')}}" class="svg" alt="">
+                                            </button>
+                                            <a class="btn btn-outline--primary btn-sm edit"
+                                               href="{{route('admin.coupon.update',[$coupon['id']])}}"
+                                               title="{{ translate('edit')}}"
+                                            >
                                                 <i class="tio-edit"></i>
-                                            </a><br>
-                                            <a class="btn btn-danger btn-sm delete m-1"
-                                                href="javascript:"
-                                                onclick="form_alert('coupon-{{$c['id']}}','Want to delete this coupon ?')"
-                                                title="{{\App\CPU\translate('delete')}}"   
-                                                >
-                                                <i class="tio-add-to-trash"></i>
                                             </a>
-                                            <form action="{{route('admin.coupon.delete',[$c['id']])}}"
-                                                method="post" id="coupon-{{$c['id']}}">
+                                            <a class="btn btn-outline-danger btn-sm delete delete-data"
+                                               href="javascript:"
+                                               data-id="coupon-{{$coupon['id']}}"
+                                               title="{{translate('delete')}}"
+                                            >
+                                                <i class="tio-delete"></i>
+                                            </a>
+                                            <form action="{{route('admin.coupon.delete',[$coupon['id']])}}"
+                                                  method="post" id="coupon-{{$coupon['id']}}">
                                                 @csrf @method('delete')
                                             </form>
-                                            </div>
-                                            
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        <div class="modal fade" id="quick-view" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered coupon-details" role="document">
+                                <div class="modal-content" id="quick-view-modal">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        {{$cou->links()}}
-                    </div>
-                    @if(count($cou)==0)
-                        <div class="text-center p-4">
-                            <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg"
-                                 alt="Image Description" style="width: 7rem;">
-                            <p class="mb-0">{{\App\CPU\translate('No data to show')}}</p>
+
+                    <div class="table-responsive mt-4">
+                        <div class="px-4 d-flex justify-content-lg-end">
+                            {{$coupons->links()}}
                         </div>
+                    </div>
+
+                    @if(count($coupons)==0)
+                        @include('layouts.back-end._empty-state',['text'=>'no_coupon_found'],['image'=>'default'])
                     @endif
                 </div>
             </div>
         </div>
     </div>
+
+    <span id="coupon-bearer-url" data-url="{{route('admin.coupon.ajax-get-vendor')}}"></span>
+    <span id="get-detail-url" data-url="{{ route('admin.coupon.quick-view-details') }}"></span>
 @endsection
 
 @push('script')
-
-<script>
-    
-    $('#btn-export').on('click',function(e){
-        e.preventDefault();
-        
-        var search = $('[name="search"]').val();
-        
-        search = (typeof(search) == "undefined") ? "" : search;
-        
-        var fromDate = $('[name="fromDate"]').val();
-        
-        fromDate = (typeof(fromDate) == "undefined") ? "" : fromDate;
-        
-        var toDate = $('[name="toDate"]').val();
-        
-        toDate = (typeof(toDate) == "undefined") ? "" : toDate;
-        
-        var fromOrder = $('[name="fromOrder"]').val();
-        
-        fromOrder = (typeof(fromOrder) == "undefined") ? "" : fromOrder;
-        
-        var toOrder = $('[name="toOrder"]').val();
-        
-        toOrder = (typeof(toOrder) == "undefined") ? "" : toOrder;
-        
-        var fromOrderprice = $('[name="fromOrderprice"]').val();
-        
-        fromOrderprice = (typeof(fromOrderprice) == "undefined") ? "" : fromOrderprice;
-        
-        var toOrderprice = $('[name="toOrderprice"]').val();
-        
-        toOrderprice = (typeof(toOrderprice) == "undefined") ? "" : toOrderprice;
-        
-        var city = $('[name="city"]').val();
-        
-        city = (typeof(city) == "undefined") ? "" : city;
-        
-        var area = $('[name="area"]').val();
-        
-        area = (typeof(area) == "undefined") ? "" : area;
-        
-        var type = $('[name="type"]').val();
-        
-        type = (typeof(type) == "undefined") ? "" : type;
-        var url = `search=`+search+`&fromDate=`+fromDate+`&toDate=`+toDate+`&fromOrder=`+fromOrder+`&toOrder=`+toOrder+`&fromOrderprice=`+fromOrderprice+`&toOrderprice=`+toOrderprice+`&city=`+city+`&area=`+area+`&type=`+type;
-        console.log("<?=URL::to('admin/customer/export');?>"+url );
-        open("<?=URL::to('admin/coupon/export?');?>"+url , '_blank');
-    })
-    $('#si-city').on('change',function(){
-        var cities = $('#si-city option:selected');
-        $('#si-area option').removeClass('city-active');
-        for (let index = 0; index < cities.length; index++) {
-            var city = $(cities[index]).val();
-            $('#si-area option[ data-parent="'+city+'"]').addClass('city-active');            
-        }
-    })
-    
-    $('#si-city2').on('change',function(){
-        var city = $('#si-city2 option:selected').val();
-        $('#si-area2 option').removeClass('city-active');
-        $('#si-area2 option[ data-parent="'+city+'"]').addClass('city-active');
-    })
-
-    $('#ForAll').on('change',function(){
-        if($(this).val() == 1){
-            $('.forAll').hide();
-        }
-        else{
-            $('.forAll').show();
-        }
-    })
-</script>
-<script>
-    $(document).ready(function() {
-            let discount_type = $('#discount_type').val();
-            if (discount_type == 'amount') {
-                $('#max-discount').hide()
-            } else if (discount_type == 'percentage') {
-                $('#max-discount').show()
-            }
-            //console.log(discount_type);
-            $('#start_date').attr('min',(new Date()).toISOString().split('T')[0]);
-            $('#expire_date').attr('min',(new Date()).toISOString().split('T')[0]);
-        });
-
-        $("#start_date").on("change", function () {
-            $('#expire_date').attr('min',$(this).val());
-        });
-
-        $("#expire_date").on("change", function () {
-            $('#start_date').attr('max',$(this).val());
-        });
-        
-        function checkDiscountType(val) {
-            if (val == 'amount') {
-                $('#max-discount').hide()
-            } else if (val == 'percentage') {
-                $('#max-discount').show()
-            }
-        }
-
-    
-</script>
-    
-    <script src="{{asset('public/assets/back-end')}}/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.select-areas').select2();
-        });
-        $(".js-example-theme-single").select2({
-            theme: "classic"
-        });
-
-        $(".js-example-responsive").select2({
-            width: 'resolve'
-        });
-    </script>
-
-    <!-- Page level plugins -->
-    <script src="{{asset('public/assets/back-end')}}/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="{{asset('public/assets/back-end')}}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{asset('public/assets/back-end')}}/js/demo/datatables-demo.js"></script>
+    <script src="{{dynamicAsset(path: 'public/assets/back-end/js/admin/coupon.js')}}"></script>
 @endpush

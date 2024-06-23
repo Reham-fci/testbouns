@@ -1,148 +1,130 @@
 @extends('layouts.back-end.app')
-@section('title', \App\CPU\translate('Contact View'))
-@push('css_or_js')
-    <link href="{{asset('public/assets/back-end')}}/css/select2.min.css" rel="stylesheet"/>
-    <link href="{{asset('public/assets/back-end/css/croppie.css')}}" rel="stylesheet">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endpush
+
+@section('title', translate('contact_View'))
 
 @section('content')
     <div class="content container-fluid">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"> {{\App\CPU\translate('Dashboard')}}</a>
-                </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Message')}} {{\App\CPU\translate('view')}}</li>
-            </ol>
-        </nav>
-        <!-- Page Heading -->
         <div class="container">
-            <div class="d-sm-flex align-items-center justify-content-between mb-2">
-                <h1 class="h3 mb-0 text-black-50">{{\App\CPU\translate('View_User_Message')}}</h1>
+            <div class="mb-3">
+                <h2 class="h1 mb-0 text-capitalize d-flex align-items-center gap-2">
+                    <img width="20" src="{{dynamicAsset(path: 'public/assets/back-end/img/message.png')}}" alt="">
+                    {{translate('message_view')}}
+                </h2>
             </div>
-
-            <!-- Content Row -->
-
             <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body mt-3 ml-4">
-                            <div class="row " style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                                <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
-                                    <img
-                                        onerror="this.src='{{asset('public/assets/front-end/img/image-place-holder.png')}}'"
-                                        style="height: 8rem; width: 9rem;" class="img-circle"
-                                        src="{{asset('public/assets/front-end')}}/img/contacts/blank.jpg"
-                                        alt="User Pic">
-
-                                </div>
-
-                                <div class=" col-md-9 col-lg-9 hidden-xs hidden-sm">
-                                    <strong style="margin-right: 20px">{{$contact->subject}}</strong>
-                                    @if($contact->seen==1)
-                                        <label
-                                            style="color: green; border: 1px solid;padding: 2px;border-radius: 10px">{{\App\CPU\translate('Seen')}}</label>
+                <div class="col-lg-6">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="mb-0 text-capitalize d-flex text-capitalize">
+                                <i class="tio-user-big"></i>
+                                {{translate('user_details')}}
+                            </h5>
+                            <form action="{{route('admin.contact.update',$contact->id)}}" method="post" id="submit-form">
+                                @csrf
+                                <div class="d-flex justify-content-end">
+                                    @if($contact->seen==0)
+                                        <button type="button" class="btn btn-success form-alert" data-id="submit-form" data-message="{{translate('want_check_this_message').'?'}}">
+                                            <i class="tio-checkmark-circle"></i> {{translate('check')}}
+                                        </button>
                                     @else
-                                        <label
-                                            style="color: red; border: 1px solid;padding: 2px;border-radius: 10px">{{\App\CPU\translate('Not_Seen_Yet')}}</label>
+                                        <button type="button" class="btn btn-info" disabled>
+                                            <i class="tio-checkmark-circle text-capitalize"></i> {{translate('already_check')}}
+                                        </button>
                                     @endif
-                                    <br>
-                                    <table class="table table-user-information">
-                                        <tbody>
-                                        <tr>
-                                            <td>{{\App\CPU\translate('User')}} {{\App\CPU\translate('name')}}:</td>
-                                            <td>{{$contact->name}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{\App\CPU\translate('mobile_no')}}:</td>
-                                            <td>{{$contact->mobile_number}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{\App\CPU\translate('Email')}}:</td>
-                                            <td>{{$contact->email}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{\App\CPU\translate('messages')}}</td>
-                                            <td><p style="font-width:16px;"> {{$contact->message}}</p></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
-
-
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h3>
-                                                <u>{{\App\CPU\translate('Reply_from_admin')}}</u>
-                                            </h3>
-                                            @if($contact['reply']!=null)
-                                                @php($data=json_decode($contact['reply'],true))
-                                                <div class="flex-start">
-                                                    <h6 class="{{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}">{{\App\CPU\translate('Subject')}} : </h6>
-                                                    <h6>{{$data['subject']}}</h6>
-                                                </div>
-                                                <div class="flex-start">
-                                                    <h6 class="{{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}">{{\App\CPU\translate('Body')}} : </h6>
-                                                    <h6>{{$data['body']}}</h6>
-                                                </div>
-                                            @else
-                                                <label class="badge badge-danger">{{\App\CPU\translate('No_reply')}}.</label>
-                                            @endif
-                                        </div>
+                            </form>
+                        </div>
+                        <div class="card-body">
+                            <div class="pl-2 d-flex gap-2 align-items-center mb-3">
+                                <strong class="">{{$contact->subject}}</strong>
+                                @if($contact->seen==1)
+                                    <label class="badge badge-soft-info mb-0">{{translate('seen')}}</label>
+                                @else
+                                    <label class="badge badge-soft-info mb-0 text-capitalize">{{translate('not_seen_yet')}}</label>
+                                @endif
+                            </div>
+                            <table class="table table-user-information table-borderless mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td>{{translate('name')}}:</td>
+                                        <td>{{$contact['name']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{translate('mobile_no')}}:</td>
+                                        <td>{{$contact['mobile_number']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{translate('email')}}:</td>
+                                        <td>{{$contact['email']}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header justify-content-center">
+                            <h5 class="mb-0 text-capitalize">
+                                {{translate('message_Log')}}
+                            </h5>
+                        </div>
+                        <div class="card-body d-flex flex-column gap-2">
+                            <div class="mb-3">
+                                <h5 class="px-2 py-1 badge-soft-info rounded mb-3 d-flex">{{ $contact->name }}</h5>
+                                <div class="flex-start mb-1">
+                                    <strong class="{{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}">{{translate('subject')}}: </strong>
+                                    <div><strong>{{$contact->subject}}</strong></div>
+                                </div>
+                                <div class="flex-start">
+                                    <strong class="{{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}">{{translate('message')}}: </strong>
+                                    <div>{{$contact->message}}</div>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="px-2 py-1 badge-soft-warning rounded mb-3 d-flex">{{translate('admin')}}</h5>
+                                @if($contact['reply']!=null)
+                                    @php($data=json_decode($contact['reply'],true))
+                                    <div class="flex-start mb-1">
+                                        <strong class="{{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}">{{translate('subject')}}: </strong>
+                                        <div><strong>{{$data['subject']}}</strong></div>
                                     </div>
-                                </div>
-
+                                    <div class="flex-start">
+                                        <strong class="{{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}">{{translate('message')}}: </strong>
+                                        <div>{{$data['body']}}</div>
+                                    </div>
+                                @else
+                                    <label class="badge badge-danger">{{translate('no_reply')}}.</label>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body mt-3 mx-lg-4">
+                            <div class="row text-start">
                                 <div class="col-12">
-                                    <form action="{{route('admin.contact.update',$contact->id)}}" method="post">
-                                        @csrf
-                                        <div class="form-group" style="display: none">
-                                            <div class="row">
-                                                <div class="col-md-10">
-                                                    <h4>{{\App\CPU\translate('Feedback')}}</h4>
-                                                    <textarea class="form-control " name="feedback" id="" rows="5"
-                                                              placeholder="{{\App\CPU\translate('Please_send_a_Feedback')}}">{{$contact->feedback}}</textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="card-footer pl-0">
-                                            @if($contact->seen==0)
-                                                <button type="submit" class="btn btn-primary float-right">
-                                                    <i class="fa fa-check"></i> {{\App\CPU\translate('Seen')}}
-                                                </button>
-                                            @endif
-                                        </div>
-                                    </form>
-                                </div>
-
-                                <div class="col-12 mt-4">
-                                    <center>
-                                        <h3>{{\App\CPU\translate('Send_Mail')}}</h3>
-                                        <label class="badge badge-soft-danger">{{\App\CPU\translate('Configure_your_mail_setup_first')}}.</label>
-                                    </center>
-
-
+                                    <div class="d-flex justify-content-center">
+                                        <h3>{{translate('send_Mail')}}</h3>
+                                        <label class="badge-soft-danger px-1">{{translate('configure_your_mail_setup_first').'.'}}</label>
+                                    </div>
                                     <form action="{{route('admin.contact.send-mail',$contact->id)}}" method="post">
                                         @csrf
-                                        <div class="form-group">
+                                        <div class="form-group mt-2">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <h6>{{\App\CPU\translate('Subject')}}</h6>
-                                                    <input class="form-control" name="subject">
+                                                    <label class="title-color">{{translate('subject')}}</label>
+                                                    <input class="form-control" name="subject" required placeholder="{{translate('subject')}}">
                                                 </div>
                                                 <div class="col-md-12 mt-3">
-                                                    <h6>{{\App\CPU\translate('Mail_Body')}}</h6>
-                                                    <textarea class="form-control " name="mail_body" id="" rows="5"
-                                                              placeholder="{{\App\CPU\translate('Please_send_a_Feedback')}}"></textarea>
+                                                    <label class="title-color">{{translate('mail_Body')}}</label>
+                                                    <textarea class="form-control h-100" name="mail_body"
+                                                              placeholder="{{translate('please_send_a_Feedback')}}" required></textarea>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="card-footer pl-0">
-                                            <button type="submit" class="btn btn-primary float-right">
-                                                <i class="fa fa-check"></i>{{\App\CPU\translate('send')}}
+                                        <div class="d-flex justify-content-end pt-3 mt-5">
+                                            <button type="submit" class="btn btn--primary px-4">
+                                            {{translate('send')}}<i class="tio-send ml-2"></i>
                                             </button>
                                         </div>
                                     </form>
@@ -154,9 +136,4 @@
             </div>
         </div>
     </div>
-
 @endsection
-
-@push('script')
-
-@endpush

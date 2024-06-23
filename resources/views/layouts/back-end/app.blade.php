@@ -1,232 +1,130 @@
+@php
+    use App\Utils\Helpers;
+    use Carbon\Carbon;
+@endphp
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{Session::get('direction')}}" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{Session::get('direction')}}"
+      style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Title -->
-
     <title>@yield('title')</title>
     <meta name="_token" content="{{csrf_token()}}">
-    <!--to make http ajax request to https-->
-    <!--    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">-->
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="">
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
-    <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="{{asset('public/assets/back-end')}}/css/vendor.min.css">
-    <link rel="stylesheet" href="{{asset('public/assets/back-end')}}/css/custom.css">
-
-
-    <link rel="stylesheet" href="{{asset('public/assets/back-end')}}/vendor/icon-set/style.css">
-    <!-- CSS Front Template -->
-    <link rel="stylesheet" href="{{asset('public/assets/back-end')}}/css/theme.minc619.css?v=1.0">
+    <link rel="shortcut icon" href="{{dynamicStorage(path: 'storage/app/public/company/'.getWebConfig(name: 'company_fav_icon'))}}">
+    <link rel="stylesheet" href="{{dynamicAsset(path: 'public/assets/back-end/css/vendor.min.css')}}">
+    <link rel="stylesheet" href="{{dynamicAsset(path: 'public/assets/back-end/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{dynamicAsset(path: 'public/assets/back-end/css/google-fonts.css')}}">
+    <link rel="stylesheet" href="{{dynamicAsset(path: 'public/assets/back-end/css/custom.css')}}">
+    <link rel="stylesheet" href="{{dynamicAsset(path: 'public/assets/back-end/vendor/icon-set/style.css')}}">
+    <link rel="stylesheet" href="{{dynamicAsset(path: 'public/assets/back-end/css/theme.minc619.css?v=1.0')}}">
+    <link rel="stylesheet" href="{{dynamicAsset(path: 'public/assets/back-end/css/style.css')}}">
+    <link rel="stylesheet" href="{{dynamicAsset(path: 'public/assets/back-end/css/toastr.css')}}">
     @if(Session::get('direction') === "rtl")
-        <link rel="stylesheet" href="{{asset('public/assets/back-end')}}/css/menurtl.css">
+        <link rel="stylesheet" href="{{dynamicAsset(path: 'public/assets/back-end/css/menurtl.css')}}">
     @endif
-    {{-- light box --}}
-    <link rel="stylesheet" href="{{asset('public/css/lightbox.css')}}">
+    <link rel="stylesheet" href="{{dynamicAsset(path: 'public/css/lightbox.css')}}">
     @stack('css_or_js')
-    <style>
-        :root {
-            --theameColor: #045cff;
-        }
-
-        .rtl {
-            direction: {{ Session::get('direction') }};
-        }
-        .flex-start {
-            display: flex;
-            justify-content:flex-start;
-        }
-        .flex-between {
-            display: flex;
-            justify-content:space-between;
-        }
-        .row-reverse {
-            display: flex;
-            flex-direction: row-reverse;
-        }
-        .row-center {
-            display: flex;
-            justify-content:center;
-        }
-
-        .select2-results__options {
-            text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};
-        }
-
-        .scroll-bar {
-            max-height: calc(100vh - 100px);
-            overflow-y: auto !important;
-        }
-
-        ::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 1px #cfcfcf;
-            /*border-radius: 5px;*/
-        }
-
-        ::-webkit-scrollbar {
-            width: 3px !important;
-            height: 3px !important;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            /*border-radius: 5px;*/
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #003638;
-        }
-
-        @media only screen and (max-width: 768px) {
-            /* For mobile phones: */
-            .map-warper {
-                height: 250px;
-                padding-bottom: 10px;
-            }
-            
-        }
-
-        
-
-        .deco-none {
-            color: inherit;
-            text-decoration: inherit;
-        }
-
-        .qcont:first-letter {
-            text-transform: capitalize
-        }
-    </style>
-    <style>
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 48px;
-            height: 23px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 15px;
-            width: 15px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        input:checked + .slider {
-            background-color: #377dff;
-        }
-
-        input:focus + .slider {
-            box-shadow: 0 0 1px #377dff;
-        }
-
-        input:checked + .slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-        }
-
-        /* Rounded sliders */
-        .slider.round {
-            border-radius: 34px;
-        }
-
-        .slider.round:before {
-            border-radius: 50%;
-        }
-        @media only screen and (min-width: 768px) {
-            .view-web-site-info {
-                display: none;
-            }
-        
-        }
-        
-
-    </style>
     <script
-        src="{{asset('public/assets/back-end')}}/vendor/hs-navbar-vertical-aside/hs-navbar-vertical-aside-mini-cache.js"></script>
-    <link rel="stylesheet" href="{{asset('public/assets/back-end')}}/css/toastr.css">
+        src="{{dynamicAsset(path: 'public/assets/back-end/vendor/hs-navbar-vertical-aside/hs-navbar-vertical-aside-mini-cache.js')}}"></script>
+    <style>
+        select {
+            background-image: url('{{dynamicAsset(path: 'public/assets/back-end/img/arrow-down.png')}}');
+            background-size: 7px;
+            background-position: 96% center;
+        }
+    </style>
+    @if(Request::is('admin/payment/configuration/addon-payment-get'))
+        <style>
+            .form-floating > label {
+                position: relative;
+                display: block;
+                margin-bottom: 12px;
+                padding: 0;
+                inset-inline: 0 !important;
+            }
+        </style>
+    @endif
 </head>
 
 <body class="footer-offset">
-<!-- Builder -->
+
 @include('layouts.back-end.partials._front-settings')
-<!-- End Builder -->
-{{--loader--}}
+<span class="d-none" id="placeholderImg" data-img="{{dynamicAsset(path: 'public/assets/back-end/img/400x400/img3.png')}}"></span>
 <div class="row">
-    <div class="col-12" style="margin-top:10rem;position: fixed;z-index: 9999;">
-        <div id="loading" style="display: none;">
-           <center>
-            <img width="200"
-                 src="{{asset('storage/app/public/company')}}/{{\App\CPU\Helpers::get_business_settings('loader_gif')}}"
-                 onerror="this.src='{{asset('public/assets/front-end/img/loader.gif')}}'">
-           </center>
+    <div class="col-12 position-fixed z-9999 mt-10rem">
+        <div id="loading" class="d--none">
+            <div id="loader"></div>
         </div>
     </div>
 </div>
-{{--loader--}}
-
-<!-- JS Preview mode only -->
 @include('layouts.back-end.partials._header')
 @include('layouts.back-end.partials._side-bar')
+@include('layouts.back-end._translator-for-js')
+<span id="get-root-path-for-toggle-modal-image" data-path="{{dynamicAsset(path: 'public/assets/back-end/img/modal')}}"></span>
 
-<!-- END ONLY DEV -->
-
-<main id="content" role="main" class="main pointer-event" style="background-color: #ffffff">
-    <!-- Content -->
-@yield('content')
-<!-- End Content -->
-
-    <!-- Footer -->
-@include('layouts.back-end.partials._footer')
-<!-- End Footer -->
-
+<main id="content" role="main" class="main pointer-event">
+    @yield('content')
+    @include('layouts.back-end.partials._footer')
     @include('layouts.back-end.partials._modals')
-
+    @include('layouts.back-end.partials._toggle-modal')
+    @include('layouts.back-end.partials._sign-out-modal')
+    @include('layouts.back-end._alert-message')
 </main>
-<!-- ========== END MAIN CONTENT ========== -->
+<span class="please_fill_out_this_field" data-text="{{ translate('please_fill_out_this_field') }}"></span>
+<span class="get-application-environment-mode" data-value="{{ env('APP_MODE') == 'demo' ? 'demo':'live' }}"></span>
+<span id="get-currency-symbol"
+      data-currency-symbol="{{ getCurrencySymbol(currencyCode: getCurrencyCode(type: 'default')) }}"></span>
 
-<!-- ========== END SECONDARY CONTENTS ========== -->
-<script src="{{asset('public/assets/back-end')}}/js/custom.js"></script>
-<!-- JS Implementing Plugins -->
+<span id="message-select-word" data-text="{{ translate('select') }}"></span>
+<span id="message-yes-word" data-text="{{ translate('yes') }}"></span>
+<span id="message-no-word" data-text="{{ translate('no') }}"></span>
+<span id="message-cancel-word" data-text="{{ translate('cancel') }}"></span>
+<span id="message-are-you-sure" data-text="{{ translate('are_you_sure') }} ?"></span>
+<span id="message-invalid-date-range" data-text="{{ translate('invalid_date_range') }}"></span>
+<span id="message-status-change-successfully" data-text="{{ translate('status_change_successfully') }}"></span>
+<span id="message-are-you-sure-delete-this" data-text="{{ translate('are_you_sure_to_delete_this') }} ?"></span>
+<span id="message-you-will-not-be-able-to-revert-this"
+      data-text="{{ translate('you_will_not_be_able_to_revert_this') }}"></span>
 
-{{--@stack('script')--}}
+<span id="get-customer-list-route" data-action="{{route('admin.customer.customer-list-search')}}"></span>
+<span id="get-customer-list-without-all-customer-route" data-action="{{route('admin.customer.customer-list-without-all-customer')}}"></span>
 
-<!-- JS Front -->
-<script src="{{asset('public/assets/back-end')}}/js/vendor.min.js"></script>
-<script src="{{asset('public/assets/back-end')}}/js/theme.min.js"></script>
-<script src="{{asset('public/assets/back-end')}}/js/sweet_alert.js"></script>
-<script src="{{asset('public/assets/back-end')}}/js/toastr.js"></script>
+<span id="get-search-product-route" data-action="{{route('admin.products.search-product')}}"></span>
+<span id="get-orders-list-route" data-action="{{route('admin.orders.list',['status'=>'all'])}}"></span>
+<span id="get-stock-limit-status" data-action="{{route('admin.products.stock-limit-status',['type'=>'in_house'])}}"></span>
+<span id="get-product-stock-limit-title" data-title="{{translate('warning')}}"></span>
+<span id="get-product-stock-limit-image" data-warning-image="{{ dynamicAsset(path: 'public/assets/back-end/img/warning-2.png') }}"></span>
+<span id="get-product-stock-limit-message"
+      data-message-for-multiple="{{ translate('there_isn’t_enough_quantity_on_stock').' . '.translate('please_check_products_in_limited_stock').'.' }}"
+      data-message-for-three-plus-product="{{translate('_more_products_have_low_stock') }}"
+      data-message-for-one-product="{{translate('this_product_is_low_on_stock')}}">
+</span>
+<span id="get-product-stock-view"
+      data-stock-limit-page="{{route('admin.products.stock-limit-list',['in_house'])}}"
+>
+</span>
+<span id="getChattingNewNotificationCheckRoute" data-route="{{ route('admin.messages.new-notification') }}"></span>
+<span class="system-default-country-code" data-value="{{ getWebConfig(name: 'country_code') ?? 'us' }}"></span>
+
+<audio id="myAudio">
+    <source src="{{ dynamicAsset(path: 'public/assets/back-end/sound/notification.mp3') }}" type="audio/mpeg">
+</audio>
+
+
+<script src="{{dynamicAsset(path: 'public/assets/back-end/js/vendor.min.js')}}"></script>
+<script src="{{dynamicAsset(path: 'public/assets/back-end/js/theme.min.js')}}"></script>
+<script src="{{dynamicAsset(path: 'public/assets/back-end/js/bootstrap.min.js')}}"></script>
+<script src="{{dynamicAsset(path: 'public/assets/back-end/js/sweet_alert.js')}}"></script>
+<script src="{{dynamicAsset(path: 'public/assets/back-end/js/toastr.js')}}"></script>
+<script src="{{dynamicAsset(path: 'public/js/lightbox.min.js')}}"></script>
+<script src="{{dynamicAsset(path: 'public/assets/back-end/js/custom.js')}}"></script>
+<script src="{{dynamicAsset(path: 'public/assets/back-end/js/app-script.js')}}"></script>
+
 {!! Toastr::message() !!}
 
 @if ($errors->any())
     <script>
+        'use strict';
         @foreach($errors->all() as $error)
         toastr.error('{{$error}}', Error, {
             CloseButton: true,
@@ -235,271 +133,47 @@
         @endforeach
     </script>
 @endif
-<!-- JS Plugins Init. -->
-<script>
 
-    $(document).on('ready', function () {
-        // ONLY DEV
-        // =======================================================
-        if (window.localStorage.getItem('hs-builder-popover') === null) {
-            $('#builderPopover').popover('show')
-                .on('shown.bs.popover', function () {
-                    $('.popover').last().addClass('popover-dark')
-                });
-
-            $(document).on('click', '#closeBuilderPopover', function () {
-                window.localStorage.setItem('hs-builder-popover', true);
-                $('#builderPopover').popover('dispose');
-            });
-        } else {
-            $('#builderPopover').on('show.bs.popover', function () {
-                return false
-            });
-        }
-        // END ONLY DEV
-        // =======================================================
-
-        // BUILDER TOGGLE INVOKER
-        // =======================================================
-        $('.js-navbar-vertical-aside-toggle-invoker').click(function () {
-            $('.js-navbar-vertical-aside-toggle-invoker i').tooltip('hide');
-        });
-
-        // INITIALIZATION OF MEGA MENU
-        // =======================================================
-        /*var megaMenu = new HSMegaMenu($('.js-mega-menu'), {
-            desktop: {
-                position: 'left'
-            }
-        }).init();*/
-
-
-        // INITIALIZATION OF NAVBAR VERTICAL NAVIGATION
-        // =======================================================
-        var sidebar = $('.js-navbar-vertical-aside').hsSideNav();
-
-
-        // INITIALIZATION OF TOOLTIP IN NAVBAR VERTICAL MENU
-        // =======================================================
-        $('.js-nav-tooltip-link').tooltip({boundary: 'window'})
-
-        $(".js-nav-tooltip-link").on("show.bs.tooltip", function (e) {
-            if (!$("body").hasClass("navbar-vertical-aside-mini-mode")) {
-                return false;
-            }
-        });
-
-
-        // INITIALIZATION OF UNFOLD
-        // =======================================================
-        $('.js-hs-unfold-invoker').each(function () {
-            var unfold = new HSUnfold($(this)).init();
-        });
-
-
-        // INITIALIZATION OF FORM SEARCH
-        // =======================================================
-        $('.js-form-search').each(function () {
-            new HSFormSearch($(this)).init()
-        });
-
-
-        // INITIALIZATION OF SELECT2
-        // =======================================================
-        $('.js-select2-custom').each(function () {
-            var select2 = $.HSCore.components.HSSelect2.init($(this));
-        });
-
-
-        // INITIALIZATION OF DATERANGEPICKER
-        // =======================================================
-        $('.js-daterangepicker').daterangepicker();
-
-        $('.js-daterangepicker-times').daterangepicker({
-            timePicker: true,
-            startDate: moment().startOf('hour'),
-            endDate: moment().startOf('hour').add(32, 'hour'),
-            locale: {
-                format: 'M/DD hh:mm A'
-            }
-        });
-
-        var start = moment();
-        var end = moment();
-
-        function cb(start, end) {
-            $('#js-daterangepicker-predefined .js-daterangepicker-predefined-preview').html(start.format('MMM D') + ' - ' + end.format('MMM D, YYYY'));
-        }
-
-        $('#js-daterangepicker-predefined').daterangepicker({
-            startDate: start,
-            endDate: end,
-            ranges: {
-                'Today': [moment(), moment()],
-                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-            }
-        }, cb);
-
-        cb(start, end);
-
-
-        // INITIALIZATION OF CLIPBOARD
-        // =======================================================
-        $('.js-clipboard').each(function () {
-            var clipboard = $.HSCore.components.HSClipboard.init(this);
-        });
-    });
-</script>
-<script>
-    function openInfoWeb()
-    {
-        var x = document.getElementById("website_info");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
-    }
-</script>
 @stack('script')
 
-
-<script src="{{asset('public/assets/back-end')}}/js/bootstrap.min.js"></script>
-{{-- light box --}}
-<script src="{{asset('public/js/lightbox.min.js')}}"></script>
-<audio id="myAudio">
-    <source src="{{asset('public/assets/back-end/sound/notification.mp3')}}" type="audio/mpeg">
-</audio>
-<audio id="myAudio2">
-    <source src="{{asset('public/assets/back-end/sound/notification2.mp3')}}" type="audio/mpeg">
-</audio>
+@if(Helpers::module_permission_check('order_management') && env('APP_MODE')!='dev')
 <script>
-    var audio = document.getElementById("myAudio");
-    var audio2 = document.getElementById("myAudio2");
-
-    function playAudio() {
-        audio.play();
-    }
-
-    function pauseAudio() {
-        audio.pause();
-    }
-
-    function playAudio2() {
-        audio2.play();
-    }
-
-    function pauseAudio2() {
-        audio2.pause();
-    }
-</script>
-<script>
-    setInterval(function () {
-        $.get({
-            url: '{{route('admin.get-order-data')}}',
-            dataType: 'json',
-            success: function (response) {
-                let data = response.data;
-                if (data.new_order > 0) {
-                    playAudio();
-                    $('#popup-modal').appendTo("body").modal('show');
-                }
-                if (data.new_user > 0) {
-                    playAudio2();
-                    $('#popup-modal-user').appendTo("body").modal('show');
-                }
-            },
-        });
-    }, 10000);
-
-    function check_order() {
-        location.href = '{{route('admin.orders.list',['status'=>'all'])}}';
-    }
-    function check_user() {
-        location.href = '{{route('admin.customer.list',['status'=>'all'])}}';
-    }
-</script>
-<script>
-    $("#search-bar-input").keyup(function () {
-        $("#search-card").css("display", "block");
-        let key = $("#search-bar-input").val();
-        if (key.length > 0) {
+    'use strict'
+        setInterval(function () {
             $.get({
-                url: '{{url('/')}}/admin/search-function/',
+                url: '{{route('admin.orders.get-order-data')}}',
                 dataType: 'json',
-                data: {
-                    key: key
-                },
-                beforeSend: function () {
-                    $('#loading').show();
-                },
-                success: function (data) {
-                    $('#search-result-box').empty().html(data.result)
-                },
-                complete: function () {
-                    $('#loading').hide();
+                success: function (response) {
+                    let data = response.data;
+                    if (data.new_order > 0) {
+                        playAudio();
+                        $('#popup-modal').appendTo("body").modal('show');
+                    }
                 },
             });
-        } else {
-            $('#search-result-box').empty();
-        }
-    });
-
-    $(document).mouseup(function (e) {
-        var container = $("#search-card");
-        if (!container.is(e.target) && container.has(e.target).length === 0) {
-            container.hide();
-        }
-    });
-
-    function form_alert(id, message) {
-        Swal.fire({
-            title: '{{\App\CPU\translate('Are you sure')}}?',
-            text: message,
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            cancelButtonText: 'No',
-            confirmButtonText: 'Yes',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.value) {
-                $('#' + id).submit()
+        }, 5000);
+</script>
+@endif
+@if(env('APP_MODE') == 'demo')
+    <script>
+        'use strict'
+        function checkDemoResetTime() {
+            let currentMinute = new Date().getMinutes();
+            if (currentMinute > 55 && currentMinute <= 60) {
+                $('#demo-reset-warning').addClass('active');
+            } else {
+                $('#demo-reset-warning').removeClass('active');
             }
-        })
-    }
-</script>
+        }
+        checkDemoResetTime();
+        setInterval(checkDemoResetTime, 60000);
+    </script>
+@endif
 
-<script>
-    function call_demo() {
-        toastr.info('{{\App\CPU\translate('Update option is disabled for demo')}}!', {
-            CloseButton: true,
-            ProgressBar: true
-        });
-    }
-</script>
 
-<!-- IE Support -->
-<script>
-    if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{asset('public/assets/back-end')}}/vendor/babel-polyfill/polyfill.min.js"><\/script>');
-</script>
+<script src="{{ dynamicAsset(path: 'public/assets/back-end/js/admin/common-script.js') }}"></script>
+
 @stack('script_2')
 
-<!-- ck editor -->
-
-<!-- ck editor -->
-
-<script>
-    initSample();
-</script>
-
-<script>
-    
-</script>
 </body>
 </html>

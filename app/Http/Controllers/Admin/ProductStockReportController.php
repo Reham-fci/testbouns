@@ -2,55 +2,89 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\CPU\Helpers;
+use App\Utils\Helpers;
+use App\Exports\ProductStockReportExport;
 use App\Http\Controllers\Controller;
-use App\Model\Product;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Seller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-require __DIR__ .'/SimpleXLSXGen.php';
-use SimpleXLSXGen;
+use Maatwebsite\Excel\Facades\Excel;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class ProductStockReportController extends Controller
 {
+    /**
+     * Product stock report list show, search & filtering
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index(Request $request)
     {
-        if ($request->has('seller_id') == false || $request['seller_id'] == 'all') {
-            $query = Product::whereIn('added_by', ['admin', 'seller']);
-        } elseif ($request['seller_id'] == 'in_house') {
-            $query = Product::where(['added_by' => 'admin']);
-        } else {
-            $query = Product::where(['added_by' => 'seller', 'user_id' => $request['seller_id']]);
-        }
+        $search = $request['search'];
+        $seller_id = $request['seller_id'] ?? 'all';
+        $sort = $request['sort'] ?? 'ASC';
+        $category_id = $request['category_id'] ?? 'all';
 
-        $query_param = ['seller_id' => $request['seller_id']];
-        $products = $query->paginate(Helpers::pagination_limit())->appends($query_param);
-        $seller_is = $request['seller_id'];
-        return view('admin-views.report.product-stock', compact('products','seller_is'));
+        $stock_limit = \App\Utils\Helpers::get_business_settings('stock_limit');
+        $sellers = Seller::where(['status'=>'approved'])->get();
+        $categories = Category::where(['position'=>0])->get();
+        $query_param = ['search' => $search, 'sort' => $sort, 'seller_id' => $seller_id, 'category_id'=>$category_id];
+
+        $products = self::common_query($request)
+            ->paginate(Helpers::pagination_limit())->appends($query_param);
+
+        return view('admin-views.report.product-stock', compact('categories', 'sellers', 'products', 'stock_limit', 'seller_id', 'search', 'sort', 'category_id'));
     }
-    
-    
-    
-    public function bulk_export_data()
+
+    /**
+     * Product total stock report export by excel
+     * @param Request $request
+     * @return string|\Symfony\Component\HttpFoundation\StreamedResponse
+     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \Box\Spout\Common\Exception\InvalidArgumentException
+     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
+     * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
+     */
+    public function export(Request $request)
     {
-        $products = Product::
-            select(DB::raw("products.name , products.current_stock
-            "))
-            // ->where(['added_by' => 'admin'])
-            ->get();
-        //export from product
-        $storage = [];
-        $storage[] = [
-            'name' => 'name',
-            'current_stock' => 'current_stock',
+        $stock_limit = Helpers::get_business_settings('stock_limit');
+        $products = self::common_query($request)->get();
+        $seller = $request->has('seller_id') && $request['seller_id'] != 'inhouse' && $request['seller_id'] != 'all' ? (Seller::with('shop')->find($request->seller_id)) : ($request['seller_id']?? 'all');
+        $category = $request->has('category_id') && $request['category_id'] != 'all' ? (Category::find($request->category_id)) : ($request['category_id'] ??'all');
+        $data = [
+            'products' =>$products,
+            'search' => $request['search'],
+            'seller' => $seller,
+            'category' => $category,
+            'sort' => $request['sort'] ?? 'ASC',
+            'stock_limit' => $stock_limit,
         ];
-        foreach ($products as $item) {
-            
-            $storage[] = [
-                'name' => $item->name,
-                'current_stock' => $item->current_stock,
-            ];
-        }
-        SimpleXLSXGen::fromArray( $storage )->downloadAs('stock.xlsx');
+        return Excel::download(new ProductStockReportExport($data) , 'Product-stock-report.xlsx');
+    }
+
+    public function common_query($request){
+        $search = $request['search'];
+        $seller_id = $request['seller_id'] ?? 'all';
+        $sort = $request['sort'] ?? 'ASC';
+        $category_id = $request['category_id'] ?? 'all';
+
+        return Product::where(['product_type' => 'physical'])->when(empty($request['seller_id']) || $request['seller_id'] == 'all', function ($query) {
+                $query->whereIn('added_by', ['admin', 'seller']);
+            })
+            ->when($category_id && $category_id!='all', function($query) use($category_id) {
+                $query->whereJsonContains('category_ids', ["id" => $category_id]);
+            })
+            ->when($seller_id == 'in_house', function ($query) {
+                $query->where(['added_by' => 'admin']);
+            })
+            ->when($seller_id != 'in_house' && isset($seller_id) && $seller_id != 'all', function ($query) use ($seller_id) {
+                $query->where(['added_by' => 'seller', 'user_id' => $seller_id]);
+            })
+            ->when(!empty($search), function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%");
+            })
+            ->orderBy('current_stock', $sort);
     }
 
 }

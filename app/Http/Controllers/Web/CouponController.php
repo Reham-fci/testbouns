@@ -2,188 +2,67 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\CPU\CartManager;
-use App\CPU\Helpers;
+use App\Utils\Helpers;
 use App\Http\Controllers\Controller;
-use App\Model\Coupon;
-use App\Model\Order;
-use Carbon\Carbon;
+use App\Models\Coupon;
+use App\Models\Order;
+use App\Utils\CartManager;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class CouponController extends Controller
 {
-    public function apply(Request $request)
+    public function apply(Request $request): JsonResponse|RedirectResponse
     {
-        
-        $sub_total = 0;
-        $total_tax = 0;
-        $qty = 0;
-        $total_discount_on_product = 0;    
-        $carts = CartManager::get_cart(CartManager::get_cart_group_ids());
-        $shipping_cost = CartManager::get_shipping_cost();
-        foreach($carts as $key => $cartItem)
-        {
-            $sub_total+=$cartItem['price']*$cartItem['quantity'];
-            $total_tax+=$cartItem['tax']*$cartItem['quantity'];
-            // $qty += $cartItem['quantity'];
-            $qty += 1;
-            $total_discount_on_product+=$cartItem['discount']*$cartItem['quantity'];
+        self::removeCurrentCouponActivity();
+
+        $couponLimit = Order::where(['customer_id' => auth('customer')->id(), 'coupon_code' => $request['code']])
+            ->groupBy('order_group_id')->get()->count();
+
+        $firstCoupon = Coupon::where(['code' => $request['code']])
+            ->where('status', 1)
+            ->whereDate('start_date', '<=', date('Y-m-d'))
+            ->whereDate('expire_date', '>=', date('Y-m-d'))->first();
+
+        if (!$firstCoupon) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'status' => 0,
+                    'messages' => ['0' => translate('invalid_coupon')]
+                ]);
+            }
+            Toastr::error(translate('invalid_coupon'));
+            return back();
         }
-        $total = $sub_total+$total_tax+$shipping_cost-$total_discount_on_product;
-        $user = DB::table('users')->where('id' , auth('customer')->id())->first();
-        $shipping_addresses = DB::table('shipping_addresses')->where('id' , session('address_id'))->first();
-        $order = DB::table('orders')->select(DB::raw('count(*) as order_count'))
-        ->where('customer_id' , auth('customer')->id())
-        ->where('order_status' , 'delivered')->first();
-      
-        
-        
-        
-        
-        /*
-            
-                `forall`, 
-                `FromRegisterDate`,
-                `FromOrderTimes`,
-                `Fromprice`,
-                `ToRegisterDate`,
-                `ToOrderTimes`,
-                `Toprice`,
-                `city`,
-                `area`,
-                `type`,
-                `qty`
+        if ($firstCoupon && $firstCoupon->coupon_type == 'first_order') {
+            $coupon = $firstCoupon;
+        } else {
+            $coupon = $firstCoupon->limit > $couponLimit ? $firstCoupon : null;
+        }
 
-                'Fromprice <= '.$total.' and Toprice >= '.$total.' and Toprice != 0 '
-                and FromOrderTimes <= '.$order.' and ToOrderTimes >= '.$order.' and ToOrderTimes != 0 '
-                and (type = "'.$user->type.'" or type != "")
-                and (city = "'.$request->city.'" or city != 0)
-                and (area like "'.$request->area.',%" or area like "%,'.$request->area.'" or area like "%,'.$request->area.',%" or area = "'.$request->area.'" or area != 0)
-                and (city like "'.$request->city.',%" or city like "%,'.$request->city.'" or city like "%,'.$request->city.',%" or city = "'.$request->city.'" or city != 0)
-                and qty <= '.$qty.'
-            */ 
+        if ($coupon && $coupon->coupon_type == 'first_order') {
+            $orders = Order::where(['customer_id' => auth('customer')->id()])->count();
+            if ($orders > 0) {
+                if ($request->ajax()) {
+                    return response()->json([
+                        'status' => 0,
+                        'messages' => ['0' => translate('sorry_this_coupon_is_not_valid_for_this_user') . '!']
+                    ]);
+                }
+                Toastr::error(translate('sorry_this_coupon_is_not_valid_for_this_user'));
+                return back();
+            }
+        }
 
-        // print_r($shipping_addresses);exit();
-        $couponLimit = Order::where('customer_id', auth('customer')->id())
-            ->where('coupon_code', $request['code'])->count();
-        
-            
-        // $coupon = Coupon::where(['code' => $request['code']])
-        //     ->where('limit', '>', $couponLimit)
-        //     ->where('status', '=', 1)
-        //     ->where(
-        //         'Fromprice <= '.$total.' and Toprice >= '.$total.' and Toprice != 0  and FromOrderTimes <= '.$order->order_count.' and ToOrderTimes >= '.$order->order_count.' and ToOrderTimes != 0  and (type = "'.$user->type.'" or type != "") and (area like "'.$shipping_addresses->city.',%" or area like "%,'.$shipping_addresses->city.'" or area like "%,'.$shipping_addresses->city.',%" or area = "'.$shipping_addresses->city.'" or area != 0) and (city like "'.$shipping_addresses->zip.',%" or city like "%,'.$shipping_addresses->zip.'" or city like "%,'.$shipping_addresses->zip.',%" or city = "'.$shipping_addresses->zip.'" or city != 0) and qty <= '.$qty.''
-        //     , '','' , false)
-        //     ->whereDate('start_date', '<=', date('Y-m-d'))
-        //     ->whereDate('expire_date', '>=', date('Y-m-d'));
-            // ->first();
-        
-            $sql = '
-                select coupons.* 
-                from coupons 
-                where `limit` > '. $couponLimit .'
-                and code = "'.$request['code'].'"
-                and status  =  1
-                and (qty <= '.$qty.' or qty is null)
-                and (
-                    forall =  1
-                    or (
-                        forall = 0  and (
-                            (Fromprice <= '.$total.'  or Fromprice is null )
-                            and (Toprice >= '.$total.'  or Toprice is null)
-                            
-                            
-                            and (
-                                FromRegisterDate  is null 
-                                or FromRegisterDate <= "'.date('Y-m-d',strtotime($user->created_at)).'"
-                            )
-                            and (
-                                ToRegisterDate is  null 
-                                or ToRegisterDate >= "'.date('Y-m-d',strtotime($user->created_at)).'"
-                            )
-                            and (FromOrderTimes <= '.$order->order_count.' or FromOrderTimes is null)
-                            and (ToOrderTimes >= '.$order->order_count.' or ToOrderTimes is null)
-                            and (type = "'.$user->type.'" or type is null) 
-                            and (
-                                city like "'.$shipping_addresses->city.',%" 
-                                or city like "%,'.$shipping_addresses->city.'" 
-                                or city like "%,'.$shipping_addresses->city.',%" 
-                                or city = "'.$shipping_addresses->city.'" 
-                                or city = ""
-                                ) 
-                                and (
-                                    area like "'.$shipping_addresses->zip.',%" 
-                                    or area like "%,'.$shipping_addresses->zip.'" 
-                                    or area like "%,'.$shipping_addresses->zip.',%" 
-                                    or area = "'.$shipping_addresses->zip.'" 
-                                    or area = ""
-                                ) 
-                            )  
-                    )
-                )
-                and start_date <="'. date('Y-m-d').'" 
-                and expire_date >= "' . date('Y-m-d') . '"
-                
-            ';
-        // $sql = '
-        //     select * 
-        //     from coupons 
-        //     where `limit` > '. $couponLimit .'
-        //     and code = "'.$request->code.'"
-        //     and status  =  1
-        //     and (qty <= '.$qty.' or qty is null)
-        //     and (
-        //         forall =  1 
-        //         or (
-        //             forall = 0  and (
-                    
-        //                 (Fromprice <= '.$total.'  or Fromprice is null )
-        //                 and (Toprice >= '.$total.'  or Toprice is null) 
-        //                 and Toprice != 0  
-        //                 and (
-        //                     FromRegisterDate  is null 
-        //                     or FromRegisterDate <= "'.date('Y-m-d',strtotime($user->created_at)).'"
-        //                 )
-        //                 and (
-        //                     ToRegisterDate is  null  
-        //                     or ToRegisterDate >= "'.date('Y-m-d',strtotime($user->created_at)).'"
-        //                 )
-                        
-                        
-        //                 and (FromOrderTimes <= '.$order->order_count.' or FromOrderTimes is null)
-        //                 and (ToOrderTimes >= '.$order->order_count.' or ToOrderTimes is null)
-                            
-        //                 and (type = "'.$user->type.'" or type is null) 
-        //                 and (
-        //                     city like "'.$shipping_addresses->city.',%" 
-        //                     or city like "%,'.$shipping_addresses->city.'" 
-        //                     or city like "%,'.$shipping_addresses->city.',%" 
-        //                     or city = "'.$shipping_addresses->city.'" 
-        //                   or city = ""
-        //                     ) 
-        //                     and (
-        //                         area like "'.$shipping_addresses->zip.',%" 
-        //                         or area like "%,'.$shipping_addresses->zip.'" 
-        //                         or area like "%,'.$shipping_addresses->zip.',%" 
-        //                         or area = "'.$shipping_addresses->zip.'" 
-        //                       or area = ""
-        //                     ) 
-        //                 )  
-        //         )
-        //     )
-        //     and start_date <="'. date('Y-m-d').'" 
-        //     and expire_date >= "' . date('Y-m-d') . '"
-            
-        // ';
-        $coupon = DB::select($sql);
-        // $coupon_obj = $coupon[0];
-        if ($coupon) {
-            $coupon = json_decode(json_encode($coupon[0]), true);
+        if ($coupon && (($coupon->coupon_type == 'first_order') || ($coupon->coupon_type == 'discount_on_purchase' && ($coupon->customer_id == '0' || $coupon->customer_id == auth('customer')->id())))) {
             $total = 0;
-            foreach (CartManager::get_cart() as $cart) {
-                $product_subtotal = $cart['price'] * $cart['quantity'];
-                $total += $product_subtotal;
+            foreach (CartManager::get_cart(type: 'checked') as $cart) {
+                if ($coupon->seller_id == '0' || (is_null($coupon->seller_id) && $cart->seller_is == 'admin') || ($coupon->seller_id == $cart->seller_id && $cart->seller_is == 'seller')) {
+                    $product_subtotal = $cart['price'] * $cart['quantity'];
+                    $total += $product_subtotal;
+                }
             }
             if ($total >= $coupon['min_purchase']) {
                 if ($coupon['discount_type'] == 'percentage') {
@@ -193,20 +72,74 @@ class CouponController extends Controller
                 }
 
                 session()->put('coupon_code', $request['code']);
+                session()->put('coupon_type', $coupon->coupon_type);
                 session()->put('coupon_discount', $discount);
+                session()->put('coupon_bearer', $coupon->coupon_bearer);
+                session()->put('coupon_seller_id', $coupon->seller_id);
 
                 return response()->json([
                     'status' => 1,
                     'discount' => Helpers::currency_converter($discount),
                     'total' => Helpers::currency_converter($total - $discount),
-                    'messages' => ['0' => 'Coupon Applied Successfully!']
+                    'messages' => ['0' => translate('coupon_applied_successfully') . '!']
+                ]);
+            }
+        } elseif ($coupon && $coupon->coupon_type == 'free_delivery' && ($coupon->customer_id == '0' || $coupon->customer_id == auth('customer')->id())) {
+            $total = 0;
+            $shipping_fee = 0;
+            foreach (CartManager::get_cart(type: 'checked') as $cart) {
+                if ($coupon->seller_id == '0' || (is_null($coupon->seller_id) && $cart->seller_is == 'admin') || ($coupon->seller_id == $cart->seller_id && $cart->seller_is == 'seller')) {
+                    $product_subtotal = $cart['price'] * $cart['quantity'];
+                    $total += $product_subtotal;
+                    if (is_null($coupon->seller_id) || $coupon->seller_id == '0' || $coupon->seller_id == $cart->seller_id) {
+                        $shipping_fee += $cart['shipping_cost'];
+                    }
+                }
+            }
+
+            if ($total >= $coupon['min_purchase']) {
+                session()->put('coupon_code', $request['code']);
+                session()->put('coupon_type', $coupon->coupon_type);
+                session()->put('coupon_discount', $shipping_fee);
+                session()->put('coupon_bearer', $coupon->coupon_bearer);
+                session()->put('coupon_seller_id', $coupon->seller_id);
+
+                return response()->json([
+                    'status' => 1,
+                    'discount' => Helpers::currency_converter($shipping_fee),
+                    'total' => Helpers::currency_converter($total - $shipping_fee),
+                    'messages' => ['0' => translate('coupon_applied_successfully') . '!']
                 ]);
             }
         }
 
-        return response()->json([
-            'status' => 0,
-            'messages' => ['0' => 'Invalid Coupon']
-        ]);
+        if ($request->ajax()) {
+            return response()->json([
+                'status' => 0,
+                'messages' => ['0' => translate('invalid_coupon')]
+            ]);
+        }
+        Toastr::error(translate('invalid_coupon'));
+        return back();
+    }
+
+    public function removeCoupon(Request $request): JsonResponse|RedirectResponse
+    {
+        self::removeCurrentCouponActivity();
+
+        if ($request->ajax()) {
+            return response()->json(['messages' => translate('coupon_removed')]);
+        }
+        Toastr::success(translate('coupon_removed'));
+        return back();
+    }
+
+    function removeCurrentCouponActivity(): void
+    {
+        session()->forget('coupon_code');
+        session()->forget('coupon_type');
+        session()->forget('coupon_bearer');
+        session()->forget('coupon_discount');
+        session()->forget('coupon_seller_id');
     }
 }

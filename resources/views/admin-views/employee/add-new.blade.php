@@ -1,125 +1,191 @@
 @extends('layouts.back-end.app')
-@section('title', \App\CPU\translate('Employee Add'))
+
+@section('title', translate('employee Add'))
 @push('css_or_js')
-    <link href="{{asset('public/assets/back-end')}}/css/select2.min.css" rel="stylesheet"/>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ dynamicAsset(path: 'public/assets/back-end/plugins/intl-tel-input/css/intlTelInput.css') }}">
 @endpush
-
 @section('content')
-<div class="content container-fluid">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{\App\CPU\translate('Dashboard')}}</a></li>
-            <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('employee_add')}}</li>
-        </ol>
-    </nav>
-
-    <!-- Content Row -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    {{\App\CPU\translate('employee_form')}}
-                </div>
-                <div class="card-body">
-                    <form action="{{route('admin.employee.add-new')}}" method="post" enctype="multipart/form-data"
-                          style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                        @csrf
-                        <div class="form-group">
+    <div class="content container-fluid">
+        <div class="mb-3">
+            <h2 class="h1 mb-0 text-capitalize d-flex align-items-center gap-2">
+                <img src="{{dynamicAsset(path: 'public/assets/back-end/img/add-new-employee.png')}}" alt="">
+                {{translate('add_new_employee')}}
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form action="{{route('admin.employee.add-new')}}" method="post" enctype="multipart/form-data" class="text-start">
+                    @csrf
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="mb-0 page-header-title text-capitalize d-flex align-items-center gap-2 border-bottom pb-3 mb-3">
+                                <i class="tio-user"></i>
+                                {{translate('general_information')}}
+                            </h5>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="name">{{\App\CPU\translate('Name')}}</label>
-                                    <input type="text" name="name" class="form-control" id="name"
-                                           placeholder="{{\App\CPU\translate('Ex')}} : {{\App\CPU\translate('Md. Al Imrun')}}" value="{{old('name')}}" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="name">{{\App\CPU\translate('Phone')}}</label>
-                                    <input type="number" name="phone" value="{{old('phone')}}" class="form-control" id="phone"
-                                           placeholder="{{\App\CPU\translate('Ex')}} : +88017********" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="name">{{\App\CPU\translate('Email')}}</label>
-                                    <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email"
-                                           placeholder="{{\App\CPU\translate('Ex')}} : ex@gmail.com" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="name">{{\App\CPU\translate('Role')}}</label>
-                                    <select class="form-control" name="role_id"
-                                            style="width: 100%">
-                                        <option value="0" selected disabled>---{{\App\CPU\translate('select')}}---</option>
-                                        @foreach($rls as $r)
-                                            <option value="{{$r->id}}" {{old('role_id')==$r->id?'selected':''}}>{{$r->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="name">{{\App\CPU\translate('password')}}</label>
-                                    <input type="text" name="password" class="form-control" id="password"
-                                           placeholder="{{\App\CPU\translate('Password')}}" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="name">{{\App\CPU\translate('employee_image')}}</label><span class="badge badge-soft-danger">( {{\App\CPU\translate('ratio')}} 1:1 )</span>
-                                    <br>
                                     <div class="form-group">
-                                        <div class="custom-file text-left">
-                                            <input type="file" name="image" id="customFileUpload" class="custom-file-input"
-                                                accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
-                                            <label class="custom-file-label" for="customFileUpload">{{\App\CPU\translate('choose')}} {{\App\CPU\translate('file')}}</label>
+                                        <label for="name"
+                                               class="title-color">{{translate('full_name')}}</label>
+                                        <input type="text" name="name" class="form-control" id="name"
+                                               placeholder="{{translate('ex'). ':'. translate('John_Doe')}}"
+                                               value="{{old('name')}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone" class="title-color">{{translate('phone')}}</label>
+                                        <div class="mb-3">
+                                            <input class="form-control form-control-user phone-input-with-country-picker"
+                                                   type="tel" id="exampleInputPhone" value="{{old('phone')}}"
+                                                   placeholder="{{ translate('enter_phone_number') }}" required>
+                                            <div class="">
+                                                <input type="text" class="country-picker-phone-number w-50" value="{{old('phone')}}" name="phone" hidden  readonly>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="text-center">
-                                        <img style="width: auto;border: 1px solid; border-radius: 10px; max-height:200px;" id="viewer"
-                                            src="{{asset('public\assets\back-end\img\400x400\img2.jpg')}}" alt="Product thumbnail"/>
+                                    <div class="form-group">
+                                        <label for="role_id" class="title-color">{{translate('role')}}</label>
+                                        <select class="form-control" name="role_id" id="role_id">
+                                            <option value="0" selected disabled>{{translate('select')}}
+                                            </option>
+                                            @foreach($employee_roles as $role)
+                                                <option
+                                                    value="{{$role->id}}" {{old('role_id')==$role->id?'selected':''}}>{{ ucfirst($role->name) }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="identify_type" class="title-color">{{translate('identify_type')}}</label>
+                                        <select class="form-control" name="identify_type" id="identify_type">
+                                            <option value="" selected disabled>{{translate('select_identify_type')}}</option>
+                                            <option value="nid">{{translate('NID')}}</option>
+                                            <option value="passport">{{translate('passport')}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="identify_number" class="title-color">{{translate('identify_number')}}</label>
+                                        <input type="number" name="identify_number" value="{{old('identity_number')}}" class="form-control"
+                                            placeholder="{{translate('ex').':'.'9876123123'}}" id="identify_number">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="text-center mb-3">
+                                            <img class="upload-img-view" id="viewer"
+                                                 src="{{dynamicAsset(path: 'public/assets/back-end/img/400x400/img2.jpg')}}"
+                                                 alt=""/>
+                                        </div>
+                                        <label for="customFileUpload" class="title-color">{{translate('employee_image')}}</label>
+                                        <span class="text-info">( {{translate('ratio').' '.'1:1'}} )</span>
+                                        <div class="form-group">
+                                            <div class="custom-file text-left">
+                                                <input type="file" name="image" id="custom-file-upload" class="custom-file-input image-input"
+                                                       data-image-id="viewer"
+                                                       accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
+                                                <label class="custom-file-label" for="custom-file-upload">{{translate('choose_file')}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label class="title-color" for="exampleFormControlInput1">{{translate('identity_image')}}</label>
+                                        <div>
+                                            <div class="row select-multiple-image"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <button type="submit" class="btn btn-primary float-right">{{\App\CPU\translate('submit')}}</button>
-                    </form>
-                </div>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h5 class="mb-0 page-header-title d-flex align-items-center gap-2 border-bottom pb-3 mb-3">
+                                <i class="tio-user"></i>
+                                {{translate('account_Information')}}
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="email" class="title-color">{{translate('email')}}</label>
+                                        <input type="email" name="email" value="{{old('email')}}" class="form-control"
+                                               id="email"
+                                               placeholder="{{translate('ex').':'.'ex@gmail.com'}}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="user_password" class="title-color d-flex align-items-center">
+                                            {{translate('password')}}
+                                            <span class="input-label-secondary cursor-pointer" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{translate('The_password_must_be_at_least_8_characters_long_and_contain_at_least_one_uppercase_letter').','.translate('_one_lowercase_letter').','.translate('_one_digit_').','.translate('_one_special_character').','.translate('_and_no_spaces').'.'}}">
+                                                <img alt="" width="16" src={{dynamicAsset(path: 'public/assets/back-end/img/info-circle.svg') }} alt="" class="m-1">
+                                            </span>
+                                        </label>
+                                        <div class="input-group input-group-merge">
+                                            <input type="password" class="js-toggle-password form-control password-check"
+                                                   name="password" required id="user_password"
+                                                   placeholder="{{ translate('password_minimum_8_characters') }}"
+                                                   data-hs-toggle-password-options='{
+                                                         "target": "#changePassTarget",
+                                                        "defaultClass": "tio-hidden-outlined",
+                                                        "showClass": "tio-visible-outlined",
+                                                        "classChangeTarget": "#changePassIcon"
+                                                }'>
+                                            <div id="changePassTarget" class="input-group-append">
+                                                <a class="input-group-text" href="javascript:">
+                                                    <i id="changePassIcon" class="tio-visible-outlined"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <span class="text-danger mx-1 password-error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="confirm_password" class="title-color">
+                                            {{translate('confirm_password')}}
+                                        </label>
+
+                                        <div class="input-group input-group-merge">
+                                            <input type="password" class="js-toggle-password form-control"
+                                                   name="confirm_password" required id="confirm_password"
+                                                   placeholder="{{ translate('confirm_password') }}"
+                                                   data-hs-toggle-password-options='{
+                                                         "target": "#changeConfirmPassTarget",
+                                                        "defaultClass": "tio-hidden-outlined",
+                                                        "showClass": "tio-visible-outlined",
+                                                        "classChangeTarget": "#changeConfirmPassIcon"
+                                                }'>
+                                            <div id="changeConfirmPassTarget" class="input-group-append">
+                                                <a class="input-group-text" href="javascript:">
+                                                    <i id="changeConfirmPassIcon" class="tio-visible-outlined"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end gap-3">
+                                <button type="reset" id="reset" class="btn btn-secondary px-4">{{translate('reset')}}</button>
+                                <button type="submit" class="btn btn--primary px-4">{{translate('submit')}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
+    <span id="get-multiple-image-data"
+          data-image="{{dynamicAsset(path: "public/assets/back-end/img/400x400/img2.jpg")}}"
+          data-width="100%"
+          data-group-class="col-6 col-lg-4"
+          data-row-height="auto"
+          data-max-count="5"
+          data-field="identity_image[]">
+</span>
 @endsection
 
 @push('script')
-    <script src="{{asset('public/assets/back-end')}}/js/select2.min.js"></script>
-    <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#viewer').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $("#customFileUpload").change(function () {
-            readURL(this);
-        });
-
-        $(".js-example-theme-single").select2({
-            theme: "classic"
-        });
-
-        $(".js-example-responsive").select2({
-            width: 'resolve'
-        });
-    </script>
+    <script src="{{dynamicAsset(path: 'public/assets/back-end/js/spartan-multi-image-picker.js')}}"></script>
+    <script src="{{dynamicAsset(path: 'public/assets/back-end/js/select-multiple-image.js')}}"></script>
+    <script src="{{ dynamicAsset(path: 'public/assets/back-end/plugins/intl-tel-input/js/intlTelInput.js') }}"></script>
+    <script src="{{ dynamicAsset(path: 'public/assets/back-end/js/country-picker-init.js') }}"></script>
 @endpush

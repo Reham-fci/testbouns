@@ -4,72 +4,61 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\WalletTransaction;
-use App\CPU\Helpers;
+use App\Models\WalletTransaction;
+use App\Utils\Helpers;
+use App\Models\AddFundBonusCategories;
 use Brian2694\Toastr\Facades\Toastr;
-use App\CPU\CustomerManager;
-use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
+use function App\Utils\payment_gateways;
+
 class UserWalletController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
     {
         $wallet_status = Helpers::get_business_settings('wallet_status');
-
-        if($wallet_status == 1)
-        {
+        if ($wallet_status == 1) {
             $total_wallet_balance = auth('customer')->user()->wallet_balance;
-        $wallet_transactio_list = WalletTransaction::where('user_id',auth('customer')->id())
-                                                    ->latest()
-                                                    ->paginate(15);
-        return view('web-views.users-profile.user-wallet',compact('total_wallet_balance','wallet_transactio_list'));
-        }else{
-            Toastr::warning(\App\CPU\translate('access_denied!'));
-            return back();
+            $wallet_transactio_list = WalletTransaction::where('user_id', auth('customer')->id())
+                ->when($request->has('type'), function ($query) use ($request) {
+                    $query->when($request->type == 'order_transactions', function ($query) {
+                        $query->where('transaction_type', 'order_place');
+                    })->when($request->type == 'converted_from_loyalty_point', function ($query) {
+                        $query->where('transaction_type', 'loyalty_point');
+                    })->when($request->type == 'added_via_payment_method', function ($query) {
+                        $query->where(['transaction_type' => 'add_fund', 'reference' => 'add_funds_to_wallet']);
+                    })->when($request->type == 'add_fund_by_admin', function ($query) {
+                        $query->where(['transaction_type' => 'add_fund_by_admin']);
+                    })->when($request->type == 'order_refund', function ($query) {
+                        $query->where(['transaction_type' => 'order_refund']);
+                    });
+                })->latest()->paginate(10);
+
+            $payment_gateways = payment_gateways();
+
+            $add_fund_bonus_list = AddFundBonusCategories::where('is_active', 1)
+                ->whereDate('start_date_time', '<=', date('Y-m-d'))
+                ->whereDate('end_date_time', '>=', date('Y-m-d'))
+                ->get();
+
+            if ($request->has('flag') && $request->flag == 'success') {
+                Toastr::success(translate('add_fund_to_wallet_success'));
+                return redirect()->route('wallet');
+            } else if ($request->has('flag') && $request->flag == 'fail') {
+                Toastr::error(translate('add_fund_to_wallet_unsuccessful'));
+                return redirect()->route('wallet');
+            }
+
+            return view(VIEW_FILE_NAMES['user_wallet'], compact('total_wallet_balance', 'wallet_transactio_list', 'payment_gateways', 'add_fund_bonus_list'));
+        } else {
+            Toastr::warning(translate('access_denied!'));
+            return redirect()->route('home');
         }
     }
-    
-    
-    
-    function remove_expired_fund_from_wallet(){
-        
-            $WalletTransactionRows = WalletTransaction::whereIn('transaction_type' , ["add_fund_by_admin"])
-            ->where("expiredDate" ,"<" , date('Y-m-d'))
-            ->where("balance" , ">" , 0)
-            ->where("done" , "=" , 0)
-            ->get();
-            // WalletTransaction::whereIn('transaction_type' , ["add_fund_by_admin"])
-            // ->where("expiredDate" ,"<" , date('Y-m-d'))
-            // ->where("balance" , ">" , 0)
-            // ->where("done" , "=" , 0)
-            // ->update([
-            //         "done" => 1
-            //     ]);
-            
-            
-            
-                // dd($WalletTransactionRows);
-            $ids = [];
-            foreach($WalletTransactionRows as $row){
-                $ids[] = $row->id;
-                // $wallet_transaction = CustomerManager::create_wallet_transaction($row->user_id,$row->balance,'expired_fund','expired_fund');
-            }
-            
-            WalletTransaction::whereIn('transaction_type' , $ids)
-            ->update([
-                "done" => 1
-            ]);
-            DB::update("
-            
-                UPDATE users JOIN (
-            	SELECT sum(`balance`) b , user_id FROM `wallet_transactions` WHERE `done` = 0 and `transaction_type` in ('loyalty_point','add_fund_by_admin','return_money_order')
-            	GROUP by user_id
-                ) as wallet
-                on wallet.user_id = users.id
-                set users.wallet_balance = wallet.b
-            ");
-            
-            
-            
-            
+
+    public function my_wallet_account()
+    {
+        return view(VIEW_FILE_NAMES['wallet_account']);
     }
 }

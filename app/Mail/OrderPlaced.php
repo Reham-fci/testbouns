@@ -31,6 +31,6 @@ class OrderPlaced extends Mailable
     public function build()
     {
         $o_id = $this->o_id;
-        return $this->view('email-templates.order-placed-v2',['id'=>$o_id]);
+        return $this->subject(translate('Order_Placed'))->view('email-templates.order-placed-v2',['id'=>$o_id]);
     }
 }

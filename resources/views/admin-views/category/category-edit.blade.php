@@ -1,158 +1,135 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('Category'))
-
-@push('css_or_js')
-
-@endpush
+@section('title', translate('category'))
 
 @section('content')
     <div class="content container-fluid">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{\App\CPU\translate('Dashboard')}}</a>
-                </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('category')}}</li>
-            </ol>
-        </nav>
+        <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+            <h2 class="h1 mb-0">
+                <img src="{{ dynamicAsset(path: 'public/assets/back-end/img/brand-setup.png') }}" class="mb-1 mr-1" alt="">
+                @if($category['position'] == 1)
+                    {{ translate('sub') }}
+                @elseif($category['position'] == 2)
+                    {{ translate('sub_Sub') }}
+                @endif
+                {{ translate('category') }}
+                {{ translate('update') }}
+            </h2>
+        </div>
 
-        <!-- Content Row -->
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        {{ \App\CPU\translate('category_form')}}
-                    </div>
-                    <div class="card-body" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                        <form action="{{route('admin.category.update',[$category['id']])}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            @php($language=\App\Model\BusinessSetting::where('type','pnc_language')->first())
-                            @php($language = $language->value ?? null)
-                            @php($default_lang = 'en')
 
-                            @php($default_lang = json_decode($language)[0])
-                            <ul class="nav nav-tabs mb-4">
-                                @foreach(json_decode($language) as $lang)
-                                    <li class="nav-item">
-                                        <a class="nav-link lang_link {{$lang == $default_lang? 'active':''}}"
-                                           href="#"
-                                           id="{{$lang}}-link">{{\App\CPU\Helpers::get_language_name($lang).'('.strtoupper($lang).')'}}</a>
+                    <div class="card-body text-start">
+                        <form action="{{ route('admin.category.update', [$category['id']]) }}" method="POST"
+                              enctype="multipart/form-data">
+                            @csrf
+                            <ul class="nav nav-tabs w-fit-content mb-4">
+                                @foreach($languages as $lang)
+                                    <li class="nav-item text-capitalize">
+                                        <span
+                                            class="nav-link form-system-language-tab cursor-pointer {{ $lang == $defaultLanguage? 'active':''}}"
+                                            id="{{ $lang}}-link">
+                                            {{ getLanguageName($lang).'('.strtoupper($lang).')'}}
+                                        </span>
                                     </li>
                                 @endforeach
                             </ul>
                             <div class="row">
-                                <div class="col-12 col-md-5">
-                                    @foreach(json_decode($language) as $lang)
-                                        <?php
-                                        if (count($category['translations'])) {
-                                            $translate = [];
-                                            foreach ($category['translations'] as $t) {
-                                                if ($t->locale == $lang && $t->key == "name") {
-                                                    $translate[$lang]['name'] = $t->value;
+                                <div
+                                    class="{{ $category['parent_id']==0 || $category['position'] == 1 ? 'col-lg-6':'col-12' }}">
+                                    @foreach($languages as $lang)
+                                        <div>
+                                                <?php
+                                                if (count($category['translations'])) {
+                                                    $translate = [];
+                                                    foreach ($category['translations'] as $t) {
+                                                        if ($t->locale == $lang && $t->key == "name") {
+                                                            $translate[$lang]['name'] = $t->value;
+                                                        }
+                                                    }
                                                 }
-                                            }
-                                        }
-                                        ?>
-                                        <div class="form-group {{$lang != $default_lang ? 'd-none':''}} lang_form"
-                                             id="{{$lang}}-form">
-                                            <label class="input-label">{{\App\CPU\translate('name')}}
-                                                ({{strtoupper($lang)}})</label>
-                                            <input type="text" name="name[]"
-                                                   value="{{$lang==$default_lang?$category['name']:($translate[$lang]['name']??'')}}"
-                                                   class="form-control"
-                                                   placeholder="{{\App\CPU\translate('New')}} {{\App\CPU\translate('Category')}}" {{$lang == $default_lang? 'required':''}}>
+                                                ?>
+                                            <div class="form-group {{ $lang != $defaultLanguage ? 'd-none':''}} form-system-language-form"
+                                                id="{{ $lang}}-form">
+                                                <label class="title-color">
+                                                    {{ translate('category_Name') }} ({{strtoupper($lang) }})
+                                                </label>
+                                                <input type="text" name="name[]"
+                                                       value="{{ $lang==$defaultLanguage?$category['name']:($translate[$lang]['name']??'') }}"
+                                                       class="form-control"
+                                                       placeholder="{{ translate('new_Category') }}" {{ $lang == $defaultLanguage? 'required':''}}>
+                                            </div>
+                                            <input type="hidden" name="lang[]" value="{{ $lang}}">
+                                            <input type="hidden" name="id" value="{{ $category['id']}}">
                                         </div>
-                                        <input type="hidden" name="lang[]" value="{{$lang}}">
                                     @endforeach
-                                </div>
-                                <div class="col-12 col-md-3">
+
                                     <div class="form-group">
-                                        <label class="input-label" for="priority">{{\App\CPU\translate('choose_priority_number')}}</label>
+                                        <label class="title-color" for="priority">{{ translate('priority') }}</label>
                                         <select class="form-control" name="priority" id="" required>
-                                            @for ($i = 0; $i <= 10; $i++)
-                                            <option
-                                            value="{{$i}}" {{$category['priority']==$i?'selected':''}}>{{$i}}</option>
+                                            @for ($index = 0; $index <= 10; $index++)
+                                                <option
+                                                    value="{{ $index }}" {{ $category['priority']==$index?'selected':''}}>{{ $index }}</option>
                                             @endfor
                                         </select>
                                     </div>
+
+                                    @if($category['parent_id']==0 || ($category['position'] == 1 && theme_root_path() == 'theme_aster'))
+                                        <div class="from_part_2">
+                                            <label class="title-color">{{ translate('category_Logo') }}</label>
+                                            <span class="text-info">({{ translate('ratio') }} 1:1)</span>
+                                            <div class="custom-file text-left">
+                                                <input type="file" name="image" id="category-image"
+                                                       class="custom-file-input image-preview-before-upload"
+                                                       data-preview="#viewer"
+                                                       accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
+                                                <label class="custom-file-label"
+                                                       for="category-image">{{ translate('choose_File') }}</label>
+                                            </div>
+                                        </div>
                                 </div>
-                                <!--image upload only for main category-->
-                               
-                                @if($category['parent_id']==0 ||$category['position']==1)
-                                    <div class="col-12 col-md-4 from_part_2">
-                                        <label>{{\App\CPU\translate('image')}}</label><small style="color: red">
-                                            ( {{\App\CPU\translate('ratio')}} 1:1 )</small>
-                                        <div class="custom-file" style="text-align: left">
-                                            <input type="file" name="image" id="customFileEg1"
-                                                   class="custom-file-input"
-                                                   accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                            <label class="custom-file-label"
-                                                   for="customFileEg1">{{\App\CPU\translate('choose')}} {{\App\CPU\translate('file')}}</label>
+                                <div class="col-lg-6 mt-5 mt-lg-0 from_part_2">
+                                    <div class="form-group">
+                                        <div class="text-center mx-auto">
+                                            <img class="upload-img-view"
+                                                 id="viewer"
+                                                 src="{{ getValidImage(path: 'storage/app/public/category/'. $category['icon'] , type: 'backend-basic') }}"
+                                                 alt=""/>
                                         </div>
                                     </div>
-                                    <div class="col-12 from_part_2">
-                                        <div class="form-group">
-                                            <hr>
-                                            <center>
-                                                <img style="width: 20%;border: 1px solid; border-radius: 10px;"
-                                                     id="viewer"
-                                                     src="{{asset('storage/app/public/category')}}/{{$category['icon']}}"
-                                                     alt=""/>
-                                            </center>
-                                        </div>
+                                </div>
+                                @endif
+                                @if($category['position'] == 2 || ($category['position'] == 1 && theme_root_path() != 'theme_aster'))
+                                    <div class="d-flex justify-content-end gap-3">
+                                        <button type="reset" id="reset" class="btn btn-secondary px-4">
+                                            {{ translate('reset') }}
+                                        </button>
+                                        <button type="submit" class="btn btn--primary px-4">
+                                            {{ translate('update') }}
+                                        </button>
                                     </div>
                                 @endif
                             </div>
-                            
-                            <button type="submit" class="btn btn-primary float-right">{{\App\CPU\translate('update')}}</button>
+
+                            @if($category['parent_id']==0 || ($category['position'] == 1 && theme_root_path() == 'theme_aster'))
+                                <div class="d-flex justify-content-end gap-3">
+                                    <button type="reset" id="reset"
+                                            class="btn btn-secondary px-4">{{ translate('reset') }}</button>
+                                    <button type="submit"
+                                            class="btn btn--primary px-4">{{ translate('update') }}</button>
+                                </div>
+                            @endif
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 @endsection
 
 @push('script')
-
-    <script>
-        $(".lang_link").click(function (e) {
-            e.preventDefault();
-            $(".lang_link").removeClass('active');
-            $(".lang_form").addClass('d-none');
-            $(this).addClass('active');
-
-            let form_id = this.id;
-            let lang = form_id.split("-")[0];
-            console.log(lang);
-            $("#" + lang + "-form").removeClass('d-none');
-            if (lang == '{{$default_lang}}') {
-                $(".from_part_2").removeClass('d-none');
-            } else {
-                $(".from_part_2").addClass('d-none');
-            }
-        });
-
-        $(document).ready(function () {
-            $('#dataTable').DataTable();
-        });
-    </script>
-
-    <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#viewer').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $("#customFileEg1").change(function () {
-            readURL(this);
-        });
-    </script>
+    <script src="{{ dynamicAsset(path: 'public/assets/back-end/js/products-management.js') }}"></script>
 @endpush

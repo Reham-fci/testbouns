@@ -1,38 +1,33 @@
-<!-- Header -->
-<div class="card-header">
-    <h5 class="card-header-title">
-        <i class="tio-company"></i> {{\App\CPU\translate('top_store_by_order_received')}}
-    </h5>
-    <i class="tio-award-outlined" style="font-size: 45px"></i>
+<div class="card-header gap-10">
+    <h4 class="d-flex align-items-center text-capitalize gap-10 mb-0">
+        <img src="{{dynamicAsset(path: 'public/assets/back-end/img/most-popular-store-icon.png')}}" alt="">
+        {{translate('most_Popular_Stores')}}
+    </h4>
 </div>
-<!-- End Header -->
-
-<!-- Body -->
 <div class="card-body">
-    <div class="row">
-        @foreach($top_store_by_order_received as $key=>$item)
-            @php($shop=\App\Model\Shop::where('seller_id',$item['seller_id'])->first())
-            @if(isset($shop))
-                <div class="col-6 col-md-4 mt-2"
-                     onclick="location.href='{{route('admin.sellers.view',$item['seller_id'])}}'"
-                     style="padding-left: 6px;padding-right: 6px;cursor: pointer">
-                    <div class="grid-card" style="min-height: 170px">
-                        <div class="label_1 row-center">
-                            <div class="px-1">{{\App\CPU\translate('orders')}} : </div>
-                            <div>{{$item['count']}}</div>
+    @if($top_store_by_order_received)
+        <div class="grid-item-wrap">
+            @foreach($top_store_by_order_received as $key=>$item)
+                @if(isset($item->seller->shop))
+                    @php($shop=$item->seller->shop)
+                    <a href="{{route('admin.vendors.view',$item['seller_id'])}}" class="grid-item basic-box-shadow">
+                        <div class="d-flex align-items-center gap-10">
+                            <img src="{{getValidImage(path: 'storage/app/public/shop/'.$shop->image ?? '',type:'backend-basic')}}" class="avatar rounded-circle avatar-sm" alt="">
+
+                            <h5 class="shop-name">{{$shop['name']??'Not exist'}}</h5>
                         </div>
-                        <div class="text-center mt-3">
-                            <img style="border-radius: 50%;width: 60px;height: 60px;border:2px solid #80808082;"
-                                 onerror="this.src='{{asset('public/assets/back-end/img/160x160/img1.jpg')}}'"
-                                 src="{{asset('storage/app/public/shop/'.$shop->image??'')}}">
+                        <div class="d-flex align-items-center gap-2">
+                            <h5 class="shop-sell c2">{{$item['count']}}</h5>
+                            <img src="{{dynamicAsset(path: 'public/assets/back-end/img/love.png')}}" alt="">
                         </div>
-                        <div class="text-center mt-2">
-                            <span style="font-size: 10px">{{$shop['name']??'Not exist'}}</span>
-                        </div>
-                    </div>
-                </div>
-            @endif
-        @endforeach
-    </div>
+                    </a>
+                @endif
+            @endforeach
+        </div>
+    @else
+        <div class="text-center">
+            <p class="text-muted">{{translate('no_Top_Selling_Products')}}</p>
+            <img class="w-75" src="{{dynamicAsset(path: 'public/assets/back-end/img/no-data.png')}}" alt="">
+        </div>
+    @endif
 </div>
-<!-- End Body -->

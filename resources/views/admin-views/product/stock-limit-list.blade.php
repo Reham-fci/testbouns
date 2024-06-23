@@ -1,184 +1,205 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('Product List'))
-
-@push('css_or_js')
-
-@endpush
+@section('title', translate('stock_limit_products'))
 
 @section('content')
-    <div class="content container-fluid">  <!-- Page Heading -->
-        <!-- Page Header -->
-        <div class="page-header">
-            <div class="row align-items-center">
-                <div class="col-12 mb-2 mb-sm-0">
-                    <h1 class="page-header-title text-capitalize"><i
-                            class="tio-files"></i> {{\App\CPU\translate('stock_limit_products_list')}}
-                        <span class="badge badge-soft-dark ml-2">{{$pro->total()}}</span>
-                    </h1>
-                    <span>{{ \App\CPU\translate('the_products_are_shown_in_this_list,_which_quantity_is_below') }} {{ \App\Model\BusinessSetting::where(['type'=>'stock_limit'])->first()->value }}</span>
-                </div>
-            </div>
+    <div class="content container-fluid">
+        <div class="mb-3 d-flex flex-column gap-1">
+            <h2 class="h1 text-capitalize d-flex gap-2 align-items-center">
+                <img src="{{ dynamicAsset(path: 'public/assets/back-end/img/inhouse-product-list.png') }}" class="mb-1 mr-1" alt="">
+                {{ translate('limited_Stocked_Products_List') }}
+                <span class="badge badge-soft-dark radius-50 fz-14 ml-1">
+                    {{ $products->total() }}
+                </span>
+            </h2>
+            <p class="d-flex">
+                {{ translate('the_products_are_shown_in_this_list,_which_quantity_is_below') }} {{ $stockLimit }}
+            </p>
         </div>
-        <!-- End Page Header -->
-
-        <div class="row" style="margin-top: 20px">
+        <div class="row mt-30">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="row flex-between justify-content-between align-items-center flex-grow-1">
-                            <div class="col-12 col-md-12 col-lg-4">
-                                <h5>
-                                    {{\App\CPU\translate('product_table')}} ({{ $pro->total() }})
-                                </h5>
-                            </div>
-                            <div class="col-12 mt-1 col-md-6 col-lg-4">
-                                <!-- Search -->
+                    <div class="px-3 py-4">
+                        <div class="row justify-content-between align-items-center gy-2">
+                            <div class="col-auto">
                                 <form action="{{ url()->current() }}" method="GET">
-                                    <div class="input-group input-group-merge input-group-flush">
+                                    <div class="input-group input-group-custom input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <i class="tio-search"></i>
                                             </div>
                                         </div>
-                                        <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                               placeholder="{{\App\CPU\translate('Search Product Name')}}"
+                                        <input id="datatableSearch_" type="search" name="searchValue"
+                                               class="form-control"
+                                               placeholder="{{ translate('search_by_Product_Name') }}"
                                                aria-label="Search orders"
-                                               value="{{ $search }}" required>
-                                        <input type="hidden" value="{{ $request_status }}" name="status">
-                                        <button type="submit"
-                                                class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
+                                               value="{{ $searchValue }}" required>
+                                        <input type="hidden" value="{{ $status }}" name="status">
+                                        <button type="submit" class="btn btn--primary">
+                                            {{ translate('search') }}
+                                        </button>
                                     </div>
                                 </form>
-                                <!-- End Search -->
                             </div>
+
                             <div class="col-12 mt-1 col-md-6 col-lg-3">
-                                <select name="qty_ordr_sort" class="form-control"
-                                        onchange="location.href='{{route('admin.product.stock-limit-list',['in_house', ''])}}/?sort_oqrderQty='+this.value">
-                                    <option
-                                        value="default" {{ $sort_oqrderQty== "default"?'selected':''}}>{{\App\CPU\translate('default_sort')}}</option>
-                                    <option
-                                        value="quantity_asc" {{ $sort_oqrderQty== "quantity_asc"?'selected':''}}>{{\App\CPU\translate('quantity_sort_by_(low_to_high)')}}</option>
-                                    <option
-                                        value="quantity_desc" {{ $sort_oqrderQty== "quantity_desc"?'selected':''}}>{{\App\CPU\translate('quantity_sort_by_(high_to_low)')}}</option>
-                                    <option
-                                        value="order_asc" {{ $sort_oqrderQty== "order_asc"?'selected':''}}>{{\App\CPU\translate('order_sort_by_(low_to_high)')}}</option>
-                                    <option
-                                        value="order_desc" {{ $sort_oqrderQty== "order_desc"?'selected':''}}>{{\App\CPU\translate('order_sort_by_(high_to_low)')}}</option>
+                                <select name="qty_order_sort" class="form-control action-select-onchange-get-view"
+                                        data-url-prefix="{{ route('admin.products.stock-limit-list',['in_house', '']) }}/?sortOrderQty=">
+                                    <option value="default" {{ $sortOrderQty== "default"?'selected':''}}>
+                                        {{ translate('default') }}
+                                    </option>
+                                    <option value="quantity_asc" {{ $sortOrderQty== "quantity_asc"?'selected':''}}>
+                                        {{ translate('inventory_quantity(low_to_high)') }}
+                                    </option>
+                                    <option value="quantity_desc" {{ $sortOrderQty== "quantity_desc"?'selected':''}}>
+                                        {{ translate('inventory_quantity(high_to_low)') }}
+                                    </option>
+                                    <option value="order_asc" {{ $sortOrderQty== "order_asc"?'selected':''}}>
+                                        {{ translate('order_volume(low_to_high)') }}
+                                    </option>
+                                    <option value="order_desc" {{ $sortOrderQty== "order_desc"?'selected':''}}>
+                                        {{ translate('order_volume(high_to_low)') }}
+                                    </option>
                                 </select>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-body" style="padding: 0">
-                        <div class="table-responsive">
-                            <table id="datatable"
-                                   style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
-                                   class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
-                                   style="width: 100%">
-                                <thead class="thead-light">
-                                <tr>
-                                    <th>{{\App\CPU\translate('SL#')}}</th>
-                                    <th>{{\App\CPU\translate('Product Name')}}</th>
-                                    <th>{{\App\CPU\translate('purchase_price')}}</th>
-                                    <th>{{\App\CPU\translate('selling_price')}}</th>
-                                    <th>{{\App\CPU\translate('quantity')}}</th>
-                                    <th>{{\App\CPU\translate('orders')}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($pro as $k=>$p)
-                                    <tr>
-                                        <th scope="row">{{$pro->firstItem()+$k}}</th>
-                                        <td>
-                                            <a href="{{route('admin.product.view',[$p['id']])}}">
-                                                {{\Illuminate\Support\Str::limit($p['name'],20)}}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            {{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($p['purchase_price']))}}
-                                        </td>
-                                        <td>
-                                            {{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($p['unit_price']))}}
-                                        </td>
-                                        <td>
-                                            {{$p['current_stock']}}
-                                            <button class="btn btn-sm" id="{{ $p->id }}"
-                                                    onclick="update_quantity({{ $p->id }})" type="button"
-                                                    data-toggle="modal" data-target="#update-quantity"
-                                                    title="{{ \App\CPU\translate('update_quantity') }}">
-                                                <i class="tio-add-circle"></i>
 
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="datatable"
+                               class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table w-100 text-start">
+                            <thead class="thead-light thead-50 text-capitalize">
+                            <tr>
+                                <th>{{ translate('SL') }}</th>
+                                <th>{{ translate('product_Name') }}</th>
+                                <th class="text-center">{{ translate('unit_price') }}</th>
+                                <th class="text-center">{{ translate('quantity') }}</th>
+                                <th class="text-center">{{ translate('orders') }}</th>
+                                <th class="text-center">{{ translate('active_status') }}</th>
+                                <th class="text-center">{{ translate('action') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($products as $key=>$product)
+                                <tr>
+                                    <th scope="row">{{ $products->firstItem()+$key}}</th>
+                                    <td>
+                                        <a href="{{route('admin.products.view',['addedBy'=>($product['added_by']=='seller'?'vendor' : 'in-house'),'id'=>$product['id']]) }}"
+                                           class="media align-items-center gap-2">
+                                            <img src="{{ getValidImage(path:'storage/app/public/product/thumbnail/'.$product['thumbnail'],type: 'backend-product')}}"
+                                                class="avatar border" alt="">
+                                            <span class="media-body title-color hover-c1">
+                                                {{ Str::limit($product['name'], 20) }}
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        {{setCurrencySymbol(amount: usdToDefaultCurrency(amount: $product['unit_price']), currencyCode: getCurrencyCode()) }}
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center product-quantity justify-content-center">
+                                            {{ $product['current_stock']}}
+
+                                            <button class="btn py-0 px-2 fz-18 action-update-product-quantity"
+                                                    id="{{ $product['id'] }}"
+                                                    data-url="{{ route('admin.products.get-variations').'?id='.$product['id'] }}"
+                                                    type="button"
+                                                    data-toggle="modal" data-target="#update-quantity"
+                                                    title="{{ translate('update_quantity') }}">
+                                                <i class="tio-add-circle c1"></i>
                                             </button>
-                                        </td>
-                                        <td>
-                                            {{$p['order_details_count']}}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">{{($product['order_details_count'])}}</td>
+
+                                    <td class="text-center">
+                                        @if($product->request_status != 2 )
+                                            <form action="{{route('admin.products.status-update') }}" method="post"
+                                                  id="product-status{{ $product['id']}}-form"
+                                                  class="admin-product-status-form">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $product['id']}}">
+                                                <label class="switcher mx-auto">
+                                                    <input type="checkbox" class="switcher_input toggle-switch-message"
+                                                           name="status"
+                                                           id="product-status{{ $product['id'] }}" value="1"
+                                                           {{ $product['status'] == 1 ? 'checked' : '' }}
+                                                           data-modal-id="toggle-status-modal"
+                                                           data-toggle-id="product-status{{ $product['id'] }}"
+                                                           data-on-image="product-status-on.png"
+                                                           data-off-image="product-status-off.png"
+                                                           data-on-title="{{ translate('Want_to_Turn_ON').' '.$product['name'].' '.translate('status') }}"
+                                                           data-off-title="{{ translate('Want_to_Turn_OFF').' '.$product['name'].' '.translate('status') }}"
+                                                           data-on-message="<p>{{ translate('if_enabled_this_product_will_be_available_on_the_website_and_customer_app') }}</p>"
+                                                           data-off-message="<p>{{ translate('if_disabled_this_product_will_be_hidden_from_the_website_and_customer_app') }}</p>">
+                                                    <span class="switcher_control"></span>
+                                                </label>
+                                            </form>
+
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-center gap-2">
+                                            <a class="btn btn-outline-info btn-sm square-btn"
+                                               title="{{ translate('barcode') }}"
+                                               href="{{ route('admin.products.barcode', [$product['id']]) }}">
+                                                <i class="tio-barcode"></i>
+                                            </a>
+                                            <a class="btn btn-outline--primary btn-sm square-btn"
+                                               title="{{ translate('edit') }}"
+                                               href="{{route('admin.products.update',[$product['id']]) }}">
+                                                <i class="tio-edit"></i>
+                                            </a>
+                                            <span class="btn btn-outline-danger btn-sm square-btn delete-data"
+                                                  title="{{ translate('delete') }}"
+                                                  data-id="product-{{ $product['id']}}">
+                                                <i class="tio-delete"></i>
+                                            </span>
+                                        </div>
+                                        <form action="{{ route('admin.products.delete', [$product['id']]) }}"
+                                              method="post" id="product-{{ $product['id']}}">
+                                            @csrf @method('delete')
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-responsive mt-4">
+                        <div class="px-4 d-flex justify-content-lg-end">
+                            {{ $products->links() }}
                         </div>
                     </div>
-                    <div class="card-footer">
-                        {{$pro->links()}}
-                    </div>
-                    @if(count($pro)==0)
-                        <div class="text-center p-4">
-                            <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg"
-                                 alt="Image Description" style="width: 7rem;">
-                            <p class="mb-0">{{\App\CPU\translate('No data to show')}}</p>
-                        </div>
+
+                    @if(count($products)==0)
+                        @include('layouts.back-end._empty-state',['text'=>'no_product_found'],['image'=>'default'])
                     @endif
                 </div>
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="update-quantity" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-body">
-                    <form action="{{route('admin.product.update-quantity')}}" method="post" class="row">
+                <form action="{{ route('admin.products.update-quantity') }}" method="post" class="row">
+                    <div class="modal-body">
                         @csrf
-                        <div class="card mt-2 rest-part" style="width: 100%"></div>
-                        <div class="form-group col-sm-12 card card-footer">
-                            <button class="btn btn-primary" class="btn btn-primary" type="submit">{{\App\CPU\translate('submit')}}</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
-                                {{\App\CPU\translate('close')}}
+                        <div class="rest-part"></div>
+                        <div class="d-flex justify-content-end gap-10 flex-wrap align-items-center">
+                            <button type="button" class="btn btn-danger px-4" data-dismiss="modal" aria-label="Close">
+                                {{ translate('close') }}
+                            </button>
+                            <button class="btn btn--primary" class="btn btn--primary px-4" type="submit">
+                                {{ translate('submit') }}
                             </button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 @endsection
-
-@push('script')
-    <script>
-        function update_quantity(val) {
-            $.get({
-                url: '{{url('/')}}/admin/product/get-variations?id='+val,
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data)
-                    $('.rest-part').empty().html(data.view);
-                },
-            });
-        }
-
-        function update_qty() {
-            var total_qty = 0;
-            var qty_elements = $('input[name^="qty_"]');
-            for (var i = 0; i < qty_elements.length; i++) {
-                total_qty += parseInt(qty_elements.eq(i).val());
-            }
-            if (qty_elements.length > 0) {
-
-                $('input[name="current_stock"]').attr("readonly", true);
-                $('input[name="current_stock"]').val(total_qty);
-            } else {
-                $('input[name="current_stock"]').attr("readonly", false);
-            }
-        }
-    </script>
-@endpush

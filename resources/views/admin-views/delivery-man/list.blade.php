@@ -1,173 +1,168 @@
 @extends('layouts.back-end.app')
 
-@section('title',\App\CPU\translate('Deliveryman List'))
-
-@push('css_or_js')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endpush
+@section('title',translate('deliveryman_List'))
 
 @section('content')
     <div class="content container-fluid">
-        <!-- Page Header -->
-        <div class="page-header">
-            <div class="row align-items-center">
-                <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title"><i class="tio-filter-list"></i>
-                        {{\App\CPU\translate('deliveryman')}} {{\App\CPU\translate('list')}}
-                        ( {{ $delivery_men->total() }} )
-                    </h1>
-                </div>
-            </div>
+        <div class="mb-3">
+            <h2 class="h1 mb-0 text-capitalize d-flex align-items-center gap-2">
+                <img src="{{dynamicAsset(path: 'public/assets/back-end/img/deliveryman.png')}}" width="20" alt="">
+                {{translate('delivery_man')}} <span class="badge badge-soft-dark radius-50 fz-12">{{ $deliveryMens->total() }}</span>
+            </h2>
         </div>
-        <!-- End Page Header -->
-        <div class="row gx-2 gx-lg-3">
-            <div class="col-sm-12 col-lg-12 mb-3 mb-lg-2">
-                <!-- Card -->
+
+        <div class="row">
+            <div class="col-sm-12 mb-3">
                 <div class="card">
-                    <!-- Header -->
-                    <div class="card-header">
-                        
-                        <div class="col-12 ">
-                            <div class="row flex-between justify-content-between align-items-center">
-                                <div class="mb-1 col-md-4">
-                                    <form action="{{url()->current()}}" method="GET">
-                                        <!-- Search -->
-                                        <div class="input-group input-group-merge input-group-flush">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <i class="tio-search"></i>
-                                                </div>
+                    <div class="px-3 py-4">
+                        <div class="d-flex justify-content-between gap-10 flex-wrap align-items-center">
+                            <div class="">
+                                <form action="{{url()->current()}}" method="GET">
+                                    <div class="input-group input-group-merge input-group-custom">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="tio-search"></i>
                                             </div>
-                                            <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                                    placeholder="Search" aria-label="Search" value="{{$search}}" required>
-                                            <button type="submit" class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
-    
                                         </div>
-                                        <!-- End Search -->
-                                    </form>
+                                        <input id="datatableSearch_" type="search" name="searchValue" class="form-control"
+                                                placeholder="{{translate('search_by_name').','.translate('_contact_info')}}" aria-label="Search" value="{{ request('searchValue') }}" required>
+                                        <button type="submit" class="btn btn--primary">{{translate('search')}}</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="d-flex justify-content-end gap-2">
+                                <div class="dropdown text-nowrap">
+                                    <button type="button" class="btn btn-outline--primary" data-toggle="dropdown">
+                                        <i class="tio-download-to"></i>
+                                        {{translate('export')}}
+                                        <i class="tio-chevron-down"></i>
+                                    </button>
+
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li>
+                                            <a type="submit" class="dropdown-item d-flex align-items-center gap-2 " href="{{route('admin.delivery-man.export',['searchValue' => request('searchValue')])}}">
+                                                <img width="14" src="{{dynamicAsset(path: 'public/assets/back-end/img/excel.png')}}" alt="">
+                                                {{translate('excel')}}
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                
-                                <div class="col-md-3 ">
-                                    <a href="{{route('admin.delivery-man.add')}}" class="btn btn-primary float-right"><i
-                                            class="tio-add-circle"></i> {{\App\CPU\translate('add')}} {{\App\CPU\translate('deliveryman')}}
-                                    </a>
-                                </div>
+                                <a href="{{route('admin.delivery-man.add')}}" class="btn btn--primary text-nowrap">
+                                    <i class="tio-add"></i>
+                                    {{translate('add_Delivery_Man')}}
+                                </a>
                             </div>
                         </div>
-                        
                     </div>
-                    <!-- End Header -->
-
-                    <!-- Table -->
                     <div class="table-responsive datatable-custom">
-                        <table
-                            class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
-                            <thead class="thead-light">
+                        <table class="table table-hover table-borderless table-thead-bordered table-align-middle card-table {{ Session::get('direction') === 'rtl' ? 'text-right' : 'text-left' }}">
+                            <thead class="thead-light thead-50 text-capitalize table-nowrap">
                             <tr>
-                                <th>{{\App\CPU\translate('#')}}</th>
-                                <th style="width: 30%">{{\App\CPU\translate('name')}}</th>
-                                <th style="width: 25%">{{\App\CPU\translate('image')}}</th>
-                                <th>{{\App\CPU\translate('email')}}</th>
-                                <th>{{\App\CPU\translate('phone')}}</th>
-                                <th>{{\App\CPU\translate('status')}}</th>
-                                <th>{{\App\CPU\translate('action')}}</th>
+                                <th>{{translate('SL')}}</th>
+                                <th>{{translate('name')}}</th>
+                                <th>{{translate('contact info')}}</th>
+                                <th>{{translate('total_Orders')}}</th>
+                                <th>{{translate('rating')}}</th>
+                                <th class="text-center">{{translate('status')}}</th>
+                                <th class="text-center">{{translate('action')}}</th>
                             </tr>
                             </thead>
 
                             <tbody id="set-rows">
-                            @foreach($delivery_men as $key=>$dm)
+                            @foreach($deliveryMens as $key => $deliveryMen)
                                 <tr>
-                                    <td>{{$delivery_men->firstitem()+$key}}</td>
+                                    <td>{{$deliveryMens->firstitem()+$key}}</td>
                                     <td>
-                                        <span class="d-block font-size-sm text-body">
-                                            {{$dm['f_name'].' '.$dm['l_name']}}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <div style="overflow-x: hidden;overflow-y: hidden">
-                                            <img width="60" style="border-radius: 50%;height: 60px; width: 60px;"
-                                                 onerror="this.src='{{asset('public/assets/back-end/img/160x160/img1.jpg')}}'"
-                                                 src="{{asset('storage/app/public/delivery-man')}}/{{$dm['image']}}">
+                                        <div class="media align-items-center gap-10">
+                                            <img class="rounded-circle avatar avatar-lg" alt=""
+                                                 src="{{getValidImage(path: 'storage/app/public/delivery-man/'.$deliveryMen['image'],type:'backend-profile')}}">
+                                            <div class="media-body">
+                                                <a title="Earning Statement"
+                                                   class="title-color hover-c1"
+                                                   href="{{ route('admin.delivery-man.earning-statement-overview', ['id' => $deliveryMen['id']]) }}">
+                                                    {{$deliveryMen['f_name'].' '.$deliveryMen['l_name']}}
+                                                </a>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>
-                                        {{$dm['email']}}
+                                        <div class="d-flex flex-column gap-1">
+                                            <div><a class="title-color hover-c1" href="mailto:{{$deliveryMen['email']}}"><strong>{{$deliveryMen['email']}}</strong></a></div>
+                                            <a class="title-color hover-c1" href="tel:{{$deliveryMen['country_code']}}{{$deliveryMen['phone']}}">{{ $deliveryMen['country_code'].' '. $deliveryMen['phone']}}</a>
+                                        </div>
                                     </td>
                                     <td>
-                                        {{$dm['phone']}}
-                                    </td>
-                                    <td>
-                                        <label class="switch switch-status">
-                                            <input type="checkbox" class="status"
-                                                   id="{{$dm['id']}}" {{$dm->is_active == 1?'checked':''}}>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </td>
-                                    <td>
-                                    
-                                        <a  class="btn btn-primary btn-sm edit"
-                                            title="{{\App\CPU\translate('edit')}}"
-                                            href="{{route('admin.delivery-man.edit',[$dm['id']])}}">
-                                            <i class="tio-edit"></i></a>
-                                        <a class="btn btn-danger btn-sm delete" href="javascript:"
-                                            onclick="form_alert('delivery-man-{{$dm['id']}}','Want to remove this information ?')"
-                                            title="{{ \App\CPU\translate('Delete')}}">
-                                            <i class="tio-add-to-trash"></i>
+                                        <a href="{{ route('admin.orders.list', ['all', 'delivery_man_id' => $deliveryMen['id']]) }}" class="badge fz-14 badge-soft--primary">
+                                            <span>{{ $deliveryMen->orders_count }}</span>
                                         </a>
-                                        <form action="{{route('admin.delivery-man.delete',[$dm['id']])}}"
-                                                method="post" id="delivery-man-{{$dm['id']}}">
-                                            @csrf @method('delete')
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.delivery-man.rating', ['id' => $deliveryMen['id']]) }}" class="badge fz-14 badge-soft-info">
+                                            <span>{{ isset($deliveryMen->rating[0]->average) ? number_format($deliveryMen->rating[0]->average, 2, '.', ' ') : 0 }} <i class="tio-star"></i> </span>
+                                        </a>
+                                    </td>
+                                    <td>
+
+                                        <form action="{{route('admin.delivery-man.status-update')}}" method="post" id="deliveryman_status{{$deliveryMen['id']}}-form" class="deliveryman_status_form">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$deliveryMen['id']}}">
+                                            <label class="switcher mx-auto">
+                                                <input type="checkbox" class="switcher_input toggle-switch-message" id="deliveryman_status{{$deliveryMen['id']}}" name="status" value="1" {{ $deliveryMen->is_active == 1 ? 'checked':'' }}
+                                                   data-modal-id = "toggle-status-modal"
+                                                   data-toggle-id = "deliveryman_status{{$deliveryMen['id']}}"
+                                                   data-on-image = "deliveryman-status-on.png"
+                                                   data-off-image = "deliveryman-status-off.png"
+                                                   data-on-title = "{{translate('Want_to_Turn_ON_Deliveryman_Status').'?'}}"
+                                                   data-off-title = "{{translate('Want_to_Turn_OFF_Deliveryman_Status').'?'}}"
+                                                   data-on-message = "<p>{{translate('if_enabled_this_deliveryman_can_log_in_to_the_system_and_deliver_products')}}</p>"
+                                                   data-off-message = "<p>{{translate('if_disabled_this_deliveryman_cannot_log_in_to_the_system_and_deliver_any_products')}}</p>"
+                                                >
+                                                <span class="switcher_control"></span>
+                                            </label>
                                         </form>
                                     </td>
+                                    <td>
+                                        <div class="d-flex justify-content-center align-items-center gap-10">
+                                            <a  class="btn btn-outline--primary btn-sm edit"
+                                                title="{{translate('edit')}}"
+                                                href="{{route('admin.delivery-man.edit',[$deliveryMen['id']])}}">
+                                                <i class="tio-edit"></i></a>
+                                            <a title="Earning Statement"
+                                               class="btn btn-outline-info btn-sm square-btn"
+                                               href="{{ route('admin.delivery-man.earning-statement-overview', ['id' => $deliveryMen['id']]) }}">
+                                                <i class="tio-money"></i>
+                                            </a>
+                                            <a class="btn btn-outline-danger btn-sm delete delete-data" href="javascript:"
+                                                data-id="delivery-man-{{$deliveryMen['id']}}"
+                                                title="{{ translate('delete')}}">
+                                                <i class="tio-delete"></i>
+                                            </a>
+                                            <form action="{{route('admin.delivery-man.delete',[$deliveryMen['id']])}}"
+                                                    method="post" id="delivery-man-{{$deliveryMen['id']}}">
+                                                @csrf @method('delete')
+                                            </form>
+                                        </div>
+                                    </td>
                                 </tr>
-                            @endforeach
+                                @endforeach
                             </tbody>
                         </table>
-                        <hr>
-
-                        <div class="page-area">
-                            <table>
-                                <tfoot>
-                                {!! $delivery_men->links() !!}
-                                </tfoot>
-                            </table>
-                        </div>
-
                     </div>
-                    <!-- End Table -->
+                    <div class="table-responsive mt-4">
+                        <div class="px-4 d-flex justify-content-lg-end">
+                            {!! $deliveryMens->links() !!}
+                        </div>
+                    </div>
+                    @if(count($deliveryMens)==0)
+                        @include('layouts.back-end._empty-state',['text'=>'no_delivery_man_found'],['image'=>'default'])
+                    @endif
                 </div>
-                <!-- End Card -->
             </div>
         </div>
     </div>
-
 @endsection
 
 @push('script_2')
-    <script>
-        $(document).on('change', '.status', function () {
-            var id = $(this).attr("id");
-            if ($(this).prop("checked") == true) {
-                var status = 1;
-            } else if ($(this).prop("checked") == false) {
-                var status = 0;
-            }
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: "{{route('admin.delivery-man.status-update')}}",
-                method: 'POST',
-                data: {
-                    id: id,
-                    status: status
-                },
-                success: function (data) {
-                    toastr.success('{{\App\CPU\translate('Status updated successfully')}}');
-                }
-            });
-        });
-    </script>
+    <script src="{{dynamicAsset(path: 'public/assets/back-end/js/admin/deliveryman.js')}}"></script>
 @endpush
