@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('My Support Tickets'))
+@section('title',translate('My Support Tickets'))
 
 @push('css_or_js')
     <style>
@@ -87,9 +87,9 @@
                 <div class="modal-header">
                     <div class="row">
                         <div class="col-md-12"><h5
-                                class="modal-title font-nameA ">{{\App\CPU\translate('submit_new_ticket')}}</h5></div>
+                                class="modal-title font-nameA ">{{translate('submit_new_ticket')}}</h5></div>
                         <div class="col-md-12" style=" color: #030303;  margin-top: 1rem;">
-                            <span>{{\App\CPU\translate('you_will_get_response')}}.</span>
+                            <span>{{translate('you_will_get_response')}}.</span>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="firstName">{{\App\CPU\translate('Subject')}}</label>
+                                <label for="firstName">{{translate('Subject')}}</label>
                                 <input type="text" class="form-control" id="ticket-subject" name="ticket_subject"
                                        required>
                             </div>
@@ -106,42 +106,42 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <div class="">
-                                    <label class="" for="inlineFormCustomSelect">{{\App\CPU\translate('Type')}}</label>
+                                    <label class="" for="inlineFormCustomSelect">{{translate('Type')}}</label>
                                     <select class="custom-select " id="ticket-type" name="ticket_type" required>
                                         <option
-                                            value="Website problem">{{\App\CPU\translate('Website')}} {{\App\CPU\translate('problem')}}</option>
-                                        <option value="Partner request">{{\App\CPU\translate('partner_request')}}</option>
-                                        <option value="Complaint">{{\App\CPU\translate('Complaint')}}</option>
+                                            value="Website problem">{{translate('Website')}} {{translate('problem')}}</option>
+                                        <option value="Partner request">{{translate('partner_request')}}</option>
+                                        <option value="Complaint">{{translate('Complaint')}}</option>
                                         <option
-                                            value="Info inquiry">{{\App\CPU\translate('Info')}} {{\App\CPU\translate('inquiry')}} </option>
+                                            value="Info inquiry">{{translate('Info')}} {{translate('inquiry')}} </option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <div class="">
-                                    <label class="" for="inlineFormCustomSelect">{{\App\CPU\translate('Priority')}}</label>
+                                    <label class="" for="inlineFormCustomSelect">{{translate('Priority')}}</label>
                                     <select class="form-control custom-select" id="ticket-priority"
                                             name="ticket_priority" required>
-                                        <option value>{{\App\CPU\translate('choose_priority')}}</option>
-                                        <option value="Urgent">{{\App\CPU\translate('Urgent')}}</option>
-                                        <option value="High">{{\App\CPU\translate('High')}}</option>
-                                        <option value="Medium">{{\App\CPU\translate('Medium')}}</option>
-                                        <option value="Low">{{\App\CPU\translate('Low')}}</option>
+                                        <option value>{{translate('choose_priority')}}</option>
+                                        <option value="Urgent">{{translate('Urgent')}}</option>
+                                        <option value="High">{{translate('High')}}</option>
+                                        <option value="Medium">{{translate('Medium')}}</option>
+                                        <option value="Low">{{translate('Low')}}</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="detaaddressils">{{\App\CPU\translate('describe_your_issue')}}</label>
+                                <label for="detaaddressils">{{translate('describe_your_issue')}}</label>
                                 <textarea class="form-control" rows="6" id="ticket-description"
                                           name="ticket_description"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer" style="padding: 0px!important;">
                             <button type="button" class="btn btn-secondary"
-                                    data-dismiss="modal">{{\App\CPU\translate('close')}}</button>
-                            <button type="submit" class="btn btn-primary">{{\App\CPU\translate('submit_a_ticket')}}</button>
+                                    data-dismiss="modal">{{translate('close')}}</button>
+                            <button type="submit" class="btn btn-primary">{{translate('submit_a_ticket')}}</button>
                         </div>
                     </form>
                 </div>
@@ -153,7 +153,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-9 sidebar_heading">
-                <h1 class="h3  mb-0 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{\App\CPU\translate('support_ticket')}}</h1>
+                <h1 class="h3  mb-0 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{translate('support_ticket')}}</h1>
             </div>
         </div>
     </div>
@@ -174,21 +174,21 @@
                             <tr style="background: #6b6b6b">
                                 <td class="tdBorder" style="width: 30%;">
                                     <div class="py-2"><span
-                                            class="d-block spandHeadO ">{{\App\CPU\translate('Topic')}}</span></div>
+                                            class="d-block spandHeadO ">{{translate('Topic')}}</span></div>
                                 </td>
                                 <td class="tdBorder" style="width: 20%;">
                                     <div class="py-2 {{Session::get('direction') === "rtl" ? 'mr-2' : 'ml-2'}}"><span
-                                            class="d-block spandHeadO ">{{\App\CPU\translate('submition_date')}}</span>
+                                            class="d-block spandHeadO ">{{translate('submition_date')}}</span>
                                     </div>
                                 </td>
                                 <td class="tdBorder" style="width: 15%;">
-                                    <div class="py-2"><span class="d-block spandHeadO">{{\App\CPU\translate('Type')}}</span>
+                                    <div class="py-2"><span class="d-block spandHeadO">{{translate('Type')}}</span>
                                     </div>
                                 </td>
                                 <td class="tdBorder" style="width: 9%;">
                                     <div class="py-2">
                                         <span class="d-block spandHeadO">
-                                            {{\App\CPU\translate('Status')}}
+                                            {{translate('Status')}}
                                         </span>
                                     </div>
                                 </td>
@@ -199,7 +199,7 @@
                                 </td>
                                 <td class="tdBorder" style="width: 7%;">
                                     <div class="py-2"><span
-                                            class="d-block spandHeadO">{{\App\CPU\translate('Action')}} </span></div>
+                                            class="d-block spandHeadO">{{translate('Action')}} </span></div>
                                 </td>
                             </tr>
                             </thead>
@@ -220,7 +220,7 @@
                                     <td class="bodytr">
                                         <span class="">
                                             <a class="btn btn-primary btn-sm"
-                                               href="{{route('support-ticket.index',$ticket['id'])}}">{{\App\CPU\translate('View')}}
+                                               href="{{route('support-ticket.index',$ticket['id'])}}">{{translate('View')}}
                                             </a>
                                         </span>
                                     </td>
@@ -228,13 +228,13 @@
                                     <td class="bodytr">
                                         <a href="javascript:"
                                            onclick="Swal.fire({
-                                               title: '{{\App\CPU\translate('Do you want to delete this?')}}',
+                                               title: '{{translate('Do you want to delete this?')}}',
                                                showDenyButton: true,
                                                showCancelButton: true,
                                                confirmButtonColor: '{{$web_config['primary_color']}}',
                                                cancelButtonColor: '{{$web_config['secondary_color']}}',
-                                               confirmButtonText: `{{\App\CPU\translate('Yes')}}`,
-                                               denyButtonText: `{{\App\CPU\translate("Don't Delete")}}`,
+                                               confirmButtonText: `{{translate('Yes')}}`,
+                                               denyButtonText: `{{translate("Don't Delete")}}`,
                                                }).then((result) => {
                                                if (result.value) {
                                                Swal.fire('Deleted!', '', 'success')
@@ -257,7 +257,7 @@
                 <div class="mt-3">
                     <button type="submit" class="btn btn-primary float-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}" data-toggle="modal"
                             data-target="#open-ticket">
-                            {{\App\CPU\translate('add_new_ticket')}}
+                            {{translate('add_new_ticket')}}
                     </button>
                 </div>
             </section>

@@ -1,18 +1,18 @@
 @extends('layouts.back-end.app')
-@section('title', \App\CPU\translate('Coupon Edit'))
+@section('title', translate('Coupon Edit'))
 @push('css_or_js')
     <link href="{{asset('public/assets/back-end')}}/css/select2.min.css" rel="stylesheet"/>
-    
+
     <style>
         .forAll{
             display: none;
         }
-        
+
         .city-non-active{
                 display: none;
         }
         .city-active{
-            
+
             display: block;
         }
     </style>
@@ -24,10 +24,10 @@
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
                     @if($id)
-                        <h1 class="page-header-title"><i class="tio-edit"></i> {{\App\CPU\translate('orderLimit')}} {{\App\CPU\translate('update')}}</h1>
+                        <h1 class="page-header-title"><i class="tio-edit"></i> {{translate('orderLimit')}} {{translate('update')}}</h1>
                     @else
-                        <h1 class="page-header-title"><i class="tio-edit"></i> 
-                            {{\App\CPU\translate('Add')}} {{\App\CPU\translate('New')}} {{\App\CPU\translate('orderLimit')}}    
+                        <h1 class="page-header-title"><i class="tio-edit"></i>
+                            {{translate('Add')}} {{translate('New')}} {{translate('orderLimit')}}
                         </h1>
                     @endif
 
@@ -44,12 +44,12 @@
                     <form action="{{route('admin.OrderLimit.insertandUpdate',[$id])}}" method="post">
                         @csrf
                         <div class="row">
-                            
+
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="name">{{\App\CPU\translate('limit')}}</label>
+                                    <label for="name">{{translate('limit')}}</label>
                                     <input name="id" value="{{$id}}" type="hidden">
-                                    <input type="number" step="any" name="limit" 
+                                    <input type="number" step="any" name="limit"
                                         value="<?php if(isset($orderLimit->Limit)){echo $orderLimit->Limit;} ?>"
                                         class="form-control" id="code"
                                         placeholder="" required>
@@ -65,7 +65,7 @@
                                         <input class="form-check-input city" type="checkbox" value="{{$governorate->id}}">
                                         <label class="form-check-label" for="flexCheckDefault" style="margin: 0 20px;">
                                             {{$governorate->governorate_name_ar}}
-                                        </label>                                    
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="col-12 row">
@@ -77,7 +77,7 @@
                                                 >
                                                 <label class="form-check-label " for="flexCheckDefault" style="margin: 0 20px;">
                                                     {{$area->city_name_ar}}
-                                                </label>                                    
+                                                </label>
                                             </div>
                                         </div>
                                     @endforeach
@@ -89,7 +89,7 @@
 
 
                         <div class="">
-                            <button type="submit" class="btn btn-primary float-right">{{\App\CPU\translate('Submit')}}</button>
+                            <button type="submit" class="btn btn-primary float-right">{{translate('Submit')}}</button>
                         </div>
                     </form>
                 </div>
@@ -113,6 +113,6 @@
             }
         });
     </script>
-        
-        
+
+
 @endpush

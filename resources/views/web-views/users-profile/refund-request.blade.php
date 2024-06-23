@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('Refund request'))
+@section('title',translate('Refund request'))
 
 @push('css_or_js')
     <link href="{{asset('public/assets/back-end/css/tags-input.min.css')}}" rel="stylesheet">
@@ -14,7 +14,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-9 sidebar_heading">
             <h1 class="h3  mb-0 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">
-                {{\App\CPU\translate('refund_request')}}
+                {{translate('refund_request')}}
             </h1>
         </div>
     </div>
@@ -43,14 +43,14 @@
                                 </div>
                                 <div class="col-9 col-sm-7 text-left">
                                     <p>{{$product['name']}}</p>
-                                    <span>{{\App\CPU\translate('variant')}} : </span>
+                                    <span>{{translate('variant')}} : </span>
                                                 {{$order_details->variant}}
                                 </div>
                                 <div class="col-4 col-sm-3 text-left d-flex flex-column pl-0 mt-2 mt-sm-0 pl-sm-5">
-                                    <span >{{\App\CPU\translate('QTY')}} : {{$order_details->qty}}</span>
-                                    <span>{{\App\CPU\translate('price')}} : {{\App\CPU\Helpers::currency_converter($order_details->price)}}</span>
-                                    <span>{{\App\CPU\translate('discount')}} : {{\App\CPU\Helpers::currency_converter($order_details->discount)}}</span>
-                                    <span>{{\App\CPU\translate('tax')}} : {{\App\CPU\Helpers::currency_converter($order_details->tax)}}</span>
+                                    <span >{{translate('QTY')}} : {{$order_details->qty}}</span>
+                                    <span>{{translate('price')}} : {{\App\CPU\Helpers::currency_converter($order_details->price)}}</span>
+                                    <span>{{translate('discount')}} : {{\App\CPU\Helpers::currency_converter($order_details->discount)}}</span>
+                                    <span>{{translate('tax')}} : {{\App\CPU\Helpers::currency_converter($order_details->tax)}}</span>
                                 </div>
                             </div>
                         </div>
@@ -58,11 +58,11 @@
                     <?php
                     $total_product_price = 0;
                     foreach ($order->details as $key => $or_d) {
-                        $total_product_price += ($or_d->qty*$or_d->price) + $or_d->tax - $or_d->discount; 
+                        $total_product_price += ($or_d->qty*$or_d->price) + $or_d->tax - $or_d->discount;
                     }
                         $refund_amount = 0;
                         $subtotal = ($order_details->price * $order_details->qty) - $order_details->discount + $order_details->tax;
-                        
+
                         $coupon_discount = ($order->discount_amount*$subtotal)/$total_product_price;
 
                         $refund_amount = $subtotal - $coupon_discount;
@@ -71,9 +71,9 @@
                     <div class="card mt-2">
                         <div class="card-body">
                             <div class="row text-center">
-                                <span class="col-sm-2">{{\App\CPU\translate('subtotal')}}: {{\App\CPU\Helpers::currency_converter($subtotal)}}</span>
-                                <span class="col-sm-5">{{\App\CPU\translate('coupon_discount')}}: {{\App\CPU\Helpers::currency_converter($coupon_discount)}}</span>
-                                <span class="col-sm-5">{{\App\CPU\translate('total_refundable_amount')}}:{{\App\CPU\Helpers::currency_converter($refund_amount)}}</span>
+                                <span class="col-sm-2">{{translate('subtotal')}}: {{\App\CPU\Helpers::currency_converter($subtotal)}}</span>
+                                <span class="col-sm-5">{{translate('coupon_discount')}}: {{\App\CPU\Helpers::currency_converter($coupon_discount)}}</span>
+                                <span class="col-sm-5">{{translate('total_refundable_amount')}}:{{\App\CPU\Helpers::currency_converter($refund_amount)}}</span>
                             </div>
                         </div>
                     </div>
@@ -81,25 +81,25 @@
                         <div class="card-body">
                             <div class="row">
                                 <form action="{{route('refund-store')}}"  method="post" enctype="multipart/form-data">
-                                    @csrf 
+                                    @csrf
                                     <input type="hidden" name="order_details_id" value="{{$order_details->id}}">
                                     <input type="hidden" name="amount" value="{{$refund_amount}}">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label class="input-label" for="name">{{\App\CPU\translate('refund_reason')}}</label>
-                                            <textarea class="form-control" name="refund_reason" cols="120" 
+                                            <label class="input-label" for="name">{{translate('refund_reason')}}</label>
+                                            <textarea class="form-control" name="refund_reason" cols="120"
                                                    required>{{old('details')}}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">{{\App\CPU\translate('attachment')}}</label>
+                                            <label for="exampleInputEmail1">{{translate('attachment')}}</label>
                                             <div class="row coba"></div>
                                         </div>
-    
+
                                     </div>
-                                    <button type="submit" class="btn btn-primary">{{\App\CPU\translate('submit')}}</button>
-                                    
+                                    <button type="submit" class="btn btn-primary">{{translate('submit')}}</button>
+
                                 </form>
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                     image: '{{asset('public/assets/front-end/img/image-place-holder.png')}}',
                     width: '100%'
                 },
-                dropFileLabel: "{{\App\CPU\translate('drop_here')}}",
+                dropFileLabel: "{{translate('drop_here')}}",
                 onAddRow: function (index, file) {
 
                 },
@@ -136,13 +136,13 @@
 
                 },
                 onExtensionErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('input_png_or_jpg')}}', {
+                    toastr.error('{{translate('input_png_or_jpg')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 },
                 onSizeErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('file_size_too_big')}}', {
+                    toastr.error('{{translate('file_size_too_big')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });

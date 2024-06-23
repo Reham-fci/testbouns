@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('FCM Settings'))
+@section('title', translate('FCM Settings'))
 
 @push('css_or_js')
 
@@ -10,9 +10,9 @@
     <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{\App\CPU\translate('Dashboard')}}</a>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{translate('Dashboard')}}</a>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Push Notification Setup')}}</li>
+                <li class="breadcrumb-item" aria-current="page">{{translate('Push Notification Setup')}}</li>
             </ol>
         </nav>
 
@@ -21,7 +21,7 @@
             <div class="col-sm-12 col-lg-12 mb-3 mb-lg-2">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="page-header-title">{{\App\CPU\translate('Firebase Push Notification Setup')}}</h1>
+                        <h1 class="page-header-title">{{translate('Firebase Push Notification Setup')}}</h1>
                     </div>
                     <div class="card-body">
                         <form action="{{route('admin.business-settings.update-fcm')}}" method="post"
@@ -30,7 +30,7 @@
                             @csrf
                             @php($key=\App\Model\BusinessSetting::where('type','push_notification_key')->first()->value)
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{\App\CPU\translate('Server Key')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('Server Key')}}</label>
                                 <textarea name="push_notification_key" class="form-control"
                                           required>{{env('APP_MODE')=='demo'?'':$key}}</textarea>
                             </div>
@@ -39,7 +39,7 @@
                                 @php($project_id=\App\Model\BusinessSetting::where('type','fcm_project_id')->first()->value)
                                 <div class="col-md-12 col-12">
                                     <div class="form-group">
-                                        <label class="input-label" for="exampleFormControlInput1">{{\App\CPU\translate('FCM Project ID')}}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('FCM Project ID')}}</label>
                                         <input type="text" value="{{$project_id}}"
                                                name="fcm_project_id" class="form-control">
                                     </div>
@@ -48,7 +48,7 @@
                             <hr>
                             <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}"
                                     onclick="{{env('APP_MODE')!='demo'?'':'call_demo()'}}"
-                                    class="btn btn-primary mb-2 float-right">{{\App\CPU\translate('save')}}</button>
+                                    class="btn btn-primary mb-2 float-right">{{translate('save')}}</button>
                         </form>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h2>{{\App\CPU\translate('Push Messages')}}</h2>
+                        <h2>{{translate('Push Messages')}}</h2>
                     </div>
                     <div class="card-body">
                         <form action="{{route('admin.business-settings.update-fcm-messages')}}" method="post"
@@ -80,7 +80,7 @@
                                                 <span class="toggle-switch-indicator"></span>
                                               </span>
                                             <span class="toggle-switch-content">
-                                            <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}">{{\App\CPU\translate('Order Pending Message')}}</span>
+                                            <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}">{{translate('Order Pending Message')}}</span>
                                           </span>
                                         </label>
                                         <textarea name="pending_message"
@@ -100,7 +100,7 @@
                                                 <span class="toggle-switch-indicator"></span>
                                               </span>
                                             <span class="toggle-switch-content">
-                                                <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}"> {{\App\CPU\translate('Order Confirmation Message')}}</span>
+                                                <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}"> {{translate('Order Confirmation Message')}}</span>
                                               </span>
                                         </label>
 
@@ -122,7 +122,7 @@
                                                 <span class="toggle-switch-indicator"></span>
                                               </span>
                                             <span class="toggle-switch-content">
-                                                <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}">{{\App\CPU\translate('Order Processing Message')}}</span>
+                                                <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}">{{translate('Order Processing Message')}}</span>
                                               </span>
                                         </label>
 
@@ -144,7 +144,7 @@
                                                 <span class="toggle-switch-indicator"></span>
                                               </span>
                                             <span class="toggle-switch-content">
-                                                <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}">{{\App\CPU\translate('Order out for delivery Message')}}</span>
+                                                <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}">{{translate('Order out for delivery Message')}}</span>
                                               </span>
                                         </label>
                                         <textarea name="out_for_delivery_message"
@@ -165,7 +165,7 @@
                                                 <span class="toggle-switch-indicator"></span>
                                               </span>
                                             <span class="toggle-switch-content">
-                                                <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}">{{\App\CPU\translate('Order Delivered Message')}}</span>
+                                                <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}">{{translate('Order Delivered Message')}}</span>
                                               </span>
                                         </label>
 
@@ -188,7 +188,7 @@
                                                 <span class="toggle-switch-indicator"></span>
                                               </span>
                                             <span class="toggle-switch-content">
-                                                <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}">{{\App\CPU\translate('Order Returned Message')}}</span>
+                                                <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}">{{translate('Order Returned Message')}}</span>
                                               </span>
                                         </label>
 
@@ -211,7 +211,7 @@
                                                 <span class="toggle-switch-indicator"></span>
                                               </span>
                                             <span class="toggle-switch-content">
-                                                <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}">{{\App\CPU\translate('Order Failed Message')}}</span>
+                                                <span class="d-block {{Session::get('direction') === "rtl" ? 'mr-2' : ''}}">{{translate('Order Failed Message')}}</span>
                                               </span>
                                         </label>
 
@@ -236,7 +236,7 @@
                                               </span>
                                             <span class="toggle-switch-content">
                                                 <span
-                                                    class="d-block">{{\App\CPU\translate('deliveryman')}} {{\App\CPU\translate('assign')}} {{\App\CPU\translate('message')}}</span>
+                                                    class="d-block">{{translate('deliveryman')}} {{translate('assign')}} {{translate('message')}}</span>
                                               </span>
                                         </label>
 
@@ -260,7 +260,7 @@
                                               </span>
                                             <span class="toggle-switch-content">
                                                 <span
-                                                    class="d-block"> {{\App\CPU\translate('deliveryman')}} {{\App\CPU\translate('start')}} {{\App\CPU\translate('message')}}</span>
+                                                    class="d-block"> {{translate('deliveryman')}} {{translate('start')}} {{translate('message')}}</span>
                                               </span>
                                         </label>
 
@@ -285,7 +285,7 @@
                                               </span>
                                             <span class="toggle-switch-content">
                                                 <span
-                                                    class="d-block">{{\App\CPU\translate('deliveryman')}} {{\App\CPU\translate('delivered')}} {{\App\CPU\translate('message')}}</span>
+                                                    class="d-block">{{translate('deliveryman')}} {{translate('delivered')}} {{translate('message')}}</span>
                                               </span>
                                         </label>
 
@@ -298,7 +298,7 @@
                             <hr>
                             <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}"
                                     onclick="{{env('APP_MODE')!='demo'?'':'call_demo()'}}"
-                                    class="btn btn-primary mb-2 float-right">{{\App\CPU\translate('save')}}</button>
+                                    class="btn btn-primary mb-2 float-right">{{translate('save')}}</button>
                         </form>
                     </div>
                 </div>

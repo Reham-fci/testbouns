@@ -66,7 +66,7 @@ class LoginController extends Controller
                             $response = \file_get_contents($url);
                             $response = json_decode($response);
                             if (!$response->success) {
-                                $fail(\App\CPU\translate('ReCAPTCHA Failed'));
+                                $fail(translate('ReCAPTCHA Failed'));
                             }
                         },
                     ],
@@ -75,7 +75,7 @@ class LoginController extends Controller
         } else {
             if (strtolower($request->default_captcha_value) != strtolower(Session('default_captcha_code'))) {
                 Session::forget('default_captcha_code');
-                return back()->withErrors(\App\CPU\translate('Captcha Failed'));
+                return back()->withErrors(translate('Captcha Failed'));
             }
         }
 

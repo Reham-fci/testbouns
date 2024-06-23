@@ -80,7 +80,7 @@ class OrderController extends Controller
 
 
         if ($request['salesPersonId']) {
-            
+
             $query_param['salesPersonId'] =  $request['salesPersonId'];
             $customer_id = DB::table('users')->select('id')->where('salesPersonId', $request['salesPersonId']);
             $orders->whereIn('customer_id', $customer_id);
@@ -134,8 +134,8 @@ class OrderController extends Controller
 
 
         if ($request['salesPersonId']) {
-            
-            
+
+
             $customer_id = DB::table('users')->select('id')->where('salesPersonId', $request['salesPersonId']);
             $orders->whereIn('customer_id', $customer_id);
         }
@@ -144,15 +144,15 @@ class OrderController extends Controller
         // ->appends(['search' => $request['search'], 'from' => $request['from'], 'to' => $request['to']]);
         $exportData = [];
         $exportData[] = [
-            \App\CPU\translate('SL'),
-            \App\CPU\translate('Order'),
-            \App\CPU\translate('Date'),
-            \App\CPU\translate('customer_name'),
-            \App\CPU\translate('Phone'),
-            \App\CPU\translate('Status'),
-            \App\CPU\translate('Total'),
-            \App\CPU\translate('Order') . ' ' . \App\CPU\translate('Status'),
-            // \App\CPU\translate('Action'),
+            translate('SL'),
+            translate('Order'),
+            translate('Date'),
+            translate('customer_name'),
+            translate('Phone'),
+            translate('Status'),
+            translate('Total'),
+            translate('Order') . ' ' . translate('Status'),
+            // translate('Action'),
             "Link GPS",
             // "Link GPS"
         ];
@@ -162,15 +162,15 @@ class OrderController extends Controller
 
 
         foreach ($orders as $key => $order) {
-            
+
             $address = json_decode($order['shipping_address_data']);
             $exportData[] = [
                 $key + 1,
                 $order['id'],
                 date('d M Y', strtotime($order['created_at'])),
-                $order->customer ? $order->customer['f_name'] . ' ' . $order->customer['l_name'] : \App\CPU\translate('invalid_customer_data'),
+                $order->customer ? $order->customer['f_name'] . ' ' . $order->customer['l_name'] : translate('invalid_customer_data'),
                 $order->customer ? $order->customer['phone'] : '',
-                ($order->payment_status == 'paid') ? \App\CPU\translate('paid') : \App\CPU\translate('unpaid'),
+                ($order->payment_status == 'paid') ? translate('paid') : translate('unpaid'),
                 \App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($order->order_amount)),
                 $order['order_status'],
                 "https://www.google.com/maps?q=".$address->latitude.",".$address->longitude."",
@@ -253,7 +253,7 @@ class OrderController extends Controller
                 Helpers::send_push_notif_to_device($fcm_token, $data);
             }
         } catch (\Exception $e) {
-            Toastr::warning(\App\CPU\translate('Push notification failed for DeliveryMan!'));
+            Toastr::warning(translate('Push notification failed for DeliveryMan!'));
         }
 
         return response()->json(['status' => true], 200);
@@ -265,13 +265,13 @@ class OrderController extends Controller
         $old_order_status = $order['order_status'];
         $new_order_status = $request->order_status;
         $old_payment_status = $order['payment_status'];
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
         // $wallet_status = Helpers::get_business_settings('wallet_status');
         // $loyalty_point_status = Helpers::get_business_settings('loyalty_point_status');
 
@@ -318,35 +318,35 @@ class OrderController extends Controller
                 if(
                     $old_order_status != "delivered"
                     && $new_order_status == "delivered"
-                    && $old_payment_status == "paid"    
+                    && $old_payment_status == "paid"
                 ){
-                    CustomerManager::ConvertOrderAmountToWallet($order);  
+                    CustomerManager::ConvertOrderAmountToWallet($order);
                 }
                 else if(
                         $old_order_status == "delivered"
                         && $new_order_status != "delivered"
-                        // && $old_payment_status == "paid"  
+                        // && $old_payment_status == "paid"
                     ){
-                    
+
                     $walletMoney = CustomerManager::RemoveOrderAmountToWallet($order);
                     $order->convertToMoney = $walletMoney ? 0 : 1;
                     $order->save();
                 }
-                
-                
+
+
                 if(in_array($new_order_status, ['failed' , 'returned' , 'canceled']) && $old_payment_status !== "paid"){
-                    
+
                     if($order->walletAmount > 0){
-                        
+
                         if(DB::table('wallet_transaction_order')->where('orderId' , $order->id)->delete()){
                             $wallet_transaction = CustomerManager::create_wallet_transaction($order['customer_id'],$order->walletAmount,'return_money_order','return_money_order');
                             $order->walletAmount = 0 ;
                             $order->save();
                         }
                     }
-                    
+
                 }
-                
+
             }
         }
         // if ($loyalty_point_status == 1) {
@@ -367,27 +367,27 @@ class OrderController extends Controller
                 ['delivery_status' => 'delivered']
             );
         }
-        
+
         return response()->json($request->order_status);
     }
 
-    
-    
+
+
 
     public function payment_status(Request $request)
     {
         if ($request->ajax()) {
             $order = Order::find($request->id);
-            
+
             $old_order_status = $order['order_status'];
             $new_payment_status = $request->payment_status;
             $old_payment_status = $order['payment_status'];
-            
-            
+
+
             $order->payment_status = $request->payment_status;
             $order->save();
             $data = $request->payment_status;
-            
+
             if($order->wasChanged("payment_status"))
             {
                 if($order->convertToMoney == 0)
@@ -395,16 +395,16 @@ class OrderController extends Controller
                     if(
                         $old_payment_status != "paid"
                         && $new_payment_status == "paid"
-                        && $old_order_status == "delivered"    
+                        && $old_order_status == "delivered"
                     ){
-                        CustomerManager::ConvertOrderAmountToWallet($order);  
-                        
+                        CustomerManager::ConvertOrderAmountToWallet($order);
+
                     }
-                    
+
                     // else if(
                     //     $old_payment_status == "paid"
                     //     && $new_payment_status != "paid"
-                    //     && $old_order_status == "delivered"    
+                    //     && $old_order_status == "delivered"
                     // ){
                     //     $walletMoney = CustomerManager::RemoveOrderAmountToWallet($order);
                     //     $order->convertToMoney = $walletMoney ? 0 : 1;
@@ -412,8 +412,8 @@ class OrderController extends Controller
                     // }
                 }
             }
-        
-            
+
+
             return response()->json($data);
         }
     }
@@ -422,8 +422,8 @@ class OrderController extends Controller
     {
         $order = Order::with('seller')->with('shipping')->with('details')->where('id', $id)->first();
         $seller = Seller::find($order->details->first()->seller_id);
-        $data["email"] = $order->customer != null ? $order->customer["email"] : \App\CPU\translate('email_not_found');
-        $data["client_name"] = $order->customer != null ? $order->customer["f_name"] . ' ' . $order->customer["l_name"] : \App\CPU\translate('customer_not_found');
+        $data["email"] = $order->customer != null ? $order->customer["email"] : translate('email_not_found');
+        $data["client_name"] = $order->customer != null ? $order->customer["f_name"] . ' ' . $order->customer["l_name"] : translate('customer_not_found');
         $data["order"] = $order;
 
         $mpdf_view = \View::make('admin-views.order.invoice')->with('order', $order)->with('seller', $seller);
@@ -437,12 +437,12 @@ class OrderController extends Controller
     {
         $order = Order::with('seller')->with('shipping')->with('details')->where('id', $id)->first();
         $seller = Seller::find($order->details->first()->seller_id);
-        $data["email"] = $order->customer != null ? $order->customer["email"] : \App\CPU\translate('email_not_found');
-        $data["client_name"] = $order->customer != null ? $order->customer["f_name"] . ' ' . $order->customer["l_name"] : \App\CPU\translate('customer_not_found');
+        $data["email"] = $order->customer != null ? $order->customer["email"] : translate('email_not_found');
+        $data["client_name"] = $order->customer != null ? $order->customer["f_name"] . ' ' . $order->customer["l_name"] : translate('customer_not_found');
         $data["order"] = $order;
 
         $mpdf_view = \View::make('admin-views.order.invoice2')->with('order', $order)->with('seller', $seller);
-        
+
         Helpers::gen_mpdf($mpdf_view, 'order_invoice_', $order->id);
     }
 
@@ -464,7 +464,7 @@ class OrderController extends Controller
         $order->delivery_man_id = null;
         $order->save();
 
-        Toastr::success(\App\CPU\translate('updated_successfully!'));
+        Toastr::success(translate('updated_successfully!'));
         return back();
     }
 
@@ -563,7 +563,7 @@ class OrderController extends Controller
                 $product = Product::find($c['p_id']);
                 $_products[] = $product;
                 $total += (($c['qty'] * $c['price']));
-                if ($c['d_id'] != -1) 
+                if ($c['d_id'] != -1)
                 {
                     $ids[] = $c['d_id'];
                     $o_d = OrderDetail::findOrFail($c['d_id']);
@@ -687,12 +687,12 @@ class OrderController extends Controller
                 $coupon = DB::table('coupons')->where('id' , $request->couponValue)->first();
                 if($coupon){
                     if($coupon->discount_type == "percentage"){
-                        
+
                     $order->discount_amount = ($coupon->discount * $total) / 100;
                     $order->discount_amount = ($order->discount_amount > $coupon->max_discount) ? $coupon->max_discount : $order->discount_amount;
                     }
                     else{
-                        
+
                         $order->discount_amount = $coupon->discount;
                     }
                     $order->discount_type = 'coupon_discount';
@@ -701,18 +701,18 @@ class OrderController extends Controller
                     $order->coupon_discount_type =  $coupon->discount_type;
                     $order->coupon_max_discount =  $coupon->max_discount;
                 }
-                
+
             }
             else if($order->coupon_discount_type){
-                    
+
                 if($order->coupon_discount_type == "percentage"){
-                    
+
                 $order->discount_amount = ($order->coupon_discount * $total) / 100;
                 $order->discount_amount = ($order->discount_amount > $order->coupon_max_discount) ? $coupon->max_discount : $order->discount_amount;
                 // dd($order);
                 }
                 else{
-                    
+
                     // $order->discount_amount = $coupon->coupon_discount;
                 }
             }
@@ -720,11 +720,11 @@ class OrderController extends Controller
             //     'order_amount' => $total - $order['discount_amount'],
             //     'updated_at' => now(),
             // ]);
-            
+
             $order->order_amount = $total - $order['discount_amount'];
             $order->updated_at = now();
-                
-            
+
+
             $order->save();
 
             $out = OrderDetail::whereNotIn('id', $ids)->where('order_id', $order->id)->delete();
@@ -734,10 +734,10 @@ class OrderController extends Controller
             DB::rollback();
             return $e->getMessage();
         }
-        
+
         // echo $total - $order['discount_amount'];
         // exit();
-        
+
             if(isset($_REQUEST['Dev_test'])){
                 exit();exit();
             }

@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('Order Details'))
+@section('title', translate('Order Details'))
 
 @push('css_or_js')
     <link href="{{asset('public/assets/back-end')}}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -15,23 +15,23 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
-                                                           href="{{route('admin.orders.list',['status'=>'all'])}}">{{\App\CPU\translate('Orders')}}</a>
+                                                           href="{{route('admin.orders.list',['status'=>'all'])}}">{{translate('Orders')}}</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">{{\App\CPU\translate('Order details')}}</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{translate('Order details')}}</li>
                         </ol>
                     </nav>
 
                     <div class="d-sm-flex align-items-sm-center">
-                        <h1 class="page-header-title">{{\App\CPU\translate('Order')}} #{{$order['id']}}</h1>
+                        <h1 class="page-header-title">{{translate('Order')}} #{{$order['id']}}</h1>
                         {{-- {{ $order}} --}}
 
                         @if($order['payment_status']=='paid')
                             <span class="badge badge-soft-success {{Session::get('direction') === "rtl" ? 'mr-sm-3' : 'ml-sm-3'}}">
-                            <span class="legend-indicator bg-success" style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}"></span>{{\App\CPU\translate('Paid')}}
+                            <span class="legend-indicator bg-success" style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}"></span>{{translate('Paid')}}
                         </span>
                         @else
                             <span class="badge badge-soft-danger {{Session::get('direction') === "rtl" ? 'mr-sm-3' : 'ml-sm-3'}}">
-                            <span class="legend-indicator bg-danger" style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}"></span>{{\App\CPU\translate('Unpaid')}}
+                            <span class="legend-indicator bg-danger" style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}"></span>{{translate('Unpaid')}}
                         </span>
                         @endif
 
@@ -62,7 +62,7 @@
                         @if(\App\CPU\Helpers::get_business_settings('order_verification'))
                             <span class="ml-2 ml-sm-3">
                                 <b>
-                                    {{\App\CPU\translate('order_verification_code')}} : {{$order['verification_code']}}
+                                    {{translate('order_verification_code')}} : {{$order['verification_code']}}
                                 </b>
                             </span>
                         @endif
@@ -71,7 +71,7 @@
                     <div class="col-md-6 mt-2">
                         <a class="text-body" target="_blank"
                            href={{route('admin.orders.generate-invoice',[$order['id']])}}>
-                            <i class="tio-print"></i> {{\App\CPU\translate('Print invoice')}}
+                            <i class="tio-print"></i> {{translate('Print invoice')}}
                         </a>
                     </div>
 
@@ -88,21 +88,21 @@
                                             data-id="{{$order['id']}}">
 
                                         <option
-                                            value="pending" {{$order->order_status == 'pending'?'selected':''}} > {{\App\CPU\translate('Pending')}}</option>
+                                            value="pending" {{$order->order_status == 'pending'?'selected':''}} > {{translate('Pending')}}</option>
                                         <option
-                                            value="confirmed" {{$order->order_status == 'confirmed'?'selected':''}} > {{\App\CPU\translate('Confirmed')}}</option>
+                                            value="confirmed" {{$order->order_status == 'confirmed'?'selected':''}} > {{translate('Confirmed')}}</option>
                                         <option
-                                            value="processing" {{$order->order_status == 'processing'?'selected':''}} >{{\App\CPU\translate('Processing')}} </option>
+                                            value="processing" {{$order->order_status == 'processing'?'selected':''}} >{{translate('Processing')}} </option>
                                         <option class="text-capitalize"
-                                            value="out_for_delivery" {{$order->order_status == 'out_for_delivery'?'selected':''}} >{{\App\CPU\translate('out_for_delivery')}} </option>
+                                            value="out_for_delivery" {{$order->order_status == 'out_for_delivery'?'selected':''}} >{{translate('out_for_delivery')}} </option>
                                         <option
-                                            value="delivered" {{$order->order_status == 'delivered'?'selected':''}} >{{\App\CPU\translate('Delivered')}} </option>
+                                            value="delivered" {{$order->order_status == 'delivered'?'selected':''}} >{{translate('Delivered')}} </option>
                                         <option
-                                            value="returned" {{$order->order_status == 'returned'?'selected':''}} > {{\App\CPU\translate('Returned')}}</option>
+                                            value="returned" {{$order->order_status == 'returned'?'selected':''}} > {{translate('Returned')}}</option>
                                         <option
-                                            value="failed" {{$order->order_status == 'failed'?'selected':''}} >{{\App\CPU\translate('Failed')}} </option>
+                                            value="failed" {{$order->order_status == 'failed'?'selected':''}} >{{translate('Failed')}} </option>
                                         <option
-                                            value="canceled" {{$order->order_status == 'canceled'?'selected':''}} >{{\App\CPU\translate('Canceled')}} </option>
+                                            value="canceled" {{$order->order_status == 'canceled'?'selected':''}} >{{translate('Canceled')}} </option>
 
                                     </select>
                                 </div>
@@ -117,10 +117,10 @@
                                             onclick="route_alert('{{route('admin.orders.payment-status',['id'=>$order['id'],'payment_status'=>'paid'])}}','Change status to paid ?')"
                                             href="javascript:"
                                             value="paid" {{$order->payment_status == 'paid'?'selected':''}} >
-                                            {{\App\CPU\translate('Paid')}}
+                                            {{translate('Paid')}}
                                         </option>
                                         <option value="unpaid" {{$order->payment_status == 'unpaid'?'selected':''}} >
-                                            {{\App\CPU\translate('Unpaid')}}
+                                            {{translate('Unpaid')}}
                                         </option>
 
                                     </select>
@@ -144,7 +144,7 @@
                     <div class="card-header" style="display: block!important;">
                         <div class="row">
                             <div class="col-12 pb-2 border-bottom">
-                                <h4 class="card-header-title">{{\App\CPU\translate('Order details')}}
+                                <h4 class="card-header-title">{{translate('Order details')}}
                                     <span class="badge badge-soft-dark rounded-circle {{Session::get('direction') === "rtl" ? 'mr-1' : 'ml-1'}}">{{$order->details->count()}}</span>
                                 </h4>
                             </div>
@@ -153,11 +153,11 @@
                             </div>
                             <div class="col-12 text-right">
                                 <div>
-                                    <h6 class="text-capitalize" style="display: inline; color: #8a8a8a; ">{{\App\CPU\translate('payment')}} {{\App\CPU\translate('method')}} :</h6>
+                                    <h6 class="text-capitalize" style="display: inline; color: #8a8a8a; ">{{translate('payment')}} {{translate('method')}} :</h6>
                                     <h6 class="mx-1" style="display: inline; color: #8a8a8a;">{{str_replace('_',' ',$order['payment_method'])}}</h6>
                                 </div>
                                 <div>
-                                    <h6 style="display: inline; color: #8a8a8a;">{{\App\CPU\translate('Payment')}} {{\App\CPU\translate('reference')}} :</h6>
+                                    <h6 style="display: inline; color: #8a8a8a;">{{translate('Payment')}} {{translate('reference')}} :</h6>
                                     <h6 class="mx-1" style="display: inline; color: #8a8a8a;">{{str_replace('_',' ',$order['transaction_ref'])}}</h6>
                                 </div>
                             </div>
@@ -169,34 +169,34 @@
                     <div class="card-body">
                         <div class="media">
                             <div class="avatar avatar-xl {{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">
-                                <p>{{\App\CPU\translate('image')}}</p>
+                                <p>{{translate('image')}}</p>
                             </div>
 
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-md-5 product-name">
-                                        <p> {{\App\CPU\translate('Name')}}</p>
+                                        <p> {{translate('Name')}}</p>
                                     </div>
 
                                     <div class="col col-md-1 align-self-center p-0 ">
-                                        <p> {{\App\CPU\translate('price')}}</p>
+                                        <p> {{translate('price')}}</p>
                                     </div>
 
                                     <div class="col col-md-1 align-self-center">
                                         <p>Q</p>
                                     </div>
                                     <div class="col col-md-1 align-self-center  p-0 product-name">
-                                        <p> {{\App\CPU\translate('TAX')}}</p>
+                                        <p> {{translate('TAX')}}</p>
                                     </div>
                                     <div class="col col-md-2 align-self-center  p-0 product-name">
-                                        <p> {{\App\CPU\translate('Discount')}}</p>
+                                        <p> {{translate('Discount')}}</p>
                                     </div>
 
 
                                     <div class="col col-md-2 align-self-center text-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}">
 
 
-                                        <p> {{\App\CPU\translate('Subtotal')}}</p>
+                                        <p> {{translate('Subtotal')}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -227,7 +227,7 @@
                                                 <p>
                                                     {{substr($detail->product['name'],0,10)}}{{strlen($detail->product['name'])>10?'...':''}}
                                                 </p>
-                                                <strong><u>{{\App\CPU\translate('variation')}} : </u></strong>
+                                                <strong><u>{{translate('variation')}} : </u></strong>
 
                                                 <div class="font-size-sm text-body">
 
@@ -275,17 +275,17 @@
                         <div class="row justify-content-md-end mb-3">
                             <div class="col-md-9 col-lg-8">
                                 <dl class="row text-sm-right">
-                                    <dt class="col-sm-6">{{\App\CPU\translate('Shipping')}}</dt>
+                                    <dt class="col-sm-6">{{translate('Shipping')}}</dt>
                                     <dd class="col-sm-6 border-bottom">
                                         <strong>{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($shipping))}}</strong>
                                     </dd>
 
-                                    <dt class="col-sm-6">{{\App\CPU\translate('coupon_discount')}}</dt>
+                                    <dt class="col-sm-6">{{translate('coupon_discount')}}</dt>
                                     <dd class="col-sm-6 border-bottom">
                                         <strong>- {{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($coupon_discount))}}</strong>
                                     </dd>
 
-                                    <dt class="col-sm-6">{{\App\CPU\translate('Total')}}</dt>
+                                    <dt class="col-sm-6">{{translate('Total')}}</dt>
                                     <dd class="col-sm-6">
                                         <strong>{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($total+$shipping-$coupon_discount))}}</strong>
                                     </dd>
@@ -306,20 +306,20 @@
             <div class="col-lg-4">
                 <div class="card mb-2">
                     <div class="card-header">
-                        <h4>{{\App\CPU\translate('shipping_info')}}</h4>
+                        <h4>{{translate('shipping_info')}}</h4>
                     </div>
                     <div class="card-body text-capitalize">
                         <ul class="list-unstyled list-unstyled-py-2">
                             <li>
                                 <h6 class="" style="color: #8a8a8a;">
-                                    {{\App\CPU\translate('shipping_type')}}
+                                    {{translate('shipping_type')}}
                                     : {{str_replace('_',' ',$order->shipping_type)}}
                                 </h6>
                             </li>
                             @if ($order->shipping_type == 'order_wise')
                             <li>
                                 <h6 class="" style="color: #8a8a8a;">
-                                    {{\App\CPU\translate('shipping')}} {{\App\CPU\translate('method')}}
+                                    {{translate('shipping')}} {{translate('method')}}
                                     : {{$order->shipping ? $order->shipping->title :'No shipping method selected'}}
                                 </h6>
                             </li>
@@ -327,24 +327,24 @@
                             <li>
                                 <select class="form-control text-capitalize" name="delivery_type" onchange="choose_delivery_type(this.value)">
                                     <option value="0">
-                                        {{\App\CPU\translate('choose_delivery_type')}}
+                                        {{translate('choose_delivery_type')}}
                                     </option>
-                                    
+
                                     <option value="self_delivery" {{$order->delivery_type=='self_delivery'?'selected':''}}>
-                                        {{\App\CPU\translate('by_self_delivery_man')}}
+                                        {{translate('by_self_delivery_man')}}
                                     </option>
                                     <option value="third_party_delivery" {{$order->delivery_type=='third_party_delivery'?'selected':''}} >
-                                        {{\App\CPU\translate('by_third_party_delivery_service')}}
+                                        {{translate('by_third_party_delivery_service')}}
                                     </option>
                                 </select>
                             </li>
                             <li id="choose_delivery_man">
                                 <label for="">
-                                    {{\App\CPU\translate('choose_delivery_man')}}
+                                    {{translate('choose_delivery_man')}}
                                 </label>
                                 <select class="form-control text-capitalize js-select2-custom" name="delivery_man_id" onchange="addDeliveryMan(this.value)">
                                     <option
-                                        value="0">{{\App\CPU\translate('select')}}</option>
+                                        value="0">{{translate('select')}}</option>
                                     @foreach($delivery_men as $deliveryMan)
                                         <option
                                             value="{{$deliveryMan['id']}}" {{$order['delivery_man_id']==$deliveryMan['id']?'selected':''}}>
@@ -355,7 +355,7 @@
                             </li>
                             <li class=" mt-2" id="by_third_party_delivery_service_info">
                                 <span>
-                                    {{\App\CPU\translate('delivery_service_name')}} : {{$order->delivery_service_name}}
+                                    {{translate('delivery_service_name')}} : {{$order->delivery_service_name}}
                                 </span>
                                 <span style="float: right;">
                                     <a href="javascript:" onclick="choose_delivery_type('third_party_delivery')">
@@ -364,7 +364,7 @@
                                 </span>
                                 <br>
                                 <span>
-                                    {{\App\CPU\translate('tracking_id')}} : {{$order->third_party_delivery_tracking_id}}
+                                    {{translate('tracking_id')}} : {{$order->third_party_delivery_tracking_id}}
                                 </span>
                             </li>
                         </ul>
@@ -374,7 +374,7 @@
                 <div class="card">
                     <!-- Header -->
                     <div class="card-header">
-                        <h4 class="card-header-title">{{\App\CPU\translate('Customer')}}</h4>
+                        <h4 class="card-header-title">{{translate('Customer')}}</h4>
                     </div>
                     <!-- End Header -->
 
@@ -416,7 +416,7 @@
                             <hr>
 
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5>{{\App\CPU\translate('Contact info')}}</h5>
+                                <h5>{{translate('Contact info')}}</h5>
                             </div>
 
                             <div class="flex-start">
@@ -431,28 +431,28 @@
                             <hr>
 
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5>{{\App\CPU\translate('shipping_address')}}</h5>
+                                <h5>{{translate('shipping_address')}}</h5>
 
                             </div>
                             <div class="flex-start">
-                                <div>{{\App\CPU\translate('Name')}} :</div>
+                                <div>{{translate('Name')}} :</div>
                                 <div class="mx-1"><strong>{{$order->shippingAddress ? $order->shippingAddress['contact_person_name'] : "empty"}}</strong></div>
                             </div>
-                            
+
                             <div class="flex-start">
-                                <div>{{\App\CPU\translate('City')}} :</div>
+                                <div>{{translate('City')}} :</div>
                                 <div class="mx-1"><strong>{{$order->shippingAddress ? $order->shippingAddress['city'] : "Empty"}}</strong></div>
                             </div>
                             <div class="flex-start">
-                                <div>{{\App\CPU\translate('zip_code')}} :</div>
+                                <div>{{translate('zip_code')}} :</div>
                                 <div class="mx-1"><strong> {{$order->shippingAddress ? $order->shippingAddress['zip']  : "Empty"}}</strong></div>
                             </div>
                             <div class="flex-start">
-                                <div>{{\App\CPU\translate('address')}} </div>
+                                <div>{{translate('address')}} </div>
                                 <div class="mx-1"><strong> : {{$order->shippingAddress ? $order->shippingAddress['address']  : "Empty"}}</strong></div>
                             </div>
                             <div class="flex-start">
-                                <div>{{\App\CPU\translate('Phone')}} :</div>
+                                <div>{{translate('Phone')}} :</div>
                                 <div class="mx-1"><strong>{{$order->shippingAddress ? $order->shippingAddress['phone']  : "Empty"}}</strong></div>
                             </div>
 
@@ -470,7 +470,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{\App\CPU\translate('update_third_party_delivery_info')}}</h5>
+                    <h5 class="modal-title">{{translate('update_third_party_delivery_info')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -483,20 +483,20 @@
                                 <input type="hidden" name="order_id" value="{{$order['id']}}">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="">{{\App\CPU\translate('delivery_service_name')}}</label>
+                                        <label for="">{{translate('delivery_service_name')}}</label>
                                         <input class="form-control" type="text" name="delivery_service_name" value="{{$order['delivery_service_name']}}" id="" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="">{{\App\CPU\translate('tracking_id')}} ({{\App\CPU\translate('optional')}})</label>
+                                        <label for="">{{translate('tracking_id')}} ({{translate('optional')}})</label>
                                         <input class="form-control" type="text" name="third_party_delivery_tracking_id" value="{{$order['third_party_delivery_tracking_id']}}" id="">
                                     </div>
-                                    <button class="btn btn-primary" type="submit">{{\App\CPU\translate('update')}}</button>
+                                    <button class="btn btn-primary" type="submit">{{translate('update')}}</button>
                                 </div>
                             </form>
                         </div>
                     </div>
-                        
-                    
+
+
                 </div>
             </div>
         </div>
@@ -510,12 +510,12 @@
             var id = $(this).attr("data-id");
             var value = $(this).val();
             Swal.fire({
-                title: '{{\App\CPU\translate('Are you sure Change this')}}?',
-                text: "{{\App\CPU\translate('You will not be able to revert this')}}!",
+                title: '{{translate('Are you sure Change this')}}?',
+                text: "{{translate('You will not be able to revert this')}}!",
                 showCancelButton: true,
                 confirmButtonColor: '#377dff',
                 cancelButtonColor: 'secondary',
-                confirmButtonText: '{{\App\CPU\translate('Yes, Change it')}}!'
+                confirmButtonText: '{{translate('Yes, Change it')}}!'
             }).then((result) => {
                 if (result.value) {
                     $.ajaxSetup({
@@ -531,7 +531,7 @@
                             "payment_status": value
                         },
                         success: function (data) {
-                            toastr.success('{{\App\CPU\translate('Status Change successfully')}}');
+                            toastr.success('{{translate('Status Change successfully')}}');
                             location.reload();
                         }
                     });
@@ -542,12 +542,12 @@
         function order_status(status) {
             @if($order['order_status']=='delivered')
             Swal.fire({
-                title: '{{\App\CPU\translate('Order is already delivered, and transaction amount has been disbursed, changing status can be the reason of miscalculation')}}!',
-                text: "{{\App\CPU\translate('Think before you proceed')}}.",
+                title: '{{translate('Order is already delivered, and transaction amount has been disbursed, changing status can be the reason of miscalculation')}}!',
+                text: "{{translate('Think before you proceed')}}.",
                 showCancelButton: true,
                 confirmButtonColor: '#377dff',
                 cancelButtonColor: 'secondary',
-                confirmButtonText: '{{\App\CPU\translate('Yes, Change it')}}!'
+                confirmButtonText: '{{translate('Yes, Change it')}}!'
             }).then((result) => {
                 if (result.value) {
                     $.ajaxSetup({
@@ -564,10 +564,10 @@
                         },
                         success: function (data) {
                             if (data.success == 0) {
-                                toastr.success('{{\App\CPU\translate('Order is already delivered, You can not change it')}} !!');
+                                toastr.success('{{translate('Order is already delivered, You can not change it')}} !!');
                                 location.reload();
                             } else {
-                                toastr.success('{{\App\CPU\translate('Status Change successfully')}} !');
+                                toastr.success('{{translate('Status Change successfully')}} !');
                                 location.reload();
                             }
 
@@ -577,12 +577,12 @@
             })
             @else
             Swal.fire({
-                title: '{{\App\CPU\translate('Are you sure Change this')}}?',
-                text: "{{\App\CPU\translate('You will not be able to revert this')}}!",
+                title: '{{translate('Are you sure Change this')}}?',
+                text: "{{translate('You will not be able to revert this')}}!",
                 showCancelButton: true,
                 confirmButtonColor: '#377dff',
                 cancelButtonColor: 'secondary',
-                confirmButtonText: '{{\App\CPU\translate('Yes, Change it')}}!'
+                confirmButtonText: '{{translate('Yes, Change it')}}!'
             }).then((result) => {
                 if (result.value) {
                     $.ajaxSetup({
@@ -599,10 +599,10 @@
                         },
                         success: function (data) {
                             if (data.success == 0) {
-                                toastr.success('{{\App\CPU\translate('Order is already delivered, You can not change it')}} !!');
+                                toastr.success('{{translate('Order is already delivered, You can not change it')}} !!');
                                 location.reload();
                             } else {
-                                toastr.success('{{\App\CPU\translate('Status Change successfully')}} !');
+                                toastr.success('{{translate('Status Change successfully')}} !');
                                 location.reload();
                             }
 
@@ -616,8 +616,8 @@
     <script>
         $( document ).ready(function() {
             let delivery_type = '{{$order->delivery_type}}';
-    
-            
+
+
             if(delivery_type === 'self_delivery'){
                 $('#choose_delivery_man').show();
                 $('#by_third_party_delivery_service_info').hide();
@@ -634,7 +634,7 @@
     <script>
         function choose_delivery_type(val)
         {
-    
+
             if(val==='self_delivery')
             {
                 $('#choose_delivery_man').show();
@@ -647,7 +647,7 @@
                 $('#choose_delivery_man').hide();
                 $('#by_third_party_delivery_service_info').hide();
             }
-            
+
         }
         function addDeliveryMan(id) {
             $.ajax({

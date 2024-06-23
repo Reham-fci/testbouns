@@ -64,7 +64,7 @@
         if (file1 == 1) {
             $("#crop-{{$id}}").hide();
             $(this).val('');
-            toastr.error('{{\App\CPU\translate('This is not an image file')}}.', {
+            toastr.error('{{translate('This is not an image file')}}.', {
                 CloseButton: true,
                 ProgressBar: true
             });

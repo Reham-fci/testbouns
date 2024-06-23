@@ -1,20 +1,20 @@
 @if(isset($product))
-    @php 
+    @php
         $variation = json_decode($product->variation);
         $price = 0;
         $discount = 0;
         if(isset($variation[0])){
-        
+
             $price = $variation[0]->price;
             if(isset($variation[0]->discount)){
                 $discount = $variation[0]->discount;
                 if($variation[0]->discount_type == "percent"){
-                
+
                     $discount = round((($variation[0]->discount * $variation[0]->price) / 100) ,2);
                 }
             }
-            
-            
+
+
         }
     @endphp
     @php($overallRating = \App\CPU\ProductManager::get_overall_rating($product->reviews))
@@ -29,7 +29,7 @@
                     {{round($product->discount,$decimal_point_settings)}}%
                 @elseif($product->discount_type =='flat')
                     {{\App\CPU\Helpers::currency_converter($product->discount)}}
-                @endif {{\App\CPU\translate('off')}}
+                @endif {{translate('off')}}
             </span>
         </div>
         @endif
@@ -50,7 +50,7 @@
                         </span>
                     </div>
                     <?php
-                    /* 
+                    /*
                     <div class="flash-product-review">
                         @for($inc=0;$inc<5;$inc++)
                             @if($inc<$overallRating[0])
@@ -65,7 +65,7 @@
                     </div>
                     */?>
                     <div>
-                        
+
                         @if($discount > 0)
                             <strike
                                 style="font-size: 12px!important;color: #E96A6A!important;">
@@ -75,26 +75,26 @@
                     </div>
                     <div class="flash-product-price">
                         {{\App\CPU\Helpers::currency_converter($price-$discount)}}
-                        
-                        
+
+
                     </div>
-                    
+
                 </div>
             </div>
         </div>
-        
+
         <div class="text-center quick-view" >
             @if(Request::is('product/*'))
                 <a class="btn btn-primary btn-sm" href="{{route('product',$product->slug)}}">
                     <i class="czi-forward align-middle {{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}"></i>
-                    {{\App\CPU\translate('View')}}
+                    {{translate('View')}}
                 </a>
             @else
                 <a class="btn btn-primary btn-sm"
                 style="margin-top:0px;padding-top:5px;padding-bottom:5px;padding-left:10px;padding-right:10px;" href="javascript:"
                    onclick="quickView('{{$product->id}}')">
                     <i class="czi-eye align-middle {{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}"></i>
-                    {{\App\CPU\translate('Quick')}}   {{\App\CPU\translate('View')}}
+                    {{translate('Quick')}}   {{translate('View')}}
                 </a>
             @endif
         </div>

@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('Order Details'))
+@section('title',translate('Order Details'))
 
 @push('css_or_js')
     <style>
@@ -188,7 +188,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-4">
                         <a class="page-link" href="{{ route('account-oder') }}">
-                            <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'right ml-2' : 'left mr-2'}}"></i>{{\App\CPU\translate('back')}}
+                            <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'right ml-2' : 'left mr-2'}}"></i>{{translate('back')}}
                         </a>
                     </div>
                 </div>
@@ -197,7 +197,7 @@
                 <div class="card box-shadow-sm">
                     @if(\App\CPU\Helpers::get_business_settings('order_verification'))
                         <div class="card-header">
-                            <h4>{{\App\CPU\translate('order_verification_code')}} : {{$order['verification_code']}}</h4>
+                            <h4>{{translate('order_verification_code')}} : {{$order['verification_code']}}</h4>
                         </div>
                     @endif
                     <div class="payment mb-3  table-responsive">
@@ -210,7 +210,7 @@
                                 <td class="order_table_td">
                                     <div class="order_table_info_div">
                                         <div class="order_table_info_div_1 py-2">
-                                            <span class="d-block spandHeadO">{{\App\CPU\translate('order_no')}}: </span>
+                                            <span class="d-block spandHeadO">{{translate('order_no')}}: </span>
                                         </div>
                                         <div class="order_table_info_div_2">
                                             <span class="spanTr"> {{$order->id}} </span>
@@ -221,7 +221,7 @@
                                     <div class="order_table_info_div">
                                         <div class="order_table_info_div_1 py-2">
                                             <span
-                                                class="d-block spandHeadO">{{\App\CPU\translate('order_date')}}: </span>
+                                                class="d-block spandHeadO">{{translate('order_date')}}: </span>
                                         </div>
                                         <div class="order_table_info_div_2">
                                             <span
@@ -235,7 +235,7 @@
                                     <div class="order_table_info_div">
                                         <div class="order_table_info_div_1 py-2">
                                             <span
-                                                class="d-block spandHeadO">{{\App\CPU\translate('shipping_address')}}: </span>
+                                                class="d-block spandHeadO">{{translate('shipping_address')}}: </span>
                                         </div>
 
                                         @if($order->shippingAddress)
@@ -250,7 +250,7 @@
                                                     {{$shipping->address}},<br>
                                                      {{$shipping->city}}
                                                     , {{$shipping->zip}}
-                                                    
+
                                                 @endif
                                             </span>
                                         </div>
@@ -260,7 +260,7 @@
                                     <div class="order_table_info_div">
                                         <div class="order_table_info_div_1 py-2">
                                             <span
-                                                class="d-block spandHeadO">{{\App\CPU\translate('billing_address')}}: </span>
+                                                class="d-block spandHeadO">{{translate('billing_address')}}: </span>
                                         </div>
 
                                         @if($order->billingAddress)
@@ -275,7 +275,7 @@
                                                     {{$billing->address}}, <br>
                                                      {{$billing->city}}
                                                     , {{$billing->zip}}
-                                                    
+
                                                 @else
                                                     {{$shipping->address}},<br>
                                                      {{$shipping->city}}
@@ -305,21 +305,21 @@
                                                      alt="VR Collection" width="60">
                                             </td>
                                             <td class="col-10 for-glaxy-name" style="vertical-align:middle;">
-                                                
-                                                
+
+
                                                 <a href="{{route('product',[$product['slug']])}}">
                                                     {{isset($product['name']) ? Str::limit($product['name'],40) : ''}}
-                                                </a> 
+                                                </a>
                                                 @if($detail->refund_request == 1)
-                                                    <small> ({{\App\CPU\translate('refund_pending')}}) </small> <br>
+                                                    <small> ({{translate('refund_pending')}}) </small> <br>
                                                 @elseif($detail->refund_request == 2)
-                                                    <small> ({{\App\CPU\translate('refund_approved')}}) </small> <br>
+                                                    <small> ({{translate('refund_approved')}}) </small> <br>
                                                 @elseif($detail->refund_request == 3)
-                                                    <small> ({{\App\CPU\translate('refund_rejected')}}) </small> <br>
+                                                    <small> ({{translate('refund_rejected')}}) </small> <br>
                                                 @elseif($detail->refund_request == 4)
-                                                    <small> ({{\App\CPU\translate('refund_refunded')}}) </small> <br>
+                                                    <small> ({{translate('refund_refunded')}}) </small> <br>
                                                 @endif<br>
-                                                <span>{{\App\CPU\translate('variant')}} : </span>
+                                                <span>{{translate('variant')}} : </span>
                                                 {{$detail->variant}}
                                             </td>
                                         </div>
@@ -330,7 +330,7 @@
                                                     <span
                                                         class="font-weight-bold amount">{{\App\CPU\Helpers::currency_converter($detail->price)}} </span>
                                                     <br>
-                                                    <span>{{\App\CPU\translate('qty')}}: {{$detail->qty}}</span>
+                                                    <span>{{translate('qty')}}: {{$detail->qty}}</span>
 
                                                 </div>
                                             </td>
@@ -339,43 +339,43 @@
                                             $refund_day_limit=\App\CPU\Helpers::get_business_settings('refund_day_limit');
                                             $order_details_date = $detail->created_at;
                                             $current = \Carbon\Carbon::now();
-                                            $length = $order_details_date->diffInDays($current);                                          
+                                            $length = $order_details_date->diffInDays($current);
 
                                         ?>
                                         <div class="col-md-2">
                                             <td>
                                                 @if($order->order_type == 'default_type')
                                                     @if($order->order_status=='delivered')
-                                                        <a href="{{route('submit-review',[$detail->id])}}" class="btn btn-primary btn-sm d-inline-block w-100 mb-2">{{\App\CPU\translate('review')}}</a>
-                                                        
+                                                        <a href="{{route('submit-review',[$detail->id])}}" class="btn btn-primary btn-sm d-inline-block w-100 mb-2">{{translate('review')}}</a>
+
                                                         @if($detail->refund_request !=0)
                                                             <a href="{{route('refund-details',[$detail->id])}}" class="btn btn-primary btn-sm d-inline-block w-100 mb-2">
-                                                                {{\App\CPU\translate('refund_details')}}
+                                                                {{translate('refund_details')}}
                                                             </a>
                                                         @endif
                                                         @if( $length <= $refund_day_limit && $detail->refund_request == 0)
                                                             <a href="{{route('refund-request',[$detail->id])}}"
-                                                            class="btn btn-primary btn-sm d-inline-block">{{\App\CPU\translate('refund_request')}}</a>
+                                                            class="btn btn-primary btn-sm d-inline-block">{{translate('refund_request')}}</a>
                                                         @endif
                                                     {{--@else
                                                         <a href="javascript:" onclick="review_message()"
-                                                        class="btn btn-primary btn-sm d-inline-block w-100 mb-2">{{\App\CPU\translate('review')}}</a>
-                                                        
+                                                        class="btn btn-primary btn-sm d-inline-block w-100 mb-2">{{translate('review')}}</a>
+
                                                         @if($length <= $refund_day_limit)
                                                             <a href="javascript:" onclick="refund_message()"
-                                                                class="btn btn-primary btn-sm d-inline-block">{{\App\CPU\translate('refund_request')}}</a>
+                                                                class="btn btn-primary btn-sm d-inline-block">{{translate('refund_request')}}</a>
                                                         @endif --}}
                                                     @endif
                                                 @else
                                                     <label class="badge badge-secondary">
-                                                            <a 
-                                                            class="btn btn-primary btn-sm">{{\App\CPU\translate('pos_order')}}</a>
+                                                            <a
+                                                            class="btn btn-primary btn-sm">{{translate('pos_order')}}</a>
                                                         </label>
                                                 @endif
-                                            </td>    
+                                            </td>
                                         </div>
                                     </div>
-                                    
+
                                 </tr>
                             @endforeach
                             @php($summary=\App\CPU\OrderManager::order_summary($order))
@@ -390,31 +390,31 @@
                             }
                         ?>
                         @if($order->delivery_type !=null)
-                        
+
                             <div class="p-2">
-                        
-                                <h4 style="color: #130505 !important; margin:0px;text-transform: capitalize;">{{\App\CPU\translate('delivery_info')}} </h4>
+
+                                <h4 style="color: #130505 !important; margin:0px;text-transform: capitalize;">{{translate('delivery_info')}} </h4>
                                 <hr>
                                 <div class="m-2">
                                     @if ($order->delivery_type == 'self_delivery')
                                         <p style="color: #414141 !important ; padding-top:5px;">
-                                    
+
                                             <span style="text-transform: capitalize">
-                                                {{\App\CPU\translate('delivery_man_name')}} : {{$order->delivery_man['f_name'].' '.$order->delivery_man['l_name']}}
+                                                {{translate('delivery_man_name')}} : {{$order->delivery_man['f_name'].' '.$order->delivery_man['l_name']}}
                                             </span>
                                             {{-- <br>
                                             <span style="text-transform: capitalize">
-                                                {{\App\CPU\translate('delivery_man_phone')}} : {{$order->delivery_man['phone']}}
+                                                {{translate('delivery_man_phone')}} : {{$order->delivery_man['phone']}}
                                             </span> --}}
                                         </p>
                                     @else
                                     <p style="color: #414141 !important ; padding-top:5px;">
                                         <span>
-                                            {{\App\CPU\translate('delivery_service_name')}} : {{$order->delivery_service_name}}
+                                            {{translate('delivery_service_name')}} : {{$order->delivery_service_name}}
                                         </span>
                                         <br>
                                         <span>
-                                            {{\App\CPU\translate('tracking_id')}} : {{$order->third_party_delivery_tracking_id}}
+                                            {{translate('tracking_id')}} : {{$order->third_party_delivery_tracking_id}}
                                         </span>
                                     </p>
                                     @endif
@@ -424,19 +424,19 @@
 
                         @if($order->order_note !=null)
                             <div class="p-2">
-                        
-                                <h4>{{\App\CPU\translate('order_note')}}</h4>
+
+                                <h4>{{translate('order_note')}}</h4>
                                 <hr>
                                 <div class="m-2">
                                     <p>
-                                        {{$order->order_note}} 
+                                        {{$order->order_note}}
                                     </p>
                                 </div>
                             </div>
                         @endif
                     </div>
                 </div>
-                
+
                 {{--Calculation--}}
                 <div class="row d-flex justify-content-end">
                     <div class="col-md-8 col-lg-5">
@@ -445,7 +445,7 @@
                             <tr>
                                 <td>
                                     <div class="text-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}"><span
-                                            class="product-qty ">{{\App\CPU\translate('Item')}}</span></div>
+                                            class="product-qty ">{{translate('Item')}}</span></div>
                                 </td>
                                 <td>
                                     <div class="text-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}">
@@ -457,7 +457,7 @@
                             <tr>
                                 <td>
                                     <div class="text-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}"><span
-                                            class="product-qty ">{{\App\CPU\translate('Subtotal')}}</span>
+                                            class="product-qty ">{{translate('Subtotal')}}</span>
                                     </div>
                                 </td>
                                 <td>
@@ -470,7 +470,7 @@
                             <tr>
                                 <td>
                                     <div class="text-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}"><span
-                                            class="product-qty ">{{\App\CPU\translate('text_fee')}}</span>
+                                            class="product-qty ">{{translate('text_fee')}}</span>
                                     </div>
                                 </td>
                                 <td>
@@ -483,7 +483,7 @@
                             <tr>
                                 <td>
                                     <div class="text-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}"><span
-                                            class="product-qty ">{{\App\CPU\translate('Shipping')}} {{\App\CPU\translate('Fee')}}</span>
+                                            class="product-qty ">{{translate('Shipping')}} {{translate('Fee')}}</span>
                                     </div>
                                 </td>
                                 <td>
@@ -497,7 +497,7 @@
                             <tr>
                                 <td>
                                     <div class="text-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}"><span
-                                            class="product-qty ">{{\App\CPU\translate('Discount')}} {{\App\CPU\translate('on_product')}}</span>
+                                            class="product-qty ">{{translate('Discount')}} {{translate('on_product')}}</span>
                                     </div>
                                 </td>
                                 <td>
@@ -510,7 +510,7 @@
                             <tr>
                                 <td>
                                     <div class="text-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}"><span
-                                            class="product-qty ">{{\App\CPU\translate('Coupon')}} {{\App\CPU\translate('Discount')}}</span>
+                                            class="product-qty ">{{translate('Coupon')}} {{translate('Discount')}}</span>
                                     </div>
                                 </td>
                                 <td>
@@ -524,10 +524,10 @@
                                 <tr>
                                 <td>
                                     <div class="text-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}"><span
-                                            class="product-qty ">{{\App\CPU\translate('extra')}} {{\App\CPU\translate('Discount')}}</span>
+                                            class="product-qty ">{{translate('extra')}} {{translate('Discount')}}</span>
                                     </div>
                                 </td>
-                                
+
                                 <td>
                                     <div class="text-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}">
                                         <span>- {{\App\CPU\Helpers::currency_converter($extra_discount)}}</span>
@@ -539,7 +539,7 @@
                             <tr class="border-top border-bottom">
                                 <td>
                                     <div class="text-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}"><span
-                                            class="font-weight-bold">{{\App\CPU\translate('Total')}}</span>
+                                            class="font-weight-bold">{{translate('Total')}}</span>
                                     </div>
                                 </td>
                                 <td>
@@ -555,12 +555,12 @@
                 <div class="justify-content mt-4 for-mobile-glaxy ">
                     <a href="{{route('generate-invoice',[$order->id])}}" class="btn btn-primary for-glaxy-mobile"
                        style="width:49%;">
-                        {{\App\CPU\translate('generate_invoice')}}
+                        {{translate('generate_invoice')}}
                     </a>
                     <a class="btn btn-secondary" type="button"
                        href="{{route('track-order.result',['order_id'=>$order['id'],'from_order_details'=>1])}}"
                        style="width:50%; color: white">
-                        {{\App\CPU\translate('Track')}} {{\App\CPU\translate('Order')}}
+                        {{translate('Track')}} {{translate('Order')}}
                     </a>
 
                 </div>
@@ -568,7 +568,7 @@
         </div>
     </div>
 
-    
+
 
 @endsection
 
@@ -576,14 +576,14 @@
 @push('script')
     <script>
         function review_message() {
-            toastr.info('{{\App\CPU\translate('you_can_review_after_the_product_is_delivered!')}}', {
+            toastr.info('{{translate('you_can_review_after_the_product_is_delivered!')}}', {
                 CloseButton: true,
                 ProgressBar: true
             });
         }
 
         function refund_message(){
-            toastr.info('{{\App\CPU\translate('you_can_refund_request_after_the_product_is_delivered!')}}', {
+            toastr.info('{{translate('you_can_refund_request_after_the_product_is_delivered!')}}', {
                 CloseButton: true,
                 ProgressBar: true
             });

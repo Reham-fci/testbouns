@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('Support Ticket'))
+@section('title',translate('Support Ticket'))
 
 @push('css_or_js')
     <style>
@@ -107,7 +107,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-9 sidebar_heading">
-                <h1 class="h3  mb-0 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{\App\CPU\translate('SUPPORT TICKET ANSWER')}}</h1>
+                <h1 class="h3  mb-0 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{translate('SUPPORT TICKET ANSWER')}}</h1>
             </div>
         </div>
     </div>
@@ -123,25 +123,25 @@
                     class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-4">
                     <div class="d-flex w-100 text-light text-center {{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">
                         <div class="font-size-ms px-3">
-                            <div class="font-weight-medium">{{\App\CPU\translate('Date Submitted')}}</div>
+                            <div class="font-weight-medium">{{translate('Date Submitted')}}</div>
                             <div
                                 class="opacity-60">{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$ticket['created_at'])->format('Y-m-d')}}</div>
                         </div>
                         <div class="font-size-ms px-3">
-                            <div class="font-weight-medium">{{\App\CPU\translate('Last Updated')}}</div>
+                            <div class="font-weight-medium">{{translate('Last Updated')}}</div>
                             <div
                                 class="opacity-60">{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$ticket['updated_at'])->format('Y-m-d')}}</div>
                         </div>
                         <div class="font-size-ms px-3">
-                            <div class="font-weight-medium">{{\App\CPU\translate('Type')}}</div>
+                            <div class="font-weight-medium">{{translate('Type')}}</div>
                             <div class="opacity-60">{{$ticket['type']}}</div>
                         </div>
                         <div class="font-size-ms px-3">
-                            <div class="font-weight-medium" style="color:black">{{\App\CPU\translate('Priority')}}</div>
+                            <div class="font-weight-medium" style="color:black">{{translate('Priority')}}</div>
                             <span class="badge badge-warning">{{$ticket['priority']}}</span>
                         </div>
                         <div class="font-size-ms px-3">
-                            <div class="font-weight-medium" style="color: black">{{\App\CPU\translate('Status')}}</div>
+                            <div class="font-weight-medium" style="color: black">{{translate('Status')}}</div>
                             @if($ticket['status']=='open')
                                 <span class="badge badge-secondary">{{$ticket['status']}}</span>
                             @else
@@ -153,25 +153,25 @@
                 <!-- Ticket details (visible on mobile)-->
                 <div class="d-flex d-lg-none flex-wrap bg-secondary text-center rounded-lg pt-4 px-4 pb-1 mb-4">
                     <div class="font-size-sm px-3 pb-3">
-                        <div class="font-weight-medium">{{\App\CPU\translate('Date Submitted')}}</div>
+                        <div class="font-weight-medium">{{translate('Date Submitted')}}</div>
                         <div
                             class="text-muted">{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$ticket['created_at'])->format('Y-m-d')}}</div>
                     </div>
                     <div class="font-size-sm px-3 pb-3">
-                        <div class="font-weight-medium">{{\App\CPU\translate('Last Updated')}}</div>
+                        <div class="font-weight-medium">{{translate('Last Updated')}}</div>
                         <div
                             class="text-muted">{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$ticket['updated_at'])->format('Y-m-d')}}</div>
                     </div>
                     <div class="font-size-sm px-3 pb-3">
-                        <div class="font-weight-medium">{{\App\CPU\translate('Type')}}</div>
+                        <div class="font-weight-medium">{{translate('Type')}}</div>
                         <div class="text-muted">{{$ticket['type']}}</div>
                     </div>
                     <div class="font-size-sm px-3 pb-3">
-                        <div class="font-weight-medium">{{\App\CPU\translate('Priority')}}</div>
+                        <div class="font-weight-medium">{{translate('Priority')}}</div>
                         <span class="badge badge-warning">{{$ticket['priority']}}</span>
                     </div>
                     <div class="font-size-sm px-3 pb-3">
-                        <div class="font-weight-medium">{{\App\CPU\translate('Status')}}</div>
+                        <div class="font-weight-medium">{{translate('Status')}}</div>
                         @if($ticket['status']=='open')
                             <span class="badge btn btn-secondary">{{$ticket['status']}}</span>
                         @else
@@ -230,21 +230,21 @@
             @endforeach
             <!-- Leave message-->
                 <div class="col-sm-12">
-                    <h3 class="h5 mt-2 pt-4 pb-2">{{\App\CPU\translate('Leave a Message')}}</h3>
+                    <h3 class="h5 mt-2 pt-4 pb-2">{{translate('Leave a Message')}}</h3>
                     <form class="needs-validation" href="{{route('support-ticket.comment',[$ticket['id']])}}"
                           method="post" novalidate>
                         @csrf
                         <div class="form-group">
                             <textarea class="form-control" name="comment" rows="8"
-                                      placeholder="{{\App\CPU\translate('Write your message here...')}}" required></textarea>
-                            <div class="invalid-tooltip">{{\App\CPU\translate('Please write the message')}}!</div>
+                                      placeholder="{{translate('Write your message here...')}}" required></textarea>
+                            <div class="invalid-tooltip">{{translate('Please write the message')}}!</div>
                         </div>
                         <div class="d-flex flex-wrap justify-content-between align-items-center">
                             <div class="">
                                 <a href="{{route('support-ticket.close',[$ticket['id']])}}" class="btn btn-secondary"
-                                   style="color: white">{{\App\CPU\translate('close')}}</a>
+                                   style="color: white">{{translate('close')}}</a>
                             </div>
-                            <button class="btn btn-primary my-2" type="submit">{{\App\CPU\translate('Submit message')}}</button>
+                            <button class="btn btn-primary my-2" type="submit">{{translate('Submit message')}}</button>
                         </div>
                     </form>
                 </div>

@@ -2,10 +2,10 @@
         <table class="table table-bordered">
             <thead class="text-muted">
                 <tr>
-                    <th scope="col">{{\App\CPU\translate('item')}}</th>
-                    <th scope="col" class="text-center">{{\App\CPU\translate('qty')}}</th>
-                    <th scope="col">{{\App\CPU\translate('price')}}</th>
-                    <th scope="col">{{\App\CPU\translate('delete')}}</th>
+                    <th scope="col">{{translate('item')}}</th>
+                    <th scope="col" class="text-center">{{translate('qty')}}</th>
+                    <th scope="col">{{translate('price')}}</th>
+                    <th scope="col">{{translate('delete')}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,7 +45,7 @@
                 @foreach(session()->get($cart_id) as $key => $cartItem)
                 @if(is_array($cartItem))
                     <?php
-                    
+
                     $product_subtotal = ($cartItem['price'])*$cartItem['quantity'];
                     $discount_on_product += ($cartItem['discount']*$cartItem['quantity']);
                     $subtotal += $product_subtotal;
@@ -53,9 +53,9 @@
                     //tax calculation
                     $product = \App\Model\Product::find($cartItem['id']);
                     $total_tax += \App\CPU\Helpers::tax_calculation($cartItem['price'], $product['tax'], $product['tax_type'])*$cartItem['quantity'];
-                    
+
                     ?>
-                    
+
                 <tr>
                     <td class="media align-items-center">
                         <img class="avatar avatar-sm mr-1" src="{{asset('storage/app/public/product/thumbnail')}}/{{$cartItem['image']}}"
@@ -63,7 +63,7 @@
                         <div class="media-body">
                             <h5 class="text-hover-primary mb-0">{{Str::limit($cartItem['name'], 10)}}</h5>
                             <small>{{Str::limit($cartItem['variant'], 20)}}</small>
-                            
+
                         </div>
                     </td>
                     <td class="align-items-center text-center">
@@ -105,18 +105,18 @@
         <dl class="row text-sm-right">
 
             <div class="col-12 d-flex justify-content-between">
-                <dt  class="col-sm-6">{{\App\CPU\translate('sub_total')}} : </dt>
+                <dt  class="col-sm-6">{{translate('sub_total')}} : </dt>
                 <dd class="col-sm-6 text-right">{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($subtotal))}}</dd>
 
             </div>
 
             <div class="col-12 d-flex justify-content-between">
-                <dt  class="col-sm-6">{{\App\CPU\translate('product')}} {{\App\CPU\translate('discount')}} :</dt>
+                <dt  class="col-sm-6">{{translate('product')}} {{translate('discount')}} :</dt>
                 <dd class="col-sm-6 text-right">{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency(round($discount_amount,2))) }}</dd>
             </div>
 
             <div class="col-12 d-flex justify-content-between">
-                <dt  class="col-sm-6">{{\App\CPU\translate('extra')}} {{\App\CPU\translate('discount')}} :</dt>
+                <dt  class="col-sm-6">{{translate('extra')}} {{translate('discount')}} :</dt>
                 <dd class="col-sm-6 text-right">
                     <button id="extra_discount" class="btn btn-sm" type="button" data-toggle="modal" data-target="#add-discount">
                         <i class="tio-edit"></i></button>
@@ -125,7 +125,7 @@
             </div>
 
             <div class="col-12 d-flex justify-content-between">
-                <dt  class="col-sm-6">{{\App\CPU\translate('coupon')}} {{\App\CPU\translate('discount')}} :</dt>
+                <dt  class="col-sm-6">{{translate('coupon')}} {{translate('discount')}} :</dt>
                 <dd class="col-sm-6 text-right">
                     <button id="coupon_discount" class="btn btn-sm" type="button" data-toggle="modal" data-target="#add-coupon-discount">
                         <i class="tio-edit"></i>
@@ -135,23 +135,23 @@
             </div>
 
             <div class="col-12 d-flex justify-content-between">
-                <dt  class="col-sm-6">{{\App\CPU\translate('tax')}} : </dt>
+                <dt  class="col-sm-6">{{translate('tax')}} : </dt>
                 <dd class="col-sm-6 text-right">{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency(round($total_tax_amount,2)))}}</dd>
             </div>
 
             <div class="col-12 d-flex justify-content-between">
-                <dt  class="col-sm-6">{{\App\CPU\translate('total')}} : </dt>
+                <dt  class="col-sm-6">{{translate('total')}} : </dt>
                 <dd class="col-sm-6 text-right h4 b">{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency(round($total+$total_tax_amount-$coupon_discount, 2)))}}</dd>
             </div>
         </dl>
         <div class="row">
             <div class="col-md-6 mb-2">
                 <a href="#" class="btn btn-danger btn-lg btn-block" onclick="emptyCart()"><i
-                        class="fa fa-times-circle "></i> {{\App\CPU\translate('Cancel')}} </a>
+                        class="fa fa-times-circle "></i> {{translate('Cancel')}} </a>
             </div>
             <div class="col-md-6">
                 <button id="submit_order" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#paymentModal"><i class="fa fa-shopping-bag"></i>
-                    {{\App\CPU\translate('Order')}} </button>
+                    {{translate('Order')}} </button>
             </div>
         </div>
     </div>
@@ -160,7 +160,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{\App\CPU\translate('update_discount')}}</h5>
+                    <h5 class="modal-title">{{translate('update_discount')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -168,22 +168,22 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="">{{\App\CPU\translate('discount')}}</label>
+                            <label for="">{{translate('discount')}}</label>
                             <input type="number" id="dis_amount" class="form-control" name="discount">
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="">{{\App\CPU\translate('type')}}</label>
+                            <label for="">{{translate('type')}}</label>
                             <select name="type" id="type_ext_dis" class="form-control">
-                                <option value="amount" {{$discount_type=='amount'?'selected':''}}>{{\App\CPU\translate('amount')}}()</option>
-                                <option value="percent" {{$discount_type=='percent'?'selected':''}}>{{\App\CPU\translate('percent')}}(%)</option>
+                                <option value="amount" {{$discount_type=='amount'?'selected':''}}>{{translate('amount')}}()</option>
+                                <option value="percent" {{$discount_type=='percent'?'selected':''}}>{{translate('percent')}}(%)</option>
                             </select>
                         </div>
                         <div class="form-group col-sm-12">
-                            <button class="btn btn-primary" onclick="extra_discount();" type="submit">{{\App\CPU\translate('submit')}}</button>
+                            <button class="btn btn-primary" onclick="extra_discount();" type="submit">{{translate('submit')}}</button>
                         </div>
                     </div>
-                        
-                    
+
+
                 </div>
             </div>
         </div>
@@ -193,23 +193,23 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{\App\CPU\translate('coupon_discount')}}</h5>
+                    <h5 class="modal-title">{{translate('coupon_discount')}}</h5>
                     <button id="coupon_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-    
+
                         <div class="form-group col-sm-12">
-                            <label for="">{{\App\CPU\translate('coupon_code')}}</label>
+                            <label for="">{{translate('coupon_code')}}</label>
                             <input type="text" id="coupon_code" class="form-control" name="coupon_code">
                             {{-- <input type="hidden" id="user_id" name="user_id" > --}}
                         </div>
-    
+
                         <div class="form-group col-sm-12">
-                            <button class="btn btn-primary" type="submit" onclick="coupon_discount();">{{\App\CPU\translate('submit')}}</button>
+                            <button class="btn btn-primary" type="submit" onclick="coupon_discount();">{{translate('submit')}}</button>
                         </div>
-    
+
                 </div>
             </div>
         </div>
@@ -219,7 +219,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{\App\CPU\translate('update_tax')}}</h5>
+                    <h5 class="modal-title">{{translate('update_tax')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -228,12 +228,12 @@
                     <form action="{{route('admin.pos.tax')}}" method="POST" class="row">
                         @csrf
                         <div class="form-group col-12">
-                            <label for="">{{\App\CPU\translate('tax')}} (%)</label>
+                            <label for="">{{translate('tax')}} (%)</label>
                             <input type="number" class="form-control" name="tax" min="0">
                         </div>
 
                         <div class="form-group col-sm-12">
-                            <button class="btn btn-primary" type="submit">{{\App\CPU\translate('submit')}}</button>
+                            <button class="btn btn-primary" type="submit">{{translate('submit')}}</button>
                         </div>
                     </form>
                 </div>
@@ -245,7 +245,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{\App\CPU\translate('payment')}}</h5>
+                    <h5 class="modal-title">{{translate('payment')}}</h5>
                     <button id="payment_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -254,20 +254,20 @@
                     <form action="{{route('admin.pos.order')}}" id='order_place' method="post" class="row">
                         @csrf
                         <div class="form-group col-12">
-                            <label class="input-label" for="">{{\App\CPU\translate('amount')}}({{\App\CPU\currency_symbol()}})</label>
-                            <input type="number" class="form-control" name="amount" min="0" step="0.01" 
+                            <label class="input-label" for="">{{translate('amount')}}({{\App\CPU\currency_symbol()}})</label>
+                            <input type="number" class="form-control" name="amount" min="0" step="0.01"
                                     value="{{\App\CPU\BackEndHelper::usd_to_currency($total+$total_tax_amount-$coupon_discount)}}"
                                     readonly>
                         </div>
                         <div class="form-group col-12">
-                            <label class="input-label" for="">{{\App\CPU\translate('type')}}</label>
+                            <label class="input-label" for="">{{translate('type')}}</label>
                             <select name="type" class="form-control">
-                                <option value="cash">{{\App\CPU\translate('cash')}}</option>
-                                <option value="card">{{\App\CPU\translate('card')}}</option>
+                                <option value="cash">{{translate('cash')}}</option>
+                                <option value="card">{{translate('card')}}</option>
                             </select>
                         </div>
                         <div class="form-group col-12">
-                            <button class="btn btn-primary" id="order_complete" type="submit">{{\App\CPU\translate('submit')}}</button>
+                            <button class="btn btn-primary" id="order_complete" type="submit">{{translate('submit')}}</button>
                         </div>
                     </form>
                 </div>
@@ -279,26 +279,26 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{\App\CPU\translate('short_cut_keys')}}</h5>
+                    <h5 class="modal-title">{{translate('short_cut_keys')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <span>{{\App\CPU\translate('to_click_order')}} : alt + O</span><br>
-                    <span>{{\App\CPU\translate('to_click_payment_submit')}} : alt + S</span><br>
-                    <span>{{\App\CPU\translate('to_close_payment_submit')}} : alt + Z</span><br>
-                    <span>{{\App\CPU\translate('to_click_cancel_cart_item_all')}} : alt + C</span><br>
-                    <span>{{\App\CPU\translate('to_click_add_new_customer')}} : alt + A</span> <br>
-                    <span>{{\App\CPU\translate('to_submit_add_new_customer_form')}} : alt + N</span><br>
-                    <span>{{\App\CPU\translate('to_click_short_cut_keys')}} : alt + K</span><br>
-                    <span>{{\App\CPU\translate('to_print_invoice')}} : alt + P</span> <br>
-                    <span>{{\App\CPU\translate('to_cancel_invoice')}} : alt + B</span> <br>
-                    <span>{{\App\CPU\translate('to_focus_search_input')}} : alt + Q</span> <br>
-                    <span>{{\App\CPU\translate('to_click_extra_discount')}} : alt + E</span> <br>
-                    <span>{{\App\CPU\translate('to_click_coupon_discount')}} : alt + D</span> <br>
-                    <span>{{\App\CPU\translate('to_click_clear_cart')}} : alt + X</span> <br>
-                    <span>{{\App\CPU\translate('to_click_new_order')}} : alt + R</span> <br>
+                    <span>{{translate('to_click_order')}} : alt + O</span><br>
+                    <span>{{translate('to_click_payment_submit')}} : alt + S</span><br>
+                    <span>{{translate('to_close_payment_submit')}} : alt + Z</span><br>
+                    <span>{{translate('to_click_cancel_cart_item_all')}} : alt + C</span><br>
+                    <span>{{translate('to_click_add_new_customer')}} : alt + A</span> <br>
+                    <span>{{translate('to_submit_add_new_customer_form')}} : alt + N</span><br>
+                    <span>{{translate('to_click_short_cut_keys')}} : alt + K</span><br>
+                    <span>{{translate('to_print_invoice')}} : alt + P</span> <br>
+                    <span>{{translate('to_cancel_invoice')}} : alt + B</span> <br>
+                    <span>{{translate('to_focus_search_input')}} : alt + Q</span> <br>
+                    <span>{{translate('to_click_extra_discount')}} : alt + E</span> <br>
+                    <span>{{translate('to_click_coupon_discount')}} : alt + D</span> <br>
+                    <span>{{translate('to_click_clear_cart')}} : alt + X</span> <br>
+                    <span>{{translate('to_click_new_order')}} : alt + R</span> <br>
 
                 </div>
             </div>

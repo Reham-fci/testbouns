@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('All Brands Page'))
+@section('title',translate('All Brands Page'))
 
 @push('css_or_js')
     <meta property="og:image" content="{{asset('storage/app/public/company')}}/{{$web_config['web_logo']->value}}"/>
@@ -29,7 +29,7 @@
     <div class="container pb-5 mb-2 mb-md-4 rtl" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
         <div class="row">
             <div class="col-md-12 p-3 feature_header">
-                <span>{{\App\CPU\translate('Brands')}}</span>
+                <span>{{translate('Brands')}}</span>
             </div>
         </div>
         <div class="row">

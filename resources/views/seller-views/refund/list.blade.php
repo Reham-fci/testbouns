@@ -6,7 +6,7 @@
     <div class="page-header mb-1">
         <div class="flex-between align-items-center">
             <div>
-                <h1 class="page-header-title">{{\App\CPU\translate('refund_request_list')}} <span
+                <h1 class="page-header-title">{{translate('refund_request_list')}} <span
                         class="badge badge-soft-dark mx-2">{{$refund_list->total()}}</span></h1>
             </div>
             <div>
@@ -29,7 +29,7 @@
           </a>
         </span>
 
-            
+
             <!-- End Nav -->
         </div>
         <!-- End Nav Scroller -->
@@ -51,9 +51,9 @@
                                 </div>
                             </div>
                             <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                   placeholder="{{\App\CPU\translate('Search_by_order_id_or_refund_id')}}" aria-label="Search orders" value="{{ $search }}"
+                                   placeholder="{{translate('Search_by_order_id_or_refund_id')}}" aria-label="Search orders" value="{{ $search }}"
                                    required>
-                            <button type="submit" class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
+                            <button type="submit" class="btn btn-primary">{{translate('search')}}</button>
                         </div>
                         <!-- End Search -->
                     </form>
@@ -70,17 +70,17 @@
                 <thead class="thead-light">
                 <tr>
                     <th class="">
-                        {{\App\CPU\translate('SL')}}#
+                        {{translate('SL')}}#
                     </th>
                     <th>
-                        {{\App\CPU\translate('refund_id')}}
+                        {{translate('refund_id')}}
                     </th>
-                    <th>{{\App\CPU\translate('order_id')}} </th>
-                    <th>{{\App\CPU\translate('customer_name')}}</th>
-                    <th>{{\App\CPU\translate('status')}}</th>
-                    <th>{{\App\CPU\translate('amount')}}</th>
-                    <th>{{\App\CPU\translate('product_name')}}</th>
-                    <th>{{\App\CPU\translate('Action')}}</th>
+                    <th>{{translate('order_id')}} </th>
+                    <th>{{translate('customer_name')}}</th>
+                    <th>{{translate('status')}}</th>
+                    <th>{{translate('amount')}}</th>
+                    <th>{{translate('product_name')}}</th>
+                    <th>{{translate('Action')}}</th>
                 </tr>
                 </thead>
 
@@ -102,11 +102,11 @@
                         </td>
                         <td>
                             {{-- <a href="{{route('seller.orders.details',[$refund->order_id])}}"> --}}
-                                {{$refund->customer !=null?$refund->customer->f_name. ' '.$refund->customer->l_name:\App\CPU\translate('customer_not_found')}}
+                                {{$refund->customer !=null?$refund->customer->f_name. ' '.$refund->customer->l_name:translate('customer_not_found')}}
                             {{-- </a> --}}
                         </td>
                         <td>
-                            {{\App\CPU\translate($refund->status)}}
+                            {{translate($refund->status)}}
                         </td>
                         <td>
                             {{\App\CPU\Helpers::currency_converter($refund->amount)}}
@@ -117,18 +117,18 @@
                                     {{\Illuminate\Support\Str::limit($refund->product->name,35)}}
                                 </a>
                             @else
-                                {{\App\CPU\translate('product_name_not_found')}}
+                                {{translate('product_name_not_found')}}
                             @endif
                         </td>
                         <td>
                             <a  class="btn btn-primary btn-sm mr-1"
-                                title="{{\App\CPU\translate('view')}}"
+                                title="{{translate('view')}}"
                                 href="{{route('seller.refund.details',['id'=>$refund['id']])}}">
                                 <i class="tio-visible"></i>
                             </a>
                         </td>
                     </tr>
-                    
+
                 @endforeach
                 </tbody>
             </table>
@@ -151,7 +151,7 @@
         @if(count($refund_list)==0)
             <div class="text-center p-4">
                 <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                <p class="mb-0">{{ \App\CPU\translate('No_data_to_show')}}</p>
+                <p class="mb-0">{{ translate('No_data_to_show')}}</p>
             </div>
         @endif
         <!-- End Footer -->
@@ -161,5 +161,5 @@
 @endsection
 
 @push('script_2')
-    
+
 @endpush

@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('Product List'))
+@section('title', translate('Product List'))
 
 @push('css_or_js')
 
@@ -10,8 +10,8 @@
 <div class="content container-fluid">  <!-- Page Heading -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{\App\CPU\translate('Dashboard')}}</a></li>
-            <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Products')}}</li>
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{translate('Dashboard')}}</a></li>
+            <li class="breadcrumb-item" aria-current="page">{{translate('Products')}}</li>
         </ol>
     </nav>
 
@@ -22,7 +22,7 @@
                     <div class="row flex-between justify-content-between align-items-center flex-grow-1">
                         <div class="col-12 mb-1 col-md-4">
                             <h5 class="flex-between">
-                                <div>{{\App\CPU\translate('product_table')}} ({{ $pro->total() }})</div>
+                                <div>{{translate('product_table')}} ({{ $pro->total() }})</div>
                             </h5>
                         </div>
                         <div class="col-12 mb-1 col-md-5" style="width: 40vw">
@@ -35,10 +35,10 @@
                                         </div>
                                     </div>
                                     <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                           placeholder="{{\App\CPU\translate('Search Product Name')}}" aria-label="Search orders"
+                                           placeholder="{{translate('Search Product Name')}}" aria-label="Search orders"
                                            value="{{ $search }}" required>
                                     <input type="hidden" value="{{ $request_status }}" name="status">
-                                    <button type="submit" class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
+                                    <button type="submit" class="btn btn-primary">{{translate('search')}}</button>
                                 </div>
                             </form>
                             <!-- End Search -->
@@ -47,7 +47,7 @@
                             @if (!isset($request_status))
                                 <a href="{{route('admin.product.add-new')}}" class="btn btn-primary  float-right">
                                     <i class="tio-add-circle"></i>
-                                    <span class="text">{{\App\CPU\translate('Add new product')}}</span>
+                                    <span class="text">{{translate('Add new product')}}</span>
                                 </a>
                             @endif
                         </div>
@@ -60,13 +60,13 @@
                                style="width: 100%">
                             <thead class="thead-light">
                             <tr>
-                                <th>{{\App\CPU\translate('SL#')}}</th>
-                                <th>{{\App\CPU\translate('Product Name')}}</th>
-                                <th>{{\App\CPU\translate('purchase_price')}}</th>
-                                <th>{{\App\CPU\translate('selling_price')}}</th>
-                                <th>{{\App\CPU\translate('featured')}}</th>
-                                <th>{{\App\CPU\translate('Active')}} {{\App\CPU\translate('status')}}</th>
-                                <th style="width: 5px" class="text-center">{{\App\CPU\translate('Action')}}</th>
+                                <th>{{translate('SL#')}}</th>
+                                <th>{{translate('Product Name')}}</th>
+                                <th>{{translate('purchase_price')}}</th>
+                                <th>{{translate('selling_price')}}</th>
+                                <th>{{translate('featured')}}</th>
+                                <th>{{translate('Active')}} {{translate('status')}}</th>
+                                <th style="width: 5px" class="text-center">{{translate('Action')}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -79,10 +79,10 @@
                                         </a>
                                     </td>
                                     <td>
-                                        EGP {{$p['purchase_price2']}} 
+                                        EGP {{$p['purchase_price2']}}
                                     </td>
                                     <td>
-                                        EGP {{$p['price2']}} 
+                                        EGP {{$p['price2']}}
                                     </td>
                                     <td>
                                         <label class="switch">
@@ -100,19 +100,19 @@
                                     </td>
                                     <td>
                                         <a class="btn btn-info btn-sm"
-                                            title="{{\App\CPU\translate('view')}}"
+                                            title="{{translate('view')}}"
                                            href="{{route('admin.product.view',[$p['id']])}}">
                                             <i class="tio-visible"></i>
                                         </a>
                                         <a class="btn btn-primary btn-sm"
-                                            title="{{\App\CPU\translate('Edit')}}"
+                                            title="{{translate('Edit')}}"
                                             href="{{route('admin.product.edit',[$p['id']])}}">
                                             <i class="tio-edit"></i>
                                         </a>
                                         <a class="btn btn-danger btn-sm" href="javascript:"
-                                            title="{{\App\CPU\translate('Delete')}}"
+                                            title="{{translate('Delete')}}"
                                            onclick="form_alert('product-{{$p['id']}}','Want to delete this item ?')">
-                                            <i class="tio-add-to-trash"></i> 
+                                            <i class="tio-add-to-trash"></i>
                                         </a>
                                         <form action="{{route('admin.product.delete',[$p['id']])}}"
                                               method="post" id="product-{{$p['id']}}">
@@ -131,7 +131,7 @@
                 @if(count($pro)==0)
                     <div class="text-center p-4">
                         <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                        <p class="mb-0">{{\App\CPU\translate('No data to show')}}</p>
+                        <p class="mb-0">{{translate('No data to show')}}</p>
                     </div>
                 @endif
             </div>
@@ -172,10 +172,10 @@
                 },
                 success: function (data) {
                     if(data.success == true) {
-                        toastr.success('{{\App\CPU\translate('Status updated successfully')}}');
+                        toastr.success('{{translate('Status updated successfully')}}');
                     }
                     else if(data.success == false) {
-                        toastr.error('{{\App\CPU\translate('Status updated failed. Product must be approved')}}');
+                        toastr.error('{{translate('Status updated failed. Product must be approved')}}');
                         setTimeout(function(){
                             location.reload();
                         }, 2000);
@@ -197,7 +197,7 @@
                     id: id
                 },
                 success: function () {
-                    toastr.success('{{\App\CPU\translate('Featured status updated successfully')}}');
+                    toastr.success('{{translate('Featured status updated successfully')}}');
                 }
             });
         }

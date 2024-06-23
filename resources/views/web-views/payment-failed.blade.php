@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('Payment Incomplete'))
+@section('title',translate('Payment Incomplete'))
 
 @push('css_or_js')
     <style>
@@ -59,11 +59,11 @@
                 <div class="card">
                     <div class=" p-5">
                         <center>
-                            <h3>{{\App\CPU\translate('Order payment is incomplete')}}.</h3>
+                            <h3>{{translate('Order payment is incomplete')}}.</h3>
                             <div class="justify-content-center mt-4 ">
                                 <a href="{{route('home')}}" class="btn btn-primary"
                                    style="width:49%;">
-                                    {{\App\CPU\translate('go_to_shopping')}}
+                                    {{translate('go_to_shopping')}}
                                 </a>
                             </div>
                         </center>

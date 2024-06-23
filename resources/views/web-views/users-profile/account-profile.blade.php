@@ -116,7 +116,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-9 sidebar_heading">
-                <h1 class="h3  mb-0 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{\App\CPU\translate('profile_Info')}}</h1>
+                <h1 class="h3  mb-0 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{translate('profile_Info')}}</h1>
             </div>
         </div>
     </div>
@@ -145,38 +145,38 @@
                                     <label for="files"
                                            style="cursor: pointer; color:{{$web_config['primary_color']}};"
                                            class="spandHeadO">
-                                        {{\App\CPU\translate('change_your_profile')}}
+                                        {{translate('change_your_profile')}}
                                     </label>
-                                    <span style="color: red;font-size: 10px">( * {{\App\CPU\translate('Image ratio should be 1:1')}}  )</span>
+                                    <span style="color: red;font-size: 10px">( * {{translate('Image ratio should be 1:1')}}  )</span>
                                     <input id="files" name="image" style="visibility:hidden;" type="file">
                                 </div>
 
                                 <div class="card-body mt-md-3" style="padding: 0px;">
-                                    <h3 class="font-nameA">{{\App\CPU\translate('account_information')}} </h3>
+                                    <h3 class="font-nameA">{{translate('account_information')}} </h3>
 
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="firstName">{{\App\CPU\translate('first_name')}} </label>
+                                            <label for="firstName">{{translate('first_name')}} </label>
                                             <input type="text" class="form-control" id="f_name" name="f_name"
                                                    value="{{$customerDetail['f_name']}}" required>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="lastName"> {{\App\CPU\translate('last_name')}} </label>
+                                            <label for="lastName"> {{translate('last_name')}} </label>
                                             <input type="text" class="form-control" id="l_name" name="l_name"
                                                    value="{{$customerDetail['l_name']}}">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="inputEmail4">{{\App\CPU\translate('Email')}} </label>
+                                            <label for="inputEmail4">{{translate('Email')}} </label>
                                             <input type="email" class="form-control" type="email" id="account-email"
                                                    value="{{$customerDetail['email']}}" disabled>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="phone">{{\App\CPU\translate('phone_number')}} </label>
+                                            <label for="phone">{{translate('phone_number')}} </label>
                                             <small class="text-primary">(
-                                                * {{\App\CPU\translate('country_code_is_must')}} {{\App\CPU\translate('like_for_BD_880')}}
+                                                * {{translate('country_code_is_must')}} {{translate('like_for_BD_880')}}
                                                 )</small></label>
                                             <input type="number" class="form-control" type="text" id="phone"
                                                    name="phone"
@@ -185,7 +185,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="si-password">{{\App\CPU\translate('new_password')}}</label>
+                                            <label for="si-password">{{translate('new_password')}}</label>
                                             <div class="password-toggle">
                                                 <input class="form-control" name="password" type="password"
                                                        id="password"
@@ -196,13 +196,13 @@
                                                     <i class="czi-eye password-toggle-indicator"
                                                        onChange="checkPasswordMatch()"></i>
                                                     <span
-                                                        class="sr-only">{{\App\CPU\translate('Show')}} {{\App\CPU\translate('password')}} </span>
+                                                        class="sr-only">{{translate('Show')}} {{translate('password')}} </span>
                                                 </label>
                                             </div>
                                         </div>
 
                                         <div class="form-group col-md-6">
-                                            <label for="newPass">{{\App\CPU\translate('confirm_password')}} </label>
+                                            <label for="newPass">{{translate('confirm_password')}} </label>
                                             <div class="password-toggle">
                                                 <input class="form-control" name="con_password" type="password"
                                                        id="confirm_password">
@@ -212,7 +212,7 @@
                                                                style="display: none">
                                                         <i class="czi-eye password-toggle-indicator"
                                                            onChange="checkPasswordMatch()"></i><span
-                                                            class="sr-only">{{\App\CPU\translate('Show')}} {{\App\CPU\translate('password')}} </span>
+                                                            class="sr-only">{{translate('Show')}} {{translate('password')}} </span>
                                                     </label>
                                                 </div>
                                             </div>
@@ -220,7 +220,7 @@
                                         </div>
                                     </div>
                                     <button type="submit"
-                                            class="btn btn-primary float-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}">{{\App\CPU\translate('update')}} {{\App\CPU\translate('Informations')}}  </button>
+                                            class="btn btn-primary float-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}">{{translate('update')}} {{translate('Informations')}}  </button>
                                 </div>
                             </div>
                         </form>
@@ -320,21 +320,21 @@
             $("#message").html("");
             if (confirmPassword == "") {
                 $("#message").attr("style", "color:black");
-                $("#message").html("{{\App\CPU\translate('Please ReType Password')}}");
+                $("#message").html("{{translate('Please ReType Password')}}");
 
             } else if (password == "") {
                 $("#message").removeAttr("style");
                 $("#message").html("");
 
             } else if (password != confirmPassword) {
-                $("#message").html("{{\App\CPU\translate('Passwords do not match')}}!");
+                $("#message").html("{{translate('Passwords do not match')}}!");
                 $("#message").attr("style", "color:red");
             } else if (confirmPassword.length <= 6) {
-                $("#message").html("{{\App\CPU\translate('password Must Be 6 Character')}}");
+                $("#message").html("{{translate('password Must Be 6 Character')}}");
                 $("#message").attr("style", "color:red");
             } else {
 
-                $("#message").html("{{\App\CPU\translate('Passwords match')}}.");
+                $("#message").html("{{translate('Passwords match')}}.");
                 $("#message").attr("style", "color:green");
             }
 

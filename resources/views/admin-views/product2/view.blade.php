@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('Product Preview'))
+@section('title', translate('Product Preview'))
 
 @push('css_or_js')
     <style>
@@ -39,12 +39,12 @@
                     <div class="col-12 flex-start">
                         <div class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">
                             <a href="{{url()->previous()}}" class="btn btn-primary float-right">
-                                <i class="tio-back-ui"></i> {{\App\CPU\translate('Back')}}
+                                <i class="tio-back-ui"></i> {{translate('Back')}}
                             </a>
                         </div>
                         <div>
                             <a href="{{route('product',$product['slug'])}}" class="btn btn-primary " target="_blank"><i
-                                    class="tio-globe"></i> {{ \App\CPU\translate('View') }} {{ \App\CPU\translate('from') }} {{ \App\CPU\translate('Website') }}
+                                    class="tio-globe"></i> {{ translate('View') }} {{ translate('from') }} {{ translate('Website') }}
                             </a>
                         </div>
                     </div>
@@ -57,13 +57,13 @@
                         @if($product['request_status'] == 0)
                             <a href="{{route('admin.product.approve-status', ['id'=>$product['id']])}}"
                                class="btn btn-secondary float-right">
-                                {{\App\CPU\translate('Approve')}}
+                                {{translate('Approve')}}
                             </a>
                         @endif
                     </div>
                     <div class="{{Session::get('direction') === "rtl" ? 'mr-1' : 'ml-1'}}">
                         <button class="btn btn-warning float-right" data-toggle="modal" data-target="#publishNoteModal">
-                            {{\App\CPU\translate('deny')}}
+                            {{translate('deny')}}
                         </button>
                         <!-- Modal -->
                         <div class="modal fade" id="publishNoteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -72,7 +72,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title"
-                                            id="exampleModalLabel">{{ \App\CPU\translate('denied_note') }}</h5>
+                                            id="exampleModalLabel">{{ translate('denied_note') }}</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -86,9 +86,9 @@
                                                    value="{{ csrf_token() }}"/>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{\App\CPU\translate('Close')}}
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{translate('Close')}}
                                             </button>
-                                            <button type="submit" class="btn btn-primary">{{\App\CPU\translate('Save changes')}}</button>
+                                            <button type="submit" class="btn btn-primary">{{translate('Save changes')}}</button>
                                         </div>
                                     </form>
                                 </div>
@@ -109,7 +109,7 @@
             <ul class="nav nav-tabs page-header-tabs">
                 <li class="nav-item">
                     <a class="nav-link active" href="javascript:">
-                        {{\App\CPU\translate('Product reviews')}}
+                        {{translate('Product reviews')}}
                     </a>
                 </li>
             </ul>
@@ -132,7 +132,7 @@
 
                             <div class="d-block">
                                 <h4 class="display-2 text-dark mb-0">{{($rating->c>0)?number_format($rating->rating, 2, '.', ' '):0}}</h4>
-                                <p> {{\App\CPU\translate('of')}} {{$rating->c}} {{\App\CPU\translate('reviews')}}
+                                <p> {{translate('of')}} {{$rating->c}} {{translate('reviews')}}
                                     <span
                                         class="badge badge-soft-dark badge-pill {{Session::get('direction') === "rtl" ? 'mr-1' : 'ml-1'}}"></span>
                                 </p>
@@ -148,7 +148,7 @@
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($five=\App\CPU\Helpers::rating_count2($p,5))
                                 <span
-                                    class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">{{\App\CPU\translate('5 star')}}</span>
+                                    class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">{{translate('5 star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                          style="width: {{$total==0?0:($five/$total)*100}}%;"
@@ -162,7 +162,7 @@
                             <!-- Review Ratings -->
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($four=\App\CPU\Helpers::rating_count2($p,4))
-                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">{{\App\CPU\translate('4 star')}}</span>
+                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">{{translate('4 star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                          style="width: {{$total==0?0:($four/$total)*100}}%;"
@@ -176,7 +176,7 @@
                             <!-- Review Ratings -->
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($three=\App\CPU\Helpers::rating_count2($p,3))
-                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">{{\App\CPU\translate('3 star')}}</span>
+                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">{{translate('3 star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                          style="width: {{$total==0?0:($three/$total)*100}}%;"
@@ -191,7 +191,7 @@
                             <!-- Review Ratings -->
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($two=\App\CPU\Helpers::rating_count2($p,2))
-                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">{{\App\CPU\translate('2 star')}}</span>
+                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">{{translate('2 star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                          style="width: {{$total==0?0:($two/$total)*100}}%;"
@@ -205,7 +205,7 @@
                             <!-- Review Ratings -->
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($one=\App\CPU\Helpers::rating_count2($p,1))
-                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">{{\App\CPU\translate('1 star')}}</span>
+                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">{{translate('1 star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                          style="width: {{$total==0?0:($one/$total)*100}}%;"
@@ -228,28 +228,28 @@
                                 <h4 class="border-bottom">{{$_prod['name']}}</h4>
                             </div>
                             <div class="flex-start">
-                                <span>{{\App\CPU\translate('Price')}} : </span>
+                                <span>{{translate('Price')}} : </span>
                                 <span
                                     class="mx-1">{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($_prod['unit_price']))}}</span>
                             </div>
                             <div class="flex-start">
-                                <span>{{\App\CPU\translate('TAX')}} : </span>
+                                <span>{{translate('TAX')}} : </span>
                                 <span class="mx-1">{{($_prod['tax'])}} % </span>
                             </div>
                             <div class="flex-start">
-                                <span>{{\App\CPU\translate('Discount')}} : </span>
+                                <span>{{translate('Discount')}} : </span>
                                 <span
                                     class="mx-1">{{ $_prod->discount_type=='flat'?(\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($_prod['discount']))): $_prod->discount.''.'%'}} </span>
                             </div>
                             <div class="flex-start">
-                                <span>{{\App\CPU\translate('shipping Cost')}} : </span>
+                                <span>{{translate('shipping Cost')}} : </span>
                                 <span class="mx-1">{{ \App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($_prod->shipping_cost)) }}</span>
                             </div>
                             <div class="flex-start">
-                                <span>{{\App\CPU\translate('Current Stock')}} : </span>
+                                <span>{{translate('Current Stock')}} : </span>
                                 <span class="mx-1">{{ $_prod->current_stock }}</span>
                             </div>
-                            
+
                         </div>
                         @endforeach
                     </div>
@@ -258,7 +258,7 @@
                         <span> @if (count(json_decode($product->colors)) > 0)
                                 <div class="row no-gutters">
                                 <div class="col-2">
-                                    <div class="product-description-label mt-2">{{\App\CPU\translate('Available color')}}:
+                                    <div class="product-description-label mt-2">{{translate('Available color')}}:
                                     </div>
                                 </div>
                                 <div class="col-10">
@@ -276,7 +276,7 @@
                             </div>
                             @endif</span><br>
                         <span>
-                        {{\App\CPU\translate('Product Image')}}
+                        {{translate('Product Image')}}
 
                      <div class="row">
                          @foreach (json_decode($product->images) as $key => $photo)
@@ -308,9 +308,9 @@
                        style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                     <thead class="thead-light">
                     <tr>
-                        <th>{{\App\CPU\translate('Reviewer')}}</th>
-                        <th>{{\App\CPU\translate('Review')}}</th>
-                        <th>{{\App\CPU\translate('Date')}}</th>
+                        <th>{{translate('Reviewer')}}</th>
+                        <th>{{translate('Review')}}</th>
+                        <th>{{translate('Date')}}</th>
                     </tr>
                     </thead>
 
@@ -348,11 +348,11 @@
                                         {{$review['comment']}}
                                     </p>
                                     @foreach (json_decode($review->attachment) as $img)
-                                                
+
                                         <a class="float-left" href="{{asset('storage/app/public/review')}}/{{$img}}" data-lightbox="mygallery">
                                             <img style="width: 60px;height:60px;padding:10px; " src="{{asset('storage/app/public/review')}}/{{$img}}" alt="">
                                         </a>
-                                    
+
                                     @endforeach
                                 </div>
                             </td>
@@ -369,7 +369,7 @@
             @if(count($reviews)==0)
                 <div class="text-center p-4">
                     <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                    <p class="mb-0">{{\App\CPU\translate('No data to show')}}</p>
+                    <p class="mb-0">{{translate('No data to show')}}</p>
                 </div>
             @endif
             <!-- Footer -->

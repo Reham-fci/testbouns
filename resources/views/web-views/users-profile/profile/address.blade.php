@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('Home'))
+@section('title',translate('Home'))
 
 @push('css_or_js')
 
@@ -227,7 +227,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-9 sidebar_heading">
-                <h1 class="h3  mb-0 folot-left headerTitle">{{\App\CPU\translate('ADDRESSES')}}</h1>
+                <h1 class="h3  mb-0 folot-left headerTitle">{{translate('ADDRESSES')}}</h1>
             </div>
         </div>
     </div>
@@ -246,7 +246,7 @@
                         <!-- Filter by price-->
                         <div class="sidebarL">
                             <h3 class="widget-title btnF" style="font-weight: 700;"><a href="{{ route('orderList') }}"
-                                                                                       style="color: #1B7FED">{{\App\CPU\translate('My Orders')}}</a>
+                                                                                       style="color: #1B7FED">{{translate('My Orders')}}</a>
                             </h3>
                             <div class="divider-role"
                                  style="border: 1px solid whitesmoke; margin-bottom: 14px;  margin-top: -6px;"></div>
@@ -257,7 +257,7 @@
                         <!-- Filter by price-->
                         <div class="sidebarL ">
                             <h3 class="widget-title btnF" style="font-weight: 700;"><a
-                                    href="{{ route('wishList') }}"> {{\App\CPU\translate('Wish List')}} </a></h3>
+                                    href="{{ route('wishList') }}"> {{translate('Wish List')}} </a></h3>
                             <div class="divider-role"
                                  style="border: 1px solid whitesmoke; margin-bottom: 14px;  margin-top: -6px;"></div>
 
@@ -267,7 +267,7 @@
                         <!-- Filter by price-->
                         <div class=" sidebarL">
                             <h3 class="widget-title btnF" style="font-weight: 700;"><a
-                                    href=""> {{\App\CPU\translate('Chat With Sellers')}} </a></h3>
+                                    href=""> {{translate('Chat With Sellers')}} </a></h3>
                             <div class="divider-role"
                                  style="border: 1px solid whitesmoke; margin-bottom: 14px;  margin-top: -6px;"></div>
 
@@ -277,7 +277,7 @@
                         <!-- Filter by price-->
                         <div class=" sidebarL">
                             <h3 class="widget-title btnF" style="font-weight: 700;"><a
-                                    href="{{ route('profile') }}"> {{\App\CPU\translate('Profile Info')}} </a></h3>
+                                    href="{{ route('profile') }}"> {{translate('Profile Info')}} </a></h3>
                             <div class="divider-role"
                                  style="border: 1px solid whitesmoke; margin-bottom: 14px;  margin-top: -6px;"></div>
 
@@ -287,7 +287,7 @@
                         <!-- Filter by price-->
                         <div class=" sidebarL">
                             <h3 class="widget-title btnF" style="font-weight: 700;"><a
-                                    href="">{{\App\CPU\translate('Address')}} </a></h3>
+                                    href="">{{translate('Address')}} </a></h3>
                             <div class="divider-role"
                                  style="border: 1px solid whitesmoke; margin-bottom: 14px;  margin-top: -6px;"></div>
 
@@ -297,7 +297,7 @@
                         <!-- Filter by price-->
                         <div class=" sidebarL">
                             <h3 class="widget-title btnF" style="font-weight: 700;"><a
-                                    href="{{ route('support-ticket') }}">{{\App\CPU\translate('Support ticket')}} </a>
+                                    href="{{ route('support-ticket') }}">{{translate('Support ticket')}} </a>
                             </h3>
                             <div class="divider-role"
                                  style="border: 1px solid whitesmoke; margin-bottom: 14px;  margin-top: -6px;"></div>
@@ -308,7 +308,7 @@
                         <!-- Filter by price-->
                         <div class="sidebarL ">
                             <h3 class="widget-title btnF" style="font-weight: 700;"><a
-                                    href="">{{\App\CPU\translate('Transaction history')}} </a></h3>
+                                    href="">{{translate('Transaction history')}} </a></h3>
                             <div class="divider-role"
                                  style="border: 1px solid whitesmoke; margin-bottom: 14px;  margin-top: -6px;"></div>
 
@@ -318,7 +318,7 @@
                         <!-- Filter by price-->
                         <div class="sidebarL ">
                             <h3 class="widget-title btnF" style="font-weight: 700;"><a
-                                    href="">{{\App\CPU\translate('Payment method')}} </a></h3>
+                                    href="">{{translate('Payment method')}} </a></h3>
                             <div class="divider-role"
                                  style="border: 1px solid whitesmoke; margin-bottom: 14px;  margin-top: -6px;"></div>
 
@@ -328,7 +328,7 @@
             </div>
 
             <section class="col-lg-9 mt-3">
-                <span style="color: #6A6A6A">{{\App\CPU\translate('No address found')}}.</span>
+                <span style="color: #6A6A6A">{{translate('No address found')}}.</span>
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog  modal-lg" role="document">
@@ -336,7 +336,7 @@
                             <div class="modal-header">
                                 <div class="row">
                                     <div class="col-md-12"><h5
-                                            class="modal-title font-nameA ">{{\App\CPU\translate('Add a new address')}}</h5>
+                                            class="modal-title font-nameA ">{{translate('Add a new address')}}</h5>
                                     </div>
                                 </div>
 
@@ -348,15 +348,15 @@
                                     <ul class="nav nav-pills ml-3" role="tablist">
                                         <li class="nav-item">
                                             <a class="nav-link active btn-p" data-toggle="pill"
-                                               href="#home">{{\App\CPU\translate('Permanent')}}</a>
+                                               href="#home">{{translate('Permanent')}}</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="pill"
-                                               href="#menu1">{{\App\CPU\translate('Home')}}</a>
+                                               href="#menu1">{{translate('Home')}}</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="pill"
-                                               href="#menu2">{{\App\CPU\translate('Office')}}</a>
+                                               href="#menu2">{{translate('Office')}}</a>
                                         </li>
                                     </ul>
 
@@ -368,43 +368,43 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label
-                                                        for="firstName">{{\App\CPU\translate('Contact person name')}}</label>
+                                                        for="firstName">{{translate('Contact person name')}}</label>
                                                     <input type="text" class="form-control" id="firstName"
                                                            placeholder="">
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="lastName">{{\App\CPU\translate('Floor,Suite')}}</label>
+                                                    <label for="lastName">{{translate('Floor,Suite')}}</label>
                                                     <input type="text" class="form-control" id="lastName"
                                                            placeholder="">
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="firstName">{{\App\CPU\translate('City')}}</label>
+                                                    <label for="firstName">{{translate('City')}}</label>
                                                     <input type="text" class="form-control" id="firstName"
                                                            placeholder="">
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="lastName">{{\App\CPU\translate('Zip code')}}</label>
+                                                    <label for="lastName">{{translate('Zip code')}}</label>
                                                     <input type="text" class="form-control" id="lastName"
                                                            placeholder="">
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="firstName">{{\App\CPU\translate('State')}}</label>
+                                                    <label for="firstName">{{translate('State')}}</label>
                                                     <input type="text" class="form-control" id="firstName"
                                                            placeholder="">
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="lastName">{{\App\CPU\translate('Country')}}</label>
+                                                    <label for="lastName">{{translate('Country')}}</label>
                                                     <input type="text" class="form-control" id="lastName"
                                                            placeholder="">
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                    <label for="firstName">{{\App\CPU\translate('Phone')}}</label>
+                                                    <label for="firstName">{{translate('Phone')}}</label>
                                                     <input type="text" class="form-control" id="firstName"
                                                            placeholder="">
                                                 </div>
@@ -418,9 +418,9 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class=" closeB"
-                                                    data-dismiss="modal">{{\App\CPU\translate('Close')}}</button>
+                                                    data-dismiss="modal">{{translate('Close')}}</button>
                                             <button type="button"
-                                                    class="btn btn-p"> {{\App\CPU\translate('Update Information')}}</button>
+                                                    class="btn btn-p"> {{translate('Update Information')}}</button>
                                         </div>
                                     </div>
                                 </form>
@@ -433,7 +433,7 @@
 
         <div class="mt-3">
             <button type="submit" class="btn btn-p btn-b float-right" data-toggle="modal" data-target="#exampleModal">
-                {{\App\CPU\translate('Add New Address')}}
+                {{translate('Add New Address')}}
             </button>
         </div>
     </div>

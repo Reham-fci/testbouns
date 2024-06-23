@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Title -->
-    <title>{{\App\CPU\translate('seller_login')}}</title>
+    <title>{{translate('seller_login')}}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
@@ -77,16 +77,16 @@
 
                             <div class="text-center">
                                 <div class="mb-5">
-                                    <h1 class="display-4">{{\App\CPU\translate('sign_in')}}</h1>
-                                    <center><h1 class="h4 text-gray-900 mb-4">{{\App\CPU\translate('welcome_back_to_seller_login')}}</h1>
+                                    <h1 class="display-4">{{translate('sign_in')}}</h1>
+                                    <center><h1 class="h4 text-gray-900 mb-4">{{translate('welcome_back_to_seller_login')}}</h1>
                                     </center>
                                 </div>
-                                
+
                             </div>
 
                             <!-- Form Group -->
                             <div class="js-form-message form-group">
-                                <label class="input-label" for="signinSrEmail">{{\App\CPU\translate('your_email')}}</label>
+                                <label class="input-label" for="signinSrEmail">{{translate('your_email')}}</label>
 
                                 <input type="email" class="form-control form-control-lg" name="email" id="signinSrEmail"
                                        style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
@@ -99,9 +99,9 @@
                             <div class="js-form-message form-group">
                                 <label class="input-label" for="signupSrPassword" tabindex="0">
                                     <span class="d-flex justify-content-between align-items-center" style="direction: {{Session::get('direction')}}">
-                                      {{\App\CPU\translate('password')}}
+                                      {{translate('password')}}
                                             <a href="{{route('seller.auth.forgot-password')}}">
-                                                {{\App\CPU\translate('forgot_password')}}
+                                                {{translate('forgot_password')}}
                                             </a>
                                     </span>
                                 </label>
@@ -133,7 +133,7 @@
                                     <input type="checkbox" class="custom-control-input" id="termsCheckbox"
                                            name="remember">
                                     <label class="custom-control-label text-muted" for="termsCheckbox">
-                                      {{\App\CPU\translate('remember_me')}}
+                                      {{translate('remember_me')}}
                                     </label>
                                 </div>
                             </div>
@@ -147,7 +147,7 @@
                                 <div class="row p-2">
                                     <div class="col-6 pr-0">
                                         <input type="text" class="form-control form-control-lg" name="default_captcha_value" value=""
-                                            placeholder="{{\App\CPU\translate('Enter captcha value')}}" style="border: none" autocomplete="off">
+                                            placeholder="{{translate('Enter captcha value')}}" style="border: none" autocomplete="off">
                                     </div>
                                     <div class="col-6 input-icons" style="background-color: #FFFFFF; border-radius: 5px;">
                                         <a onclick="javascript:re_captcha();">
@@ -158,7 +158,7 @@
                                 </div>
                             @endif
 
-                            <button type="submit" class="btn btn-lg btn-block btn-primary">{{\App\CPU\translate('sign_in')}}</button>
+                            <button type="submit" class="btn btn-lg btn-block btn-primary">{{translate('sign_in')}}</button>
                         </form>
                         <!-- End Form -->
                     </div>
@@ -166,8 +166,8 @@
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-10">
-                                    <span>{{\App\CPU\translate('Email')}} : test.seller@gmail.com</span><br>
-                                    <span>{{\App\CPU\translate('Password')}} : 12345678</span>
+                                    <span>{{translate('Email')}} : test.seller@gmail.com</span><br>
+                                    <span>{{translate('Password')}} : 12345678</span>
                                 </div>
                                 <div class="col-2">
                                     <button class="btn btn-primary" onclick="copy_cred()"><i class="tio-copy"></i>
@@ -238,7 +238,7 @@
 
             if (response.length === 0) {
                 e.preventDefault();
-                toastr.error("{{\App\CPU\translate('Please check the recaptcha')}}");
+                toastr.error("{{translate('Please check the recaptcha')}}");
             }
         });
     </script>
@@ -259,7 +259,7 @@
         function copy_cred() {
             $('#signinSrEmail').val('test.seller@gmail.com');
             $('#signupSrPassword').val('12345678');
-            toastr.success('{{\App\CPU\translate("Copied successfully")}}!', 'Success!', {
+            toastr.success('{{translate("Copied successfully")}}!', 'Success!', {
                 CloseButton: true,
                 ProgressBar: true
             });

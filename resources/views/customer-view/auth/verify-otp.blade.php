@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title', \App\CPU\translate('OTP_verification'))
+@section('title', translate('OTP_verification'))
 
 @push('css_or_js')
     <style>
@@ -33,13 +33,13 @@
     <div class="container py-4 py-lg-5 my-4">
         <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6">
-                <h2 class="h3 mb-4">{{\App\CPU\translate('provide_your_otp_and_proceed')}}?</h2>
+                <h2 class="h3 mb-4">{{translate('provide_your_otp_and_proceed')}}?</h2>
                 <div class="card py-2 mt-4">
                     <form class="card-body needs-validation" action="{{route('customer.auth.otp-verification2')}}"
                           method="post">
                         @csrf
                         <div class="form-group">
-                            <label>{{\App\CPU\translate('Enter your OTP')}}</label>
+                            <label>{{translate('Enter your OTP')}}</label>
                             <div id="divOuter">
                                 <div id="divInner">
                                     <input type="hidden" name="sessionInfo" value="{{$sessionInfo}}">
@@ -50,7 +50,7 @@
                                 <a href="#" id="resend">Resend Code Again</a>
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">{{\App\CPU\translate('proceed')}}</button>
+                        <button class="btn btn-primary" type="submit">{{translate('proceed')}}</button>
                     </form>
                 </div>
             </div>

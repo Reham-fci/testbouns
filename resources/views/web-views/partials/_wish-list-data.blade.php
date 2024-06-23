@@ -105,8 +105,8 @@
                                 </span>
                                 <br>
                                 <span
-                                    class="sellerName"> {{\App\CPU\translate('Brand')}} :{{$product->brand?$product->brand['name']:''}} </span>
-                    
+                                    class="sellerName"> {{translate('Brand')}} :{{$product->brand?$product->brand['name']:''}} </span>
+
                                 <div class="">
                                     @if($product->discount > 0)
                                     <strike style="color: #E96A6A;" class="{{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-3'}}">
@@ -131,13 +131,13 @@
                 </div>
             </div>
         @else
-            <span class="badge badge-danger">{{\App\CPU\translate('item_removed')}}</span>
+            <span class="badge badge-danger">{{translate('item_removed')}}</span>
         @endif
     @endforeach
 @else
     <center>
         <h6 class="text-muted">
-            {{\App\CPU\translate('No data found')}}.
+            {{translate('No data found')}}.
         </h6>
     </center>
 @endif

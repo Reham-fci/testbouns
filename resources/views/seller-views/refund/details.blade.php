@@ -29,41 +29,41 @@
                 <div class="card-header">
                     <div class="row flex-between justify-content-between  flex-grow-1">
                         <div class="col-12 col-md-4">
-                            <h3>{{\App\CPU\translate('refund_details')}}</h3>
-                            <span>{{\App\CPU\translate('refund_id')}} : {{$refund->id}}</span>
+                            <h3>{{translate('refund_details')}}</h3>
+                            <span>{{translate('refund_id')}} : {{$refund->id}}</span>
                         </div>
-                        <div class="col-6 col-md-4 mt-2 mt-md-0 text-capitalize">{{\App\CPU\translate('refund_status')}}:
+                        <div class="col-6 col-md-4 mt-2 mt-md-0 text-capitalize">{{translate('refund_status')}}:
                             @if ($refund->status == 'pending')
-                                <span style="color: coral"> {{\App\CPU\translate($refund->status)}}</span>
+                                <span style="color: coral"> {{translate($refund->status)}}</span>
                             @elseif($refund->status == 'approved')
-                                <span style="color: rgb(21, 115, 255)"> {{\App\CPU\translate($refund->status)}}</span>
+                                <span style="color: rgb(21, 115, 255)"> {{translate($refund->status)}}</span>
                             @elseif($refund->status == 'refunded')
-                                <span style="color: rgba(1, 255, 44, 0.979)"> {{\App\CPU\translate($refund->status)}}</span>
+                                <span style="color: rgba(1, 255, 44, 0.979)"> {{translate($refund->status)}}</span>
                             @elseif($refund->status == 'rejected')
-                                <span style="color: rgba(255, 42, 5, 0.979)"> {{\App\CPU\translate($refund->status)}}</span>
+                                <span style="color: rgba(255, 42, 5, 0.979)"> {{translate($refund->status)}}</span>
                             @endif
                         </div>
-                        
+
                         <div class="col-6 col-md-4 mt-2 mt-md-0">
                             @if ($refund->change_by != 'admin')
-                                <button class="btn btn-primary float-right" data-toggle="modal" 
-                                        data-target="#refund-status">{{\App\CPU\translate('change_refund_status')}}</button>
+                                <button class="btn btn-primary float-right" data-toggle="modal"
+                                        data-target="#refund-status">{{translate('change_refund_status')}}</button>
                             @endif
                         </div>
-                        
+
                     </div>
                 </div>
                 @php($order = App\Model\Order::find($refund->order_id))
                 <?php
                     $total_product_price = 0;
                     foreach ($order->details as $key => $or_d) {
-                        $total_product_price += ($or_d->qty*$or_d->price) + $or_d->tax - $or_d->discount; 
+                        $total_product_price += ($or_d->qty*$or_d->price) + $or_d->tax - $or_d->discount;
                     }
                         $refund_amount = 0;
                         $subtotal = $refund->order_details->price*$refund->order_details->qty - $refund->order_details->discount + $refund->order_details->tax;
-                        
+
                         $coupon_discount = ($order->discount_amount*$subtotal)/$total_product_price;
-    
+
                         $refund_amount = $subtotal - $coupon_discount;
                 ?>
                 <div class="card-body">
@@ -81,13 +81,13 @@
                                         {{$refund->product->name}}
                                     </a>
                                 @else
-                                    {{\App\CPU\translate('product_name_not_found')}}
+                                    {{translate('product_name_not_found')}}
                                 @endif
                             </span><br>
-                            <span >{{\App\CPU\translate('QTY')}} : {{$refund->order_details->qty}}</span><br>
-                            <span>{{\App\CPU\translate('price')}} : {{\App\CPU\Helpers::currency_converter($refund->order_details->price)}}</span><br>
+                            <span >{{translate('QTY')}} : {{$refund->order_details->qty}}</span><br>
+                            <span>{{translate('price')}} : {{\App\CPU\Helpers::currency_converter($refund->order_details->price)}}</span><br>
                             @if ($refund->order_details->variant)
-                                <strong><u>{{\App\CPU\translate('Variation')}} : </u></strong>
+                                <strong><u>{{translate('Variation')}} : </u></strong>
 
                                 <div class="font-size-sm text-body">
 
@@ -99,17 +99,17 @@
                             <div class="row justify-content-md-end mb-3">
                                 <div class="col-md-10 col-lg-10">
                                     <dl class="row text-sm-right">
-                                        <dt class="col-sm-7">{{\App\CPU\translate('total_price')}} : </dt>
+                                        <dt class="col-sm-7">{{translate('total_price')}} : </dt>
                                         <dd class="col-sm-5 ">
                                             <strong>{{\App\CPU\Helpers::currency_converter($refund->order_details->price*$refund->order_details->qty)}}</strong>
                                         </dd>
-    
-                                        <dt class="col-sm-7">{{\App\CPU\translate('total_discount')}} :</dt>
+
+                                        <dt class="col-sm-7">{{translate('total_discount')}} :</dt>
                                         <dd class="col-sm-5 ">
                                             <strong>{{\App\CPU\Helpers::currency_converter($refund->order_details->discount)}}</strong>
                                         </dd>
-    
-                                        <dt class="col-sm-7">{{\App\CPU\translate('total_tax')}} :</dt>
+
+                                        <dt class="col-sm-7">{{translate('total_tax')}} :</dt>
                                         <dd class="col-sm-5">
                                             <strong>{{\App\CPU\Helpers::currency_converter($refund->order_details->tax)}}</strong>
                                         </dd>
@@ -118,13 +118,13 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                     <hr>
                     <div class="row text-center">
-                        <span class="col-sm-2">{{\App\CPU\translate('subtotal')}} : {{\App\CPU\Helpers::currency_converter($subtotal)}}</span>
-                        <span class="col-sm-5">{{\App\CPU\translate('coupon_discount')}} : {{\App\CPU\Helpers::currency_converter($coupon_discount)}}</span>
-                        <span class="col-sm-5">{{\App\CPU\translate('total_refund_amount')}} : {{\App\CPU\Helpers::currency_converter($refund_amount)}}</span>
+                        <span class="col-sm-2">{{translate('subtotal')}} : {{\App\CPU\Helpers::currency_converter($subtotal)}}</span>
+                        <span class="col-sm-5">{{translate('coupon_discount')}} : {{\App\CPU\Helpers::currency_converter($coupon_discount)}}</span>
+                        <span class="col-sm-5">{{translate('total_refund_amount')}} : {{\App\CPU\Helpers::currency_converter($refund_amount)}}</span>
                     </div>
                 </div>
             </div>
@@ -134,23 +134,23 @@
                 <div class="card-header">
                     <div class="row flex-between justify-content-between  flex-grow-1">
                         <div class="col-12">
-                            <h3>{{\App\CPU\translate('additional_information')}}</h3>
+                            <h3>{{translate('additional_information')}}</h3>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="card-body">
                     <div class="row p-1">
                         <div class="col-12 col-sm-6">
-                            <h5>{{\App\CPU\translate('deliveryman_info')}} : </h5>
-                        <span>{{\App\CPU\translate('deliveryman_name')}} : {{$order->delivery_man!=null?$order->delivery_man->f_name . ' ' .$order->delivery_man->l_name:\App\CPU\translate('not_assigned')}}</span><br>
-                        <span>{{\App\CPU\translate('deliveryman_email')}} : {{$order->delivery_man!=null?$order->delivery_man->email :\App\CPU\translate('not_found')}}</span><br>
-                        <span>{{\App\CPU\translate('deliveryman_phone')}} : {{$order->delivery_man!=null?$order->delivery_man->phone :\App\CPU\translate('not_found')}}</span><br>
+                            <h5>{{translate('deliveryman_info')}} : </h5>
+                        <span>{{translate('deliveryman_name')}} : {{$order->delivery_man!=null?$order->delivery_man->f_name . ' ' .$order->delivery_man->l_name:translate('not_assigned')}}</span><br>
+                        <span>{{translate('deliveryman_email')}} : {{$order->delivery_man!=null?$order->delivery_man->email :translate('not_found')}}</span><br>
+                        <span>{{translate('deliveryman_phone')}} : {{$order->delivery_man!=null?$order->delivery_man->phone :translate('not_found')}}</span><br>
                         </div>
-                 
+
                         <div class="col-12 col-sm-6 text-capitalize">
-                            <span>{{\App\CPU\translate('payment_method')}} : {{str_replace('_',' ',$order->payment_method)}}</span><br>
-                            <span>{{\App\CPU\translate('order_details')}} : </span> <a class="btn btn-primary btn-sm" href="{{route('seller.orders.details',['id'=>$order->id])}}">{{\App\CPU\translate('click_here')}}</a><br>
+                            <span>{{translate('payment_method')}} : {{str_replace('_',' ',$order->payment_method)}}</span><br>
+                            <span>{{translate('order_details')}} : </span> <a class="btn btn-primary btn-sm" href="{{route('seller.orders.details',['id'=>$order->id])}}">{{translate('click_here')}}</a><br>
                         </div>
                     </div>
                 </div>
@@ -161,7 +161,7 @@
         <div class="col-12">
             <div class="card m-3">
                 <div class="card-header">
-                    <h3>{{\App\CPU\translate('refund_status_changed_log')}}</h3>
+                    <h3>{{translate('refund_status_changed_log')}}</h3>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive datatable-custom">
@@ -170,14 +170,14 @@
                             <thead class="thead-light">
                             <tr>
                                 <th style="width: 10%;">
-                                    {{\App\CPU\translate('SL')}}#
+                                    {{translate('SL')}}#
                                 </th>
-                                <th style="width: 15%;">{{\App\CPU\translate('changed_by')}} </th>
-                                <th style="width: 15%;">{{\App\CPU\translate('status')}}</th>
-                                <th style="width: 60%;">{{\App\CPU\translate('note')}}</th>
+                                <th style="width: 15%;">{{translate('changed_by')}} </th>
+                                <th style="width: 15%;">{{translate('status')}}</th>
+                                <th style="width: 60%;">{{translate('note')}}</th>
                             </tr>
                             </thead>
-            
+
                             <tbody>
                             @foreach ($refund->refund_status as $key=>$r_status)
                                 <tr>
@@ -188,7 +188,7 @@
                                         {{$r_status->change_by}}
                                     </td>
                                     <td>
-                                        {{\App\CPU\translate($r_status->status)}}
+                                        {{translate($r_status->status)}}
                                     </td>
                                     <td class="text-break">
                                         {{$r_status->message}}
@@ -200,7 +200,7 @@
                         @if(count($refund->refund_status)==0)
                             <div class="text-center p-4">
                                 <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                                <p class="mb-0">{{ \App\CPU\translate('No_data_to_show')}}</p>
+                                <p class="mb-0">{{ translate('No_data_to_show')}}</p>
                             </div>
                         @endif
                     </div>
@@ -211,7 +211,7 @@
         <div class="col-12">
             <div class="card m-3">
                 <div class="card-header">
-                    <h3>{{\App\CPU\translate('refund_reason')}}</h3>
+                    <h3>{{translate('refund_reason')}}</h3>
                 </div>
                 <div class="card-body">
                     <div class="col-12">
@@ -225,11 +225,11 @@
         <div class="col-12">
             <div class="card m-3">
                 <div class="card-header">
-                    <h4>{{\App\CPU\translate('attachment')}}</h4>
+                    <h4>{{translate('attachment')}}</h4>
                 </div>
                 <div class="card-body">
                     <div class="col-12">
-                        
+
                         @if ($refund->images !=null)
                             <div class="gallery">
                                 @foreach (json_decode($refund->images) as $key => $photo)
@@ -239,20 +239,20 @@
                                 @endforeach
                            </div>
                         @else
-                            <p>{{\App\CPU\translate('no_attachment_found')}}</p>
+                            <p>{{translate('no_attachment_found')}}</p>
                         @endif
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>
 <div class="modal fade" id="refund-status" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{\App\CPU\translate('change_refund_status')}}</h5>
+                <h5 class="modal-title">{{translate('change_refund_status')}}</h5>
                 <button id="payment_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -262,35 +262,35 @@
                     @csrf
                     <input type="hidden" name="id" value="{{$refund->id}}">
                     <div class="form-group col-12">
-                        <label class="input-label" for="">{{\App\CPU\translate('refund_status')}}</label>
+                        <label class="input-label" for="">{{translate('refund_status')}}</label>
                         <select name="refund_status" class="form-control" onchange="refund_status_change(this.value)">
                             <option
                                 value="pending" {{$refund->status=='pending'?'selected':''}}>
-                                {{ \App\CPU\translate('pending')}}
+                                {{ translate('pending')}}
                             </option>
                             {{-- @if ($refund->change_by !='admin') --}}
                                 <option
                                     value="approved" {{$refund->status=='approved'?'selected':''}}>
-                                    {{ \App\CPU\translate("approved")}}
+                                    {{ translate("approved")}}
                                 </option>
-                                
+
                                 <option
                                     value="rejected" {{$refund->status=='rejected'?'selected':''}}>
-                                    {{ \App\CPU\translate("rejected")}}
+                                    {{ translate("rejected")}}
                                 </option>
                             {{-- @endif --}}
                         </select>
                     </div>
                     <div class="form-group col-12" id="approved">
-                        <label class="input-label" for="">{{\App\CPU\translate('approved_note')}}</label>
+                        <label class="input-label" for="">{{translate('approved_note')}}</label>
                         <input type="text" class="form-control" id="approved_note" name="approved_note">
                     </div>
                     <div class="form-group col-12" id="rejected">
-                        <label class="input-label" for="">{{\App\CPU\translate('rejected_note')}}</label>
+                        <label class="input-label" for="">{{translate('rejected_note')}}</label>
                         <input type="text" class="form-control" id="rejected_note" name="rejected_note">
                     </div>
                     <div class="form-group col-12">
-                        <button class="btn btn-primary float-right" type="submit">{{\App\CPU\translate('submit')}}</button>
+                        <button class="btn btn-primary float-right" type="submit">{{translate('submit')}}</button>
                     </div>
                 </form>
             </div>
@@ -315,14 +315,14 @@ function refund_status_change(val)
     if(val === 'approved'){
         $('#rejected').hide();
         $("#rejected_note").prop("required", false);
-        
+
         $('#approved').show();
-        $("#approved_note").prop("required", true);  
+        $("#approved_note").prop("required", true);
 
     }else if(val === 'rejected'){
         $('#approved').hide();
         $("#approved_note").prop("required", false);
-        
+
         $('#rejected').show();
         $("#rejected_note").prop("required", true);
 

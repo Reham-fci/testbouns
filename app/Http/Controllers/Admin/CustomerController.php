@@ -19,7 +19,7 @@ class CustomerController extends Controller
 {
     public function customer_list(Request $request)
     {
-        
+
         User::where(['user_checked' => 0])->update(['user_checked' => 1]);
         $query_param = [];
         $search = $request['search'];
@@ -54,63 +54,63 @@ class CustomerController extends Controller
             $customers = User::with(['orders']);
         }
         if ($request['fromDate']) {
-            
+
             $query_param['fromDate'] =  $request['fromDate'];
             // echo $request['fromDate'];exit();
             $customers->where(DB::raw('date_format(users.created_at,"%Y-%m-%d")') , '>=' ,$request['fromDate'] );
         }
         if ($request['toDate']) {
-            
+
             $query_param['toDate'] =  $request['toDate'];
             $customers->where(DB::raw('date_format(users.created_at,"%Y-%m-%d")') , '<=' ,$request['toDate'] );
         }
         if ($request['fromOrder']) {
-            
+
             $query_param['fromOrder'] =  $request['fromOrder'];
             $customers->where(DB::raw('(SELECT COUNT(*) FROM `orders` WHERE orders.customer_id = users.id)') , '>=' ,$request['fromOrder'] );
         }
         if ($request['toOrder']) {
-            
+
             $query_param['toOrder'] =  $request['toOrder'];
             $customers->where(DB::raw('(SELECT COUNT(*) FROM `orders` WHERE orders.customer_id = users.id)') , '<=' ,$request['toOrder'] );
         }
         if ($request['fromOrderprice']) {
-            
+
             $query_param['fromOrderprice'] =  $request['fromOrderprice'];
             $customers->where(DB::raw('(SELECT sum(order_amount) FROM `orders` WHERE orders.customer_id = users.id)') , '>=' ,$request['fromOrderprice'] );
         }
         if ($request['toOrderprice']) {
-            
+
             $query_param['toOrderprice'] =  $request['toOrderprice'];
             $customers->where(DB::raw('(SELECT sum(order_amount) FROM `orders` WHERE orders.customer_id = users.id)') , '<=' ,$request['toOrderprice'] );
         }
         if ($request['city']) {
-            
+
             $query_param['city'] =  $request['city'];
             // $customers->where('users.city' , '=' ,$request['city'] );
             $customers->whereIn('users.city' ,$request['city'] );
         }
         if ($request['area']) {
-            
+
             $query_param['area'] =  $request['area'];
             $customers->where('users.area' , '=' ,$request['area'] );
         }
         if ($request['type']) {
-            
+
             $query_param['type'] =  $request['type'];
-            
+
             $customers->where('users.type' , '=' ,$request['type'] );
         }
         if ($request['salesPersonId']) {
-            
+
             $query_param['salesPersonId'] =  $request['salesPersonId'];
-            
+
             $customers->where('users.salesPersonId' , '=' ,$request['salesPersonId'] );
         }
         // print_r($customers->toSql());
         // exit();
-        
-       
+
+
 
         $customers = $customers->latest()->paginate(Helpers::pagination_limit())->appends($query_param);
         foreach ($customers as &$customer) {
@@ -164,86 +164,86 @@ class CustomerController extends Controller
             $customers = User::with(['orders']);
         }
         if ($request['fromDate']) {
-            
+
             $query_param['fromDate'] =  $request['fromDate'];
             // echo $request['fromDate'];exit();
             $customers->where(DB::raw('date_format(users.created_at,"%Y-%m-%d")') , '>=' ,$request['fromDate'] );
         }
         if ($request['toDate']) {
-            
+
             $query_param['toDate'] =  $request['toDate'];
             $customers->where(DB::raw('date_format(users.created_at,"%Y-%m-%d")') , '<=' ,$request['toDate'] );
         }
         if ($request['fromOrder']) {
-            
+
             $query_param['fromOrder'] =  $request['fromOrder'];
             $customers->where(DB::raw('(SELECT COUNT(*) FROM `orders` WHERE orders.customer_id = users.id)') , '>=' ,$request['fromOrder'] );
         }
         if ($request['toOrder']) {
-            
+
             $query_param['toOrder'] =  $request['toOrder'];
             $customers->where(DB::raw('(SELECT COUNT(*) FROM `orders` WHERE orders.customer_id = users.id)') , '<=' ,$request['toOrder'] );
         }
         if ($request['fromOrderprice']) {
-            
+
             $query_param['fromOrderprice'] =  $request['fromOrderprice'];
             $customers->where(DB::raw('(SELECT sum(order_amount) FROM `orders` WHERE orders.customer_id = users.id)') , '>=' ,$request['fromOrderprice'] );
         }
         if ($request['toOrderprice']) {
-            
+
             $query_param['toOrderprice'] =  $request['toOrderprice'];
             $customers->where(DB::raw('(SELECT sum(order_amount) FROM `orders` WHERE orders.customer_id = users.id)') , '<=' ,$request['toOrderprice'] );
         }
         if ($request['city'] && $request['city'] != -1) {
-            
+
             $query_param['city'] =  $request['city'];
             // $customers->where('users.city' , '=' ,$request['city'] );
             $customers->whereIn('users.city' ,$seaerchData['city'] );
         }
         if ($request['area']) {
-            
+
             $query_param['area'] =  $request['area'];
             $customers->where('users.area' , '=' ,$request['area'] );
         }
         if ($request['type']) {
-            
+
             $query_param['type'] =  $request['type'];
-            
+
             $customers->where('users.type' , '=' ,$request['type'] );
         }
         if ($request['salesPersonId']) {
-            
+
             $query_param['salesPersonId'] =  $request['salesPersonId'];
-            
+
             $customers->where('users.salesPersonId' , '=' ,$request['salesPersonId'] );
         }
         // print_r($customers->toSql());
         // exit();
-        
+
         $customers = $customers->get();
         $exportData = [];
         $exportData[] = [
-            \App\CPU\translate('Name'),
-            \App\CPU\translate('last_name'),
-            \App\CPU\translate('Email'),
-            \App\CPU\translate('Phone'),
-            \App\CPU\translate('RegisterDate'),
-            \App\CPU\translate('Total') . \App\CPU\translate('Order'),
-            \App\CPU\translate('seller_amount'),
-            \App\CPU\translate('Salesperson'),
-            \App\CPU\translate('Type'),
-            \App\CPU\translate('city'),
-            \App\CPU\translate('area'),
-            \App\CPU\translate('GPS'),
-            \App\CPU\translate('getFrom')
+            translate('Name'),
+            translate('last_name'),
+            translate('Email'),
+            translate('Phone'),
+            translate('RegisterDate'),
+            translate('Total') . translate('Order'),
+            translate('seller_amount'),
+            translate('Salesperson'),
+            translate('Type'),
+            translate('city'),
+            translate('area'),
+            translate('GPS'),
+            translate('getFrom')
         ];
-        
-        
-        
-        
-        
+
+
+
+
+
         foreach ($customers as $customer) {
-            
+
             $salesPerson = Salesperson::where('id',$customer['salesPersonId'])->first();
             $_type    = DB::table('customertype')->where('id',$customer['type'])->first();
             $areaName = DB::table('cities')->where('id',$customer['area'])->first();
@@ -264,7 +264,7 @@ class CustomerController extends Controller
                 isset($cityName) ? $cityName->governorate_name_ar : "",
                 isset($areaName) ? $areaName->city_name_ar : "",
                 isset($GPS->gps) ? $GPS->gps : "",
-                \App\CPU\translate($customer['getFrom']),
+                translate($customer['getFrom']),
             ];
         }
             // exit;
@@ -273,13 +273,13 @@ class CustomerController extends Controller
         // exit();
     }
 
-    
+
     public function manage(Request $request , $id = 0)
     {
         $customertypes = DB::table('customertype')->get();
         $governorates = DB::table('governorates')->get();
         $cities = DB::table('cities')->get();
-        
+
         $client = [];
         $addresses = [];
         if($id != 0 ){
@@ -289,11 +289,11 @@ class CustomerController extends Controller
 
         // print_r($client);exit();
 
-        
+
         return view('admin-views.customer.add-new', compact('id','addresses','customertypes','governorates','cities','client'));
     }
 
-    
+
     public function submit(Request $request)
     {
         // print_r($request['address']);
@@ -302,14 +302,14 @@ class CustomerController extends Controller
         // print_r($request['getFrom']);
         // exit();
         if($request['id'] == 0){
-            
-            
+
+
             $validation_array = [
                 'f_name' => 'required',
                 'phone' => 'unique:users',
                 'password' => 'required|min:8|same:con_password'
             ];
-            
+
             if($request['email'] != ''){
                 $validation_array['email'] = 'email|unique:users';
             }
@@ -329,15 +329,15 @@ class CustomerController extends Controller
                 'is_active' => 1,
                 'password' => bcrypt($request['password'])
             ]);
-            
+
             $id = $user->id;
             $msg = 'Add_success_login_now';
 
         }else{
-            
+
             $user = User::where('id', $request['id'])->get()[0];
-            
-            $validation = 
+
+            $validation =
             [
                 'f_name' => 'required',
                 'f_name.required' => 'First name is required',
@@ -345,11 +345,11 @@ class CustomerController extends Controller
             if($request['password']){
                 $validation['password'] = 'required|min:8|same:con_password';
             }
-            
+
             if($user['phone'] != $request['phone']){
                 $validation['phone'] = 'unique:users';
             }
-            
+
             if($user['email'] != $request['email'] && $request['email'] != ""){
                 $validation['email'] = 'required|email|unique:users';
             }
@@ -366,17 +366,17 @@ class CustomerController extends Controller
                 'getFrom' => $request['getFrom'],
                 'is_active' => 1
             ];
-            
+
             if($request['password']){
                 $userData['password'] = bcrypt($request['password']);
             }
-            
+
             User::where('id', $request['id'])->update($userData);
             $id = $request['id'];
-            
+
             $msg = 'update_success_login_now';
         }
-        
+
         $request['address'] = isset($request['address']) ? $request['address'] : [];
         foreach ($request['address'] as $address) {
             if(isset($address['id'])){
@@ -413,7 +413,7 @@ class CustomerController extends Controller
             }
         }
 
-        Toastr::success(\App\CPU\translate($msg));
+        Toastr::success(translate($msg));
         return redirect(route('admin.customer.list'));
     }
 
@@ -435,7 +435,7 @@ class CustomerController extends Controller
 
         $customer = User::find($id);
         if (isset($customer)) {
-            
+
             $delivery_men = Salesperson::where('is_active', 1)->get();
 
             $query_param = [];
@@ -466,7 +466,7 @@ class CustomerController extends Controller
         $search = $request['search'];
         if ($request->has('search')) {
             $subscription_list = Subscription::where('email','like', "%{$search}%");
-            
+
             $query_param = ['search' => $request['search']];
         } else {
         $subscription_list = new Subscription;
@@ -478,13 +478,13 @@ class CustomerController extends Controller
     {
         $data = BusinessSetting::where('type','like','wallet_%')->orWhere('type','like','loyalty_point_%')->get();
         $data = array_column($data->toArray(), 'value','type');
-    
+
         return view('admin-views.customer.customer-settings', compact('data'));
     }
 
     public function customer_update_settings(Request $request)
     {
-        
+
         $request->validate([
             'add_fund_bonus'=>'nullable|numeric|max:100|min:0',
             'loyalty_point_exchange_rate'=>'nullable|numeric',
@@ -513,8 +513,8 @@ class CustomerController extends Controller
         BusinessSetting::updateOrInsert(['type' => 'walletOrderValue'], [
             'value' => $request['walletOrderValue']??0
         ]);
-        
-        Toastr::success(\App\CPU\translate('customer_settings_updated_successfully'));
+
+        Toastr::success(translate('customer_settings_updated_successfully'));
         return back();
     }
 
@@ -531,17 +531,17 @@ class CustomerController extends Controller
         ->limit(8)
         ->get([DB::raw('id, CONCAT(f_name, " ", l_name, " (", phone ,")") as text')]);
         if($request->all) $data[]=(object)['id'=>false, 'text'=>trans('messages.all')];
-        
+
 
         return response()->json($data);
     }
 
 
-    
+
 
     public function add_Salesperson(Request $request , $customerId, $salesPersonId)
     {
-        
+
         if ($salesPersonId == 0) {
             return response()->json([], 401);
         }
@@ -549,7 +549,7 @@ class CustomerController extends Controller
         $customer->salesPersonId = $salesPersonId;
         $customer->save();
 
-        
+
 
         return response()->json(['status' => true], 200);
     }

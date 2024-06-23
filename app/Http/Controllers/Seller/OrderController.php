@@ -33,10 +33,10 @@ class OrderController extends Controller
         } else {
             $orders = Order::where(['seller_is' => 'seller'])->where(['seller_id' => $sellerId]);
         }
-        
+
         Order::where(['checked' => 0])->update(['checked' => 1]);
 
-        
+
 
         $search = $request['search'];
         $from = $request['from'];
@@ -54,7 +54,7 @@ class OrderController extends Controller
                 $dateQuery->whereDate('created_at', '>=',$from)
                                 ->whereDate('created_at', '<=',$to);
                 });
-        
+
         $orders = $orders->where('order_type','default_type')->latest()->paginate(Helpers::pagination_limit())->appends(['search'=>$request['search'],'from'=>$request['from'],'to'=>$request['to']]);
         return view('seller-views.order.list', compact('orders', 'search','from','to'));
     }
@@ -122,8 +122,8 @@ class OrderController extends Controller
             ->with('seller')
             ->where('id', $id)->first();
 
-        $data["email"] = $order->customer !=null?$order->customer["email"]:\App\CPU\translate('email_not_found');
-        $data["client_name"] = $order->customer !=null? $order->customer["f_name"] . ' ' . $order->customer["l_name"]:\App\CPU\translate('customer_not_found');
+        $data["email"] = $order->customer !=null?$order->customer["email"]:translate('email_not_found');
+        $data["client_name"] = $order->customer !=null? $order->customer["f_name"] . ' ' . $order->customer["l_name"]:translate('customer_not_found');
         $data["order"] = $order;
 
         $mpdf_view = \View::make('seller-views.order.invoice')->with('order', $order)->with('seller', $seller);
@@ -144,7 +144,7 @@ class OrderController extends Controller
     public function status(Request $request)
     {
         $order = Order::find($request->id);
-        
+
         $wallet_status = Helpers::get_business_settings('wallet_status');
         $loyalty_point_status = Helpers::get_business_settings('loyalty_point_status');
 
@@ -158,7 +158,7 @@ class OrderController extends Controller
         if ($order->order_status == 'delivered') {
             return response()->json(['success' => 0, 'message' => 'order is already delivered.'], 200);
         }
-        
+
         try {
             if ($value) {
                 $data = [
@@ -187,7 +187,7 @@ class OrderController extends Controller
             }
         } catch (\Exception $e) {}
 
-        
+
         $order->order_status = $request->order_status;
         OrderManager::stock_update_on_order_status_change($order, $request->order_status);
 
@@ -219,7 +219,7 @@ class OrderController extends Controller
         $order->delivery_man_id = null;
         $order->save();
 
-        Toastr::success(\App\CPU\translate('updated_successfully!'));
+        Toastr::success(translate('updated_successfully!'));
         return back();
     }
 }

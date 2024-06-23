@@ -1084,7 +1084,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{\App\CPU\translate('Add')}} {{\App\CPU\translate('Unit')}}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{translate('Add')}} {{translate('Unit')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -1093,7 +1093,7 @@
                         <div class="row">
                             <form class="col-12" id="unitForm">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">{{\App\CPU\translate('unit')}}</label>
+                                    <label for="exampleInputEmail1">{{translate('unit')}}</label>
                                     <input type="hidden" class="form-control" name="_token" id="unit_name" value="{{ csrf_token() }}">
                                     <input type="text" class="form-control" name="name" id="unit_name">
                                 </div>
@@ -1150,13 +1150,13 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label class="control-label">{{\App\CPU\translate('Sort')}}</label>
+                                    <label class="control-label">{{translate('Sort')}}</label>
                                     <input type="number" min="1" step="1"
                                             name="prdoctPrice[`+index_list+`][order]" class="form-control"
                                             required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="name">{{\App\CPU\translate('Unit')}}</label>
+                                    <label for="name">{{translate('Unit')}}</label>
                                     <div class="col-12 row">
                                         <select
                                             class="col-10 js-example-basic-multiple form-control select-unit"
@@ -1172,50 +1172,50 @@
             </div>
         </div>
         <div class="col-md-6">
-            <label class="control-label">{{\App\CPU\translate('Unit price')}}</label>
+            <label class="control-label">{{translate('Unit price')}}</label>
                                     <input type="number" min="0" step="0.01"
-                                            placeholder="{{\App\CPU\translate('Unit price')}}"
+                                            placeholder="{{translate('Unit price')}}"
                                             name="prdoctPrice[`+index_list+`][unit_price]" value="{{old('unit_price')}}" class="form-control"
                                             required>
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-4" id="quantity">
                                     <label
-                                        class="control-label">{{\App\CPU\translate('numberOfPieces')}}</label>
+                                        class="control-label">{{translate('numberOfPieces')}}</label>
                                     <input type="number" min="1" value="1" step="1"
-                                            placeholder="{{\App\CPU\translate('numberOfPieces')}}"
+                                            placeholder="{{translate('numberOfPieces')}}"
                                             name="prdoctPrice[`+index_list+`][numberOfPieces]" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label
-                                        class="control-label">{{\App\CPU\translate('Purchase price')}}</label>
+                                        class="control-label">{{translate('Purchase price')}}</label>
                                     <input type="number" min="0" step="0.01"
-                                            placeholder="{{\App\CPU\translate('Purchase price')}}"
+                                            placeholder="{{translate('Purchase price')}}"
                                             value="{{old('purchase_price')}}"
                                             name="prdoctPrice[`+index_list+`][purchase_price]" class="form-control" required>
                                 </div>
 
                                 <div class="col-md-5">
-                                    <label class="control-label">{{\App\CPU\translate('Tax')}}</label>
-                                    <label class="badge badge-info">{{\App\CPU\translate('Percent')}} ( % )</label>
+                                    <label class="control-label">{{translate('Tax')}}</label>
+                                    <label class="badge badge-info">{{translate('Percent')}} ( % )</label>
                                     <input type="number" min="0" value="0" step="0.01"
-                                            placeholder="{{\App\CPU\translate('Tax')}}}" name="prdoctPrice[`+index_list+`][tax]"
+                                            placeholder="{{translate('Tax')}}}" name="prdoctPrice[`+index_list+`][tax]"
                                             value="{{old('tax')}}"
                                             class="form-control">
                                     <input name="prdoctPrice[`+index_list+`][tax_type]" value="percent" style="display: none">
                                 </div>
 
                                 <div class="col-md-5">
-                                    <label class="control-label">{{\App\CPU\translate('Discount')}}</label>
+                                    <label class="control-label">{{translate('Discount')}}</label>
                                     <input type="number" min="0" value="{{old('discount')}}" step="0.01"
-                                            placeholder="{{\App\CPU\translate('Discount')}}" name="prdoctPrice[`+index_list+`][discount]"
+                                            placeholder="{{translate('Discount')}}" name="prdoctPrice[`+index_list+`][discount]"
                                             class="form-control" required>
                                 </div>
                                 <div class="col-md-2" style="padding-top: 30px;">
                                     <select style="width: 100%"
                                         class="js-example-basic-multiple js-states js-example-responsive demo-select2"
                                         name="prdoctPrice[`+index_list+`][discount_type]">
-                                        <option value="flat">{{\App\CPU\translate('Flat')}}</option>
-                                        <option value="percent">{{\App\CPU\translate('Percent')}}</option>
+                                        <option value="flat">{{translate('Flat')}}</option>
+                                        <option value="percent">{{translate('Percent')}}</option>
                                     </select>
                                 </div>
                                 {{-- <div class="pt-4 col-12 sku_combination" id="sku_combination">
@@ -1223,21 +1223,21 @@
                                 </div> --}}
                 <div class="col-sm-12 col-md-12 col-lg-12" id="shipping_cost">
                     <label
-                        class="control-label">{{\App\CPU\translate('description')}} </label>
-                                    <textarea placeholder="{{\App\CPU\translate('description')}}"
+                        class="control-label">{{translate('description')}} </label>
+                                    <textarea placeholder="{{translate('description')}}"
                                            name="prdoctPrice[`+index_list+`][description]" class="form-control" required></textarea>
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-4" id="shipping_cost">
                                     <label
-                                        class="control-label">{{\App\CPU\translate('shipping_cost')}} </label>
+                                        class="control-label">{{translate('shipping_cost')}} </label>
                                     <input type="number" min="0" value="0" step="1"
-                                            placeholder="{{\App\CPU\translate('shipping_cost')}}"
+                                            placeholder="{{translate('shipping_cost')}}"
                                             name="prdoctPrice[`+index_list+`][shipping_cost]" class="form-control" required>
                                 </div>
                                 <div class="col-md-6 col-lg-4 mt-sm-1" id="shipping_cost_multy">
                                     <div>
                                         <label
-                                        class="control-label">{{\App\CPU\translate('shipping_cost_multiply_with_quantity')}} </label>
+                                        class="control-label">{{translate('shipping_cost_multiply_with_quantity')}} </label>
 
                                     </div>
                                     <div>
@@ -1300,13 +1300,13 @@
 
                 },
                 onExtensionErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('Please only input png or jpg type file')}}', {
+                    toastr.error('{{translate('Please only input png or jpg type file')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 },
                 onSizeErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('File size too big')}}', {
+                    toastr.error('{{translate('File size too big')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
@@ -1334,13 +1334,13 @@
 
                 },
                 onExtensionErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('Please only input png or jpg type file')}}', {
+                    toastr.error('{{translate('Please only input png or jpg type file')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 },
                 onSizeErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('File size too big')}}', {
+                    toastr.error('{{translate('File size too big')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
@@ -1368,13 +1368,13 @@
 
                 },
                 onExtensionErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('Please only input png or jpg type file')}}', {
+                    toastr.error('{{translate('Please only input png or jpg type file')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 },
                 onSizeErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('File size too big')}}', {
+                    toastr.error('{{translate('File size too big')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
@@ -1497,7 +1497,7 @@
     <script>
         function check(){
             Swal.fire({
-                title: '{{\App\CPU\translate('Are you sure')}}?',
+                title: '{{translate('Are you sure')}}?',
                 text: '',
                 type: 'warning',
                 showCancelButton: true,
@@ -1530,7 +1530,7 @@
                                 });
                             }
                         } else {
-                            toastr.success('{{\App\CPU\translate('product added successfully')}}!', {
+                            toastr.success('{{translate('product added successfully')}}!', {
                                 CloseButton: true,
                                 ProgressBar: true
                             });

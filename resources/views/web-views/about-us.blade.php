@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('About Us'))
+@section('title',translate('About Us'))
 
 @push('css_or_js')
     <style>
@@ -37,7 +37,7 @@
 
 @section('content')
     <div class="container for-container rtl" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-        <h2 class="text-center mt-3 headerTitle">{{\App\CPU\translate('About Our Company')}}</h2>
+        <h2 class="text-center mt-3 headerTitle">{{translate('About Our Company')}}</h2>
         <div class="for-padding">
             {!! $about_us['value'] !!}
         </div>

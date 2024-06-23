@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title', \App\CPU\translate('Verify'))
+@section('title', translate('Verify'))
 
 @push('css_or_js')
     <style>
@@ -20,8 +20,8 @@
                 <div class="card border-0 box-shadow">
                     <div class="card-body">
                         <div class="text-center">
-                            <h2 class="h4 mb-1">{{\App\CPU\translate('one_step_ahead')}}</h2>
-                            <p class="font-size-sm text-muted mb-4">{{\App\CPU\translate('verify_information_to_continue')}}.</p>
+                            <h2 class="h4 mb-1">{{translate('one_step_ahead')}}</h2>
+                            <p class="font-size-sm text-muted mb-4">{{translate('verify_information_to_continue')}}.</p>
                         </div>
                         <form class="needs-validation_" id="sign-up-form" action="{{ route('customer.auth.verify') }}"
                               method="post">
@@ -33,28 +33,28 @@
                                     @if(\App\CPU\Helpers::get_business_settings('email_verification'))
                                         <label for="reg-phone" class="text-primary">
                                             *
-                                            {{\App\CPU\translate('please') }}
-                                            {{\App\CPU\translate('provide') }}
-                                            {{\App\CPU\translate('verification') }}
-                                            {{\App\CPU\translate('token') }}
-                                            {{\App\CPU\translate('sent_in_your_email') }}
+                                            {{translate('please') }}
+                                            {{translate('provide') }}
+                                            {{translate('verification') }}
+                                            {{translate('token') }}
+                                            {{translate('sent_in_your_email') }}
                                         </label>
                                     @elseif(\App\CPU\Helpers::get_business_settings('phone_verification'))
                                         <label for="reg-phone" class="text-primary">
                                             *
-                                            {{\App\CPU\translate('please') }}
-                                            {{\App\CPU\translate('provide') }}
-                                            {{\App\CPU\translate('OTP') }}
-                                            {{\App\CPU\translate('sent_in_your_phone') }}
+                                            {{translate('please') }}
+                                            {{translate('provide') }}
+                                            {{translate('OTP') }}
+                                            {{translate('sent_in_your_phone') }}
                                         </label>
                                     @else
-                                        <label for="reg-phone" class="text-primary">* {{\App\CPU\translate('verification_code') }} / {{ \App\CPU\translate('OTP')}}</label>
+                                        <label for="reg-phone" class="text-primary">* {{translate('verification_code') }} / {{ translate('OTP')}}</label>
                                     @endif
                                     <input class="form-control" type="text" name="token" required>
                                 </div>
                             </div>
                             <input type="hidden" value="{{$user->id}}" name="id">
-                            <button type="submit" class="btn btn-outline-primary">{{\App\CPU\translate('verify')}}</button>
+                            <button type="submit" class="btn btn-outline-primary">{{translate('verify')}}</button>
                         </form>
                     </div>
                 </div>

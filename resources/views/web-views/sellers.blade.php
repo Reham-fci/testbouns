@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('All Seller Page'))
+@section('title',translate('All Seller Page'))
 
 @push('css_or_js')
     <meta property="og:image" content="{{asset('storage/app/public/company')}}/{{$web_config['web_logo']->value}}"/>
@@ -45,15 +45,15 @@
     <div class="container mb-md-4">
         <div class="row mt-3 mb-3 border-bottom">
             <div class="col-md-8">
-                <h4 class="mt-2">{{ \App\CPU\translate('Sellers') }}</h4>
+                <h4 class="mt-2">{{ translate('Sellers') }}</h4>
             </div>
             <div class="col-md-4">
                 <form action="{{route('search-shop')}}">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control"  placeholder="{{\App\CPU\translate('Shop name')}}" name="shop_name" required>
+                        <input type="text" class="form-control"  placeholder="{{translate('Shop name')}}" name="shop_name" required>
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="submit">{{\App\CPU\translate('Search')}}</button>
+                            <button class="btn btn-outline-secondary" type="submit">{{translate('Search')}}</button>
                         </div>
                     </div>
                 </form>

@@ -1,7 +1,7 @@
 <!-- Header -->
 <div class="card-header">
     <h5 class="card-header-title">
-        <i class="tio-star"></i> {{\App\CPU\translate('most_rated_products')}}
+        <i class="tio-star"></i> {{translate('most_rated_products')}}
     </h5>
     <i class="tio-crown-outlined" style="font-size: 45px"></i>
 </div>

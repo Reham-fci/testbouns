@@ -26,7 +26,7 @@
             <span class="step-count"><i class="czi-user-circle"></i></span>
         </div>
         <div class="step-label">
-            {{\App\CPU\translate('sing_in')}} / {{\App\CPU\translate('sing_up')}}
+            {{translate('sing_in')}} / {{translate('sing_up')}}
         </div>
     </a>
     <a class="step-item {{$step>=2?'active':''}} {{$step==2?'current':''}}" href="{{route('checkout-details')}}">
@@ -35,7 +35,7 @@
         </div>
         @php($billing_input_by_customer=\App\CPU\Helpers::get_business_settings('billing_input_by_customer'))
         <div class="step-label">
-            {{\App\CPU\translate('Shipping')}} {{$billing_input_by_customer==1?\App\CPU\translate('and').' '. \App\CPU\translate('billing'):' '}}
+            {{translate('Shipping')}} {{$billing_input_by_customer==1?translate('and').' '. translate('billing'):' '}}
         </div>
     </a>
     <a class="step-item {{$step>=3?'active':''}} {{$step==3?'current':''}}" href="{{route('checkout-payment')}}">
@@ -43,7 +43,7 @@
             <span class="step-count"><i class="czi-card"></i></span>
         </div>
         <div class="step-label">
-            {{\App\CPU\translate('Payment')}}
+            {{translate('Payment')}}
         </div>
     </a>
 </div>

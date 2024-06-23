@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('Choose Payment Method'))
+@section('title',translate('Choose Payment Method'))
 
 @push('css_or_js')
     <style>
@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-md-12 mb-5 pt-5">
                 <div class="feature_header" style="background: #dcdcdc;line-height: 1px">
-                    <span>{{ \App\CPU\translate('payment_method')}}</span>
+                    <span>{{ translate('payment_method')}}</span>
                 </div>
             </div>
             <section class="col-lg-8">
@@ -34,7 +34,7 @@
                 <div class="checkout_details mt-3">
                 @include('web-views.partials._checkout-steps',['step'=>3])
                 <!-- Payment methods accordion-->
-                    <h2 class="h6 pb-3 mb-2 mt-5">{{\App\CPU\translate('choose_payment')}}</h2>
+                    <h2 class="h6 pb-3 mb-2 mt-5">{{translate('choose_payment')}}</h2>
 
                     <div class="row">
                         @php($config=\App\CPU\Helpers::get_business_settings('cash_on_delivery'))
@@ -61,7 +61,7 @@
                                     <div class="card-body" style="height: 100px">
                                         <form action="{{route('checkout-complete-wallet')}}" method="get" class="needs-validation">
                                             <button class="btn btn-block click-if-alone" type="submit">
-                                            
+
                                                 <img width="150" style="margin-top: -10px"
                                                      src="{{asset('public/assets/front-end/img/wallet.png')}}"/>
                                             </button>
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                         @endif
-                        
+
 
 
 
@@ -86,8 +86,8 @@
                         <div class="col-4"></div>
                         <div class="col-4">
                             <a class="btn btn-secondary btn-block" href="{{route('checkout-details')}}">
-                                <span class="d-none d-sm-inline">{{\App\CPU\translate('Back to Shipping')}}</span>
-                                <span class="d-inline d-sm-none">{{\App\CPU\translate('Back')}}</span>
+                                <span class="d-none d-sm-inline">{{translate('Back to Shipping')}}</span>
+                                <span class="d-inline d-sm-none">{{translate('Back')}}</span>
                             </a>
                         </div>
                         <div class="col-4"></div>
@@ -252,7 +252,7 @@
             let total = $('.checkout_details .click-if-alone').length;
             if (Number.parseInt(total) < 2) {
                 $('.click-if-alone').click()
-                $('.checkout_details').html('<h1>{{\App\CPU\translate('Redirecting_to_the_payment')}}......</h1>');
+                $('.checkout_details').html('<h1>{{translate('Redirecting_to_the_payment')}}......</h1>');
             }
         }
         click_if_alone();

@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('Flash Deal Products'))
+@section('title',translate('Flash Deal Products'))
 
 @push('css_or_js')
     <meta property="og:image" content="{{asset('storage/app/public/company')}}/{{$web_config['web_logo']->value}}"/>
@@ -31,9 +31,9 @@
             margin-right: 0px !important;
             display: flex;
 	        flex-direction: column;
-            -ms-flex: .4;  /* IE 10 */  
+            -ms-flex: .4;  /* IE 10 */
             flex: 1;
-            
+
         }
 
         .cz-countdown-hours {
@@ -45,7 +45,7 @@
             margin-right: 0px !important;
             display: flex;
 	        flex-direction: column;
-            -ms-flex: .4;  /* IE 10 */  
+            -ms-flex: .4;  /* IE 10 */
             flex: 1;
         }
 
@@ -58,7 +58,7 @@
             margin-right: 0px !important;
             display: flex;
 	        flex-direction: column;
-            -ms-flex: .4;  /* IE 10 */  
+            -ms-flex: .4;  /* IE 10 */
             flex: 1;
         }
         .cz-countdown-seconds {
@@ -70,12 +70,12 @@
             display: flex;
             justify-content: center;
 	        flex-direction: column;
-            -ms-flex: .4;  /* IE 10 */  
+            -ms-flex: .4;  /* IE 10 */
             flex: 1;
 
-            
+
         }
-        
+
 
         .flash_deal_title {
             font-weight: 700;
@@ -88,12 +88,12 @@
             font-size: 18px;
         }
 
-        
+
         .flex-center{
                 display: flex;
                 justify-content: space-between !important;
             }
-       
+
 
         .flash_deal_product_details .flash-product-price {
             font-weight: 700;
@@ -105,7 +105,7 @@
             width: 100%;
             height: 200px;
         }
-        
+
 
         @media (max-width: 600px) {
             .flash_deal_title {
@@ -132,7 +132,7 @@
                 justify-content: center !important;
             }
         }
-        
+
     </style>
 @endpush
 
@@ -155,9 +155,9 @@
                 <div class="{{Session::get('direction') === "rtl" ? 'mr-2' : 'ml-2'}}">
                     <div class="row ">
                         <span class="flash_deal_title ">
-                            {{ \App\CPU\translate('flash_deal')}}
+                            {{ translate('flash_deal')}}
                         </span>
-                        
+
                     </div>
                 </div>
                 <div class=" {{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}} ">
@@ -167,22 +167,22 @@
                                 data-countdown="{{isset($flash_deals)?date('m/d/Y',strtotime($flash_deals['end_date'])):''}} 11:59:00 PM">
                                 <span class="cz-countdown-days align-items-center">
                                     <span class="cz-countdown-value"></span>
-                                    <span>{{ \App\CPU\translate('day')}}</span>
+                                    <span>{{ translate('day')}}</span>
                                 </span>
                                 <span class="cz-countdown-value p-1">:</span>
                                 <span class="cz-countdown-hours align-items-center">
                                     <span class="cz-countdown-value"></span>
-                                    <span>{{ \App\CPU\translate('hrs')}}</span>
+                                    <span>{{ translate('hrs')}}</span>
                                 </span>
                                 <span class="cz-countdown-value p-1">:</span>
                                 <span class="cz-countdown-minutes align-items-center">
                                     <span class="cz-countdown-value"></span>
-                                    <span>{{ \App\CPU\translate('min')}}</span>
+                                    <span>{{ translate('min')}}</span>
                                 </span>
                                 <span class="cz-countdown-value p-1">:</span>
                                 <span class="cz-countdown-seconds align-items-center">
                                     <span class="cz-countdown-value"></span>
-                                    <span>{{ \App\CPU\translate('sec')}}</span>
+                                    <span>{{ translate('sec')}}</span>
                                 </span>
                             </span>
                         </div>
@@ -203,10 +203,10 @@
                         @foreach($deal->products as $dp)
                             @if (isset($dp->product))
                                 <div class="col-xl-2 col-sm-3 col-6" style="margin-bottom: 10px">
-                                    
+
                                     @include('web-views.partials._single-product',['product'=>$dp->product,'decimal_point_settings'=>$decimal_point_settings])
-                                    
-                                    
+
+
                                 </div>
                             @endif
                         @endforeach

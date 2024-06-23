@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app-seller')
 
-@section('title',\App\CPU\translate('Product List'))
+@section('title',translate('Product List'))
 
 @push('css_or_js')
 
@@ -10,9 +10,9 @@
     <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('seller.dashboard.index')}}">{{\App\CPU\translate('Dashboard')}}</a>
+                <li class="breadcrumb-item"><a href="{{route('seller.dashboard.index')}}">{{translate('Dashboard')}}</a>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Products')}}</li>
+                <li class="breadcrumb-item" aria-current="page">{{translate('Products')}}</li>
 
             </ol>
         </nav>
@@ -23,11 +23,11 @@
                     <div class="card-header">
                         <div class="row flex-between justify-content-between align-items-center flex-grow-1">
                             <div class="col-12 mb-1 col-md-4">
-                                <h5>{{ \App\CPU\translate('Product')}} {{ \App\CPU\translate('Table')}} ({{ $products->total() }})</h5>
-                                
+                                <h5>{{ translate('Product')}} {{ translate('Table')}} ({{ $products->total() }})</h5>
+
                             </div>
-    
-                            
+
+
                             <div class="col-12 mb-1 col-md-5">
                                 <form action="{{ url()->current() }}" method="GET">
                                     <!-- Search -->
@@ -38,8 +38,8 @@
                                             </div>
                                         </div>
                                         <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                            placeholder="{{\App\CPU\translate('Search by Product Name')}}" aria-label="Search orders" value="{{ $search }}" required>
-                                        <button type="submit" class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
+                                            placeholder="{{translate('Search by Product Name')}}" aria-label="Search orders" value="{{ $search }}" required>
+                                        <button type="submit" class="btn btn-primary">{{translate('search')}}</button>
                                     </div>
                                     <!-- End Search -->
                                 </form>
@@ -47,11 +47,11 @@
                             <div class="col-12 col-md-3">
                                 <a href="{{route('seller.product.add-new')}}" class="btn btn-primary float-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}">
                                     <i class="tio-add-circle"></i>
-                                    <span class="text">{{\App\CPU\translate('Add new product')}}</span>
+                                    <span class="text">{{translate('Add new product')}}</span>
                                 </a>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="card-body" style="padding: 0">
                         <div class="table-responsive">
@@ -61,13 +61,13 @@
                                    style="width: 100%">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th>{{\App\CPU\translate('SL#')}}</th>
-                                    <th>{{\App\CPU\translate('Product Name')}}</th>
-                                    <th>{{\App\CPU\translate('purchase_price')}}</th>
-                                    <th>{{\App\CPU\translate('selling_price')}}</th>
-                                    <th>{{\App\CPU\translate('verify_status')}}</th>
-                                    <th>{{\App\CPU\translate('Active')}} {{\App\CPU\translate('status')}}</th>
-                                    <th style="width: 5px" class="text-center">{{\App\CPU\translate('Action')}}</th>
+                                    <th>{{translate('SL#')}}</th>
+                                    <th>{{translate('Product Name')}}</th>
+                                    <th>{{translate('purchase_price')}}</th>
+                                    <th>{{translate('selling_price')}}</th>
+                                    <th>{{translate('verify_status')}}</th>
+                                    <th>{{translate('Active')}} {{translate('status')}}</th>
+                                    <th style="width: 5px" class="text-center">{{translate('Action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -85,11 +85,11 @@
                                         </td>
                                         <td>
                                             @if($p->request_status == 0)
-                                                <label class="badge badge-warning">{{\App\CPU\translate('New Request')}}</label>
+                                                <label class="badge badge-warning">{{translate('New Request')}}</label>
                                             @elseif($p->request_status == 1)
-                                                <label class="badge badge-success">{{\App\CPU\translate('Approved')}}</label>
+                                                <label class="badge badge-success">{{translate('Approved')}}</label>
                                             @elseif($p->request_status == 2)
-                                                <label class="badge badge-danger">{{\App\CPU\translate('Denied')}}</label>
+                                                <label class="badge badge-danger">{{translate('Denied')}}</label>
                                             @endif
                                         </td>
                                         <td>
@@ -101,19 +101,19 @@
                                         </td>
                                         <td>
                                             <a class="btn btn-info btn-sm"
-                                                title="{{\App\CPU\translate('view')}}"
+                                                title="{{translate('view')}}"
                                                 href="{{route('seller.product.view',[$p['id']])}}">
                                                 <i class="tio-visible"></i>
                                             </a>
                                             <a  class="btn btn-primary btn-sm"
-                                                title="{{\App\CPU\translate('Edit')}}"
+                                                title="{{translate('Edit')}}"
                                                 href="{{route('seller.product.edit',[$p['id']])}}">
                                                 <i class="tio-edit"></i>
                                             </a>
                                             <a  class="btn btn-danger btn-sm" href="javascript:"
-                                                title="{{\App\CPU\translate('Delete')}}"
-                                                onclick="form_alert('product-{{$p['id']}}','{{\App\CPU\translate("Want to delete this item")}} ?')">
-                                               <i class="tio-add-to-trash"></i> 
+                                                title="{{translate('Delete')}}"
+                                                onclick="form_alert('product-{{$p['id']}}','{{translate("Want to delete this item")}} ?')">
+                                               <i class="tio-add-to-trash"></i>
                                             </a>
                                             <form action="{{route('seller.product.delete',[$p['id']])}}"
                                                   method="post" id="product-{{$p['id']}}">
@@ -133,7 +133,7 @@
                     @if(count($products)==0)
                         <div class="text-center p-4">
                             <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                            <p class="mb-0">{{\App\CPU\translate('No data to show')}}</p>
+                            <p class="mb-0">{{translate('No data to show')}}</p>
                         </div>
                     @endif
                 </div>
@@ -174,10 +174,10 @@
                 },
                 success: function (data) {
                     if(data.success == true) {
-                        toastr.success('{{\App\CPU\translate('Status updated successfully')}}');
+                        toastr.success('{{translate('Status updated successfully')}}');
                     }
                     else if(data.success == false) {
-                        toastr.error('{{\App\CPU\translate('Status updated failed. Product must be approved')}}');
+                        toastr.error('{{translate('Status updated failed. Product must be approved')}}');
                     }
                 }
             });

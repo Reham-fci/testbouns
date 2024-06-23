@@ -84,7 +84,7 @@ class ProductController extends Controller
             'purchase_price' => 'required|numeric|min:1',
             'discount' => 'required|gt:-1',
             'shipping_cost' => 'required|gt:-1',
-            
+
         ], [
             'name.required' => 'Product name is required!',
             'category_id.required' => 'category  is required!',
@@ -352,10 +352,10 @@ class ProductController extends Controller
             $product->current_stock = $stock_count;
             $product->variation = json_encode($variations);
             $product->save();
-            Toastr::success(\App\CPU\translate('product_quantity_updated_successfully!'));
+            Toastr::success(translate('product_quantity_updated_successfully!'));
             return back();
         } else {
-            Toastr::warning(\App\CPU\translate('product_quantity_can_not_be_less_than_0_!'));
+            Toastr::warning(translate('product_quantity_can_not_be_less_than_0_!'));
             return back();
         }
     }
@@ -558,12 +558,12 @@ class ProductController extends Controller
         $product->current_stock = abs($stock_count);
         $product->shipping_cost = Helpers::get_business_settings('product_wise_shipping_cost_approval')==1?$product->shipping_cost:Convert::usd($request->shipping_cost);
         $product->multiply_qty = $request->multiplyQTY=='on'?1:0;
-        
+
         if(Helpers::get_business_settings('product_wise_shipping_cost_approval')==1 && $product->shipping_cost != Convert::usd($request->shipping_cost))
         {
             $product->temp_shipping_cost = Convert::usd($request->shipping_cost);
             $product->is_shipping_cost_updated = 0;
-            
+
         }
 
         $product->video_provider = 'youtube';

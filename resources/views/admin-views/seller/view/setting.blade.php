@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title',$seller->shop ? $seller->shop->name : \App\CPU\translate("shop name not found"))
+@section('title',$seller->shop ? $seller->shop->name : translate("shop name not found"))
 
 @push('css_or_js')
     <style>
@@ -104,36 +104,36 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a
-                        href="{{route('admin.dashboard.index')}}">{{\App\CPU\translate('Dashboard')}}</a>
+                        href="{{route('admin.dashboard.index')}}">{{translate('Dashboard')}}</a>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Seller_details')}}</li>
+                <li class="breadcrumb-item" aria-current="page">{{translate('Seller_details')}}</li>
             </ol>
         </nav>
 
         <!-- Page Heading -->
         <div class="flex-between d-sm-flex row align-items-center justify-content-between mb-2 mx-1">
             <div>
-                <a href="{{route('admin.sellers.seller-list')}}" class="btn btn-primary mt-3 mb-3">{{\App\CPU\translate('Back_to_seller_list')}}</a>
+                <a href="{{route('admin.sellers.seller-list')}}" class="btn btn-primary mt-3 mb-3">{{translate('Back_to_seller_list')}}</a>
             </div>
             <div>
                 @if ($seller->status=="pending")
                     <div class="mt-4 pr-2">
                         <div class="flex-start">
                             <div class="mx-1"><h4><i class="tio-shop-outlined"></i></h4></div>
-                            <div><h4>{{\App\CPU\translate('Seller request for open a shop')}}.</h4></div>
+                            <div><h4>{{translate('Seller request for open a shop')}}.</h4></div>
                         </div>
                         <div class="text-center">
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="approved">
-                                <button type="submit" class="btn btn-primary">{{\App\CPU\translate('Approve')}}</button>
+                                <button type="submit" class="btn btn-primary">{{translate('Approve')}}</button>
                             </form>
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="rejected">
-                                <button type="submit" class="btn btn-danger">{{\App\CPU\translate('reject')}}</button>
+                                <button type="submit" class="btn btn-danger">{{translate('reject')}}</button>
                             </form>
                         </div>
                     </div>
@@ -153,27 +153,27 @@
                 <!-- Nav -->
                 <ul class="nav nav-tabs page-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link " href="{{ route('admin.sellers.view',$seller->id) }}">{{\App\CPU\translate('Shop')}}</a>
+                        <a class="nav-link " href="{{ route('admin.sellers.view',$seller->id) }}">{{translate('Shop')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link "
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'order']) }}">{{\App\CPU\translate('Order')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'order']) }}">{{translate('Order')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'product']) }}">{{\App\CPU\translate('Product')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'product']) }}">{{translate('Product')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'setting']) }}">{{\App\CPU\translate('Setting')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'setting']) }}">{{translate('Setting')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'transaction']) }}">{{\App\CPU\translate('Transaction')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'transaction']) }}">{{translate('Transaction')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'review']) }}">{{\App\CPU\translate('Review')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'review']) }}">{{translate('Review')}}</a>
                     </li>
 
                 </ul>
@@ -191,7 +191,7 @@
                     @csrf
                     <div class="card">
                         <div class="card-header">
-                            <label> {{\App\CPU\translate('Sales Commission')}} : </label>
+                            <label> {{translate('Sales Commission')}} : </label>
                             <label class="switch ml-3">
                                 <input type="checkbox" name="commission_status"
                                        class="status"
@@ -201,14 +201,14 @@
                         </div>
                         <div class="card-body" style="overflow-x: scroll">
                             <small class="badge badge-soft-danger mb-3">
-                                {{\App\CPU\translate('If sales commission is disabled here, the system default commission will be applied')}}.
+                                {{translate('If sales commission is disabled here, the system default commission will be applied')}}.
                             </small>
                             <div class="form-group">
-                                <label>{{\App\CPU\translate('Commission')}} ( % )</label>
+                                <label>{{translate('Commission')}} ( % )</label>
                                 <input type="number" value="{{$seller['sales_commission_percentage']}}"
                                        class="form-control" name="commission">
                             </div>
-                            <button type="submit" class="btn btn-primary">{{\App\CPU\translate('Update')}}</button>
+                            <button type="submit" class="btn btn-primary">{{translate('Update')}}</button>
                         </div>
                     </div>
                 </form>
@@ -220,7 +220,7 @@
                     @csrf
                     <div class="card">
                         <div class="card-header">
-                            <label> {{\App\CPU\translate('GST Number')}} : </label>
+                            <label> {{translate('GST Number')}} : </label>
                             <label class="switch ml-3">
                                 <input type="checkbox" name="gst_status"
                                        class="status"
@@ -230,14 +230,14 @@
                         </div>
                         <div class="card-body" style="overflow-x: scroll">
                             <small class="badge badge-soft-danger mb-3">
-                                {{\App\CPU\translate('If GST number is disabled here, it will not show in invoice')}}.
+                                {{translate('If GST number is disabled here, it will not show in invoice')}}.
                             </small>
                             <div class="form-group">
-                                <label> {{\App\CPU\translate('Number')}}  </label>
+                                <label> {{translate('Number')}}  </label>
                                 <input type="text" value="{{$seller['gst']}}"
                                        class="form-control" name="gst">
                             </div>
-                            <button type="submit" class="btn btn-primary">{{\App\CPU\translate('Update')}} </button>
+                            <button type="submit" class="btn btn-primary">{{translate('Update')}} </button>
                         </div>
                     </div>
                 </form>
@@ -245,31 +245,31 @@
             <div class="col-md-6 mt-2">
                 <div class="card">
                     <div class="card-header">
-                        <h5>{{\App\CPU\translate('Seller POS')}}</h5>
+                        <h5>{{translate('Seller POS')}}</h5>
                     </div>
-                
+
                     <div class="card-body" style="padding: 20px">
                         <form action="{{ url()->current() }}"
                               method="GET">
                             @csrf
-                            <label>{{\App\CPU\translate('Seller POS permission on/off')}}</label>
+                            <label>{{translate('Seller POS permission on/off')}}</label>
                             <div class="form-check">
                                 <input class="form-check-input" name="seller_pos" type="radio" value="1"
                                        id="seller_pos1" {{$seller['pos_status']==1?'checked':''}}>
                                 <label class="form-check-label {{Session::get('direction') === "rtl" ? 'mr-3' : 'ml-3'}}" for="seller_pos1">
-                                    {{\App\CPU\translate('Turn on')}}
+                                    {{translate('Turn on')}}
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" name="seller_pos" type="radio" value="0"
                                        id="seller_pos2" {{$seller['pos_status']==0?'checked':''}}>
                                 <label class="form-check-label {{Session::get('direction') === "rtl" ? 'mr-3' : 'ml-3'}}" for="seller_pos2">
-                                    {{\App\CPU\translate('Turn off')}}
+                                    {{translate('Turn off')}}
                                 </label>
                             </div>
                             <hr>
                             <button type="submit"
-                                    class="btn btn-primary {{Session::get('direction') === "rtl" ? 'float-left mr-3' : 'float-right ml-3'}}">{{\App\CPU\translate('Save')}}</button>
+                                    class="btn btn-primary {{Session::get('direction') === "rtl" ? 'float-left mr-3' : 'float-right ml-3'}}">{{translate('Save')}}</button>
                         </form>
                     </div>
                 </div>

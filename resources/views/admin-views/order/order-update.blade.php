@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('Order Details'))
+@section('title', translate('Order Details'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -36,23 +36,23 @@ input{
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
-                                                           href="{{route('admin.orders.list',['status'=>'all'])}}">{{\App\CPU\translate('Orders')}}</a>
+                                                           href="{{route('admin.orders.list',['status'=>'all'])}}">{{translate('Orders')}}</a>
                             </li>
                             <li class="breadcrumb-item active"
-                                aria-current="page">{{\App\CPU\translate('Order')}} {{\App\CPU\translate('details')}} </li>
+                                aria-current="page">{{translate('Order')}} {{translate('details')}} </li>
                         </ol>
                     </nav>
 
                     <div class="d-sm-flex align-items-sm-center">
-                        <h1 class="page-header-title">{{\App\CPU\translate('Order')}} #{{$order['id']}}</h1>
+                        <h1 class="page-header-title">{{translate('Order')}} #{{$order['id']}}</h1>
 
                         @if($order['payment_status']=='paid')
                             <span class="badge badge-soft-success ml-sm-3">
-                                <span class="legend-indicator bg-success"></span>{{\App\CPU\translate('Paid')}}
+                                <span class="legend-indicator bg-success"></span>{{translate('Paid')}}
                             </span>
                         @else
                             <span class="badge badge-soft-danger ml-sm-3">
-                                <span class="legend-indicator bg-danger"></span>{{\App\CPU\translate('Unpaid')}}
+                                <span class="legend-indicator bg-danger"></span>{{translate('Unpaid')}}
                             </span>
                         @endif
 
@@ -84,7 +84,7 @@ input{
                         @if(\App\CPU\Helpers::get_business_settings('order_verification'))
                             <span class="ml-2 ml-sm-3">
                                 <b>
-                                    {{\App\CPU\translate('order_verification_code')}} : {{$order['verification_code']}}
+                                    {{translate('order_verification_code')}} : {{$order['verification_code']}}
                                 </b>
                             </span>
                         @endif
@@ -93,26 +93,26 @@ input{
                     <div class="col-md-6 mt-2">
                         <a class="text-body mr-3" target="_blank"
                            href={{route('admin.orders.generate-invoice',[$order['id']])}}>
-                            <i class="tio-print mr-1"></i> {{\App\CPU\translate('Print')}} {{\App\CPU\translate('invoice')}}
+                            <i class="tio-print mr-1"></i> {{translate('Print')}} {{translate('invoice')}}
                         </a>
 
                         @if (isset($shipping_address['latitude']) && isset($shipping_address['longitude']))
                             <button class="btn btn-xs btn-secondary" data-toggle="modal" data-target="#locationModal"><i
-                                    class="tio-map"></i> {{\App\CPU\translate('show_locations_on_map')}}</button>
+                                    class="tio-map"></i> {{translate('show_locations_on_map')}}</button>
                         @else
                             <button class="btn btn-xs btn-warning"><i
-                                    class="tio-map"></i> {{\App\CPU\translate('shipping_address_has_been_given_below')}}
+                                    class="tio-map"></i> {{translate('shipping_address_has_been_given_below')}}
                             </button>
                         @endif
                     </div>
 
                     <div class="row">
                         <div class="col-12 col-md-6 mt-4">
-                            <label class="badge badge-info">{{\App\CPU\translate('linked_orders')}}
+                            <label class="badge badge-info">{{translate('linked_orders')}}
                                 : {{$linked_orders->count()}}</label><br>
                             @foreach($linked_orders as $linked)
                                 <a href="{{route('admin.orders.details',[$linked['id']])}}"
-                                   class="btn btn-secondary">{{\App\CPU\translate('ID')}}
+                                   class="btn btn-secondary">{{translate('ID')}}
                                     :{{$linked['id']}}</a>
                             @endforeach
                         </div>
@@ -125,21 +125,21 @@ input{
                                             data-id="{{$order['id']}}">
 
                                         <option
-                                            value="pending" {{$order->order_status == 'pending'?'selected':''}} > {{\App\CPU\translate('Pending')}}</option>
+                                            value="pending" {{$order->order_status == 'pending'?'selected':''}} > {{translate('Pending')}}</option>
                                         <option
-                                            value="confirmed" {{$order->order_status == 'confirmed'?'selected':''}} > {{\App\CPU\translate('Confirmed')}}</option>
+                                            value="confirmed" {{$order->order_status == 'confirmed'?'selected':''}} > {{translate('Confirmed')}}</option>
                                         <option
-                                            value="processing" {{$order->order_status == 'processing'?'selected':''}} >{{\App\CPU\translate('Processing')}} </option>
+                                            value="processing" {{$order->order_status == 'processing'?'selected':''}} >{{translate('Processing')}} </option>
                                         <option class="text-capitalize"
-                                                value="out_for_delivery" {{$order->order_status == 'out_for_delivery'?'selected':''}} >{{\App\CPU\translate('out_for_delivery')}} </option>
+                                                value="out_for_delivery" {{$order->order_status == 'out_for_delivery'?'selected':''}} >{{translate('out_for_delivery')}} </option>
                                         <option
-                                            value="delivered" {{$order->order_status == 'delivered'?'selected':''}} >{{\App\CPU\translate('Delivered')}} </option>
+                                            value="delivered" {{$order->order_status == 'delivered'?'selected':''}} >{{translate('Delivered')}} </option>
                                         <option
-                                            value="returned" {{$order->order_status == 'returned'?'selected':''}} > {{\App\CPU\translate('Returned')}}</option>
+                                            value="returned" {{$order->order_status == 'returned'?'selected':''}} > {{translate('Returned')}}</option>
                                         <option
-                                            value="failed" {{$order->order_status == 'failed'?'selected':''}} >{{\App\CPU\translate('Failed')}} </option>
+                                            value="failed" {{$order->order_status == 'failed'?'selected':''}} >{{translate('Failed')}} </option>
                                         <option
-                                            value="canceled" {{$order->order_status == 'canceled'?'selected':''}} >{{\App\CPU\translate('Canceled')}} </option>
+                                            value="canceled" {{$order->order_status == 'canceled'?'selected':''}} >{{translate('Canceled')}} </option>
                                     </select>
                                 </div>
                             </div>
@@ -152,10 +152,10 @@ input{
                                             onclick="route_alert('{{route('admin.orders.payment-status',['id'=>$order['id'],'payment_status'=>'paid'])}}','Change status to paid ?')"
                                             href="javascript:"
                                             value="paid" {{$order->payment_status == 'paid'?'selected':''}} >
-                                            {{\App\CPU\translate('Paid')}}
+                                            {{translate('Paid')}}
                                         </option>
                                         <option value="unpaid" {{$order->payment_status == 'unpaid'?'selected':''}} >
-                                            {{\App\CPU\translate('Unpaid')}}
+                                            {{translate('Unpaid')}}
                                         </option>
 
                                     </select>
@@ -179,7 +179,7 @@ input{
                         <div class="row">
                             <div class="col-12 pb-2 border-bottom">
                                 <h4 class="card-header-title">
-                                    {{\App\CPU\translate('Order')}} {{\App\CPU\translate('details')}}
+                                    {{translate('Order')}} {{translate('details')}}
                                     <span
                                         class="badge badge-soft-dark rounded-circle ml-1">{{$order->details->count()}}</span>
                                 </h4>
@@ -188,7 +188,7 @@ input{
                             <div class="col-3 pt-2">
                                 @if ($order->order_note !=null)
                                     <span class="font-weight-bold text-capitalize">
-                                        {{\App\CPU\translate('order_note')}} :
+                                        {{translate('order_note')}} :
                                     </span>
                                     <p class="pl-1">
                                         {{$order->order_note}}
@@ -198,7 +198,7 @@ input{
                             <div class="col-3 pt-2">
                                 @if ($order->order_comment !=null)
                                     <span class="font-weight-bold text-capitalize">
-                                        {{\App\CPU\translate('order_comment')}} :
+                                        {{translate('order_comment')}} :
                                     </span>
                                     <p class="pl-1">
                                         {{$order->order_comment}}
@@ -208,11 +208,11 @@ input{
                             <div class="col-6 pt-2">
                                 <div class="text-right">
                                     <h6 class="" style="color: #8a8a8a;">
-                                        {{\App\CPU\translate('Payment')}} {{\App\CPU\translate('Method')}}
+                                        {{translate('Payment')}} {{translate('Method')}}
                                         : {{str_replace('_',' ',$order['payment_method'])}}
                                     </h6>
                                     <h6 class="" style="color: #8a8a8a;">
-                                        {{\App\CPU\translate('Payment')}} {{\App\CPU\translate('reference')}}
+                                        {{translate('Payment')}} {{translate('reference')}}
                                         : {{str_replace('_',' ',$order['transaction_ref'])}}
                                     </h6>
                                 </div>
@@ -225,7 +225,7 @@ input{
                     <form action="{{route('admin.orders.order-update-now',$order->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('put')
-                   
+
                     <div class="card-body">
 
                         @php($subtotal=0)
@@ -237,11 +237,11 @@ input{
                        style="width: 60%; text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}}">
                         <thead class="thead-light">
                         <tr>
-                            <th width="10%">{{\App\CPU\translate('product')}}</th>
-                            <th width="2%">{{\App\CPU\translate('qty')}}</th>
-                            <th width="5%">{{\App\CPU\translate('price')}}</th>
-                            <th width="40%">{{\App\CPU\translate('Total')}}</th>
-                            <th width="35%">{{\App\CPU\translate('Action')}}</th>
+                            <th width="10%">{{translate('product')}}</th>
+                            <th width="2%">{{translate('qty')}}</th>
+                            <th width="5%">{{translate('price')}}</th>
+                            <th width="40%">{{translate('Total')}}</th>
+                            <th width="35%">{{translate('Action')}}</th>
                         </tr>
                         </thead>
 
@@ -249,7 +249,7 @@ input{
                             @foreach($order->details as $key=>$detail)
                                 @php($subtotal=$detail['price']*$detail->qty+$detail['tax']-$detail['discount'])
                                 @php($discount+=$detail['discount'])
-                                    
+
                                     @php($tax+=$detail['tax'])
                                     @php($total+=$subtotal)
                                 <tr>
@@ -257,35 +257,35 @@ input{
                                     @if($detail->product)
                                                                     <p>
                                         {{substr($detail->product['name'],0,30)}}{{strlen($detail->product['name'])>10?'...':''}}</p>
-                                    <strong><u>{{\App\CPU\translate('Variation')}} : </u></strong>
+                                    <strong><u>{{translate('Variation')}} : </u></strong>
 
                                     <div class="font-size-sm text-body">
 
                                         <span class="font-weight-bold">{{$detail['variant']}}</span>
                                     </div>
                                     @endif
-                                </td>   
+                                </td>
                                     <td>
                                         <input type="text" class="qtyy"  name="qty[]" value="{{$detail->qty}}">
-                                    </td> 
+                                    </td>
                                     <td>
                                             {{$detail->price}}
-                                    </td> 
+                                    </td>
                                     <td class="sub_total">
                                             {{$detail->qty*$detail->price}}
-                                    </td> 
+                                    </td>
                                     <td>
-                                        <input type="hidden" value="{{$detail->id}}" name="d_id[]">  
+                                        <input type="hidden" value="{{$detail->id}}" name="d_id[]">
                                         <input type="hidden" value="{{$detail->product_id}}" name="p_id[]">
-                                        <input type="hidden" class="total_remove" value="{{$detail->qty*$detail->price}}}">  
+                                        <input type="hidden" class="total_remove" value="{{$detail->qty*$detail->price}}}">
                                         <input type="hidden" name="variant_id[]" value="-1">
                                         <input type="hidden" class="price" value="{{$detail->price}}" name="price[]">
                                         <a href="#" class="btn btn-danger remove"><i class="tio-delete-outlined"></i></a>
-                                    </td> 
+                                    </td>
 
 
                                 </tr>
-                            
+
                             @endforeach
 
                         </tbody>
@@ -300,14 +300,14 @@ input{
 
                         </div> --}}
                         <div class="row justify-content-md-end mb-3">
-                            
+
                             @if($order['discount_amount'] == 0)
                             <div class="col-4 hs-unfold float-right pr-2">
                                 <div class="dropdown">
                                     <select name="couponValue" class="couponValue form-control"
                                             data-id="{{$order['id']}}">
                                         <option>
-                                            {{\App\CPU\translate('select')}} {{\App\CPU\translate('coupon')}}
+                                            {{translate('select')}} {{translate('coupon')}}
                                         </option>
                                         @foreach($coupons as $coupon)
                                             <option coupon-max-discount="{{$coupon->max_discount}}" coupon-discount="{{$coupon->discount}}" coupon-discount-type="{{$coupon->discount_type}}" value="{{$coupon->id}}">{{$coupon->code}}</option>
@@ -321,17 +321,17 @@ input{
                         <div class="row justify-content-md-end mb-3">
                             <div class="col-md-9 col-lg-8">
                                 <dl class="row text-sm-right">
-                                    <dt class="col-sm-6">{{\App\CPU\translate('sub_total')}}</dt>
+                                    <dt class="col-sm-6">{{translate('sub_total')}}</dt>
                                     <dd class="col-sm-6 border-bottom">
                                         <strong id="subtotal">{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($total))}}</strong>
                                     </dd>
-                                    <dt class="col-sm-6">{{\App\CPU\translate('Shipping')}}</dt>
+                                    <dt class="col-sm-6">{{translate('Shipping')}}</dt>
                                     <dd class="col-sm-6 border-bottom">
                                         <input type="hidden" value="{{$shipping}}" id="shipping">
                                         <strong>{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($shipping))}}</strong>
                                     </dd>
 
-                                    <dt class="col-sm-6">{{\App\CPU\translate('coupon_discount')}}</dt>
+                                    <dt class="col-sm-6">{{translate('coupon_discount')}}</dt>
                                     <dd class="col-sm-6 border-bottom">
                                         <input type="hidden" value="{{$discount}}" id="discount">
                                         <input type="hidden" value="{{$coupon_discount}}" id="coupon_discount" name="coupon_discount">
@@ -339,13 +339,13 @@ input{
                                         <input type="hidden" value="{{$coupon_max_discount}}" id="coupon_max_discount" name="coupon_max_discount">
                                         <strong id="discount_text">- {{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($discount))}}</strong>
                                     </dd>
-                                    <dt class="col-sm-6">{{\App\CPU\translate('wallet_discount')}}</dt>
+                                    <dt class="col-sm-6">{{translate('wallet_discount')}}</dt>
                                     <dd class="col-sm-6 border-bottom">
                                         <input type="hidden" value="{{$walletAmount}}" id="walletAmount">
                                         <strong>- {{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($walletAmount))}}</strong>
                                     </dd>
 
-                                    <dt class="col-sm-6">{{\App\CPU\translate('Total')}}</dt>
+                                    <dt class="col-sm-6">{{translate('Total')}}</dt>
                                     <dd class="col-sm-6">
                                         <input type="hidden" value="{{$total+$shipping-$discount-$walletAmount}}" id="total_hidden">
                                         <strong id="total">{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($total+$shipping-$discount-$walletAmount))}}</strong>
@@ -358,7 +358,7 @@ input{
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-success" type="submit">
-                                {{\App\CPU\translate('Update')}} 
+                                {{translate('Update')}}
                          </button>
                     </div>
                     </form>
@@ -369,7 +369,7 @@ input{
 
             <div class="col-lg-4 border border-solid">
                 <div class="row">
-                 
+
                         <select name="product_add" id="product" class="select2">
                         <option value="-1" selected>Select</option>
                         @foreach($products as $p)
@@ -378,7 +378,7 @@ input{
                         </option>
                         @endforeach
                         </select>
-                  
+
 
                 </div>
                 <div class="row mt-10">
@@ -389,10 +389,10 @@ input{
                  </div>
                  <div class="row mt-10">
                         <button class="btn btn-success" id="add-item">
-                        {{\App\CPU\translate('Add')}}
+                        {{translate('Add')}}
                         </button>
                  </div>
-        
+
 
             </div>
         </div>
@@ -419,35 +419,35 @@ input{
             if(coupon_discount_type == "percentage"){
                 discount = (subtotal * coupon_discount) / 100;
             }
-            
+
             if(isNaN(discount)){
                 discount = 0 ;
             }
-            
+
             if(coupon_max_discount < discount){
                 discount = coupon_max_discount;
             }
             var shipping = parseFloat($('#shipping').val());
             var walletAmount = parseFloat($('#walletAmount').val());
-            
+
             var total = subtotal+shipping-discount-walletAmount;
-            
+
             var  symbol = "{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency(""))}}"
-            
+
             $('#discount').val(discount);
             $('#discount_text').html("- "+symbol.replace("0.00"," "+discount.toFixed(2)));
-            
+
             $('#total_hidden').val(total);
             $('#total').html(symbol.replace("0.00"," "+total.toFixed(2)));
             $('#subtotal').html(symbol.replace("0.00"," "+subtotal.toFixed(2)));
-            
-            
+
+
         }
         $(document).on('change', '.couponValue', function () {
-            
+
             var coupon_discount = parseFloat($('.couponValue option:selected').attr('coupon-discount'));
-            var coupon_discount_type = $('.couponValue option:selected').attr('coupon-discount-type') ; 
-            var coupon_max_discount = parseFloat($('.couponValue option:selected').attr('coupon-max-discount')) ; 
+            var coupon_discount_type = $('.couponValue option:selected').attr('coupon-discount-type') ;
+            var coupon_max_discount = parseFloat($('.couponValue option:selected').attr('coupon-max-discount')) ;
             if(coupon_discount_type != "percentage"){
                 $('#discount').val(coupon_discount);
             }
@@ -455,18 +455,18 @@ input{
             $('#coupon_discount_type').val(coupon_discount_type);
             $('#coupon_max_discount').val(coupon_max_discount);
             calculateTotal();
-            
+
         })
         $(document).on('change', '.payment_status', function () {
             var id = $(this).attr("data-id");
             var value = $(this).val();
             Swal.fire({
-                title: '{{\App\CPU\translate('Are you sure Change this')}}?',
-                text: "{{\App\CPU\translate('You will not be able to revert this')}}!",
+                title: '{{translate('Are you sure Change this')}}?',
+                text: "{{translate('You will not be able to revert this')}}!",
                 showCancelButton: true,
                 confirmButtonColor: '#377dff',
                 cancelButtonColor: 'secondary',
-                confirmButtonText: '{{\App\CPU\translate('Yes, Change it')}}!'
+                confirmButtonText: '{{translate('Yes, Change it')}}!'
             }).then((result) => {
                 if (result.value) {
                     $.ajaxSetup({
@@ -482,26 +482,26 @@ input{
                             "payment_status": value
                         },
                         success: function (data) {
-                            toastr.success('{{\App\CPU\translate('Status Change successfully')}}');
+                            toastr.success('{{translate('Status Change successfully')}}');
                             location.reload();
                         }
                     });
                 }
             })
         });
-        
+
         function order_status(status) {
             var textarea = `<div>
                     <textarea  style="height: 120px;width: 100%;" id="order_comment">{{$order->order_comment}}</textarea>
                 </div>`;
             @if($order['order_status']=='delivered')
             Swal.fire({
-                title: '{{\App\CPU\translate('Order is already delivered, and transaction amount has been disbursed, changing status can be the reason of miscalculation')}}!',
-                html: "{{\App\CPU\translate('Think before you proceed')}}." + textarea,
+                title: '{{translate('Order is already delivered, and transaction amount has been disbursed, changing status can be the reason of miscalculation')}}!',
+                html: "{{translate('Think before you proceed')}}." + textarea,
                 showCancelButton: true,
                 confirmButtonColor: '#377dff',
                 cancelButtonColor: 'secondary',
-                confirmButtonText: '{{\App\CPU\translate('Yes, Change it')}}!'
+                confirmButtonText: '{{translate('Yes, Change it')}}!'
             }).then((result) => {
                 if (result.value) {
                     $.ajaxSetup({
@@ -519,14 +519,14 @@ input{
                         },
                         success: function (data) {
                             if (data.success == 0) {
-                                toastr.success('{{\App\CPU\translate('Order is already delivered, You can not change it')}} !!');
+                                toastr.success('{{translate('Order is already delivered, You can not change it')}} !!');
                                 location.reload();
                             } else {
                                 if(data.payment_status == 0){
-                                    toastr.warning('{{\App\CPU\translate('Before delivered you need to make payment status paid!')}}!');
+                                    toastr.warning('{{translate('Before delivered you need to make payment status paid!')}}!');
                                     location.reload();
                                 }else{
-                                    toastr.success('{{\App\CPU\translate('Status Change successfully')}}!');
+                                    toastr.success('{{translate('Status Change successfully')}}!');
                                     location.reload();
                                 }
                             }
@@ -537,12 +537,12 @@ input{
             })
             @else
             Swal.fire({
-                title: '{{\App\CPU\translate('Are you sure Change this')}}?',
-                html: "{{\App\CPU\translate('You will not be able to revert this')}}!" + textarea,
+                title: '{{translate('Are you sure Change this')}}?',
+                html: "{{translate('You will not be able to revert this')}}!" + textarea,
                 showCancelButton: true,
                 confirmButtonColor: '#377dff',
                 cancelButtonColor: 'secondary',
-                confirmButtonText: '{{\App\CPU\translate('Yes, Change it')}}!'
+                confirmButtonText: '{{translate('Yes, Change it')}}!'
             }).then((result) => {
                 if (result.value) {
                     $.ajaxSetup({
@@ -560,14 +560,14 @@ input{
                         },
                         success: function (data) {
                             if (data.success == 0) {
-                                toastr.success('{{\App\CPU\translate('Order is already delivered, You can not change it')}} !!');
+                                toastr.success('{{translate('Order is already delivered, You can not change it')}} !!');
                                 location.reload();
                             } else {
                                 if(data.payment_status == 0){
-                                    toastr.warning('{{\App\CPU\translate('Before delivered you need to make payment status paid!')}}!');
+                                    toastr.warning('{{translate('Before delivered you need to make payment status paid!')}}!');
                                     location.reload();
                                 }else{
-                                    toastr.success('{{\App\CPU\translate('Status Change successfully')}}!');
+                                    toastr.success('{{translate('Status Change successfully')}}!');
                                     location.reload();
                                 }
                             }
@@ -584,7 +584,7 @@ input{
         let delivery_type = '{{$order->delivery_type}}';
 
         $('.select2').select2({ width: '100%' });
-        
+
         if(delivery_type === 'self_delivery'){
             $('#choose_delivery_man').show();
             $('#by_third_party_delivery_service_info').hide();
@@ -614,7 +614,7 @@ input{
             $('#choose_delivery_man').hide();
             $('#by_third_party_delivery_service_info').hide();
         }
-        
+
     }
 </script>
     <script>
@@ -660,7 +660,7 @@ input{
         })
 
         function waiting_for_location() {
-            toastr.warning('{{\App\CPU\translate('waiting_for_location')}}', {
+            toastr.warning('{{translate('waiting_for_location')}}', {
                 CloseButton: true,
                 ProgressBar: true
             });
@@ -758,7 +758,7 @@ input{
         // $(this).parent().parent().find('.sub_total').html(price*qty);
         // $('#total_hidden').val(total);
         // $('#total').html(total.toFixed(2));
-       
+
     });
     $('#product').on('change',function(){
                     let id=$(this).val();
@@ -767,13 +767,13 @@ input{
                         method: 'get',
                         data: {
                             "id": id,
-                          
+
                         },
                         success: function (data) {
                             console.log(data);
                             let html="";
                             $.each(data, function (key, val) {
-                                   html+=" <option value='"+val.type+"'>"+val.type+" /"+val.price+"</option> "; 
+                                   html+=" <option value='"+val.type+"'>"+val.type+" /"+val.price+"</option> ";
                             });
                             $('#variant').empty();
                              $('#variant').append(html);
@@ -801,7 +801,7 @@ input{
                             product_name=data.product.name;
                                     calculateTotal();
                                     // let total=parseFloat($('#total_hidden').val());
-                                    
+
                                     // total+=parseFloat(price);
                                     // $('#total_hidden').val(total);
                                     // $('#total').html(total.toFixed(2));
@@ -813,17 +813,17 @@ input{
             html+="<td>";
             html+="<p>"+product_name+"</p>"
                  +'<input type="hidden" name="variant_id[]" value="'+variant+'">'
-                +"<strong><u>{{\App\CPU\translate('Variation')}} : </u></strong><div class='font-size-sm text-body'>"
+                +"<strong><u>{{translate('Variation')}} : </u></strong><div class='font-size-sm text-body'>"
                 +"<span class='font-weight-bold'>"+variant+"</span></div>";
             html+="</td>"
-            html+='<td><input type="text" class="qtyy" name="qty[]" value="1"></td>"'; 
-            html+='<td>'+price+'</td>'; 
-            html+='<td class="sub_total">'+price+'</td>'; 
-            html+='<td><input type="hidden" value="-1" name="d_id[]">' 
-            +'<input type="hidden" value="'+product_id+'" name="p_id[]">' 
-            +'<input type="hidden" class="price" value="'+price+'" name="price[]">' 
+            html+='<td><input type="text" class="qtyy" name="qty[]" value="1"></td>"';
+            html+='<td>'+price+'</td>';
+            html+='<td class="sub_total">'+price+'</td>';
+            html+='<td><input type="hidden" value="-1" name="d_id[]">'
+            +'<input type="hidden" value="'+product_id+'" name="p_id[]">'
+            +'<input type="hidden" class="price" value="'+price+'" name="price[]">'
             +'<input type="hidden" class="total_remove" value="'+price+'">  '
-            +'<a href="#" class="btn btn-danger remove"><i class="tio-delete-outlined"></i></a></td>'; 
+            +'<a href="#" class="btn btn-danger remove"><i class="tio-delete-outlined"></i></a></td>';
 
         html+="</tr>";
         $('#body-table').append(html);

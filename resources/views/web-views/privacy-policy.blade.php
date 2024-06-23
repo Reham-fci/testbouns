@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('Privacy policy'))
+@section('title',translate('Privacy policy'))
 
 @push('css_or_js')
     <meta property="og:image" content="{{asset('storage/app/public/company')}}/{{$web_config['web_logo']->value}}"/>
@@ -35,7 +35,7 @@
 
 @section('content')
     <div class="container for-container rtl" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-        <h2 class="text-center mt-3 headerTitle">{{\App\CPU\translate('Privacy policy')}}</h2>
+        <h2 class="text-center mt-3 headerTitle">{{translate('Privacy policy')}}</h2>
         <div class="for-padding">
             {!! $privacy_policy['value'] !!}
         </div>

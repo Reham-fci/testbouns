@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 {{--@section('title','Customer')--}}
-@section('title', \App\CPU\translate('customer_settings'))
+@section('title', translate('customer_settings'))
 
 @push('css_or_js')
 
@@ -8,12 +8,12 @@
     .forAll{
         display: none;
     }
-    
+
     .city-non-active{
             display: none;
     }
     .city-active{
-        
+
         display: block;
     }
 </style>
@@ -25,7 +25,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">{{\App\CPU\translate('add_fund')}}</h1>
+                    <h1 class="page-header-title">{{translate('add_fund')}}</h1>
                 </div>
             </div>
         </div>
@@ -38,85 +38,85 @@
                         <!--<div class="col-sm-1 col-12">-->
                         <!--    <div class="form-group" style="display: flex;align-items: end;margin: 0;padding: 0;">-->
                         <!--        <input type="checkbox" id='forAll' name="ForAll"  class="form-control" style="width: 50px;">-->
-                        <!--        <label class="input-label" for="ForAll">{{\App\CPU\translate('ForAll')}}</label>-->
+                        <!--        <label class="input-label" for="ForAll">{{translate('ForAll')}}</label>-->
                         <!--    </div>-->
                         <!--</div>-->
                         <div class="col-sm-4 col-12">
                             <div class="form-group">
-                                <label class="input-label" for="customer">{{\App\CPU\translate('customer')}}</label>
-                                <select id='customer' name="customer_id[]" multiple data-placeholder="{{\App\CPU\translate('select_customer')}}" class="js-data-example-ajax form-control">
+                                <label class="input-label" for="customer">{{translate('customer')}}</label>
+                                <select id='customer' name="customer_id[]" multiple data-placeholder="{{translate('select_customer')}}" class="js-data-example-ajax form-control">
 
                                 </select>
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group">
-                                <label class="input-label" for="amount">{{\App\CPU\translate('amount')}}</label>
-                        
+                                <label class="input-label" for="amount">{{translate('amount')}}</label>
+
                                 <input type="number" class="form-control" name="amount" id="amount" step=".01" required>
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="form-group">
-                                <label class="input-label" for="amount">{{\App\CPU\translate('expiredDate')}} <small>({{\App\CPU\translate('optional')}})</small></label>
+                                <label class="input-label" for="amount">{{translate('expiredDate')}} <small>({{translate('optional')}})</small></label>
                                 <input type="date" class="form-control" name="expiredDate" id="expiredDate" >
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label class="input-label" for="referance">{{\App\CPU\translate('reference')}} <small>({{\App\CPU\translate('optional')}})</small></label>
-                        
+                                <label class="input-label" for="referance">{{translate('reference')}} <small>({{translate('optional')}})</small></label>
+
                                 <input type="text" class="form-control" name="referance" id="referance">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label class="input-label" for="notification">{{\App\CPU\translate('notification')}} </label>
-                        
+                                <label class="input-label" for="notification">{{translate('notification')}} </label>
+
                                 <input type="text" class="form-control" name="notification" id="notification">
                             </div>
                         </div>
-                
-                
+
+
                         <div class="col-md-3 col-6">
-                            <label>{{\App\CPU\translate('ForAll')}}</label>
+                            <label>{{translate('ForAll')}}</label>
                             <select class="form-control" id="ForAll" name="ForAll">
-                                <option value="1">{{\App\CPU\translate('yes')}}</option>
-                                <option value="0">{{\App\CPU\translate('no')}}</option>
+                                <option value="1">{{translate('yes')}}</option>
+                                <option value="0">{{translate('no')}}</option>
                             </select>
                         </div>
                         <div class="col-md-3 col-6 forAll">
-                            <label>{{\App\CPU\translate('fromDateRegister')}}</label>
+                            <label>{{translate('fromDateRegister')}}</label>
                             <input type="date" name="fromDate2" value=""  id="from_date"
                                     class="form-control" >
                         </div>
                         <div class="col-md-3 col-6 forAll">
-                            <label>{{\App\CPU\translate('toDateRegister')}}</label>
+                            <label>{{translate('toDateRegister')}}</label>
                             <input type="date"  name="toDate2" value="" id="to_date"
-                                    class="form-control" > 
+                                    class="form-control" >
                         </div>
                         <div class="col-md-3 col-6 forAll">
-                            <label>{{\App\CPU\translate('fromOrder')}}</label>
+                            <label>{{translate('fromOrder')}}</label>
                             <input type="number" name="fromOrder2" value=""  id="from_date"
                                     class="form-control" >
                         </div>
                         <div class="col-md-3 col-6 forAll">
-                            <label>{{\App\CPU\translate('toOrder')}}</label>
+                            <label>{{translate('toOrder')}}</label>
                             <input type="number"  name="toOrder2" value="" id="to_date"
-                            class="form-control" > 
+                            class="form-control" >
                         </div>
                         <div class="col-md-3 col-6 forAll">
-                            <label>{{\App\CPU\translate('fromOrderprice')}}</label>
+                            <label>{{translate('fromOrderprice')}}</label>
                             <input type="number" name="fromOrderprice2" value=""  id="from_date"
                                     class="form-control" >
                         </div>
                         <div class="col-md-3 col-6 forAll">
-                            <label>{{\App\CPU\translate('toOrderprice')}}</label>
+                            <label>{{translate('toOrderprice')}}</label>
                             <input type="number"  name="toOrderprice2" value="" id="to_date"
-                            class="form-control" > 
+                            class="form-control" >
                         </div>
                         <div class="col-md-3 col-6 forAll">
-                            <label>{{\App\CPU\translate('city')}}</label>
+                            <label>{{translate('city')}}</label>
                             <select multiple class="form-select form-control select-areas" name="city2[]" type="city" id="si-city"
                                 style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
                                 >
@@ -127,7 +127,7 @@
                             </select>
                         </div>
                         <div class="col-md-3 col-6 forAll">
-                            <label>{{\App\CPU\translate('area')}}</label>
+                            <label>{{translate('area')}}</label>
                             <select class="form-select form-control" name="area2" type="country" id="si-area"
                                 style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
                                 >
@@ -138,7 +138,7 @@
                             </select>
                         </div>
                         <div class="col-md-3 col-6 forAll">
-                            <label>{{\App\CPU\translate('Type')}}</label>
+                            <label>{{translate('Type')}}</label>
                             <select class="form-select form-control" name="type2" type="type" id="si-Type"
                                 style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
                                 >
@@ -148,10 +148,10 @@
                                 @endforeach
                             </select>
                         </div>
-                        
-                        
+
+
                     </div>
-                    <button type="submit" id="submit" class="btn btn-primary">{{\App\CPU\translate('submit')}}</button>
+                    <button type="submit" id="submit" class="btn btn-primary">{{translate('submit')}}</button>
                 </form>
             </div>
             <!-- End Table -->
@@ -163,17 +163,17 @@
 <script>
 
 
-        
+
         $(document).ready(function () {
             $('.select-areas').select2();
         });
-            
+
         $('#si-city').on('change',function(){
             var city = $('#si-city option:selected').val();
             $('#si-area option').removeClass('city-active');
             $('#si-area option[ data-parent="'+city+'"]').addClass('city-active');
         })
-        
+
         $('#si-city2').on('change',function(){
             var city = $('#si-city2 option:selected').val();
             $('#si-area2 option').removeClass('city-active');
@@ -190,20 +190,20 @@
         })
 
         $('#add_fund').on('submit', function (e) {
-            
+
             e.preventDefault();
             var formData = new FormData(this);
-            
+
             Swal.fire({
-                title: '{{\App\CPU\translate('are_you_sure')}}',
-                // text: '{{\App\CPU\translate('you_want_to_add_fund')}}'+$('#amount').val()+' {{\App\CPU\Helpers::currency_code().' '.\App\CPU\translate('to')}} '+$('#customer option:selected').text()+'{{\App\CPU\translate('to_wallet')}}',
-                text: '{{\App\CPU\translate('you_want_to_add_fund')}}'+$('#amount').val(),
+                title: '{{translate('are_you_sure')}}',
+                // text: '{{translate('you_want_to_add_fund')}}'+$('#amount').val()+' {{\App\CPU\Helpers::currency_code().' '.translate('to')}} '+$('#customer option:selected').text()+'{{translate('to_wallet')}}',
+                text: '{{translate('you_want_to_add_fund')}}'+$('#amount').val(),
                 type: 'info',
                 showCancelButton: true,
                 cancelButtonColor: 'default',
                 confirmButtonColor: 'primary',
-                cancelButtonText: '{{\App\CPU\translate('no')}}',
-                confirmButtonText: '{{\App\CPU\translate('add')}}',
+                cancelButtonText: '{{translate('no')}}',
+                confirmButtonText: '{{translate('add')}}',
                 reverseButtons: true
             }).then((result) => {
                 if (result.value) {
@@ -227,7 +227,7 @@
                                     });
                                 }
                             } else {
-                                toastr.success('{{\App\CPU\translate("fund_added_successfully")}}', {
+                                toastr.success('{{translate("fund_added_successfully")}}', {
                                     CloseButton: true,
                                     ProgressBar: true
                                 });
@@ -262,7 +262,7 @@
                 }
             }
         });
-        
+
         $('#forAll').on('click',function(){
             var checked = $(this).prop('checked');
             if(checked){
@@ -271,6 +271,6 @@
                 $('#customer').attr('disabled' , false);
             }
         })
-        
+
     </script>
 @endpush

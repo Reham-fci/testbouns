@@ -202,11 +202,11 @@
 @php($decimal_point_settings = \App\CPU\Helpers::get_business_settings('decimal_point_settings'))
     <!-- Page Title-->
     <div class="d-flex justify-content-center align-items-center mb-3" style="min-height: 70px;background:{{$web_config['primary_color']}}10;width:100%;">
-        
+
             <div class="row text-capitalize">
-                <span style="font-weight: 600;font-size: 18px;">{{str_replace("_"," ",$data['data_from'])}} {{\App\CPU\translate('products')}} {{ isset($brand_name) ? '('.$brand_name.')' : ''}}</span>
+                <span style="font-weight: 600;font-size: 18px;">{{str_replace("_"," ",$data['data_from'])}} {{translate('products')}} {{ isset($brand_name) ? '('.$brand_name.')' : ''}}</span>
             </div>
-        
+
     </div>
     <div class="container rtl" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
         <div class="row">
@@ -214,11 +214,11 @@
                 <a class="openbtn-tab mt-5" onclick="openNav()">
                     <div style="font-size: 20px; font-weight: 600; " class="for-tab-display mt-5">
                         <i class="fa fa-filter"></i>
-                        {{\App\CPU\translate('filter')}}
+                        {{translate('filter')}}
                     </div>
                 </a>
             </div>
-            
+
         </div>
     </div>
 
@@ -235,7 +235,7 @@
                     <div class="cz-sidebar-header box-shadow-sm">
                         <button class="close {{Session::get('direction') === "rtl" ? 'mr-auto' : 'ml-auto'}}"
                                 type="button" data-dismiss="sidebar" aria-label="Close"><span
-                                class="d-inline-block font-size-xs font-weight-normal align-middle">{{\App\CPU\translate('Dashboard')}}Close sidebar</span><span
+                                class="d-inline-block font-size-xs font-weight-normal align-middle">{{translate('Dashboard')}}Close sidebar</span><span
                                 class="d-inline-block align-middle {{Session::get('direction') === "rtl" ? 'mr-2' : 'ml-2'}}"
                                 aria-hidden="true">&times;</span></button>
                     </div>
@@ -243,7 +243,7 @@
                         <!-- Filter by price-->
                         <div class="text-center">
                             <div class="" style="border-bottom: 1px solid #F3F5F9;padding:17px;">
-                                <span class="widget-title" style="font-weight: 600;">{{\App\CPU\translate('filter')}} </span>
+                                <span class="widget-title" style="font-weight: 600;">{{translate('filter')}} </span>
                             </div>
                             {{-- <div class="divider-role"
                                  style="border: 1px solid whitesmoke; margin-bottom: 14px;  margin-top: -6px;"></div> --}}
@@ -254,15 +254,15 @@
                                        style="width: 100%; padding-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}: 0">
                                     <select style="background: #ffffff; appearance: auto;width: 100%;border-radius: 5px !important;"
                                             class="form-control custom-select" id="searchByFilterValue">
-                                        <option selected disabled>{{\App\CPU\translate('Choose')}}</option>
+                                        <option selected disabled>{{translate('Choose')}}</option>
                                         <option
-                                            value="{{route('products',['id'=> $data['id'],'data_from'=>'best-selling','page'=>1])}}" {{isset($data['data_from'])!=null?$data['data_from']=='best-selling'?'selected':'':''}}>{{\App\CPU\translate('best_selling_product')}}</option>
+                                            value="{{route('products',['id'=> $data['id'],'data_from'=>'best-selling','page'=>1])}}" {{isset($data['data_from'])!=null?$data['data_from']=='best-selling'?'selected':'':''}}>{{translate('best_selling_product')}}</option>
                                         <!--<option-->
-                                        <!--    value="{{route('products',['id'=> $data['id'],'data_from'=>'top-rated','page'=>1])}}" {{isset($data['data_from'])!=null?$data['data_from']=='top-rated'?'selected':'':''}}>{{\App\CPU\translate('top_rated')}}</option>-->
+                                        <!--    value="{{route('products',['id'=> $data['id'],'data_from'=>'top-rated','page'=>1])}}" {{isset($data['data_from'])!=null?$data['data_from']=='top-rated'?'selected':'':''}}>{{translate('top_rated')}}</option>-->
                                         <option
-                                            value="{{route('products',['id'=> $data['id'],'data_from'=>'most-favorite','page'=>1])}}" {{isset($data['data_from'])!=null?$data['data_from']=='most-favorite'?'selected':'':''}}>{{\App\CPU\translate('most_favorite')}}</option>
+                                            value="{{route('products',['id'=> $data['id'],'data_from'=>'most-favorite','page'=>1])}}" {{isset($data['data_from'])!=null?$data['data_from']=='most-favorite'?'selected':'':''}}>{{translate('most_favorite')}}</option>
                                         <option
-                                            value="{{route('products',['id'=> $data['id'],'data_from'=>'featured_deal','page'=>1])}}" {{isset($data['data_from'])!=null?$data['data_from']=='featured_deal'?'selected':'':''}}>{{\App\CPU\translate('featured_deal')}}</option>
+                                            value="{{route('products',['id'=> $data['id'],'data_from'=>'featured_deal','page'=>1])}}" {{isset($data['data_from'])!=null?$data['data_from']=='featured_deal'?'selected':'':''}}>{{translate('featured_deal')}}</option>
                                     </select>
                                 </label>
                             </div>
@@ -272,33 +272,33 @@
                         <!-- Filter by price-->
                         <div class="text-center">
                             <div style="border-bottom: 1px solid #F3F5F9;padding:17px;border-top: 1px solid #F3F5F9;">
-                                <span class="widget-title" style="font-weight: 600;">{{\App\CPU\translate('Price')}} </span>
+                                <span class="widget-title" style="font-weight: 600;">{{translate('Price')}} </span>
                             </div>
-                        
+
                             <div class="d-flex justify-content-between" style="width: 100%;padding: 14px;padding-top: 30px; ">
                                 <div style="width: 35%">
                                     <input style="background: #ffffff;"
                                            class="cz-filter-search form-control form-control-sm appended-form-control"
                                            type="number" value="0" min="0" max="1000000" id="min_price">
-                                    
+
                                 </div>
                                 <div style="width: 10%">
-                                    <p style="margin-top:6px;">{{\App\CPU\translate('to')}}</p>
+                                    <p style="margin-top:6px;">{{translate('to')}}</p>
                                 </div>
                                 <div style="width: 35%">
                                     <input style="background: #ffffff;" value="100" min="100" max="1000000"
                                            class="cz-filter-search form-control form-control-sm appended-form-control"
                                            type="number" id="max_price">
-                                
+
                                 </div>
-    
+
                                 <div style="width: 20%;background:#1B7FED;width:30px;height:35px;border-radius:3px;" class="d-flex justify-content-center align-items-center">
-                                    
-                                    <a class="" 
+
+                                    <a class=""
                                         onclick="searchByPrice()">
                                         <i style="font-size:10px;color:#ffffff" class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}"></i>
                                     </a>
-                                    
+
                                 </div>
                             </div>
 
@@ -307,9 +307,9 @@
                     <div class="mt-2">
                         <div class="text-center">
                             <div style="border-bottom: 1px solid #F3F5F9;padding:17px;border-top: 1px solid #F3F5F9;">
-                                <span class="widget-title" style="font-weight: 700;">{{\App\CPU\translate('brands')}}</span>
+                                <span class="widget-title" style="font-weight: 700;">{{translate('brands')}}</span>
                             </div>
-                            
+
                             <div class="input-group-overlay input-group-sm" style="width: 100%;padding: 14px;padding-top: 30px; ">
                                 <input style="background: #ffffff;padding: 22px;font-size: 13px;border-radius: 5px !important;{{Session::get('direction') === "rtl" ? 'padding-right: 32px;' : ''}}" placeholder="Search brand"
                                        class="cz-filter-search form-control form-control-sm appended-form-control"
@@ -321,17 +321,17 @@
                                     </span>
                                 </div>
                             </div>
-                          
+
                         <div class="accordion mt-n1"  style="max-height: 12rem;width: 100%;padding: 0px 0px 14px 14px;"
                                 data-simplebar data-simplebar-auto-hide="false" id="lista1" >
                             @foreach(\App\CPU\BrandManager::get_brands() as $brand)
-                             
+
                                     <div >
                                         <div class="card-header p-1 flex-between">
                                             <div>
                                                 <label class="for-hover-lable" style="cursor: pointer"
                                                         onclick="location.href='{{route('products',['id'=> $brand['id'],'data_from'=>'brand','page'=>1])}}'">
-                                                    {{ $brand['name']." " }} 
+                                                    {{ $brand['name']." " }}
                                                                       @if($brand['brand_products_count'] > 0 )
                                         {{$brand['brand_products_count']}}
                                         @endif
@@ -340,7 +340,7 @@
                                             <div>
                                                 <strong class="pull-right for-brand-hover" style="cursor: pointer"
                                                         onclick="$('#collapse-{{$brand['id']}}').toggle(400)">
-                                                                                          
+
                                         @if($brand['brand_products_count'] > 0 )
                                         {{'+'}}
                                         @endif
@@ -350,9 +350,9 @@
                                         <div class="card-body {{Session::get('direction') === "rtl" ? 'mr-2' : 'ml-2'}}"
                                              id="collapse-{{$brand['id']}}"
                                              style="display: none">
-                                              
+
                     @foreach(\App\CPU\BrandManager::get_brands_sub($brand['id']) as $child)
-                   
+
                                                 <div class=" for-hover-lable card-header p-1 flex-between">
                                                     <div>
                                                         <label style="cursor: pointer"
@@ -361,22 +361,22 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                             
+
                                             @endforeach
                                         </div>
                                     </div>
                                 @endforeach
-                            </div>    
+                            </div>
                         </div>
                     </div>
                     <div class="mt-3">
                         <!-- Categories-->
                         <div class="text-center">
                             <div style="border-bottom: 1px solid #F3F5F9;padding:17px;border-top: 1px solid #F3F5F9;">
-                                <span class="widget-title" style="font-weight: 700;">{{\App\CPU\translate('categories')}}</span>
+                                <span class="widget-title" style="font-weight: 700;">{{translate('categories')}}</span>
                             </div>
                             @php($categories=\App\CPU\CategoryManager::parents())
-                            
+
                             <div class="accordion mt-n1" style="width: 100%;padding: 14px;padding-top: 25px; " id="shop-categories">
                                 @foreach($categories as $category)
                                     <div >
@@ -432,9 +432,9 @@
                     </div>
                 </div>
 
-                
-                
-                
+
+
+
             </aside>
             <div id="mySidepanel" class="sidepanel">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
@@ -447,22 +447,22 @@
                             <!-- Filter -->
                             <div class="widget cz-filter" style="width: 100%">
                                 <div style="text-align: center" >
-                                    <span class="widget-title" style="font-weight: 600;">{{\App\CPU\translate('filter')}}</span>
+                                    <span class="widget-title" style="font-weight: 600;">{{translate('filter')}}</span>
                                 </div>
                                 <div class="" style="width: 100%">
                                     <label class="opacity-75 text-nowrap for-shoting" for="sorting"
                                            style="width: 100%; padding-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}: 0">
                                         <select style="background: whitesmoke; appearance: auto;width: 100%"
                                                 class="form-control custom-select" id="searchByFilterValue">
-                                            <option selected disabled>{{\App\CPU\translate('Choose')}}</option>
+                                            <option selected disabled>{{translate('Choose')}}</option>
                                             <option
-                                                value="{{route('products',['id'=> $data['id'],'data_from'=>'best-selling','page'=>1])}}">{{\App\CPU\translate('best_selling_product')}}</option>
+                                                value="{{route('products',['id'=> $data['id'],'data_from'=>'best-selling','page'=>1])}}">{{translate('best_selling_product')}}</option>
                                             <option
-                                                value="{{route('products',['id'=> $data['id'],'data_from'=>'top-rated','page'=>1])}}">{{\App\CPU\translate('top_rated')}}</option>
+                                                value="{{route('products',['id'=> $data['id'],'data_from'=>'top-rated','page'=>1])}}">{{translate('top_rated')}}</option>
                                             <option
-                                                value="{{route('products',['id'=> $data['id'],'data_from'=>'most-favorite','page'=>1])}}">{{\App\CPU\translate('most_favorite')}}</option>
+                                                value="{{route('products',['id'=> $data['id'],'data_from'=>'most-favorite','page'=>1])}}">{{translate('most_favorite')}}</option>
                                             <option
-                                                value="{{route('products',['id'=> $data['id'],'data_from'=>'featured_deal','page'=>1])}}" {{isset($data['data_from'])!=null?$data['data_from']=='featured_deal'?'selected':'':''}}>{{\App\CPU\translate('featured_deal')}}</option>
+                                                value="{{route('products',['id'=> $data['id'],'data_from'=>'featured_deal','page'=>1])}}" {{isset($data['data_from'])!=null?$data['data_from']=='featured_deal'?'selected':'':''}}>{{translate('featured_deal')}}</option>
                                         </select>
                                     </label>
                                 </div>
@@ -478,7 +478,7 @@
                         <div class="" style="padding-top: 12px;">
                             <!-- Filter by price-->
                             <div class="widget cz-filter mb-4 pb-4 mt-2">
-                                <h3 class="widget-title" style="font-weight: 700;">{{\App\CPU\translate('Price')}}</h3>
+                                <h3 class="widget-title" style="font-weight: 700;">{{translate('Price')}}</h3>
                                 <div class="divider-role"
                                      style="border: 1px solid whitesmoke; margin-bottom: 14px;  margin-top: -6px;"></div>
                                 <div class="input-group-overlay input-group-sm mb-1">
@@ -492,7 +492,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <p style="text-align: center;margin-bottom: 1px;">{{\App\CPU\translate('to')}}</p>
+                                    <p style="text-align: center;margin-bottom: 1px;">{{translate('to')}}</p>
                                 </div>
                                 <div class="input-group-overlay input-group-sm mb-2">
                                     <input style="background: aliceblue;" value="100" min="100" max="1000000"
@@ -508,7 +508,7 @@
                                 <div class="input-group-overlay input-group-sm mb-2">
                                     <button class="btn btn-primary btn-block"
                                             onclick="searchByPrice()">
-                                        <span>{{\App\CPU\translate('search')}}</span>
+                                        <span>{{translate('search')}}</span>
                                     </button>
                                 </div>
 
@@ -521,7 +521,7 @@
                         <div class="">
                             <!-- Filter by Brand-->
                             <div class="widget cz-filter mb-4 pb-4 border-bottom mt-2">
-                                <h3 class="widget-title" style="font-weight: 700;">{{\App\CPU\translate('brands')}}</h3>
+                                <h3 class="widget-title" style="font-weight: 700;">{{translate('brands')}}</h3>
                                 <div class="divider-role"
                                      style="border: 1px solid whitesmoke; margin-bottom: 14px;  margin-top: -6px;"></div>
                                 <div class="input-group-overlay input-group-sm mb-2">
@@ -563,7 +563,7 @@
                             <!-- Categories-->
                             <div class="widget widget-categories mb-4 pb-4 border-bottom">
                                 <h3 class="widget-title"
-                                    style="font-weight: 700;">{{\App\CPU\translate('categories')}}</h3>
+                                    style="font-weight: 700;">{{translate('categories')}}</h3>
                                 <div class="divider-role"
                                      style="border: 1px solid whitesmoke; margin-bottom: 14px;  margin-top: -6px;"></div>
                                 <div class="accordion mt-n1" id="shop-categories">
@@ -631,21 +631,21 @@
                     <div class="row" style="background: white;margin:0px;border-radius:5px;">
                         <div class="col-md-6 d-flex  align-items-center">
                             {{-- if need data from also --}}
-                            {{-- <h1 class="h3 text-dark mb-0 headerTitle text-uppercase">{{\App\CPU\translate('product_by')}} {{$data['data_from']}} ({{ isset($brand_name) ? $brand_name : $data_from}})</h1> --}}
+                            {{-- <h1 class="h3 text-dark mb-0 headerTitle text-uppercase">{{translate('product_by')}} {{$data['data_from']}} ({{ isset($brand_name) ? $brand_name : $data_from}})</h1> --}}
                             <h1 class="{{Session::get('direction') === "rtl" ? 'mr-3' : 'ml-3'}}">
-                            
-                                <label id="price-filter-count"> {{$products->total()}} {{\App\CPU\translate('items found')}} </label>
+
+                                <label id="price-filter-count"> {{$products->total()}} {{translate('items found')}} </label>
                             </h1>
                         </div>
                         <div class="col-md-6 m-2 m-md-0 d-flex  align-items-center ">
-    
+
                             <button class="openbtn text-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}" onclick="openNav()">
                                 <div >
                                     <i class="fa fa-filter"></i>
-                                    {{\App\CPU\translate('filter')}}
+                                    {{translate('filter')}}
                                 </div>
                             </button>
-    
+
                             <div class="" style="width: 100%">
                                 <form id="search-form" action="{{ route('products') }}" method="GET">
                                     <input hidden name="data_from" value="{{$data['data_from']}}">
@@ -654,18 +654,18 @@
                                             class=" {{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}} for-shoting"
                                             for="sorting">
                                             <span
-                                                class="{{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}}">{{\App\CPU\translate('sort_by')}}</span></label>
+                                                class="{{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}}">{{translate('sort_by')}}</span></label>
                                         <select style="background: white; appearance: auto;border-radius: 5px;border: 1px solid rgba(27, 127, 237, 0.5);padding:5px;"
                                                  onchange="filter(this.value)">
-                                            <option value="latest">{{\App\CPU\translate('Latest')}}</option>
+                                            <option value="latest">{{translate('Latest')}}</option>
                                             <option
-                                                value="low-high">{{\App\CPU\translate('Low_to_High')}} {{\App\CPU\translate('Price')}} </option>
+                                                value="low-high">{{translate('Low_to_High')}} {{translate('Price')}} </option>
                                             <option
-                                                value="high-low">{{\App\CPU\translate('High_to_Low')}} {{\App\CPU\translate('Price')}}</option>
+                                                value="high-low">{{translate('High_to_Low')}} {{translate('Price')}}</option>
                                             <option
-                                                value="a-z">{{\App\CPU\translate('A_to_Z')}} {{\App\CPU\translate('Order')}}</option>
+                                                value="a-z">{{translate('A_to_Z')}} {{translate('Order')}}</option>
                                             <option
-                                                value="z-a">{{\App\CPU\translate('Z_to_A')}} {{\App\CPU\translate('Order')}}</option>
+                                                value="z-a">{{translate('Z_to_A')}} {{translate('Order')}}</option>
                                         </select>
                                     </div>
                                 </form>
@@ -679,7 +679,7 @@
                     </div>
                 @else
                     <div class="text-center pt-5">
-                        <h2>{{\App\CPU\translate('No Product Found')}}</h2>
+                        <h2>{{translate('No Product Found')}}</h2>
                     </div>
                 @endif
             </section>
@@ -743,7 +743,7 @@
                     $('#ajax-products').html(response.view);
                     $('#paginator-ajax').html(response.paginator);
                     console.log(response.total_product);
-                    $('#price-filter-count').text(response.total_product + ' {{\App\CPU\translate('items found')}}')
+                    $('#price-filter-count').text(response.total_product + ' {{translate('items found')}}')
                 },
                 complete: function () {
                     $('#loading').hide();

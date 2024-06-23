@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('Shop Page'))
+@section('title',translate('Shop Page'))
 
 @push('css_or_js')
     @if($shop['id'] != 0)
@@ -160,7 +160,7 @@
             .openbtn {
                 display: none !important;
             }
-            
+
 
         }
 
@@ -220,7 +220,7 @@
             {{-- sidebar opener --}}
             <div class="col-md-3 mt-2 rtl" style=" width: 100%; text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                 <a class="openbtn-tab" style="" onclick="openNav()">
-                    <div style="font-size: 20px; font-weight: 600; text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}}" class="for-tab-display"> ☰ {{\App\CPU\translate('categories')}}</div>
+                    <div style="font-size: 20px; font-weight: 600; text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}}" class="for-tab-display"> ☰ {{translate('categories')}}</div>
                 </a>
             </div>
             {{-- seller info+contact --}}
@@ -252,7 +252,7 @@
                                 </span>
                                 <div class="row ml-4 flex-start">
                                     <div class="mr-3">
-                                        
+
                                         @for($count=0; $count<5; $count++)
                                             @if($avg_rating >= $count+1)
                                                 <i class="sr-star czi-star-filled active"></i>
@@ -263,11 +263,11 @@
                                         (<span class="ml-1">{{round($avg_rating,2)}}</span>)
                                     </div>
                                     <div class="d-flex" style="font-size: 12px;">
-                                        <span>{{ $total_review}} {{\App\CPU\translate('reviews')}} </span>
-                                        
+                                        <span>{{ $total_review}} {{translate('reviews')}} </span>
+
                                         <span style="border-left: 1px solid #C4C4C4;margin:5px;"></span>
-                                         
-                                        <span>{{ $total_order}} {{\App\CPU\translate('orders')}}</span>
+
+                                        <span>{{ $total_order}} {{translate('orders')}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -282,14 +282,14 @@
                                         <button class="btn btn-block" data-toggle="modal"
                                                 data-target="#exampleModal" style="border-radius: 25px;border: 1px solid #1B7FED;color: #1B7FED ;">
                                             <i class="fa fa-envelope" aria-hidden="true"></i>
-                                            {{\App\CPU\translate('Chat with seller ')}}
+                                            {{translate('Chat with seller ')}}
                                         </button>
                                     </div>
                                 @else
                                     <div class="d-flex">
                                         <a href="{{route('customer.auth.login')}}" class="btn btn-block" style="border-radius: 25px;border: 1px solid #1B7FED;color: #1B7FED !important;">
                                             <i class="fa fa-envelope" aria-hidden="true"></i>
-                                            {{\App\CPU\translate('Chat with seller ')}}
+                                            {{translate('Chat with seller ')}}
                                         </a>
                                     </div>
                                 @endif
@@ -297,7 +297,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </div>
 
@@ -307,7 +307,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="card-header">
-                                {{\App\CPU\translate('write_something')}}
+                                {{translate('write_something')}}
                             </div>
                             <div class="modal-body">
                                 <form action="{{route('messages_store')}}" method="post" id="chat-form">
@@ -320,17 +320,17 @@
                                     <textarea name="message" class="form-control" required></textarea>
                                     <br>
                                     @if($shop['id'] != 0)
-                                        <button class="btn btn-primary" style="color: white;">{{\App\CPU\translate('send')}}</button>
+                                        <button class="btn btn-primary" style="color: white;">{{translate('send')}}</button>
                                     @else
-                                        <button class="btn btn-primary" style="color: white;" disabled>{{\App\CPU\translate('send')}}</button>
+                                        <button class="btn btn-primary" style="color: white;" disabled>{{translate('send')}}</button>
                                     @endif
                                 </form>
                             </div>
                             <div class="card-footer">
                                 <a href="{{route('chat-with-seller')}}" class="btn btn-primary mx-1">
-                                    {{\App\CPU\translate('go_to')}} {{\App\CPU\translate('chatbox')}}
+                                    {{translate('go_to')}} {{translate('chatbox')}}
                                 </a>
-                                <button type="button" class="btn btn-secondary pull-right" data-dismiss="modal">{{\App\CPU\translate('close')}}
+                                <button type="button" class="btn btn-secondary pull-right" data-dismiss="modal">{{translate('close')}}
                                 </button>
                             </div>
                         </div>
@@ -339,7 +339,7 @@
             </div>
 
 
-            
+
         </div>
 
 
@@ -355,16 +355,16 @@
                                 <div>
                                     <div style="display: inline">
                                         <h3 class="widget-title"
-                                            style="font-weight: 700;font-size: 18px;display: inline;">{{\App\CPU\translate('categories')}}</h3>
+                                            style="font-weight: 700;font-size: 18px;display: inline;">{{translate('categories')}}</h3>
                                     </div>
                                 </div>
-                            
+
                                 <div class="accordion mt-2" id="shop-categories">
                                     @foreach($categories as $category)
                                         <div class="card" style="border-bottom: 2px solid #EEF6FF;background:none !important; ">
-                                            
-                                                
-                                            
+
+
+
                                             <div class="card-header p-1 flex-between" >
                                                 <div class="d-flex ">
                                                     <img class="{{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}}" style="width: 20px; border-radius:5px;height:20px;"
@@ -422,7 +422,7 @@
                         <div>
                             <div style="display: inline">
                                 <h3 class="widget-title"
-                                    style="font-weight: 700;display: inline">{{\App\CPU\translate('categories')}}</h3>
+                                    style="font-weight: 700;display: inline">{{translate('categories')}}</h3>
                             </div>
                         </div>
                         <div class="divider-role"
@@ -480,7 +480,7 @@
                               action="{{route('shopView',['id'=>$seller_id])}}">
                             <div class="input-group input-group-sm mb-3">
                                 <input type="text" class="form-control" name="product_name" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
-                                       placeholder="{{\App\CPU\translate('Search products from this store')}}" aria-label="Recipient's username"
+                                       placeholder="{{translate('Search products from this store')}}" aria-label="Recipient's username"
                                        aria-describedby="basic-addon2">
                                 <div class="input-group-append" >
                                     <button type="submit" class="input-group-text" id="basic-addon2" style="background: #F3F5F9">
@@ -553,7 +553,7 @@
                 data: $('#chat-form').serialize(),
                 success: function (respons) {
 
-                    toastr.success('{{\App\CPU\translate('send successfully')}}', {
+                    toastr.success('{{translate('send successfully')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });

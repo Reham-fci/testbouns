@@ -161,24 +161,24 @@
             <div class="details" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                 <a href="{{route('product',$product->slug)}}" class="h3 mb-2 product-title">{{$product->name}}</a>
                 <div class="d-flex align-items-center mb-2 pro">
-                    
-                    
-                   
-                   
+
+
+
+
                     <div>
-                        
+
                         <span
-                            class="d-inline-block font-size-sm text-body align-middle mt-1 {{Session::get('direction') === "rtl" ? 'ml-2 mr-1' : 'ml-1 mr-2'}} pl-2 pr-2">{{$countOrder}} {{\App\CPU\translate('orders')}}  </span>
+                            class="d-inline-block font-size-sm text-body align-middle mt-1 {{Session::get('direction') === "rtl" ? 'ml-2 mr-1' : 'ml-1 mr-2'}} pl-2 pr-2">{{$countOrder}} {{translate('orders')}}  </span>
                         <span style="width: 0px;height: 10px;border: 0.5px solid #707070; margin-top: 6px">    </span>
                         <span
-                            class="d-inline-block font-size-sm text-body align-middle mt-1 {{Session::get('direction') === "rtl" ? 'ml-2 mr-1' : 'ml-1 mr-2'}} pl-2 pr-2">  {{$countWishlist}}  {{\App\CPU\translate('wish')}}</span>
+                            class="d-inline-block font-size-sm text-body align-middle mt-1 {{Session::get('direction') === "rtl" ? 'ml-2 mr-1' : 'ml-1 mr-2'}} pl-2 pr-2">  {{$countWishlist}}  {{translate('wish')}}</span>
 
                     </div>
                 </div>
                 <div class="mb-3">
                     <span
                         class="h3 font-weight-normal text-accent unit-price {{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}">
-                        
+
                     </span>
                     <!--@if($product->discount > 0)-->
                     <!--    <strike style="font-size: 12px!important;color: grey!important;">-->
@@ -189,21 +189,21 @@
                 <div class="mb-3">
                     <span
                         class="h3 font-weight-normal text-accent product-variation-description {{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}">
-                        
+
                     </span>
-                    
+
                 </div>
-                
+
 
                 <!--@if($product->discount > 0)-->
                 <!--    <div class="flex-start mb-3">-->
-                <!--        <div><strong>{{\App\CPU\translate('discount')}} : </strong></div>-->
+                <!--        <div><strong>{{translate('discount')}} : </strong></div>-->
                 <!--        <div><strong id="set-discount-amount" class="mx-2"></strong></div>-->
                 <!--    </div>-->
                 <!--@endif-->
 
                 <div class="flex-start mb-3">
-                    <div><strong>{{\App\CPU\translate('tax')}} : </strong></div>
+                    <div><strong>{{translate('tax')}} : </strong></div>
                     <div><strong id="set-tax-amount" class="mx-2"></strong></div>
                 </div>
 
@@ -214,7 +214,7 @@
                         @if (count(json_decode($product->colors)) > 0)
                             <div class="flex-start">
                                 <div class="product-description-label mt-2">
-                                    {{\App\CPU\translate('color')}}:
+                                    {{translate('color')}}:
                                 </div>
                                 <div class="">
                                     <ul class="flex-start checkbox-color mb-1" style="list-style: none;">
@@ -265,7 +265,7 @@
                 <!-- Quantity + Add to cart -->
                     <div class="row no-gutters">
                         <div class="col-2">
-                            <div class="product-description-label mt-2">{{\App\CPU\translate('Quantity')}}:</div>
+                            <div class="product-description-label mt-2">{{translate('Quantity')}}:</div>
                         </div>
                         <div class="col-10">
                             <div class="product-quantity d-flex align-items-center">
@@ -294,7 +294,7 @@
 
                     <div class="row no-gutters d-none mt-2" id="chosen_price_div">
                         <div class="col-2">
-                            <div class="product-description-label">{{\App\CPU\translate('Total Price')}}:</div>
+                            <div class="product-description-label">{{translate('Total Price')}}:</div>
                         </div>
                         <div class="col-10">
                             <div class="product-price">
@@ -303,7 +303,7 @@
                         </div>
                         <div class="col-12">
                             @if($product['current_stock']<=0)
-                                <h5 class="mt-3" style="color: red">{{\App\CPU\translate('out_of_stock')}}</h5>
+                                <h5 class="mt-3" style="color: red">{{translate('out_of_stock')}}</h5>
                             @endif
                         </div>
                     </div>
@@ -312,13 +312,13 @@
                         <button class="btn btn-secondary" onclick="buy_now()"
                                 type="button"
                                 style="width:37%; height: 45px">
-                            {{\App\CPU\translate('buy_now')}}
+                            {{translate('buy_now')}}
                         </button>
                         <button class="btn btn-primary string-limit"
                                 onclick="addToCart()"
                                 type="button"
                                 style="width:37%; height: 45px">
-                            {{\App\CPU\translate('add_to_cart')}}
+                            {{translate('add_to_cart')}}
                         </button>
                         <button type="button" onclick="addWishlist('{{$product['id']}}')"
                                 class="btn btn-dark for-hover-bg string-limit"

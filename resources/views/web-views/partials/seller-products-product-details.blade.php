@@ -9,7 +9,7 @@
                     {{round($product->discount,$decimal_point_settings)}}%
                 @elseif($product->discount_type =='flat')
                     {{\App\CPU\Helpers::currency_converter($product->discount)}}
-                @endif {{\App\CPU\translate('off')}}
+                @endif {{translate('off')}}
             </span>
         </div>
         @endif
@@ -51,9 +51,9 @@
                     </div>
                     <div class="flash-product-price">
                         {{\App\CPU\Helpers::currency_converter($product->unit_price-\App\CPU\Helpers::get_product_discount($product,$product->unit_price))}}
-                        
+
                     </div>
-                    
+
                 </div>
             </div>
         </div>

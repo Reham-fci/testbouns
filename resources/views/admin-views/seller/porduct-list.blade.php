@@ -1,5 +1,5 @@
 @extends('layouts.back-end.app')
-@section('title', \App\CPU\translate('Product List'))
+@section('title', translate('Product List'))
 @push('css_or_js')
 
 @endpush
@@ -8,15 +8,15 @@
 <div class="content container-fluid">  <!-- Page Heading -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{\App\CPU\translate('Dashboard')}}</a></li>
-            <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Products')}}</li>
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{translate('Dashboard')}}</a></li>
+            <li class="breadcrumb-item" aria-current="page">{{translate('Products')}}</li>
         </ol>
     </nav>
 
     <div class="d-md-flex_ align-items-center justify-content-between mb-0">
         <div class="row text-center">
             <div class="col-12">
-                <h3 class="h3 mt-2 text-black-50">{{\App\CPU\translate('product_list')}}</h3>
+                <h3 class="h3 mt-2 text-black-50">{{translate('product_list')}}</h3>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{\App\CPU\translate('product_table')}}
+                    <h5>{{translate('product_table')}}
                         <span class="badge badge-soft-dark ml-2">{{$product->total()}}</span>
                     </h5>
                 </div>
@@ -37,13 +37,13 @@
                                style="width: 100%">
                             <thead class="thead-light">
                             <tr>
-                                <th>{{\App\CPU\translate('SL#')}}</th>
-                                <th>{{\App\CPU\translate('Product Name')}}</th>
-                                <th>{{\App\CPU\translate('purchase_price')}}</th>
-                                <th>{{\App\CPU\translate('selling_price')}}</th>
-                                <th>{{\App\CPU\translate('featured')}}</th>
-                                <th>{{\App\CPU\translate('status')}}</th>
-                                <th style="width: 5px">{{\App\CPU\translate('Action')}}</th>
+                                <th>{{translate('SL#')}}</th>
+                                <th>{{translate('Product Name')}}</th>
+                                <th>{{translate('purchase_price')}}</th>
+                                <th>{{translate('selling_price')}}</th>
+                                <th>{{translate('featured')}}</th>
+                                <th>{{translate('status')}}</th>
+                                <th style="width: 5px">{{translate('Action')}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -85,9 +85,9 @@
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item"
-                                                   href="{{route('admin.product.edit',[$p['id']])}}">{{\App\CPU\translate('Edit')}}</a>
+                                                   href="{{route('admin.product.edit',[$p['id']])}}">{{translate('Edit')}}</a>
                                                 <a class="dropdown-item" href="javascript:"
-                                                onclick="form_alert('product-{{$p['id']}}','Want to delete this item ?')">{{\App\CPU\translate('Delete')}}</a>
+                                                onclick="form_alert('product-{{$p['id']}}','Want to delete this item ?')">{{translate('Delete')}}</a>
                                                 <form action="{{route('admin.product.delete',[$p['id']])}}"
                                                       method="post" id="product-{{$p['id']}}">
                                                     @csrf @method('delete')
@@ -139,9 +139,9 @@
                 },
                 success: function (data) {
                     if (data.success == true) {
-                        toastr.success('{{\App\CPU\translate('Status updated successfully')}}');
+                        toastr.success('{{translate('Status updated successfully')}}');
                     } else {
-                        toastr.error('{{\App\CPU\translate('Status updated failed. Product must be approved')}}');
+                        toastr.error('{{translate('Status updated failed. Product must be approved')}}');
                         location.reload();
                     }
                 }
@@ -161,7 +161,7 @@
                     id: id
                 },
                 success: function () {
-                    toastr.success('{{\App\CPU\translate('Featured status updated successfully')}}');
+                    toastr.success('{{translate('Featured status updated successfully')}}');
                 }
             });
         }

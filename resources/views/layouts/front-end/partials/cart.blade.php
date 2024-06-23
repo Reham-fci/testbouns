@@ -8,7 +8,7 @@
         </span>
         <i class="navbar-tool-icon czi-cart"></i>
     </a>
-    <a class="navbar-tool-text {{Session::get('direction') === "rtl" ? 'mr-2' : 'ml-2'}}" href="{{route('shop-cart')}}"><small>{{\App\CPU\translate('my_cart')}}</small>
+    <a class="navbar-tool-text {{Session::get('direction') === "rtl" ? 'mr-2' : 'ml-2'}}" href="{{route('shop-cart')}}"><small>{{translate('my_cart')}}</small>
         {{\App\CPU\Helpers::currency_converter(\App\CPU\CartManager::cart_total_applied_discount(\App\CPU\CartManager::get_cart()))}}
     </a>
     <!-- Cart dropdown-->
@@ -58,7 +58,7 @@
                 <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
                     <div
                         class="font-size-sm {{Session::get('direction') === "rtl" ? 'ml-2 float-left' : 'mr-2 float-right'}} py-2 ">
-                        <span class="">{{\App\CPU\translate('Subtotal')}} :</span>
+                        <span class="">{{translate('Subtotal')}} :</span>
                         <span
                             class="text-accent font-size-base {{Session::get('direction') === "rtl" ? 'mr-1' : 'ml-1'}}">
                              {{\App\CPU\Helpers::currency_converter($sub_total)}}
@@ -66,17 +66,17 @@
                     </div>
 
                     <a class="btn btn-outline-secondary btn-sm" href="{{route('shop-cart')}}">
-                        {{\App\CPU\translate('Expand cart')}}<i
+                        {{translate('Expand cart')}}<i
                             class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left mr-1 ml-n1' : 'right ml-1 mr-n1'}}"></i>
                     </a>
                 </div>
                 <a class="btn btn-primary btn-sm btn-block" href="{{route('checkout-details')}}">
-                    <i class="czi-card {{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}} font-size-base align-middle"></i>{{\App\CPU\translate('Checkout')}}
+                    <i class="czi-card {{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}} font-size-base align-middle"></i>{{translate('Checkout')}}
                 </a>
             @else
                 <div class="widget-cart-item">
                     <h6 class="text-danger text-center"><i
-                            class="fa fa-cart-arrow-down"></i> {{\App\CPU\translate('Empty')}} {{\App\CPU\translate('Cart')}}
+                            class="fa fa-cart-arrow-down"></i> {{translate('Empty')}} {{translate('Cart')}}
                     </h6>
                 </div>
             @endif

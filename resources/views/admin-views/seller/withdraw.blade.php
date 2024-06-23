@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('Withdraw Request'))
+@section('title', translate('Withdraw Request'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -10,9 +10,9 @@
     <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{\App\CPU\translate('Dashboard')}}</a>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{translate('Dashboard')}}</a>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Withdraw')}}  </li>
+                <li class="breadcrumb-item" aria-current="page">{{translate('Withdraw')}}  </li>
             </ol>
         </nav>
 
@@ -20,14 +20,14 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>{{ \App\CPU\translate('Withdraw Request Table')}}
+                        <h5>{{ translate('Withdraw Request Table')}}
                             <span style="color: red;">({{ $withdraw_req->total() }})</span>
                         </h5>
                         <select name="withdraw_status_filter" onchange="status_filter(this.value)" class="custom-select float-right" style="width: 200px">
-                            <option value="all" {{session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'all'?'selected':''}}>{{\App\CPU\translate('All')}}</option>
-                            <option value="approved" {{session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'approved'?'selected':''}}>{{\App\CPU\translate('Approved')}}</option>
-                            <option value="denied" {{session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'denied'?'selected':''}}>{{\App\CPU\translate('Denied')}}</option>
-                            <option value="pending" {{session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'pending'?'selected':''}}>{{\App\CPU\translate('Pending')}}</option>
+                            <option value="all" {{session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'all'?'selected':''}}>{{translate('All')}}</option>
+                            <option value="approved" {{session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'approved'?'selected':''}}>{{translate('Approved')}}</option>
+                            <option value="denied" {{session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'denied'?'selected':''}}>{{translate('Denied')}}</option>
+                            <option value="pending" {{session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'pending'?'selected':''}}>{{translate('Pending')}}</option>
 
                         </select>
                     </div>
@@ -39,13 +39,13 @@
                                    style="width: 100%">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th>{{\App\CPU\translate('SL#')}}</th>
-                                    <th>{{\App\CPU\translate('amount')}}</th>
-                                    
-                                    <th>{{ \App\CPU\translate('Name') }}</th>
-                                    <th>{{\App\CPU\translate('request_time')}}</th>
-                                    <th>{{\App\CPU\translate('status')}}</th>
-                                    <th style="width: 5px">{{\App\CPU\translate('Action')}}</th>
+                                    <th>{{translate('SL#')}}</th>
+                                    <th>{{translate('amount')}}</th>
+
+                                    <th>{{ translate('Name') }}</th>
+                                    <th>{{translate('request_time')}}</th>
+                                    <th>{{translate('status')}}</th>
+                                    <th style="width: 5px">{{translate('Action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -53,34 +53,34 @@
                                     <tr>
                                         <td scope="row">{{$withdraw_req->firstItem()+$k}}</td>
                                         <td>{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($wr['amount']))}}</td>
-                                        
+
                                         <td>
                                             @if (isset($wr->seller))
                                                 <a href="{{route('admin.sellers.view',$wr->seller_id)}}">{{ $wr->seller->f_name . ' ' . $wr->seller->l_name }}</a>
                                             @else
-                                            <a href="#">{{\App\CPU\translate('not_found')}}</a>
+                                            <a href="#">{{translate('not_found')}}</a>
                                             @endif
                                         </td>
                                         <td>{{$wr->created_at}}</td>
                                         <td>
                                             @if($wr->approved==0)
-                                                <label class="badge badge-primary">{{\App\CPU\translate('Pending')}}</label>
+                                                <label class="badge badge-primary">{{translate('Pending')}}</label>
                                             @elseif($wr->approved==1)
-                                                <label class="badge badge-success">{{\App\CPU\translate('Approved')}}</label>
+                                                <label class="badge badge-success">{{translate('Approved')}}</label>
                                             @else
-                                                <label class="badge badge-danger">{{\App\CPU\translate('Denied')}}</label>
+                                                <label class="badge badge-danger">{{translate('Denied')}}</label>
                                             @endif
                                         </td>
                                         <td>
                                             @if (isset($wr->seller))
                                             <a href="{{route('admin.sellers.withdraw_view',[$wr['id'],$wr->seller['id']])}}"
                                                 class="btn btn-info btn-sm"
-                                                title="{{\App\CPU\translate('View')}}">
+                                                title="{{translate('View')}}">
                                                 <i class="tio-visible"></i>
                                              </a>
                                             @else
                                             <a href="#">
-                                                {{\App\CPU\translate('action_disabled')}}
+                                                {{translate('action_disabled')}}
                                             </a>
                                             @endif
                                         </td>
@@ -93,7 +93,7 @@
                                     <img class="mb-3"
                                          src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg"
                                          alt="Image Description" style="width: 7rem;">
-                                    <p class="mb-0">{{\App\CPU\translate('No_data_to_show')}}</p>
+                                    <p class="mb-0">{{translate('No_data_to_show')}}</p>
                                 </div>
                         @endif
                         </div>

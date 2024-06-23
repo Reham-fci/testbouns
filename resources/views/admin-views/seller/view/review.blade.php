@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title',$seller->shop ? $seller->shop->name : \App\CPU\translate("shop name not found"))
+@section('title',$seller->shop ? $seller->shop->name : translate("shop name not found"))
 
 @push('css_or_js')
     <style>
@@ -103,36 +103,36 @@
 <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">{{\App\CPU\translate('Dashboard')}}</a>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">{{translate('Dashboard')}}</a>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Seller_details')}}</li>
+                <li class="breadcrumb-item" aria-current="page">{{translate('Seller_details')}}</li>
             </ol>
         </nav>
 
         <!-- Page Heading -->
         <div class="flex-between d-sm-flex row align-items-center justify-content-between mb-2 mx-1">
             <div>
-                <a href="{{route('admin.sellers.seller-list')}}" class="btn btn-primary mt-3 mb-3">{{\App\CPU\translate('Back_to_seller_list')}}</a>
+                <a href="{{route('admin.sellers.seller-list')}}" class="btn btn-primary mt-3 mb-3">{{translate('Back_to_seller_list')}}</a>
             </div>
             <div>
                 @if ($seller->status=="pending")
                     <div class="mt-4 pr-2">
                         <div class="flex-between">
                             <div class="mx-1"><h4><i class="tio-shop-outlined"></i></h4></div>
-                            <div><h4>{{\App\CPU\translate('Seller_request_for_open_a_shop.')}}</h4></div>
+                            <div><h4>{{translate('Seller_request_for_open_a_shop.')}}</h4></div>
                         </div>
                         <div class="text-center">
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="approved">
-                                <button type="submit" class="btn btn-primary">{{\App\CPU\translate('Approve')}}</button>
+                                <button type="submit" class="btn btn-primary">{{translate('Approve')}}</button>
                             </form>
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="rejected">
-                                <button type="submit" class="btn btn-danger">{{\App\CPU\translate('reject')}}</button>
+                                <button type="submit" class="btn btn-danger">{{translate('reject')}}</button>
                             </form>
                         </div>
                     </div>
@@ -152,27 +152,27 @@
             <!-- Nav -->
             <ul class="nav nav-tabs page-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link " href="{{ route('admin.sellers.view',$seller->id) }}">{{\App\CPU\translate('Shop')}}</a>
+                    <a class="nav-link " href="{{ route('admin.sellers.view',$seller->id) }}">{{translate('Shop')}}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'order']) }}">{{\App\CPU\translate('Order')}}</a>
+                        href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'order']) }}">{{translate('Order')}}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'product']) }}">{{\App\CPU\translate('Product')}}</a>
+                        href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'product']) }}">{{translate('Product')}}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'setting']) }}">{{\App\CPU\translate('Setting')}}</a>
+                        href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'setting']) }}">{{translate('Setting')}}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'transaction']) }}">{{\App\CPU\translate('Transaction')}}</a>
+                        href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'transaction']) }}">{{translate('Transaction')}}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active"
-                        href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'review']) }}">{{\App\CPU\translate('Review')}}</a>
+                        href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'review']) }}">{{translate('Review')}}</a>
                 </li>
 
             </ul>
@@ -187,7 +187,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">{{\App\CPU\translate('Review_list')}}</h1>
+                    <h1 class="page-header-title">{{translate('Review_list')}}</h1>
                 </div>
             </div>
         </div>
@@ -199,7 +199,7 @@
                     <!-- Header -->
                     <div class="row card-header">
                         <div class="flex-start">
-                            <div class="mx-1"><h5>{{\App\CPU\translate('Review')}} {{ \App\CPU\translate('Table') }}</h5></div>
+                            <div class="mx-1"><h5>{{translate('Review')}} {{ translate('Table') }}</h5></div>
                             <div><h5><span style="color: red;">({{ $reviews->total() }})</span></h5></div>
                         </div>
                         <div class="row justify-content-between align-items-center flex-grow-1">
@@ -215,7 +215,7 @@
                                         </div>
                                         <input id="datatableSearch_" type="search" name="search" class="form-control"
                                             placeholder="Search by product name" aria-label="Search orders" value="{{ $search }}" required>
-                                        <button type="submit" class="btn btn-primary">{{\App\CPU\translate('Search')}}</button>
+                                        <button type="submit" class="btn btn-primary">{{translate('Search')}}</button>
                                     </div>
                                     <!-- End Search -->
                                 </form>
@@ -236,11 +236,11 @@
                                }'>
                                 <thead class="thead-light">
                                 <tr>
-                                    <th>#{{\App\CPU\translate('SL')}}</th>
-                                    <th style="width: 30%">{{\App\CPU\translate('Product')}}</th>
+                                    <th>#{{translate('SL')}}</th>
+                                    <th style="width: 30%">{{translate('Product')}}</th>
 
-                                    <th>{{\App\CPU\translate('Review')}}</th>
-                                    <th>{{\App\CPU\translate('Rating')}}</th>
+                                    <th>{{translate('Review')}}</th>
+                                    <th>{{translate('Rating')}}</th>
                                 </tr>
                                 </thead>
 
@@ -262,11 +262,11 @@
                                                     {{$review->comment?$review->comment:"No Comment Found"}}
                                                 </p>
                                                 @foreach (json_decode($review->attachment) as $img)
-                                                
+
                                                     <a class="float-left" href="{{asset('storage/app/public/review')}}/{{$img}}" data-lightbox="mygallery">
                                                         <img style="width: 60px;height:60px;padding:10px; " src="{{asset('storage/app/public/review')}}/{{$img}}" alt="">
                                                     </a>
-                                                
+
                                                 @endforeach
                                             </td>
                                             <td>
@@ -290,7 +290,7 @@
                     @if(count($reviews)==0)
                         <div class="text-center p-4">
                             <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                            <p class="mb-0">{{ \App\CPU\translate('No_data_to_show')}}</p>
+                            <p class="mb-0">{{ translate('No_data_to_show')}}</p>
                         </div>
                     @endif
                     <!-- End Footer -->

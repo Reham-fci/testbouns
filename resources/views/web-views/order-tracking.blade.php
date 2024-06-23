@@ -26,7 +26,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ \App\CPU\translate('Order No')}} - {{$orderDetails['id']}}</h5>
+                    <h5 class="modal-title">{{ translate('Order No')}} - {{$orderDetails['id']}}</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
@@ -65,14 +65,14 @@
                                 </div>
                             </div>
                             <div class="pt-2 pl-sm-3 mx-auto mx-sm-0 text-center">
-                                <div class="text-muted mb-2">{{ \App\CPU\translate('Quantity')}}:</div>{{$product['qty']}}
+                                <div class="text-muted mb-2">{{ translate('Quantity')}}:</div>{{$product['qty']}}
                             </div>
                             <div class="pt-2 pl-sm-2 mx-auto mx-sm-0 text-center">
-                                <div class="text-muted mb-2">{{ \App\CPU\translate('Tax')}}:
+                                <div class="text-muted mb-2">{{ translate('Tax')}}:
                                 </div>{{\App\CPU\Helpers::currency_converter($product['tax'])}}
                             </div>
                             <div class="pt-2 pl-sm-3 mx-auto mx-sm-0 text-center">
-                                <div class="text-muted mb-2">{{ \App\CPU\translate('Subtotal')}}</div>{{\App\CPU\Helpers::currency_converter($product['price']*$product['qty'])}}
+                                <div class="text-muted mb-2">{{ translate('Subtotal')}}</div>{{\App\CPU\Helpers::currency_converter($product['price']*$product['qty'])}}
                             </div>
                         </div>
                         @php($sub_total+=$product['price']*$product['qty'])
@@ -81,7 +81,7 @@
                     @endforeach
 
                     @php($total_shipping_cost=$orderDetails['shipping_cost'])
-                    
+
                     <?php
                             if ($orderDetails['extra_discount_type'] == 'percent') {
                                 $extra_discount = ($sub_total / 100) * $orderDetails['extra_discount'];
@@ -95,25 +95,25 @@
                 </div>
                 <!-- Footer-->
                 <div class="modal-footer flex-wrap justify-content-between bg-secondary font-size-md">
-                    
+
                         <div class="px-2 py-1">
                             <span
-                                class="text-muted">{{ \App\CPU\translate('Subtotal')}}:&nbsp;</span>{{\App\CPU\Helpers::currency_converter($sub_total)}}
+                                class="text-muted">{{ translate('Subtotal')}}:&nbsp;</span>{{\App\CPU\Helpers::currency_converter($sub_total)}}
                             <span></span>
                         </div>
                         <div class="px-2 py-1">
                             <span
-                                class="text-muted">{{ \App\CPU\translate('Shipping')}}:&nbsp;</span>{{\App\CPU\Helpers::currency_converter($total_shipping_cost)}}
+                                class="text-muted">{{ translate('Shipping')}}:&nbsp;</span>{{\App\CPU\Helpers::currency_converter($total_shipping_cost)}}
                             <span></span>
                         </div>
                         <div class="px-2 py-1">
-                            <span class="text-muted">{{ \App\CPU\translate('Tax')}}:&nbsp;</span> {{\App\CPU\Helpers::currency_converter($total_tax)}}
+                            <span class="text-muted">{{ translate('Tax')}}:&nbsp;</span> {{\App\CPU\Helpers::currency_converter($total_tax)}}
                             <span></span>
                         </div>
-    
+
                         <div class="px-2 py-1">
                             <span
-                                class="text-muted">{{ \App\CPU\translate('Discount')}}:&nbsp;</span>
+                                class="text-muted">{{ translate('Discount')}}:&nbsp;</span>
                             - {{\App\CPU\Helpers::currency_converter($total_discount_on_product)}}
                             <span></span>
                         </div>
@@ -121,20 +121,20 @@
                 <div class="modal-footer flex-wrap justify-content-between bg-secondary font-size-md">
                     <div class="px-2 py-1">
                         <span
-                            class="text-muted">{{ \App\CPU\translate('Coupon Discount')}}:&nbsp;</span>
+                            class="text-muted">{{ translate('Coupon Discount')}}:&nbsp;</span>
                         - {{\App\CPU\Helpers::currency_converter($coupon_discount)}}
                         <span></span>
                     </div>
                     @if ($orderDetails['order_type'] == 'POS')
                     <div class="px-2 py-1">
                         <span
-                            class="text-muted">{{ \App\CPU\translate('Extra Discount')}}:&nbsp;</span>
+                            class="text-muted">{{ translate('Extra Discount')}}:&nbsp;</span>
                         - {{\App\CPU\Helpers::currency_converter($extra_discount)}}
                         <span></span>
                     </div>
                     @endif
                     <div class="px-2 py-1">
-                        <span class="text-muted">{{ \App\CPU\translate('Total')}}:&nbsp; </span>
+                        <span class="text-muted">{{ translate('Total')}}:&nbsp; </span>
                         <span class="font-size-lg">
                              {{\App\CPU\Helpers::currency_converter($sub_total+$total_tax+$total_shipping_cost-($orderDetails->discount)-$total_discount_on_product - $coupon_discount - $extra_discount)}}
                         </span>
@@ -147,13 +147,13 @@
     <div class="container">
 
         <div class="pt-3 pb-3">
-            <h2>{{ \App\CPU\translate('My Order')}}</h2>
+            <h2>{{ translate('My Order')}}</h2>
         </div>
         <div class="btn-primary">
             <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
 
                 <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
-                    <h4 class="text-light mb-0">{{ \App\CPU\translate('Order ID')}} : <span
+                    <h4 class="text-light mb-0">{{ translate('Order ID')}} : <span
                             class="h4 font-weight-normal text-light">{{$orderDetails['id']}}</span></h4>
                 </div>
             </div>
@@ -166,20 +166,20 @@
         <div class="row" style="background: #e2f0ff; margin: 0; width: 100%;">
             <div class="col-sm-4">
                 <div class="pt-2 pb-2 text-center rounded-lg">
-                    <span class="font-weight-medium text-dark mr-2">{{ \App\CPU\translate('Order Status')}}:</span><br>
+                    <span class="font-weight-medium text-dark mr-2">{{ translate('Order Status')}}:</span><br>
                     <span class="text-uppercase ">{{$orderDetails['order_status']}}</span>
                     {{-- <span class="text-uppercase ">Courier</span> --}}
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="pt-2 pb-2 text-center rounded-lg">
-                    <span class="font-weight-medium text-dark mr-2">{{ \App\CPU\translate('Payment Status')}}:</span> <br>
+                    <span class="font-weight-medium text-dark mr-2">{{ translate('Payment Status')}}:</span> <br>
                     <span class="text-uppercase">{{$orderDetails['payment_status']}}</span>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="pt-2 pb-2 text-center rounded-lg">
-                    <span class="font-weight-medium text-dark mr-2"> {{ \App\CPU\translate('Estimated Delivary Date')}}: </span> <br>
+                    <span class="font-weight-medium text-dark mr-2"> {{ translate('Estimated Delivary Date')}}: </span> <br>
                     <span class="text-uppercase"
                           style="font-weight: 600; color: {{$web_config['primary_color']}}">{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$orderDetails['updated_at'])->format('Y-m-d')}}</span>
                 </div>
@@ -199,8 +199,8 @@
                                         <i class="czi-check"></i>
                                     </div>
                                     <div class="media-body" style="text-align: center;">
-                                        <div class="media-tab-subtitle text-muted font-size-xs mb-1">{{ \App\CPU\translate('First step')}}</div>
-                                        <h6 class="media-tab-title text-nowrap mb-0">{{ \App\CPU\translate('Order placed')}}</h6>
+                                        <div class="media-tab-subtitle text-muted font-size-xs mb-1">{{ translate('First step')}}</div>
+                                        <h6 class="media-tab-title text-nowrap mb-0">{{ translate('Order placed')}}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -216,8 +216,8 @@
                                         @endif
                                     </div>
                                     <div class="media-body" style="text-align: center;">
-                                        <div class="media-tab-subtitle text-muted font-size-xs mb-1">{{ \App\CPU\translate('Second step')}}</div>
-                                        <h6 class="media-tab-title text-nowrap mb-0">{{ \App\CPU\translate('Processing order')}}</h6>
+                                        <div class="media-tab-subtitle text-muted font-size-xs mb-1">{{ translate('Second step')}}</div>
+                                        <h6 class="media-tab-title text-nowrap mb-0">{{ translate('Processing order')}}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -233,8 +233,8 @@
                                         @endif
                                     </div>
                                     <div class="media-body" style="text-align: center;">
-                                        <div class="media-tab-subtitle text-muted font-size-xs mb-1">{{ \App\CPU\translate('Third step')}}</div>
-                                        <h6 class="media-tab-title text-nowrap mb-0">{{ \App\CPU\translate('Preparing Shipment')}}</h6>
+                                        <div class="media-tab-subtitle text-muted font-size-xs mb-1">{{ translate('Third step')}}</div>
+                                        <h6 class="media-tab-title text-nowrap mb-0">{{ translate('Preparing Shipment')}}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -250,8 +250,8 @@
                                         @endif
                                     </div>
                                     <div class="media-body" style="text-align: center;">
-                                        <div class="media-tab-subtitle text-muted font-size-xs mb-1">{{ \App\CPU\translate('Fourth step')}}</div>
-                                        <h6 class="media-tab-title text-nowrap mb-0">{{ \App\CPU\translate('Order Shipped')}}</h6>
+                                        <div class="media-tab-subtitle text-muted font-size-xs mb-1">{{ translate('Fourth step')}}</div>
+                                        <h6 class="media-tab-title text-nowrap mb-0">{{ translate('Order Shipped')}}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -259,13 +259,13 @@
                     @elseif($orderDetails['order_status']=='returned')
                         <li class="nav-item">
                             <div class="nav-link" style="text-align: center;">
-                                <h1 class="text-warning">{{ \App\CPU\translate('Product Successfully Returned')}}</h1>
+                                <h1 class="text-warning">{{ translate('Product Successfully Returned')}}</h1>
                             </div>
                         </li>
                     @else
                         <li class="nav-item">
                             <div class="nav-link" style="text-align: center;">
-                                <h1 class="text-danger">{{ \App\CPU\translate("Sorry we can't complete your order")}}</h1>
+                                <h1 class="text-danger">{{ translate("Sorry we can't complete your order")}}</h1>
                             </div>
                         </li>
                     @endif
@@ -277,7 +277,7 @@
         <div class="d-sm-flex flex-wrap justify-content-between align-items-center text-center pt-3">
             <div class="custom-control custom-checkbox mt-1 mr-3">
             </div>
-            <a class="btn btn-primary btn-sm mt-2 mb-2" href="#order-details" data-toggle="modal">{{ \App\CPU\translate('View Order Details')}}</a>
+            <a class="btn btn-primary btn-sm mt-2 mb-2" href="#order-details" data-toggle="modal">{{ translate('View Order Details')}}</a>
         </div>
     </div>
 

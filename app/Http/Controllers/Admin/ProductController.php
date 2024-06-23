@@ -277,8 +277,8 @@ class ProductController extends BaseController
             return redirect()->route('admin.product.list', ['in_house']);
         }
     }
-    
-    
+
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -293,19 +293,19 @@ class ProductController extends BaseController
             'brand_id.required' => 'brand  is required!',
         ]);
 
-        
+
         $variations = [];
         $_variations = [];
         $productOptionsNames = [] ;
         foreach($request['prdoctPrice'] as $option){
             if($option['unit'] && $option['unit_price'] && $option['purchase_price']  && $option['numberOfPieces'] ){
-    
+
                 if ($option['discount_type'] == 'percent') {
                     $option['dis'] = ($option['unit_price'] / 100) * $option['discount'];
                 } else {
                     $option['dis'] = $option['discount'];
                 }
-        
+
                 if ($option['unit_price'] <= $option['dis']) {
                     $validator->after(function ($validator) {
                         $validator->errors()->add(
@@ -313,7 +313,7 @@ class ProductController extends BaseController
                         );
                     });
                 }
-                
+
                 $_option = [
                     'order' => $option['order'],
                     'type' => $option['unit'],
@@ -340,23 +340,23 @@ class ProductController extends BaseController
                 $validator->errors()->add('options', 'Product can not have one unit');
             });
         }
-        
-        
+
+
         sort($_variations);
         foreach($_variations as $_variation){
                 $variations[] = $_variation;
                 $productOptionsNames[] = $_variation['type'];
         }
-        
+
         unset($_variations);
-        
+
         $choice_options = [];
         array_push($choice_options, [
             "name" => "choice_4",
             "title" => "الكمية",
             "options" => $productOptionsNames
         ]);
-        
+
 
 
 
@@ -398,9 +398,9 @@ class ProductController extends BaseController
             $colors = [];
             $p->colors = json_encode($colors);
         }
-        
+
         $p->choice_options = json_encode($choice_options);
-        
+
 
         $stock_count = (integer)$request['current_stock'];
 
@@ -472,7 +472,7 @@ class ProductController extends BaseController
             return redirect()->route('admin.product.list', ['in_house']);
         }
     }
-    
+
 
 
 
@@ -480,7 +480,7 @@ class ProductController extends BaseController
     {
         $query_param = [];
         $search = $request['search'];
-        $pro = Product::select(DB::raw("* , 
+        $pro = Product::select(DB::raw("* ,
             (select concat(min(price),' : ',max(price)) from product_variations where product_variations.productId = products.id) as price2,
             (select concat(min(purchase_price),' : ',max(purchase_price)) from product_variations where product_variations.productId = products.id) as purchase_price2
         "));
@@ -578,14 +578,14 @@ class ProductController extends BaseController
 
     public function update_quantity(Request $request)
     {
-        
+
         $productVariations = DB::table('product_variations')->where('productId',$request['product_id'])->orderBy('order', 'ASC')->orderBy('id', 'ASC')->get();
         $product = Product::find($request['product_id']);
-        
+
         $variations = [];
         $index = 0;
         foreach($productVariations as $option){
-            
+
             DB::table('product_variations')->where('id' , $option->id)->update([
                     'price' => $request['price_' .  str_replace(' ', '_', $option->type)],
                 ]);
@@ -607,7 +607,7 @@ class ProductController extends BaseController
             ];
             echo ( 'price_' . $option->type." : " . $request['price_' . $option->type])."<br>";
         }
-        
+
         $stock_count = $request['current_stock'];
         // if ($request->has('type')) {
         //     foreach ($request['type'] as $key => $str) {
@@ -624,10 +624,10 @@ class ProductController extends BaseController
             $product->current_stock = $stock_count;
             $product->variation = json_encode($variations);
             $product->save();
-            Toastr::success(\App\CPU\translate('product_quantity_updated_successfully!'));
+            Toastr::success(translate('product_quantity_updated_successfully!'));
             return back();
         } else {
-            Toastr::warning(\App\CPU\translate('product_quantity_can_not_be_less_than_0_!'));
+            Toastr::warning(translate('product_quantity_can_not_be_less_than_0_!'));
             return back();
         }
     }
@@ -652,7 +652,7 @@ class ProductController extends BaseController
     }
     public function updated_shipping(Request $request)
     {
-    
+
         $product = Product::where(['id' => $request['product_id']])->first();
         if($request->status == 1)
         {
@@ -664,7 +664,7 @@ class ProductController extends BaseController
 
         $product->save();
         return response()->json([
-            
+
         ], 200);
     }
 
@@ -733,7 +733,7 @@ class ProductController extends BaseController
 
     public function update(Request $request, $id)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'category_id' => 'required',
@@ -744,19 +744,19 @@ class ProductController extends BaseController
             'brand_id.required' => 'brand  is required!',
         ]);
 
-        
+
         $variations = [];
         $_variations = [];
         $productOptionsNames = [] ;
         foreach($request['prdoctPrice'] as $option){
             if($option['unit'] && $option['unit_price'] && $option['purchase_price']  && $option['numberOfPieces'] ){
-    
+
                 if ($option['discount_type'] == 'percent') {
                     $option['dis'] = ($option['unit_price'] / 100) * $option['discount'];
                 } else {
                     $option['dis'] = $option['discount'];
                 }
-        
+
                 if ($option['unit_price'] <= $option['dis']) {
                     $validator->after(function ($validator) {
                         $validator->errors()->add(
@@ -764,7 +764,7 @@ class ProductController extends BaseController
                         );
                     });
                 }
-                
+
                 $_option = [
                     'order' => $option['order'],
                     'type' => $option['unit'],
@@ -781,7 +781,7 @@ class ProductController extends BaseController
                     'numberOfPieces' =>  $option['numberOfPieces'],
                     'description' =>  $option['description'],
                 ];
-                
+
                 $_variations[$option['order']] = $_option;
                 // $productOptionsNames[] = $_option['type'];
             }
@@ -792,26 +792,26 @@ class ProductController extends BaseController
                 $validator->errors()->add('options', 'Product can not have one unit');
             });
         }
-        
-        
-        
-        
+
+
+
+
         sort($_variations);
         foreach($_variations as $_variation){
                 $variations[] = $_variation;
                 $productOptionsNames[] = $_variation['type'];
         }
-        
+
         unset($_variations);
 
-        
+
         $choice_options = [];
         array_push($choice_options, [
             "name" => "choice_4",
             "title" => "الكمية",
             "options" => $productOptionsNames
         ]);
-        
+
 
 
         $product = Product::find($id);
@@ -848,13 +848,13 @@ class ProductController extends BaseController
             $colors = [];
             $product->colors = json_encode($colors);
         }
-        
-        
-        
+
+
+
         $product->choice_options = json_encode($choice_options);
-       
-       
-        
+
+
+
         $stock_count = (integer)$request['current_stock'];
 
         if ($validator->errors()->count() > 0) {
@@ -926,8 +926,8 @@ class ProductController extends BaseController
                     );
                 }
             }
-            
-            
+
+
             DB::table('product_variations')->where('productId',$product->id)->delete();
             foreach($variations as $variation){
                 $variation['productId'] = $product->id;
@@ -997,7 +997,7 @@ class ProductController extends BaseController
             return back();
         }
 
-        
+
         $data = [];
         $skip = ['youtube_video_url', 'details', 'thumbnail'];
         foreach ($collections as $collection) {
@@ -1054,15 +1054,15 @@ class ProductController extends BaseController
             return back();
         }
 
-        
+
         $data = [];
         $skip = ['youtube_video_url', 'details', 'thumbnail' , 'id' , 'variation Id' , 'tax_type' , 'shipping_cost' , 'discount'];
-        
+
         $skipInsertAndDelete = [];
         $newProduct = [];
-        $variation= []; 
-        $_variations= []; 
-        $variationsNames= []; 
+        $variation= [];
+        $_variations= [];
+        $variationsNames= [];
         foreach ($collections as $collection) {
             foreach ($collection as $key => $value) {
                 // id != "" true , "" === "" true , true
@@ -1073,7 +1073,7 @@ class ProductController extends BaseController
             }
 
             $thumbnail = explode('/', $collection['thumbnail']);
-            
+
             $product = [
                 'name' => $collection['name'],
                 'slug' => Str::slug($collection['name'], '-') . '-' . Str::random(6),
@@ -1097,8 +1097,8 @@ class ProductController extends BaseController
                 'added_by' => 'admin',
                 'user_id' => auth('admin')->id(),
             ];
-            
-        
+
+
             $_option = [
                 'type' => $collection['variation Name'],
                 'price' => $collection['unit_price'],
@@ -1116,9 +1116,9 @@ class ProductController extends BaseController
                 'description' =>  $collection['variations description'],
                 'order' =>  $collection['Sort'],
             ];
-            
+
             if($collection['id']){
-                // update 
+                // update
                 if(!isset($skipInsertAndDelete[$collection['id']])){
                     DB::table('products')->where('id' , $collection['id'])->update($product);
                     DB::table('product_variations')->where('productId',$collection['id'])->delete();
@@ -1129,37 +1129,37 @@ class ProductController extends BaseController
             }
             else{
                 if(!isset($newProduct[$collection['name']])){
-                    
+
                     $id = DB::table('products')->insertGetId($product);
                     $newProduct[$collection['name']] = $id;
                 }
                 else{
                     $id = $newProduct[$collection['name']];
                 }
-                
+
             }
             $_variations[$id][intval($collection['Sort'])] = $_option;
             // $variationsNames[$id][] = $collection['variation Name'];
-            
-            
-            
+
+
+
         }
-        
-        
-        
+
+
+
         foreach($_variations as $productId => &$variationProduct){
             ksort($_variations[$productId]);
             foreach($_variations[$productId] as $product_variation){
                 $variations[$productId][] = $product_variation;
                 $variationsNames[$productId][] = $product_variation['type'];
             }
-            
+
         }
-        
-        
+
+
         // dd($variations);
         foreach($variations as $productId => $variationProduct){
-            
+
             $choice_options = [];
             array_push($choice_options, [
                 "name" => "choice_4",
@@ -1169,19 +1169,19 @@ class ProductController extends BaseController
             DB::table('products')->where('id' , $productId)->update(
                 [
                     "variation" =>    json_encode($variationProduct),
-                    "choice_options" =>  json_encode($choice_options),  
+                    "choice_options" =>  json_encode($choice_options),
                 ]
             );
-            
-            
+
+
             foreach($variationProduct as $variation){
                 $variation['productId'] = $productId;
                 $id = DB::table('product_variations')->insertGetId($variation);
             }
-                
-        
-        
-        
+
+
+
+
         }
         Toastr::success(count($data) . ' - Products imported successfully!');
         return back();
@@ -1190,8 +1190,8 @@ class ProductController extends BaseController
     public function bulk_export_data()
     {
         $products = Product::
-            select(DB::raw("products.* , 
-            
+            select(DB::raw("products.* ,
+
                 product_variations.`id` as product_variations_id,product_variations.`productId` as product_variations_productId,product_variations.`type` as product_variations_type,
                 product_variations.`price` as product_variations_price,product_variations.`sku` as product_variations_sku,
                 product_variations.`purchase_price` as product_variations_purchase_price,product_variations.`tax` as product_variations_tax,
@@ -1200,7 +1200,7 @@ class ProductController extends BaseController
                 product_variations.`multiply_qty` as product_variations_multiply_qty,product_variations.`numberOfPieces` as product_variations_numberOfPieces,
                 product_variations.`qty` as product_variations_qty,
                 product_variations.`description` as product_variations_description,
-                product_variations.`order` as product_variations_order 
+                product_variations.`order` as product_variations_order
             "))
             ->join('product_variations', 'productId', '=', 'products.id')
             ->where(['added_by' => 'admin'])->get();

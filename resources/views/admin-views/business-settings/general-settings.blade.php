@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('General Setting'))
+@section('title', translate('General Setting'))
 
 @push('css_or_js')
 
@@ -11,14 +11,14 @@
     <div class="content container-fluid">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{\App\CPU\translate('Dashboard')}}</a></li>
-            <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('General settings')}}</li>
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{translate('Dashboard')}}</a></li>
+            <li class="breadcrumb-item" aria-current="page">{{translate('General settings')}}</li>
         </ol>
     </nav>
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-2">
-        <h4 class="mb-0 text-black-50">{{\App\CPU\translate('General Business Settings')}}</h4>
+        <h4 class="mb-0 text-black-50">{{translate('General Business Settings')}}</h4>
     </div>
 
     <div class="row" style="margin-top: 20px">
@@ -27,7 +27,7 @@
                 <div class="card-header">
                     <div class="row justify-content-between pl-4 pr-4">
                         <div>
-                            <h5>{{\App\CPU\translate('Language Table')}}</h5>
+                            <h5>{{translate('Language Table')}}</h5>
                         </div>
                     </div>
                 </div>
@@ -38,11 +38,11 @@
                             <table id="table_id" class="display table table-hover " style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th scope="col">#{{\App\CPU\translate('SL')}}</th>
-                                    <th scope="col">{{\App\CPU\translate('ID')}}</th>
-                                    <th scope="col">{{\App\CPU\translate('Name')}}</th>
-                                    <th scope="col">{{\App\CPU\translate('Code')}}</th>
-                                    <th scope="col">{{\App\CPU\translate('Action')}}</th>
+                                    <th scope="col">#{{translate('SL')}}</th>
+                                    <th scope="col">{{translate('ID')}}</th>
+                                    <th scope="col">{{translate('Name')}}</th>
+                                    <th scope="col">{{translate('Code')}}</th>
+                                    <th scope="col">{{translate('Action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

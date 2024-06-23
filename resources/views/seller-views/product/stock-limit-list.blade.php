@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app-seller')
 
-@section('title',\App\CPU\translate('stock_limit_products'))
+@section('title',translate('stock_limit_products'))
 
 @push('css_or_js')
 
@@ -13,10 +13,10 @@
             <div class="row align-items-center">
                 <div class="col-12 mb-2 mb-sm-0">
                     <h1 class="page-header-title text-capitalize"><i
-                            class="tio-files"></i> {{\App\CPU\translate('stock_limit_products_list')}}
+                            class="tio-files"></i> {{translate('stock_limit_products_list')}}
                     <span class="badge badge-soft-dark ml-2">{{$products->total()}}</span>
                     </h1>
-                    <span>{{ \App\CPU\translate('the_products_are_shown_in_this_list,_which_quantity_is_below') }} {{ \App\Model\BusinessSetting::where(['type'=>'stock_limit'])->first()->value }}</span>
+                    <span>{{ translate('the_products_are_shown_in_this_list,_which_quantity_is_below') }} {{ \App\Model\BusinessSetting::where(['type'=>'stock_limit'])->first()->value }}</span>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                     <div class="card-header">
                         <div class="row justify-content-between align-items-center flex-grow-1">
                             <div class="col-12 col-md-12 col-lg-4">
-                                <h5>{{ \App\CPU\translate('product_table')}} <span >({{ $products->total() }})</span></h5>
+                                <h5>{{ translate('product_table')}} <span >({{ $products->total() }})</span></h5>
 
                             </div>
 
@@ -42,8 +42,8 @@
                                             </div>
                                         </div>
                                         <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                            placeholder="{{\App\CPU\translate('Search by Product Name')}}" aria-label="Search orders" value="{{ $search }}" required>
-                                        <button type="submit" class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
+                                            placeholder="{{translate('Search by Product Name')}}" aria-label="Search orders" value="{{ $search }}" required>
+                                        <button type="submit" class="btn btn-primary">{{translate('search')}}</button>
                                     </div>
                                     <!-- End Search -->
                                 </form>
@@ -51,11 +51,11 @@
 
                             <div class="col-12 mt-1 col-md-6 col-lg-3">
                                 <select name="qty_ordr_sort" class="form-control" onchange="location.href='{{route('seller.product.stock-limit-list',['in_house', ''])}}/?sort_oqrderQty='+this.value">
-                                    <option value="default" {{ $sort_oqrderQty== "default"?'selected':''}}>{{\App\CPU\translate('default_sort')}}</option>
-                                    <option value="quantity_asc" {{ $sort_oqrderQty== "quantity_asc"?'selected':''}}>{{\App\CPU\translate('quantity_sort_by_(low_to_high)')}}</option>
-                                    <option value="quantity_desc" {{ $sort_oqrderQty== "quantity_desc"?'selected':''}}>{{\App\CPU\translate('quantity_sort_by_(high_to_low)')}}</option>
-                                    <option value="order_asc" {{ $sort_oqrderQty== "order_asc"?'selected':''}}>{{\App\CPU\translate('order_sort_by_(low_to_high)')}}</option>
-                                <option value="order_desc" {{ $sort_oqrderQty== "order_desc"?'selected':''}}>{{\App\CPU\translate('order_sort_by_(high_to_low)')}}</option>
+                                    <option value="default" {{ $sort_oqrderQty== "default"?'selected':''}}>{{translate('default_sort')}}</option>
+                                    <option value="quantity_asc" {{ $sort_oqrderQty== "quantity_asc"?'selected':''}}>{{translate('quantity_sort_by_(low_to_high)')}}</option>
+                                    <option value="quantity_desc" {{ $sort_oqrderQty== "quantity_desc"?'selected':''}}>{{translate('quantity_sort_by_(high_to_low)')}}</option>
+                                    <option value="order_asc" {{ $sort_oqrderQty== "order_asc"?'selected':''}}>{{translate('order_sort_by_(low_to_high)')}}</option>
+                                <option value="order_desc" {{ $sort_oqrderQty== "order_desc"?'selected':''}}>{{translate('order_sort_by_(high_to_low)')}}</option>
                                 </select>
                             </div>
 
@@ -69,14 +69,14 @@
                                    style="width: 100%">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th>{{\App\CPU\translate('SL#')}}</th>
-                                    <th>{{\App\CPU\translate('Product Name')}}</th>
-                                    <th>{{\App\CPU\translate('purchase_price')}}</th>
-                                    <th>{{\App\CPU\translate('selling_price')}}</th>
-                                    <th>{{\App\CPU\translate('verify_status')}}</th>
-                                    <th>{{\App\CPU\translate('Active')}} {{\App\CPU\translate('status')}}</th>
-                                    <th style="width: 5px" class="text-center">{{\App\CPU\translate('quantity')}}</th>
-                                    <th>{{\App\CPU\translate('orders')}}</th>
+                                    <th>{{translate('SL#')}}</th>
+                                    <th>{{translate('Product Name')}}</th>
+                                    <th>{{translate('purchase_price')}}</th>
+                                    <th>{{translate('selling_price')}}</th>
+                                    <th>{{translate('verify_status')}}</th>
+                                    <th>{{translate('Active')}} {{translate('status')}}</th>
+                                    <th style="width: 5px" class="text-center">{{translate('quantity')}}</th>
+                                    <th>{{translate('orders')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -94,11 +94,11 @@
                                         </td>
                                         <td>
                                             @if($p->request_status == 0)
-                                                <label class="badge badge-warning">{{\App\CPU\translate('New Request')}}</label>
+                                                <label class="badge badge-warning">{{translate('New Request')}}</label>
                                             @elseif($p->request_status == 1)
-                                                <label class="badge badge-success">{{\App\CPU\translate('Approved')}}</label>
+                                                <label class="badge badge-success">{{translate('Approved')}}</label>
                                             @elseif($p->request_status == 2)
-                                                <label class="badge badge-danger">{{\App\CPU\translate('Denied')}}</label>
+                                                <label class="badge badge-danger">{{translate('Denied')}}</label>
                                             @endif
                                         </td>
                                         <td>
@@ -111,7 +111,7 @@
                                         <td>
                                             {{$p['current_stock']}}
                                             <button class="btn btn-sm" id="{{ $p->id }}" onclick="update_quantity({{ $p->id }})" type="button" data-toggle="modal" data-target="#update-quantity"
-                                                title="{{ \App\CPU\translate('update_quantity') }}">
+                                                title="{{ translate('update_quantity') }}">
                                                 <i class="tio-add-circle"></i>
                                             </button>
                                         </td>
@@ -131,7 +131,7 @@
                     @if(count($products)==0)
                         <div class="text-center p-4">
                             <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                            <p class="mb-0">{{\App\CPU\translate('No data to show')}}</p>
+                            <p class="mb-0">{{translate('No data to show')}}</p>
                         </div>
                     @endif
                 </div>
@@ -146,9 +146,9 @@
                         @csrf
                         <div class="card mt-2 rest-part" style="width: 100%"></div>
                         <div class="form-group col-sm-12 card card-footer">
-                            <button class="btn btn-primary float-right" class="btn btn-primary" type="submit">{{\App\CPU\translate('submit')}}</button>
+                            <button class="btn btn-primary float-right" class="btn btn-primary" type="submit">{{translate('submit')}}</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
-                                {{\App\CPU\translate('close')}}
+                                {{translate('close')}}
                             </button>
                         </div>
                     </form>

@@ -1,5 +1,5 @@
 @extends('layouts.back-end.app-seller')
-@section('title', \App\CPU\translate('Shop view'))
+@section('title', translate('Shop view'))
 @push('css_or_js')
     <!-- Custom styles for this page -->
     <link href="{{asset('public/assets/back-end')}}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -11,7 +11,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="h3 mb-0  ">{{\App\CPU\translate('my_shop')}} {{\App\CPU\translate('Info')}} </h3>
+                        <h3 class="h3 mb-0  ">{{translate('my_shop')}} {{translate('Info')}} </h3>
                     </div>
                     <div class="card-body">
                         <div class="row mt-2">
@@ -33,20 +33,20 @@
 
                             <div class="col-md-4 mt-4">
                                 <div class="flex-start">
-                                    <h4>{{\App\CPU\translate('Name')}} : </h4>
+                                    <h4>{{translate('Name')}} : </h4>
                                     <h4 class="mx-1">{{$shop->name}}</h4>
                                 </div>
                                 <div class="flex-start">
-                                    <h6>{{\App\CPU\translate('Phone')}} : </h6>
+                                    <h6>{{translate('Phone')}} : </h6>
                                     <h6 class="mx-1">{{$shop->contact}}</h6>
                                 </div>
                                 <div class="flex-start">
-                                    <h6>{{\App\CPU\translate('address')}} : </h6>
+                                    <h6>{{translate('address')}} : </h6>
                                     <h6 class="mx-1">{{$shop->address}}</h6>
                                 </div>
 
                                 <div class="flex-start">
-                                    <a class="btn btn-primary" href="{{route('seller.shop.edit',[$shop->id])}}">{{\App\CPU\translate('edit')}}</a>
+                                    <a class="btn btn-primary" href="{{route('seller.shop.edit',[$shop->id])}}">{{translate('edit')}}</a>
                                 </div>
                             </div>
                             <div class="col-md-5"></div>

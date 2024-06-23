@@ -3,16 +3,16 @@
 		<thead>
 			<tr>
 				<td class="text-center">
-					<label for="" class="control-label">{{\App\CPU\translate('Variant')}}</label>
+					<label for="" class="control-label">{{translate('Variant')}}</label>
 				</td>
 				<td class="text-center">
-					<label for="" class="control-label">{{\App\CPU\translate('Variant Price')}}</label>
+					<label for="" class="control-label">{{translate('Variant Price')}}</label>
 				</td>
 				<td class="text-center">
-					<label for="" class="control-label">{{\App\CPU\translate('SKU')}}</label>
+					<label for="" class="control-label">{{translate('SKU')}}</label>
 				</td>
 				<td class="text-center">
-					<label for="" class="control-label">{{\App\CPU\translate('Quantity')}}</label>
+					<label for="" class="control-label">{{translate('Quantity')}}</label>
 				</td>
 			</tr>
 		</thead>

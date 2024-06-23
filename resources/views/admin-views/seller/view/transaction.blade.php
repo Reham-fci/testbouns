@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title',$seller->shop ? $seller->shop->name : \App\CPU\translate("shop name not found"))
+@section('title',$seller->shop ? $seller->shop->name : translate("shop name not found"))
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
@@ -106,9 +106,9 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a
-                        href="{{route('admin.dashboard.index')}}">{{\App\CPU\translate('Dashboard')}}</a>
+                        href="{{route('admin.dashboard.index')}}">{{translate('Dashboard')}}</a>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Seller_details')}}</li>
+                <li class="breadcrumb-item" aria-current="page">{{translate('Seller_details')}}</li>
             </ol>
         </nav>
 
@@ -116,27 +116,27 @@
         <div class="flex-between d-sm-flex row align-items-center justify-content-between mb-2 mx-1">
             <div>
                 <a href="{{route('admin.sellers.seller-list')}}"
-                   class="btn btn-primary mt-3 mb-3">{{\App\CPU\translate('Back_to_seller_list')}}</a>
+                   class="btn btn-primary mt-3 mb-3">{{translate('Back_to_seller_list')}}</a>
             </div>
             <div>
                 @if ($seller->status=="pending")
                     <div class="mt-4 pr-2">
                         <div class="flex-start">
                             <div class="mx-1"><h4><i class="tio-shop-outlined"></i></h4></div>
-                            <div>{{\App\CPU\translate('Seller_request_for_open_a_shop.')}}</div>
+                            <div>{{translate('Seller_request_for_open_a_shop.')}}</div>
                         </div>
                         <div class="text-center">
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="approved">
-                                <button type="submit" class="btn btn-primary">{{\App\CPU\translate('Approve')}}</button>
+                                <button type="submit" class="btn btn-primary">{{translate('Approve')}}</button>
                             </form>
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="rejected">
-                                <button type="submit" class="btn btn-danger">{{\App\CPU\translate('reject')}}</button>
+                                <button type="submit" class="btn btn-danger">{{translate('reject')}}</button>
                             </form>
                         </div>
                     </div>
@@ -157,27 +157,27 @@
                 <ul class="nav nav-tabs page-header-tabs">
                     <li class="nav-item">
                         <a class="nav-link "
-                           href="{{ route('admin.sellers.view',$seller->id) }}">{{\App\CPU\translate('Shop')}}</a>
+                           href="{{ route('admin.sellers.view',$seller->id) }}">{{translate('Shop')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link "
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'order']) }}">{{\App\CPU\translate('Order')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'order']) }}">{{translate('Order')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'product']) }}">{{\App\CPU\translate('Product')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'product']) }}">{{translate('Product')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'setting']) }}">{{\App\CPU\translate('Setting')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'setting']) }}">{{translate('Setting')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'transaction']) }}">{{\App\CPU\translate('Transaction')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'transaction']) }}">{{translate('Transaction')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'review']) }}">{{\App\CPU\translate('Review')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'review']) }}">{{translate('Review')}}</a>
                     </li>
 
                 </ul>
@@ -194,9 +194,9 @@
                         <div class="card-header">
                             <div class="row d-flex justify-content-between align-items-center flex-grow-1">
                                 <div class="col-md-3 col-12">
-                                    <h3 class="text-capitalize">{{ \App\CPU\translate('transaction_table')}}
+                                    <h3 class="text-capitalize">{{ translate('transaction_table')}}
                                         <span class="badge badge-soft-dark mx-2">{{$transactions->total()}}</span>
-    
+
                                     </h3>
                                 </div>
                                 <div class="col-md-4 col-12">
@@ -210,11 +210,11 @@
                                             </div>
                                             <input id="datatableSearch_" type="search" name="search"
                                                    class="form-control"
-                                                   placeholder="{{\App\CPU\translate('Search by orders id or transaction id')}}"
+                                                   placeholder="{{translate('Search by orders id or transaction id')}}"
                                                    aria-label="Search orders" value="{{ $search }}"
                                                    required>
                                             <button type="submit"
-                                                    class="btn btn-primary">{{ \App\CPU\translate('search')}}</button>
+                                                    class="btn btn-primary">{{ translate('search')}}</button>
                                         </div>
                                         <!-- End Search -->
                                     </form>
@@ -222,27 +222,27 @@
                                 <div class="col-md-4 col-12 mt-2 mt-md-0">
                                     <form action="{{ url()->current() }}" method="GET">
                                         <div class="row ">
-    
+
                                             <div class="col-md-8">
-    
+
                                                 <select class="form-control" name="status">
-    
+
                                                     <option class="text-center" value="0" selected disabled>
-                                                        ---{{\App\CPU\translate('select_status')}}---
+                                                        ---{{translate('select_status')}}---
                                                     </option>
                                                     <option class="text-left text-capitalize"
-                                                            value="all" {{ $status == 'all'? 'selected' : '' }} >{{\App\CPU\translate('all')}} </option>
+                                                            value="all" {{ $status == 'all'? 'selected' : '' }} >{{translate('all')}} </option>
                                                     <option class="text-left text-capitalize"
-                                                            value="disburse" {{ $status == 'disburse'? 'selected' : '' }} >{{\App\CPU\translate('disburse')}} </option>
+                                                            value="disburse" {{ $status == 'disburse'? 'selected' : '' }} >{{translate('disburse')}} </option>
                                                     <option class="text-left text-capitalize"
-                                                            value="hold" {{ $status == 'hold'? 'selected' : '' }}>{{\App\CPU\translate('hold')}}</option>
+                                                            value="hold" {{ $status == 'hold'? 'selected' : '' }}>{{translate('hold')}}</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-2 mt-2 mt-md-0 ">
                                                 <button type="submit"
-                                                        class="btn btn-success float-right">{{\App\CPU\translate('filter')}}</button>
+                                                        class="btn btn-success float-right">{{translate('filter')}}</button>
                                             </div>
-    
+
                                         </div>
                                     </form>
                                 </div>
@@ -257,21 +257,21 @@
                                        style="width: 100%">
                                     <thead class="thead-light">
                                     <tr>
-                                        <th>{{\App\CPU\translate('SL#')}}</th>
-                                        {{-- <th>{{\App\CPU\translate('seller')}}</th> --}}
-                                        <th>{{\App\CPU\translate('seller_name')}}</th>
-                                        <th>{{\App\CPU\translate('customer_name')}}</th>
-                                        <th>{{\App\CPU\translate('order_id')}}</th>
-                                        <th>{{\App\CPU\translate('transaction_id')}}</th>
-                                        <th>{{\App\CPU\translate('order_amount')}}</th>
-                                        <th>{{ \App\CPU\translate('seller_amount') }}</th>
-                                        <th>{{\App\CPU\translate('admin_commission')}}</th>
-                                        <th>{{\App\CPU\translate('received_by')}}</th>
-                                        <th>{{\App\CPU\translate('delivered_by')}}</th>
-                                        <th>{{\App\CPU\translate('delivery_charge')}}</th>
-                                        <th>{{\App\CPU\translate('payment_method')}}</th>
-                                        <th>{{\App\CPU\translate('tax')}}</th>
-                                        <th>{{\App\CPU\translate('status')}}</th>
+                                        <th>{{translate('SL#')}}</th>
+                                        {{-- <th>{{translate('seller')}}</th> --}}
+                                        <th>{{translate('seller_name')}}</th>
+                                        <th>{{translate('customer_name')}}</th>
+                                        <th>{{translate('order_id')}}</th>
+                                        <th>{{translate('transaction_id')}}</th>
+                                        <th>{{translate('order_amount')}}</th>
+                                        <th>{{ translate('seller_amount') }}</th>
+                                        <th>{{translate('admin_commission')}}</th>
+                                        <th>{{translate('received_by')}}</th>
+                                        <th>{{translate('delivered_by')}}</th>
+                                        <th>{{translate('delivery_charge')}}</th>
+                                        <th>{{translate('payment_method')}}</th>
+                                        <th>{{translate('tax')}}</th>
+                                        <th>{{translate('status')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -324,7 +324,7 @@
                                         <img class="mb-3"
                                              src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg"
                                              alt="Image Description" style="width: 7rem;">
-                                        <p class="mb-0">{{\App\CPU\translate('No_data_to_show')}}</p>
+                                        <p class="mb-0">{{translate('No_data_to_show')}}</p>
                                     </div>
                                 @endif
                             </div>

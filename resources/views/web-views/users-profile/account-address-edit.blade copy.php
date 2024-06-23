@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('My Address'))
+@section('title',translate('My Address'))
 
 @push('css_or_js')
     <link rel="stylesheet" media="screen"
@@ -181,12 +181,12 @@
             }
         }
 
-        
+
         .city-non-active{
                 display: none;
         }
         .city-active{
-            
+
             display: block;
         }
     </style>
@@ -201,7 +201,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12  d-flex justify-content-between overflow-hidden">
                 <div class="col-md-4">
-                    <h1 class="h3  mb-0 folot-left headerTitle">{{\App\CPU\translate('UPDATE_ADDRESSES')}}</h1>
+                    <h1 class="h3  mb-0 folot-left headerTitle">{{translate('UPDATE_ADDRESSES')}}</h1>
                 </div>
             </div>
         </div>
@@ -218,15 +218,15 @@
                                     <ul class="donate-now">
                                         <li class="address_type_li">
                                             <input type="radio" class="address_type" id="a25" name="addressAs" value="permanent"  {{ $shippingAddress->address_type == 'permanent' ? 'checked' : ''}} />
-                                            <label for="a25" class="component">{{\App\CPU\translate('permanent')}}</label>
+                                            <label for="a25" class="component">{{translate('permanent')}}</label>
                                         </li>
                                         <li class="address_type_li">
                                             <input type="radio" class="address_type" id="a50" name="addressAs" value="home" {{ $shippingAddress->address_type == 'home' ? 'checked' : ''}} />
-                                            <label for="a50" class="component">{{\App\CPU\translate('Home')}}</label>
+                                            <label for="a50" class="component">{{translate('Home')}}</label>
                                         </li>
                                         <li class="address_type_li">
                                             <input type="radio" class="address_type" id="a75" name="addressAs" value="office" {{ $shippingAddress->address_type == 'office' ? 'checked' : ''}}/>
-                                            <label for="a75" class="component">{{\App\CPU\translate('Office')}}</label>
+                                            <label for="a75" class="component">{{translate('Office')}}</label>
                                         </li>
                                     </ul>
                                 </div>
@@ -236,11 +236,11 @@
                                     <ul class="donate-now">
                                         <li class="address_type_bl">
                                             <input type="radio" class="bill_type" id="b25" name="is_billing" value="0"  {{ $shippingAddress->is_billing == '0' ? 'checked' : ''}} />
-                                            <label for="b25" class="component">{{\App\CPU\translate('shipping')}}</label>
+                                            <label for="b25" class="component">{{translate('shipping')}}</label>
                                         </li>
                                         <li class="address_type_bl">
                                             <input type="radio" class="bill_type" id="b50" name="is_billing" value="1" {{ $shippingAddress->is_billing == '1' ? 'checked' : ''}} />
-                                            <label for="b50" class="component">{{\App\CPU\translate('billing')}}</label>
+                                            <label for="b50" class="component">{{translate('billing')}}</label>
                                         </li>
 
                                     </ul>
@@ -249,25 +249,25 @@
                             <!-- Tab panes -->
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="person_name">{{\App\CPU\translate('contact_person_name')}}</label>
+                                    <label for="person_name">{{translate('contact_person_name')}}</label>
                                     <input class="form-control" type="text" id="person_name"
                                         name="name"
                                         value="{{$shippingAddress->contact_person_name}}"
                                         required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="own_phone">{{\App\CPU\translate('Phone')}}</label>
+                                    <label for="own_phone">{{translate('Phone')}}</label>
                                     <input class="form-control" type="text" id="own_phone" name="phone" value="{{$shippingAddress->phone}}" required="required">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="city">{{\App\CPU\translate('City')}}</label>
+                                    <label for="city">{{translate('City')}}</label>
 
                                     {{-- <input class="form-control" type="text" id="city" name="city" value="{{$shippingAddress->city}}" required> --}}
 
                                     {{--  --}}
-                                    
+
                                     <select class="form-select form-control select-areas" name="city" type="country" id="si-area"
                                         style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
                                         >
@@ -279,9 +279,9 @@
                                     {{--  --}}
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="zip_code">{{\App\CPU\translate('zip_code')}}</label>
+                                    <label for="zip_code">{{translate('zip_code')}}</label>
                                     {{-- <input class="form-control" type="number" id="zip_code" name="zip" value="{{$shippingAddress->zip}}" required> --}}
-                                    
+
 
                                     <select class="form-select form-control select-areas" name="zip" type="zip" id="si-city"
                                         style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
@@ -293,15 +293,15 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label for="own_address">{{\App\CPU\translate('address')}}</label>
+                                    <label for="own_address">{{translate('address')}}</label>
                                     <textarea class="form-control" id="address"
                                         type="text"  name="address" required>{{$shippingAddress->address}}</textarea>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <input id="pac-input" class="controls rounded" style="height: 3em;width:fit-content;" title="{{\App\CPU\translate('search_your_location_here')}}" type="text" placeholder="{{\App\CPU\translate('search_here')}}"/>
+                                    <input id="pac-input" class="controls rounded" style="height: 3em;width:fit-content;" title="{{translate('search_your_location_here')}}" type="text" placeholder="{{translate('search_here')}}"/>
                                     <div style="height: 400px;" id="location_map_canvas"></div>
                                 </div>
                             </div>
@@ -314,8 +314,8 @@
                                 name="longitude" class="form-control"
                                 placeholder="Ex : 103.344322" id="longitude" value="{{$shipping_longitude??0}}" required readonly>
                             <div class="modal-footer">
-                                <button type="button" class="closeB btn btn-secondary" data-dismiss="modal">{{\App\CPU\translate('close')}}</button>
-                                <button type="submit" class="btn btn-primary">{{\App\CPU\translate('update')}}  </button>
+                                <button type="button" class="closeB btn btn-secondary" data-dismiss="modal">{{translate('close')}}</button>
+                                <button type="submit" class="btn btn-primary">{{translate('update')}}  </button>
                             </div>
                         </form>
                     </div>
@@ -329,16 +329,16 @@
 @push('script')
 <script src="https://maps.googleapis.com/maps/api/js?key={{\App\CPU\Helpers::get_business_settings('map_api_key')}}&libraries=places&v=3.49"></script>
 <script>
-    
+
     $('#si-city').on('change',function(){
         var cities = $('#si-city option:selected');
         $('#si-area option').removeClass('city-active');
         for (let index = 0; index < cities.length; index++) {
             var city = $(cities[index]).val();
-            $('#si-area option[ data-parent="'+city+'"]').addClass('city-active');            
+            $('#si-area option[ data-parent="'+city+'"]').addClass('city-active');
         }
     })
-    
+
     $('#si-city2').on('change',function(){
         var city = $('#si-city2 option:selected').val();
         $('#si-area2 option').removeClass('city-active');

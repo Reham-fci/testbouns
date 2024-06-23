@@ -265,7 +265,7 @@ class BusinessSettingsController extends Controller
         DB::table('business_settings')->updateOrInsert(['type' => 'decimal_point_settings'], [
             'value' => $request['decimal_point_settings']
         ]);
-        
+
         DB::table('business_settings')->updateOrInsert(['type' => 'shop_address'], [
             'value' => $request['shop_address']
         ]);
@@ -738,14 +738,14 @@ class BusinessSettingsController extends Controller
 
     public function product_approval(Request $request)
     {
-        
+
         DB::table('business_settings')->updateOrInsert(['type' => 'new_product_approval'], [
             'value' => $request->new_product_approval == 'on'?1:0
         ]);
         DB::table('business_settings')->updateOrInsert(['type' => 'product_wise_shipping_cost_approval'], [
             'value' => $request->product_wise_shipping_cost_approval == 'on'?1:0
         ]);
-        Toastr::success(\App\CPU\translate('admin_approval_for_products_updated_successfully!'));
+        Toastr::success(translate('admin_approval_for_products_updated_successfully!'));
         return redirect()->back();
     }
 
@@ -831,7 +831,7 @@ class BusinessSettingsController extends Controller
             'value' => $request['map_api_key_server']
         ]);
 
-        Toastr::success(\App\CPU\translate('config_data_updated'));
+        Toastr::success(translate('config_data_updated'));
         return back();
     }
 
@@ -845,7 +845,7 @@ class BusinessSettingsController extends Controller
             'value' => $request['pixel_analytics']
         ]);
 
-        Toastr::success(\App\CPU\translate('config_data_updated'));
+        Toastr::success(translate('config_data_updated'));
         return back();
     }
     public function google_tag_analytics_update(Request $request)
@@ -854,7 +854,7 @@ class BusinessSettingsController extends Controller
             'value' => $request['google_tag_manager_id']
         ]);
 
-        Toastr::success(\App\CPU\translate('google_tag_manager_id_updated'));
+        Toastr::success(translate('google_tag_manager_id_updated'));
         return back();
     }
 }

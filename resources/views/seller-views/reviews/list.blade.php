@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app-seller')
 
-@section('title', \App\CPU\translate('Review List'))
+@section('title', translate('Review List'))
 
 @push('css_or_js')
 
@@ -12,7 +12,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">{{\App\CPU\translate('Review List')}}</h1>
+                    <h1 class="page-header-title">{{translate('Review List')}}</h1>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                     <div class="card-header">
                         <div class="flex-between row justify-content-between flex-grow-1 mx-1">
                             <div class="col-12 col-sm-6">
-                                <h5>{{\App\CPU\translate('Review')}} {{ \App\CPU\translate('Table') }}
+                                <h5>{{translate('Review')}} {{ translate('Table') }}
                                 <span style="color: red;">({{ $reviews->total() }})</span></h5>
                             </div>
                             <div class="col-12 col-sm-5">
@@ -38,12 +38,12 @@
                                             </div>
                                         </div>
                                         <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                            placeholder="{{\App\CPU\translate('Search by Product Name')}}" aria-label="Search orders" value="{{ $search }}" required>
-                                        <button type="submit" class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
+                                            placeholder="{{translate('Search by Product Name')}}" aria-label="Search orders" value="{{ $search }}" required>
+                                        <button type="submit" class="btn btn-primary">{{translate('search')}}</button>
                                     </div>
                                     <!-- End Search -->
                                 </form>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                     <!-- End Header -->
@@ -55,10 +55,10 @@
                                    class="table table-borderless table-thead-bordered table-align-middle card-table">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th class="col-1">{{\App\CPU\translate('SL#')}}</th>
-                                    <th class="col-4">{{\App\CPU\translate('Product')}}</th>
-                                    <th class="col-2">{{\App\CPU\translate('Rating')}}</th>
-                                    <th class="col-5">{{\App\CPU\translate('Review')}}</th>
+                                    <th class="col-1">{{translate('SL#')}}</th>
+                                    <th class="col-4">{{translate('Product')}}</th>
+                                    <th class="col-2">{{translate('Rating')}}</th>
+                                    <th class="col-5">{{translate('Review')}}</th>
                                 </tr>
                                 </thead>
 
@@ -84,14 +84,14 @@
                                                     {{$review->comment?$review->comment:"No Comment Found"}}
                                                 </p>
                                                 @foreach (json_decode($review->attachment) as $img)
-                                                
+
                                                     <a class="float-left" href="{{asset('storage/app/public/review')}}/{{$img}}" data-lightbox="mygallery">
                                                         <img style="width: 60px;height:60px;padding:10px; " src="{{asset('storage/app/public/review')}}/{{$img}}" alt="">
                                                     </a>
-                                                
+
                                                 @endforeach
                                             </td>
-                                            
+
                                         </tr>
                                     @endif
                                 @endforeach
@@ -108,7 +108,7 @@
                     @if(count($reviews)==0)
                         <div class="text-center p-4">
                             <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                            <p class="mb-0">{{\App\CPU\translate('No data to show')}}</p>
+                            <p class="mb-0">{{translate('No data to show')}}</p>
                         </div>
                     @endif
                     <!-- End Footer -->

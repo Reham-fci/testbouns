@@ -171,7 +171,7 @@
                     <div class="hs-unfold">
                         <a id="short-cut" class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle"
                            data-toggle="modal" data-target="#short-cut-keys"
-                           title="{{\App\CPU\translate('short_cut_keys')}}">
+                           title="{{translate('short_cut_keys')}}">
                             <i class="tio-keyboard"></i>
 
                         </a>
@@ -239,7 +239,7 @@
                             <a class="dropdown-item"
                                href="{{route('seller.profile.update',auth('seller')->user()->id)}}">
                                 <span class="text-truncate pr-2"
-                                      title="Settings">{{\App\CPU\translate('Settings')}}</span>
+                                      title="Settings">{{translate('Settings')}}</span>
                             </a>
 
                             <div class="dropdown-divider"></div>
@@ -260,7 +260,7 @@
                                 }
                                 })">
                                 <span class="text-truncate pr-2"
-                                      title="Sign out">{{\App\CPU\translate('sign_out')}}</span>
+                                      title="Sign out">{{translate('sign_out')}}</span>
                             </a>
                         </div>
                     </div>
@@ -280,14 +280,14 @@
                    href="{{route('home')}}" target="_blank">
                     <i class="tio-globe"></i>
                     {{--<span class="btn-status btn-sm-status btn-status-danger"></span>--}}
-                    {{\App\CPU\translate('view_website')}}
+                    {{translate('view_website')}}
                 </a>
             </div>
             <div style="background:white;padding: 2px;border-radius: 5px;margin-top:10px;">
                 <a class="p-2"
                    href="{{route('seller.messages.chat')}}">
                     <i class="tio-email"></i>
-                    {{\App\CPU\translate('message')}}
+                    {{translate('message')}}
                     @php($message=\App\Model\Chatting::where(['seen_by_seller'=>1,'seller_id'=>auth('seller')->id()])->count())
                     @if($message!=0)
                         <span class="">({{ $message }})</span>
@@ -320,7 +320,7 @@
                                         <input id="search" autocomplete="off" type="text"
                                                value="{{$keyword?$keyword:''}}"
                                                name="search" class="form-control search-bar-input"
-                                               placeholder="{{\App\CPU\translate('Search here')}}"
+                                               placeholder="{{translate('Search here')}}"
                                                aria-label="Search here">
                                         <diV class="card search-card w-4"
                                              style="position: absolute;z-index: 1;width: 100%;">
@@ -335,7 +335,7 @@
                                 <div class="input-group float-right">
                                     <select name="category" id="category" class="form-control js-select2-custom mx-1"
                                             title="select category" onchange="set_category_filter(this.value)">
-                                        <option value="">{{\App\CPU\translate('All Categories')}}</option>
+                                        <option value="">{{translate('All Categories')}}</option>
                                         @foreach ($categories as $item)
                                             <option
                                                 value="{{$item->id}}" {{$category==$item->id?'selected':''}}>{{$item->name}}</option>
@@ -370,7 +370,7 @@
                             <div class="form-group mt-1 col-12 w-i6">
                                 <select onchange="customer_change(this.value);" id='customer' name="customer_id"
                                         data-placeholder="Walk In Customer" class="js-data-example-ajax form-control">
-                                    <option value="0">{{\App\CPU\translate('walking_customer')}}</option>
+                                    <option value="0">{{translate('walking_customer')}}</option>
                                 </select>
 
                             </div>
@@ -380,19 +380,19 @@
                                 <button class="w-100 d-inline-block btn btn-success rounded" id="add_new_customer"
                                         type="button" data-toggle="modal" data-target="#add-customer"
                                         title="Add Customer">
-                                    <i class="tio-add-circle-outlined"></i> {{ \App\CPU\translate('customer')}}
+                                    <i class="tio-add-circle-outlined"></i> {{ translate('customer')}}
                                 </button>
                             </div>
                             <div class="form-group mt-1 col-12 col-lg-6 mb-0">
                                 <a class="w-100 d-inline-block btn btn-warning rounded" onclick="new_order()">
-                                    {{ \App\CPU\translate('new_order')}}
+                                    {{ translate('new_order')}}
                                 </a>
                             </div>
                         </div>
                         <div class="row mt-2">
                             <div class="form-group col-12 mb-0">
                                 <label
-                                    class="input-label text-capitalize border p-1">{{\App\CPU\translate('current_customer')}}
+                                    class="input-label text-capitalize border p-1">{{translate('current_customer')}}
                                     : <span class="style-i4 mb-0 p-1" id="current_customer"></span></label>
                             </div>
                         </div>
@@ -405,7 +405,7 @@
 
                             <div class="form-group mt-1 col-12 col-lg-6 mt-2 mb-0">
                                 <a class="w-100 d-inline-block btn btn-danger rounded" onclick="clear_cart()">
-                                    {{ \App\CPU\translate('clear_cart')}}
+                                    {{ translate('clear_cart')}}
                                 </a>
                             </div>
                         </div>
@@ -435,7 +435,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ \App\CPU\translate('Print Invoice')}}</h5>
+                        <h5 class="modal-title">{{ translate('Print Invoice')}}</h5>
                         <button id="invoice_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -447,7 +447,7 @@
                                        onclick="printDiv('printableArea')"
                                        value="Proceed, If thermal printer is ready."/>
                                 <a href="{{url()->previous()}}"
-                                   class="btn btn-danger non-printable">{{ \App\CPU\translate('Back')}}</a>
+                                   class="btn btn-danger non-printable">{{ translate('Back')}}</a>
                             </center>
                             <hr class="non-printable">
                         </div>
@@ -465,7 +465,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{\App\CPU\translate('add_new_customer')}}</h5>
+                    <h5 class="modal-title">{{translate('add_new_customer')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -477,78 +477,78 @@
                         <div class="row pl-2">
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label class="input-label">{{\App\CPU\translate('first_name')}} <span
+                                    <label class="input-label">{{translate('first_name')}} <span
                                             class="input-label-secondary text-danger">*</span></label>
                                     <input type="text" name="f_name" class="form-control" value="{{ old('f_name') }}"
-                                           placeholder="{{\App\CPU\translate('first_name')}}" required>
+                                           placeholder="{{translate('first_name')}}" required>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label class="input-label">{{\App\CPU\translate('last_name')}} <span
+                                    <label class="input-label">{{translate('last_name')}} <span
                                             class="input-label-secondary text-danger">*</span></label>
                                     <input type="text" name="l_name" class="form-control" value="{{ old('l_name') }}"
-                                           placeholder="{{\App\CPU\translate('last_name')}}" required>
+                                           placeholder="{{translate('last_name')}}" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row pl-2">
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label class="input-label">{{\App\CPU\translate('email')}}<span
+                                    <label class="input-label">{{translate('email')}}<span
                                             class="input-label-secondary text-danger">*</span></label>
                                     <input type="email" name="email" class="form-control" value="{{ old('email') }}"
-                                           placeholder="{{\App\CPU\translate('Ex_:_ex@example.com')}}" required>
+                                           placeholder="{{translate('Ex_:_ex@example.com')}}" required>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label class="input-label">{{\App\CPU\translate('phone')}}<span
+                                    <label class="input-label">{{translate('phone')}}<span
                                             class="input-label-secondary text-danger">*</span></label>
                                     <input type="text" name="phone" class="form-control" value="{{ old('phone') }}"
-                                           placeholder="{{\App\CPU\translate('phone')}}" required>
+                                           placeholder="{{translate('phone')}}" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row pl-2">
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label class="input-label">{{\App\CPU\translate('country')}} <span
+                                    <label class="input-label">{{translate('country')}} <span
                                             class="input-label-secondary text-danger">*</span></label>
                                     <input type="text" name="country" class="form-control" value="{{ old('country') }}"
-                                           placeholder="{{\App\CPU\translate('country')}}" required>
+                                           placeholder="{{translate('country')}}" required>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label class="input-label">{{\App\CPU\translate('city')}} <span
+                                    <label class="input-label">{{translate('city')}} <span
                                             class="input-label-secondary text-danger">*</span></label>
                                     <input type="text" name="city" class="form-control" value="{{ old('city') }}"
-                                           placeholder="{{\App\CPU\translate('city')}}" required>
+                                           placeholder="{{translate('city')}}" required>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label class="input-label">{{\App\CPU\translate('zip_code')}} <span
+                                    <label class="input-label">{{translate('zip_code')}} <span
                                             class="input-label-secondary text-danger">*</span></label>
                                     <input type="text" name="zip_code" class="form-control"
                                            value="{{ old('zip_code') }}"
-                                           placeholder="{{\App\CPU\translate('zip_code')}}" required>
+                                           placeholder="{{translate('zip_code')}}" required>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <label class="input-label">{{\App\CPU\translate('address')}} <span
+                                    <label class="input-label">{{translate('address')}} <span
                                             class="input-label-secondary text-danger">*</span></label>
                                     <input type="text" name="address" class="form-control" value="{{ old('address') }}"
-                                           placeholder="{{\App\CPU\translate('address')}}" required>
+                                           placeholder="{{translate('address')}}" required>
                                 </div>
                             </div>
                         </div>
 
                         <hr>
                         <button type="submit" id="submit_new_customer"
-                                class="btn btn-primary">{{\App\CPU\translate('submit')}}</button>
+                                class="btn btn-primary">{{translate('submit')}}</button>
                     </form>
                 </div>
             </div>
@@ -807,18 +807,18 @@
                 success: function (data) {
                     // console.log(data);
                     if (data.extra_discount === 'success') {
-                        toastr.success('{{ \App\CPU\translate('extra_discount_added_successfully') }}', {
+                        toastr.success('{{ translate('extra_discount_added_successfully') }}', {
                             CloseButton: true,
                             ProgressBar: true
                         });
                     } else if (data.extra_discount === 'empty') {
-                        toastr.warning('{{ \App\CPU\translate('your_cart_is_empty') }}', {
+                        toastr.warning('{{ translate('your_cart_is_empty') }}', {
                             CloseButton: true,
                             ProgressBar: true
                         });
 
                     } else {
-                        toastr.warning('{{ \App\CPU\translate('this_discount_is_not_applied_for_this_amount') }}', {
+                        toastr.warning('{{ translate('this_discount_is_not_applied_for_this_amount') }}', {
                             CloseButton: true,
                             ProgressBar: true
                         });
@@ -836,7 +836,7 @@
                 }
             });
         } else {
-            toastr.warning('{{ \App\CPU\translate('amount_can_not_be_negative_or_zero!') }}', {
+            toastr.warning('{{ translate('amount_can_not_be_negative_or_zero!') }}', {
                 CloseButton: true,
                 ProgressBar: true
             });
@@ -867,22 +867,22 @@
             success: function (data) {
                 console.log(data);
                 if (data.coupon === 'success') {
-                    toastr.success('{{ \App\CPU\translate('coupon_added_successfully') }}', {
+                    toastr.success('{{ translate('coupon_added_successfully') }}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 } else if (data.coupon === 'amount_low') {
-                    toastr.warning('{{ \App\CPU\translate('this_discount_is_not_applied_for_this_amount') }}', {
+                    toastr.warning('{{ translate('this_discount_is_not_applied_for_this_amount') }}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 } else if (data.coupon === 'cart_empty') {
-                    toastr.warning('{{ \App\CPU\translate('your_cart_is_empty') }}', {
+                    toastr.warning('{{ translate('your_cart_is_empty') }}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 } else {
-                    toastr.warning('{{ \App\CPU\translate('coupon_is_invalid') }}', {
+                    toastr.warning('{{ translate('coupon_is_invalid') }}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
@@ -945,7 +945,7 @@
                 value: value,
             },
             success: function (data) {
-                toastr.success(key + ' ' + '{{\App\CPU\translate('selected')}}!', {
+                toastr.success(key + ' ' + '{{translate('selected')}}!', {
                     CloseButton: true,
                     ProgressBar: true
                 });
@@ -1146,20 +1146,20 @@
                         Swal.fire({
                             icon: 'info',
                             title: 'Cart',
-                            text: '{{ \App\CPU\translate("Product already added in cart")}}'
+                            text: '{{ translate("Product already added in cart")}}'
                         });
                         return false;
                     } else if (data.data == 0) {
                         Swal.fire({
                             icon: 'error',
                             title: 'Cart',
-                            text: '{{ \App\CPU\translate("Sorry, product out of stock")}}'
+                            text: '{{ translate("Sorry, product out of stock")}}'
                         });
                         return false;
                     }
                     $('.call-when-done').click();
 
-                    toastr.success('{{ \App\CPU\translate("Item has been added in your cart!")}}', {
+                    toastr.success('{{ translate("Item has been added in your cart!")}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
@@ -1174,7 +1174,7 @@
             Swal.fire({
                 type: 'info',
                 title: 'Cart',
-                text: '{{ \App\CPU\translate("Please choose all the options")}}'
+                text: '{{ translate("Please choose all the options")}}'
             });
         }
     }
@@ -1193,7 +1193,7 @@
             } else {
                 //updateCart();
 
-                toastr.info('{{ \App\CPU\translate("Item has been removed from cart")}}', {
+                toastr.info('{{ translate("Item has been removed from cart")}}', {
                     CloseButton: true,
                     ProgressBar: true
                 });
@@ -1205,8 +1205,8 @@
 
     function emptyCart() {
         Swal.fire({
-            title: '{{\App\CPU\translate('Are_you_sure?')}}',
-            text: '{{\App\CPU\translate('You_want_to_remove_all_items_from_cart!!')}}',
+            title: '{{translate('Are_you_sure?')}}',
+            text: '{{translate('You_want_to_remove_all_items_from_cart!!')}}',
             type: 'warning',
             showCancelButton: true,
             cancelButtonColor: 'default',
@@ -1218,7 +1218,7 @@
             if (result.value) {
                 $.post('{{ route('seller.pos.emptyCart') }}', {_token: '{{ csrf_token() }}'}, function (data) {
                     $('#cart').empty().html(data.view);
-                    toastr.info('{{ \App\CPU\translate("Item has been removed from cart")}}', {
+                    toastr.info('{{ translate("Item has been removed from cart")}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
@@ -1256,19 +1256,19 @@
             }, function (data) {
 
                 if (data.qty < 0) {
-                    toastr.warning('{{\App\CPU\translate('product_quantity_is_not_enough!')}}', {
+                    toastr.warning('{{translate('product_quantity_is_not_enough!')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 }
                 if (data.upQty === 'zeroNegative') {
-                    toastr.warning('{{\App\CPU\translate('Product_quantity_can_not_be_zero_or_less_than_zero_in_cart!')}}', {
+                    toastr.warning('{{translate('Product_quantity_can_not_be_zero_or_less_than_zero_in_cart!')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 }
                 if (data.qty_update == 1) {
-                    toastr.success('{{\App\CPU\translate('Product_quantity_updated!')}}', {
+                    toastr.success('{{translate('Product_quantity_updated!')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
@@ -1290,19 +1290,19 @@
             }, function (data) {
 
                 if (data.qty < 0) {
-                    toastr.warning('{{\App\CPU\translate('product_quantity_is_not_enough!')}}', {
+                    toastr.warning('{{translate('product_quantity_is_not_enough!')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 }
                 if (data.upQty === 'zeroNegative') {
-                    toastr.warning('{{\App\CPU\translate('Product_quantity_can_not_be_zero_or_less_than_zero_in_cart!')}}', {
+                    toastr.warning('{{translate('Product_quantity_can_not_be_zero_or_less_than_zero_in_cart!')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 }
                 if (data.qty_update == 1) {
-                    toastr.success('{{\App\CPU\translate('Product_quantity_updated!')}}', {
+                    toastr.success('{{translate('Product_quantity_updated!')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });

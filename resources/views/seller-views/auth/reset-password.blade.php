@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Title -->
-    <title>{{\App\CPU\translate('Seller | Reset Password')}}</title>
+    <title>{{translate('Seller | Reset Password')}}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
@@ -47,12 +47,12 @@
 
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
-                <h2 class="h3 mb-4">{{\App\CPU\translate('forget_your_password')}}?</h2>
-                <p class="font-size-md">{{\App\CPU\translate('follow_steps')}}
+                <h2 class="h3 mb-4">{{translate('forget_your_password')}}?</h2>
+                <p class="font-size-md">{{translate('follow_steps')}}
                     secure.</p>
                 <ol class="list-unstyled font-size-md">
-                    <li><span class="text-primary mr-2">1.</span>{{\App\CPU\translate('new_password')}}.</li>
-                    <li><span class="text-primary mr-2">2.</span>{{\App\CPU\translate('confirm_password')}}.</li>
+                    <li><span class="text-primary mr-2">1.</span>{{translate('new_password')}}.</li>
+                    <li><span class="text-primary mr-2">2.</span>{{translate('confirm_password')}}.</li>
                 </ol>
                 <div class="card py-2 mt-4">
                     <form class="card-body needs-validation" novalidate method="POST"
@@ -63,33 +63,33 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="si-password">{{\App\CPU\translate('New')}}{{\App\CPU\translate('password')}}</label>
+                            <label for="si-password">{{translate('New')}}{{translate('password')}}</label>
                             <div class="password-toggle">
                                 <input class="form-control" name="password" type="password" id="si-password"
                                        required>
                                 <label class="password-toggle-btn">
                                     <input class="custom-control-input" type="checkbox"><i
                                         class="czi-eye password-toggle-indicator"></i><span
-                                        class="sr-only">{{\App\CPU\translate('Show')}} {{\App\CPU\translate('password')}} </span>
+                                        class="sr-only">{{translate('Show')}} {{translate('password')}} </span>
                                 </label>
-                                <div class="invalid-feedback">{{\App\CPU\translate('provide_valid_password')}}.</div>
+                                <div class="invalid-feedback">{{translate('provide_valid_password')}}.</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="si-password">{{\App\CPU\translate('confirm_password')}}</label>
+                            <label for="si-password">{{translate('confirm_password')}}</label>
                             <div class="password-toggle">
                                 <input class="form-control" name="confirm_password" type="password" id="si-password"
                                        required>
                                 <label class="password-toggle-btn">
                                     <input class="custom-control-input" type="checkbox"><i
                                         class="czi-eye password-toggle-indicator"></i><span
-                                        class="sr-only">{{\App\CPU\translate('Show')}} {{\App\CPU\translate('password')}} </span>
+                                        class="sr-only">{{translate('Show')}} {{translate('password')}} </span>
                                 </label>
-                                <div class="invalid-feedback">{{\App\CPU\translate('provide_valid_password')}}</div>
+                                <div class="invalid-feedback">{{translate('provide_valid_password')}}</div>
                             </div>
                         </div>
 
-                        <button class="btn btn-primary" type="submit">{{\App\CPU\translate('reset_password')}}</button>
+                        <button class="btn btn-primary" type="submit">{{translate('reset_password')}}</button>
                     </form>
                 </div>
             </div>
@@ -142,7 +142,7 @@
         function copy_cred() {
             $('#signinSrEmail').val('seller_demo@demo.com');
             $('#signupSrPassword').val('12345678');
-            toastr.success('{{\App\CPU\translate('Copied successfully')}}!', 'Success!', {
+            toastr.success('{{translate('Copied successfully')}}!', 'Success!', {
                 CloseButton: true,
                 ProgressBar: true
             });

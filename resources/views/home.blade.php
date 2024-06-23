@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{\App\CPU\translate('Dashboard')}}</div>
+                <div class="card-header">{{translate('Dashboard')}}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                        {{\App\CPU\translate('You are logged in')}}!
+                        {{translate('You are logged in')}}!
                 </div>
             </div>
         </div>

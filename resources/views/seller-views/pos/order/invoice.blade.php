@@ -1,9 +1,9 @@
 <div style="width:410px;">
     <div class="text-center pt-4 mb-3">
         <h2 style="line-height: 1">{{$shop->name}}</h2>
-        
+
         <h5 style="font-size: 16px;font-weight: lighter;line-height: 1">
-            {{\App\CPU\translate('Phone')}}
+            {{translate('Phone')}}
             : {{$shop->contact}}
         </h5>
     </div>
@@ -11,7 +11,7 @@
     <span>--------------------------------------------------------------------------------------</span>
     <div class="row mt-3">
         <div class="col-6">
-            <h5>{{\App\CPU\translate('Order ID')}} : {{$order['id']}}</h5>
+            <h5>{{translate('Order ID')}} : {{$order['id']}}</h5>
         </div>
         <div class="col-6">
             <h5 style="font-weight: lighter">
@@ -20,11 +20,11 @@
         </div>
         @if($order->customer)
             <div class="col-12">
-                <h5>{{\App\CPU\translate('Customer Name')}} : {{$order->customer['f_name'].' '.$order->customer['l_name']}}</h5>
+                <h5>{{translate('Customer Name')}} : {{$order->customer['f_name'].' '.$order->customer['l_name']}}</h5>
                 @if ($order->customer->id !=0)
-                    <h5>{{\App\CPU\translate('Phone')}} : {{$order->customer['phone']}}</h5>
+                    <h5>{{translate('Phone')}} : {{$order->customer['phone']}}</h5>
                 @endif
-                
+
             </div>
         @endif
     </div>
@@ -33,9 +33,9 @@
     <table class="table table-bordered mt-3" style="width: 98%">
         <thead>
         <tr>
-            <th style="width: 10%">{{\App\CPU\translate('QTY')}}</th>
-            <th class="">{{\App\CPU\translate('DESC')}}</th>
-            <th class="">{{\App\CPU\translate('Price')}}</th>
+            <th style="width: 10%">{{translate('QTY')}}</th>
+            <th class="">{{translate('DESC')}}</th>
+            <th class="">{{translate('Price')}}</th>
         </tr>
         </thead>
 
@@ -49,7 +49,7 @@
         @php($coupon_discount=0)
         @foreach($order->details as $detail)
             @if($detail->product)
-                
+
                 <tr>
                     <td class="">
                         {{$detail['qty']}}
@@ -57,7 +57,7 @@
                     <td class="">
                         <span style="word-break: break-all;"> {{ Str::limit($detail->product['name'], 200) }}</span><br>
                         @if(count(json_decode($detail['variation'],true))>0)
-                            <strong><u>{{\App\CPU\translate('Variation')}} : </u></strong>
+                            <strong><u>{{translate('Variation')}} : </u></strong>
                             @foreach(json_decode($detail['variation'],true) as $key1 =>$variation)
                                 <div class="font-size-sm text-body" style="color: black!important;">
                                     <span>{{$key1}} :  </span>
@@ -67,9 +67,9 @@
                             @endforeach
                         @endif
 
-                    
 
-                        {{\App\CPU\translate('Discount')}} : {{\App\CPU\Helpers::currency_converter(round($detail['discount'],2))}}
+
+                        {{translate('Discount')}} : {{\App\CPU\Helpers::currency_converter(round($detail['discount'],2))}}
                     </td>
                     <td style="width: 28%">
                         @php($amount=($detail['price']*$detail['qty'])-$detail['discount'])
@@ -80,15 +80,15 @@
                 @php($sub_total+=$amount)
                 @php($total_product_price+=$product_price)
                 @php($total_tax+=$detail['tax'])
-                
+
             @endif
         @endforeach
         </tbody>
     </table>
     <span>---------------------------------------------------------------------------------------</span>
     <?php
-    
-        
+
+
         if ($order['extra_discount_type'] == 'percent') {
             $ext_discount = ($total_product_price / 100) * $order['extra_discount'];
         } else {
@@ -101,31 +101,31 @@
     <div class="row justify-content-md-end">
         <div class="col-md-8 col-lg-8">
             <dl class="row text-right" style="color: black!important;">
-                <dt class="col-7">{{\App\CPU\translate('Items Price')}}:</dt>
+                <dt class="col-7">{{translate('Items Price')}}:</dt>
                 <dd class="col-5">{{\App\CPU\Helpers::currency_converter(round($sub_total,2))}}</dd>
-                <dt class="col-7">{{\App\CPU\translate('Tax')}} / {{\App\CPU\translate('VAT')}}:</dt>
+                <dt class="col-7">{{translate('Tax')}} / {{translate('VAT')}}:</dt>
                 <dd class="col-5">{{\App\CPU\Helpers::currency_converter(round($total_tax,2))}}</dd>
-                
-                <dt class="col-7">{{\App\CPU\translate('Subtotal')}}:</dt>
+
+                <dt class="col-7">{{translate('Subtotal')}}:</dt>
                 <dd class="col-5">{{\App\CPU\Helpers::currency_converter(round($sub_total+$total_tax,2))}}</dd>
-                
-                <dt class="col-7">{{\App\CPU\translate('extra_discount')}}:</dt>
+
+                <dt class="col-7">{{translate('extra_discount')}}:</dt>
                 <dd class="col-5">{{\App\CPU\Helpers::currency_converter(round($ext_discount,2))}}</dd>
 
-                <dt class="col-7" >{{\App\CPU\translate('coupon_discount')}}:</dt>
+                <dt class="col-7" >{{translate('coupon_discount')}}:</dt>
                 <dd class="col-5">{{\App\CPU\Helpers::currency_converter(round($coupon_discount,2))}}</dd>
-                
-                <dt class="col-7" style="font-size: 20px">{{\App\CPU\translate('Total')}}:</dt>
+
+                <dt class="col-7" style="font-size: 20px">{{translate('Total')}}:</dt>
                 <dd class="col-5" style="font-size: 20px">{{\App\CPU\Helpers::currency_converter(round($order->order_amount,2))}}</dd>
             </dl>
         </div>
     </div>
     <div class="d-flex flex-row justify-content-between border-top">
-        <span>{{\App\CPU\translate('Paid_by')}}: {{\App\CPU\translate($order->payment_method)}}</span>
+        <span>{{translate('Paid_by')}}: {{translate($order->payment_method)}}</span>
     </div>
     <span>---------------------------------------------------------------------------------------</span>
     <h5 class="text-center pt-3">
-        """{{\App\CPU\translate('THANK YOU')}}"""
+        """{{translate('THANK YOU')}}"""
     </h5>
     <span>---------------------------------------------------------------------------------------</span>
 </div>

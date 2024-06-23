@@ -1,5 +1,5 @@
 <div class="feature_header">
-    <span>{{ \App\CPU\translate('shopping_cart')}}</span>
+    <span>{{ translate('shopping_cart')}}</span>
 </div>
 
 <!-- Grid-->
@@ -13,16 +13,16 @@
 <div class="row">
     <!-- List of items-->
     <section class="col-lg-8">
-        
+
             @foreach($cart as $group_key=>$group)
             <div class="cart_information mb-3">
                 @foreach($group as $cart_key=>$cartItem)
                 @if ($shippingMethod=='inhouse_shipping')
                     <?php
-                        
+
                         $admin_shipping = \App\Model\ShippingType::where('seller_id',0)->first();
                         $shipping_type = isset($admin_shipping)==true?$admin_shipping->shipping_type:'order_wise';
-                        
+
                     ?>
                 @else
                     <?php
@@ -35,16 +35,16 @@
                         }
                     ?>
                 @endif
-                
+
                     @if($cart_key==0)
                         @if($cartItem->seller_is=='admin')
                             <b>
-                                <span>{{ \App\CPU\translate('shop_name')}} : </span>
+                                <span>{{ translate('shop_name')}} : </span>
                                 <a href="{{route('shopView',['id'=>0])}}">{{\App\CPU\Helpers::get_business_settings('company_name')}}</a>
                             </b>
                         @else
                             <b>
-                                <span>{{ \App\CPU\translate('shop_name')}}:</span>
+                                <span>{{ translate('shop_name')}}:</span>
                                 <a href="{{route('shopView',['id'=>$cartItem->seller_id])}}">
                                     {{\App\Model\Shop::where(['seller_id'=>$cartItem['seller_id']])->first()->name}}
                                 </a>
@@ -57,24 +57,24 @@
                         style="width: 100%">
                         <thead class="">
                             <tr class="">
-                                <th class="font-weight-bold" style="width: 5%;">{{\App\CPU\translate('SL#')}}</th>
+                                <th class="font-weight-bold" style="width: 5%;">{{translate('SL#')}}</th>
                                 @if ( $shipping_type != 'order_wise')
-                                <th class="font-weight-bold" style="width: 30%;">{{\App\CPU\translate('product_details')}}</th>
+                                <th class="font-weight-bold" style="width: 30%;">{{translate('product_details')}}</th>
                                 @else
-                                <th class="font-weight-bold" style="width: 45%;">{{\App\CPU\translate('product_details')}}</th>
+                                <th class="font-weight-bold" style="width: 45%;">{{translate('product_details')}}</th>
                                 @endif
-                                <th class="font-weight-bold" style="width: 15%;">{{\App\CPU\translate('unit_price')}}</th>
-                                <th class="font-weight-bold" style="width: 15%;">{{\App\CPU\translate('qty')}}</th>
-                                <th class="font-weight-bold" style="width: 15%;">{{\App\CPU\translate('price')}}</th>
+                                <th class="font-weight-bold" style="width: 15%;">{{translate('unit_price')}}</th>
+                                <th class="font-weight-bold" style="width: 15%;">{{translate('qty')}}</th>
+                                <th class="font-weight-bold" style="width: 15%;">{{translate('price')}}</th>
                                 @if ( $shipping_type != 'order_wise')
-                                    <th class="font-weight-bold" style="width: 15%;">{{\App\CPU\translate('shipping_cost')}} </th>
+                                    <th class="font-weight-bold" style="width: 15%;">{{translate('shipping_cost')}} </th>
                                 @endif
                                 <th class="font-weight-bold" style="width: 5%;"></th>
                             </tr>
                         </thead>
-                            
+
                 @foreach($group as $cart_key=>$cartItem)
-                
+
                         <tbody>
                             <tr>
                                 <td>{{$cart_key+1}}</td>
@@ -90,9 +90,9 @@
                                         </div>
                                         <div class="ml-2 text-break" style="width:70%;">
                                             <a href="{{route('product',$cartItem['slug'])}}">{{$cartItem['name']}}</a>
-                                        
+
                                         </div>
-                                        
+
                                     </div>
                                     <div class="d-flex">
 
@@ -101,7 +101,7 @@
                                                 <span class="{{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}}"
                                                     style="font-size: 12px;">
                                                     {{$key1}} : {{$variation}}</span>
-                                                    
+
                                             </div>
                                         @endforeach
                                     </div>
@@ -147,10 +147,10 @@
                                 </button>
                                 </td>
                             </tr>
-                            
+
                             @if($shippingMethod=='sellerwise_shipping' && $shipping_type == 'order_wise')
                                 @php($choosen_shipping=\App\Model\CartShipping::where(['cart_group_id'=>$cartItem['cart_group_id']])->first())
-                                
+
                                 @if(isset($choosen_shipping)==false)
                                     @php($choosen_shipping['shipping_method_id']=0)
                                 @endif
@@ -158,17 +158,17 @@
                                 @php($shippings=\App\CPU\Helpers::get_shipping_methods($cartItem['seller_id'],$cartItem['seller_is']))
                             <tr>
                                 <td colspan="4">
-                                    
+
                                     @if($cart_key==$group->count()-1)
 
                                     <!-- choosen shipping method-->
-                                        
+
                                         <div class="row">
-                                            
+
                                             <div class="col-12">
                                                 <select class="form-control"
                                                         onchange="set_shipping_id(this.value,'{{$cartItem['cart_group_id']}}')">
-                                                    <option>{{\App\CPU\translate('choose_shipping_method')}}</option>
+                                                    <option>{{translate('choose_shipping_method')}}</option>
                                                     @foreach($shippings as $shipping)
                                                         <option
                                                             value="{{$shipping['id']}}" {{$choosen_shipping['shipping_method_id']==$shipping['id']?'selected':''}}>
@@ -178,24 +178,24 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        
-                                    @endif 
+
+                                    @endif
                                 </td>
                                 <td colspan="3">
                                     @if($cart_key==$group->count()-1)
                                     <div class="row">
                                         <div class="col-12">
                                             <span>
-                                                <b>{{\App\CPU\translate('shipping_cost')}} : </b>
+                                                <b>{{translate('shipping_cost')}} : </b>
                                             </span>
                                             {{\App\CPU\Helpers::currency_converter($choosen_shipping['shipping_method_id']!= 0?$choosen_shipping->shipping_cost:0)}}
                                         </div>
                                     </div>
-                                    @endif 
+                                    @endif
                                 </td>
                             </tr>
                             @endif
-                        </tbody> 
+                        </tbody>
                 @endforeach
             </table>
                 <div class="mt-3"></div></div>
@@ -207,19 +207,19 @@
                     $admin_shipping = \App\Model\ShippingType::where('seller_id',0)->first();
                     $shipping_type = isset($admin_shipping)==true?$admin_shipping->shipping_type:'order_wise';
                 ?>
-                
+
                 @if(isset($cartItem))
                     @if ($shipping_type == 'order_wise')
                         @php($shippings=\App\CPU\Helpers::get_shipping_methods(1,'admin'))
                         @php($choosen_shipping=\App\Model\CartShipping::where(['cart_group_id'=>$cartItem['cart_group_id']])->first())
-                                                
+
                         @if(isset($choosen_shipping)==false)
                             @php($choosen_shipping['shipping_method_id']=0)
                         @endif
                         <div class="row">
                             <div class="col-12">
                                 <select class="form-control" onchange="set_shipping_id(this.value,'all_cart_group')">
-                                    <option>{{\App\CPU\translate('choose_shipping_method')}}</option>
+                                    <option>{{translate('choose_shipping_method')}}</option>
                                     @foreach($shippings as $shipping)
                                         <option
                                             value="{{$shipping['id']}}" {{$choosen_shipping['shipping_method_id']==$shipping['id']?'selected':''}}>
@@ -235,35 +235,35 @@
 
             @if( $cart->count() == 0)
                 <div class="d-flex justify-content-center align-items-center">
-                    <h4 class="text-danger text-capitalize">{{\App\CPU\translate('cart_empty')}}</h4>
+                    <h4 class="text-danger text-capitalize">{{translate('cart_empty')}}</h4>
                 </div>
             @endif
-        
-        
+
+
         <form  method="get">
             <div class="form-group">
                 <div class="row">
                     <div class="col-12">
-                        <label for="phoneLabel" class="form-label input-label">{{\App\CPU\translate('order_note')}} <span
-                                            class="input-label-secondary">({{\App\CPU\translate('Optional')}})</span></label>
+                        <label for="phoneLabel" class="form-label input-label">{{translate('order_note')}} <span
+                                            class="input-label-secondary">({{translate('Optional')}})</span></label>
                         <textarea class="form-control" id="order_note" name="order_note" style="width:100%;">{{ session('order_note')}}</textarea>
                     </div>
                 </div>
             </div>
         </form>
-       
+
 
         <div class="row pt-2">
             <div class="col-6">
                 <a href="{{route('home')}}" class="btn btn-primary">
-                    <i class="fa fa-{{Session::get('direction') === "rtl" ? 'forward' : 'backward'}} px-1"></i> {{\App\CPU\translate('continue_shopping')}}
+                    <i class="fa fa-{{Session::get('direction') === "rtl" ? 'forward' : 'backward'}} px-1"></i> {{translate('continue_shopping')}}
                 </a>
             </div>
-            
+
             <div class="col-6">
                 <a onclick="checkout()"
                    class="btn btn-primary pull-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}">
-                    {{\App\CPU\translate('checkout')}}
+                    {{translate('checkout')}}
                     <i class="fa fa-{{Session::get('direction') === "rtl" ? 'backward' : 'forward'}} px-1"></i>
                 </a>
             </div>
@@ -306,7 +306,7 @@
             data: {
                     _token: '{{csrf_token()}}',
                     order_note:order_note,
-                    
+
                 },
             beforeSend: function () {
                 $('#loading').show();
@@ -321,5 +321,5 @@
             },
         });
     }
-    
+
 </script>

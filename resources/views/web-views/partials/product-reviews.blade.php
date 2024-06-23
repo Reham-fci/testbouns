@@ -14,14 +14,14 @@
                     class="media-body {{Session::get('direction') === "rtl" ? 'pr-3' : 'pl-3'}} text-body">
                     <span class="font-size-sm mb-0 text-body" style="font-weight: 700;font-size: 12px;">{{isset($productReview->user)?$productReview->user->f_name:'not exist'}}</span>
                     <div class="d-flex ">
-                        
+
                         <div class=" {{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}}">
-                            
+
                                     <i class="sr-star czi-star-filled active"></i>
-                                
+
                         </div>
                         <div
-                            class="text-body" style="font-weight: 400;font-size: 15px;">{{$productReview->rating}}/{{\App\CPU\translate('5')}} </div>
+                            class="text-body" style="font-weight: 400;font-size: 15px;">{{$productReview->rating}}/{{translate('5')}} </div>
                     </div>
                 </div>
             </div>

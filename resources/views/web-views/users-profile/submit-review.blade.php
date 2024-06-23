@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('submit_a_review'))
+@section('title',translate('submit_a_review'))
 
 @section('content')
 
@@ -13,7 +13,7 @@
         <section class="col-lg-9  col-md-9">
             <div class="card">
                 <div class="card-header">
-                    <h5 style="margin-left: 20px;">{{\App\CPU\translate('submit_a_review')}}</h3>
+                    <h5 style="margin-left: 20px;">{{translate('submit_a_review')}}</h3>
                 </div>
                 <div class="card-body">
                     <form action="{{route('review.store')}}" method="post" enctype="multipart/form-data">
@@ -21,7 +21,7 @@
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">{{\App\CPU\translate('rating')}}</label>
+                                <label for="exampleInputEmail1">{{translate('rating')}}</label>
                                 <select class="form-control" name="rating">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -32,22 +32,22 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">{{\App\CPU\translate('comment')}}</label>
+                                <label for="exampleInputEmail1">{{translate('comment')}}</label>
                                 <input name="product_id" value="{{$order_details->product_id}}" hidden>
                                 <input name="order_id" value="{{$order_details->order_id}}" hidden>
                                 <textarea class="form-control" name="comment"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">{{\App\CPU\translate('attachment')}}</label>
+                                <label for="exampleInputEmail1">{{translate('attachment')}}</label>
                                 <div class="row coba"></div>
                             </div>
 
                         </div>
                         <div class="modal-footer">
-                            <a href="{{ URL::previous() }}" class="btn btn-secondary">{{\App\CPU\translate('back')}}</a>
-                            
-                            <button type="submit" class="btn btn-primary">{{\App\CPU\translate('submit')}}</button>
+                            <a href="{{ URL::previous() }}" class="btn btn-secondary">{{translate('back')}}</a>
+
+                            <button type="submit" class="btn btn-primary">{{translate('submit')}}</button>
                         </div>
                     </form>
                 </div>
@@ -72,7 +72,7 @@
                     image: '{{asset('public/assets/front-end/img/image-place-holder.png')}}',
                     width: '100%'
                 },
-                dropFileLabel: "{{\App\CPU\translate('drop_here')}}",
+                dropFileLabel: "{{translate('drop_here')}}",
                 onAddRow: function (index, file) {
 
                 },
@@ -83,13 +83,13 @@
 
                 },
                 onExtensionErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('input_png_or_jpg')}}', {
+                    toastr.error('{{translate('input_png_or_jpg')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 },
                 onSizeErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('file_size_too_big')}}', {
+                    toastr.error('{{translate('file_size_too_big')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });

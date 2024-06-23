@@ -1,5 +1,5 @@
 @extends('layouts.back-end.app')
-@section('title', \App\CPU\translate('Order List'))
+@section('title', translate('Order List'))
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
@@ -11,7 +11,7 @@
 <div class="content container-fluid">
     <div class="row align-items-center mb-3">
         <div class="col-sm">
-            <h1 class="page-header-title">{{\App\CPU\translate('Orders')}} <span
+            <h1 class="page-header-title">{{translate('Orders')}} <span
                     class="badge badge-soft-dark ml-2">{{$orders->total()}}</span>
             </h1>
 
@@ -19,28 +19,28 @@
     </div>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-2">
-        <h1 class="h3 mb-0 text-black-50">{{\App\CPU\translate('Seller')}} : {{$seller['f_name'].' '.$seller['l_name']}} , {{\App\CPU\translate('ID')}} : {{$seller['id']}}</h1>
+        <h1 class="h3 mb-0 text-black-50">{{translate('Seller')}} : {{$seller['f_name'].' '.$seller['l_name']}} , {{translate('ID')}} : {{$seller['id']}}</h1>
     </div>
 
     <div class="row" style="margin-top: 20px">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{\App\CPU\translate('Order Table')}}</h5>
+                    <h5>{{translate('Order Table')}}</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered"  width="100%" cellspacing="0">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>{{\App\CPU\translate('SL#')}}</th>
-                                    <th>{{\App\CPU\translate('Order')}}</th>
-                                    <th>{{\App\CPU\translate('customer_name')}}</th>
-                                    <th>{{\App\CPU\translate('Phone')}}</th>
-                                    <th>{{\App\CPU\translate('Status')}} </th>
-                                    <th>{{\App\CPU\translate('Payment')}}</th>
+                                    <th>{{translate('SL#')}}</th>
+                                    <th>{{translate('Order')}}</th>
+                                    <th>{{translate('customer_name')}}</th>
+                                    <th>{{translate('Phone')}}</th>
+                                    <th>{{translate('Status')}} </th>
+                                    <th>{{translate('Payment')}}</th>
 
-                                    <th style="width: 30px">{{\App\CPU\translate('Action')}}</th>
+                                    <th style="width: 30px">{{translate('Action')}}</th>
                                 </tr>
                                 </thead>
                             <tbody>
@@ -54,14 +54,14 @@
                                         @if($order->customer != null)
                                             {{ $order->customer['f_name'] }} {{ $order->customer['l_name'] }}
                                         @else
-                                            <label class='badge badge-warning'>{{\App\CPU\translate('Customer not available')}}</label>
+                                            <label class='badge badge-warning'>{{translate('Customer not available')}}</label>
                                         @endif
                                     </td>
                                     <td>
                                         @if($order->customer != null)
                                             {{ $order->customer['phone'] }}
                                         @else
-                                            <label class="badge badge-warning">{{\App\CPU\translate('Customer not available')}}</label>
+                                            <label class="badge badge-warning">{{translate('Customer not available')}}</label>
                                         @endif
                                     </td>
                                     <td class="text-capitalize ">
@@ -82,11 +82,11 @@
                                     <td>
                                         @if($order->payment_status=='paid')
                                             <span class="badge badge-soft-success">
-                                  <span class="legend-indicator bg-success"></span>{{\App\CPU\translate('Paid')}}
+                                  <span class="legend-indicator bg-success"></span>{{translate('Paid')}}
                                 </span>
                                         @else
                                             <span class="badge badge-soft-danger">
-                                  <span class="legend-indicator bg-danger"></span>{{\App\CPU\translate('Unpaid')}}
+                                  <span class="legend-indicator bg-danger"></span>{{translate('Unpaid')}}
                                 </span>
                                         @endif
                                     </td>
@@ -101,13 +101,13 @@
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item"
                                                    href="{{route('admin.sellers.order-details',[$order['id'],$seller['id']])}}"><i
-                                                        class="tio-visible"></i> {{\App\CPU\translate('View')}}</a>
+                                                        class="tio-visible"></i> {{translate('View')}}</a>
                                                 <a class="dropdown-item" target="_blank"
                                                    href="{{route('admin.orders.generate-invoice',[$order->id])}}"><i
-                                                        class="tio-download"></i> {{\App\CPU\translate('Invoice')}}</a>
+                                                        class="tio-download"></i> {{translate('Invoice')}}</a>
                                             </div>
                                         </div>
-                                        
+
                                     </td>
                                 </tr>
                             @endforeach

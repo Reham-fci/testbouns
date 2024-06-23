@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app-seller')
 
-@section('title', \App\CPU\translate('Order Details'))
+@section('title', translate('Order Details'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -26,45 +26,45 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
-                                                           href="{{route('admin.orders.list',['status'=>'all'])}}">{{\App\CPU\translate('Orders')}}</a>
+                                                           href="{{route('admin.orders.list',['status'=>'all'])}}">{{translate('Orders')}}</a>
                             </li>
                             <li class="breadcrumb-item active"
-                                aria-current="page">{{\App\CPU\translate('Order')}} {{\App\CPU\translate('details')}} </li>
+                                aria-current="page">{{translate('Order')}} {{translate('details')}} </li>
                         </ol>
                     </nav>
 
                     <div class="d-sm-flex align-items-sm-center">
-                        <h1 class="page-header-title">{{\App\CPU\translate('Order')}} #{{$order['id']}}</h1>
+                        <h1 class="page-header-title">{{translate('Order')}} #{{$order['id']}}</h1>
 
                         @if($order['payment_status']=='paid')
                             <span class="badge badge-soft-success ml-sm-3">
-                                <span class="legend-indicator bg-success"></span>{{\App\CPU\translate('Paid')}}
+                                <span class="legend-indicator bg-success"></span>{{translate('Paid')}}
                             </span>
                         @else
                             <span class="badge badge-soft-danger ml-sm-3">
-                                <span class="legend-indicator bg-danger"></span>{{\App\CPU\translate('Unpaid')}}
+                                <span class="legend-indicator bg-danger"></span>{{translate('Unpaid')}}
                             </span>
                         @endif
 
                         @if($order['order_status']=='pending')
                             <span class="badge badge-soft-info ml-2 ml-sm-3 text-capitalize">
-                              <span class="legend-indicator bg-info text"></span>{{\App\CPU\translate(str_replace('_',' ',$order['order_status']))}}
+                              <span class="legend-indicator bg-info text"></span>{{translate(str_replace('_',' ',$order['order_status']))}}
                             </span>
                         @elseif($order['order_status']=='failed')
                             <span class="badge badge-danger ml-2 ml-sm-3 text-capitalize">
-                              <span class="legend-indicator bg-info"></span>{{\App\CPU\translate(str_replace('_',' ',$order['order_status']))}}
+                              <span class="legend-indicator bg-info"></span>{{translate(str_replace('_',' ',$order['order_status']))}}
                             </span>
                         @elseif($order['order_status']=='processing' || $order['order_status']=='out_for_delivery')
                             <span class="badge badge-soft-warning ml-2 ml-sm-3 text-capitalize">
-                              <span class="legend-indicator bg-warning"></span>{{\App\CPU\translate(str_replace('_',' ',$order['order_status']))}}
+                              <span class="legend-indicator bg-warning"></span>{{translate(str_replace('_',' ',$order['order_status']))}}
                             </span>
                         @elseif($order['order_status']=='delivered' || $order['order_status']=='confirmed')
                             <span class="badge badge-soft-success ml-2 ml-sm-3 text-capitalize">
-                              <span class="legend-indicator bg-success"></span>{{\App\CPU\translate(str_replace('_',' ',$order['order_status']))}}
+                              <span class="legend-indicator bg-success"></span>{{translate(str_replace('_',' ',$order['order_status']))}}
                             </span>
                         @else
                             <span class="badge badge-soft-danger ml-2 ml-sm-3 text-capitalize">
-                              <span class="legend-indicator bg-danger"></span>{{\App\CPU\translate(str_replace('_',' ',$order['order_status']))}}
+                              <span class="legend-indicator bg-danger"></span>{{translate(str_replace('_',' ',$order['order_status']))}}
                             </span>
                         @endif
                         <span class="ml-2 ml-sm-3">
@@ -74,21 +74,21 @@
                         @if(\App\CPU\Helpers::get_business_settings('order_verification'))
                             <span class="ml-2 ml-sm-3">
                                 <b>
-                                    {{\App\CPU\translate('order_verification_code')}} : {{$order['verification_code']}}
+                                    {{translate('order_verification_code')}} : {{$order['verification_code']}}
                                 </b>
                             </span>
                         @endif
 
-                        
+
                     </div>
                     <div class="col-md-6 mt-2">
                         <a class="text-body mr-3" target="_blank"
                            href={{route('seller.orders.generate-invoice',[$order['id']])}}>
-                            <i class="tio-print mr-1"></i> {{\App\CPU\translate('Print')}} {{\App\CPU\translate('invoice')}}
+                            <i class="tio-print mr-1"></i> {{translate('Print')}} {{translate('invoice')}}
                         </a>
                     </div>
 
-                    
+
                     <!-- End Unfold -->
                 </div>
             </div>
@@ -105,23 +105,23 @@
                         <div class="row">
                             <div class="col-12 pb-2 border-bottom">
                                 <h4 class="card-header-title">
-                                    {{\App\CPU\translate('Order')}} {{\App\CPU\translate('details')}}
+                                    {{translate('Order')}} {{translate('details')}}
                                     <span
                                         class="badge badge-soft-dark rounded-circle ml-1">{{$order->details->count()}}</span>
                                 </h4>
                             </div>
 
                             <div class="col-6 pt-2">
-                                
+
                             </div>
                             <div class="col-6 pt-2">
                                 <div class="text-right">
                                     <h6 class="" style="color: #8a8a8a;">
-                                        {{\App\CPU\translate('Payment')}} {{\App\CPU\translate('Method')}}
+                                        {{translate('Payment')}} {{translate('Method')}}
                                         : {{str_replace('_',' ',$order['payment_method'])}}
                                     </h6>
                                     <h6 class="" style="color: #8a8a8a;">
-                                        {{\App\CPU\translate('Payment')}} {{\App\CPU\translate('reference')}}
+                                        {{translate('Payment')}} {{translate('reference')}}
                                         : {{str_replace('_',' ',$order['transaction_ref'])}}
                                     </h6>
                                 </div>
@@ -134,31 +134,31 @@
                     <div class="card-body">
                         <div class="media">
                             <div class="avatar avatar-xl mr-3">
-                                <p>{{\App\CPU\translate('image')}}</p>
+                                <p>{{translate('image')}}</p>
                             </div>
 
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-md-4 product-name">
-                                        <p> {{\App\CPU\translate('Name')}}</p>
+                                        <p> {{translate('Name')}}</p>
                                     </div>
 
                                     <div class="col col-md-2 align-self-center p-0 ">
-                                        <p> {{\App\CPU\translate('price')}}</p>
+                                        <p> {{translate('price')}}</p>
                                     </div>
 
                                     <div class="col col-md-1 align-self-center">
                                         <p>Q</p>
                                     </div>
                                     <div class="col col-md-1 align-self-center  p-0 product-name">
-                                        <p> {{\App\CPU\translate('TAX')}}</p>
+                                        <p> {{translate('TAX')}}</p>
                                     </div>
                                     <div class="col col-md-2 align-self-center  p-0 product-name">
-                                        <p> {{\App\CPU\translate('Discount')}}</p>
+                                        <p> {{translate('Discount')}}</p>
                                     </div>
 
                                     <div class="col col-md-2 align-self-center text-right  ">
-                                        <p> {{\App\CPU\translate('Subtotal')}}</p>
+                                        <p> {{translate('Subtotal')}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +175,7 @@
                         @foreach($order->details as $key=>$detail)
 
                             @if($detail->product)
-                                
+
                             <!-- Media -->
                                 <div class="media">
                                     <div class="avatar avatar-xl mr-3">
@@ -190,7 +190,7 @@
                                             <div class="col-md-4 mb-3 mb-md-0 product-name">
                                                 <p>
                                                     {{substr($detail->product['name'],0,30)}}{{strlen($detail->product['name'])>10?'...':''}}</p>
-                                                <strong><u>{{\App\CPU\translate('Variation')}} : </u></strong>
+                                                <strong><u>{{translate('Variation')}} : </u></strong>
 
                                                 <div class="font-size-sm text-body">
 
@@ -246,21 +246,21 @@
                                 $coupon_discount =$order['discount_amount'];
                             }
                         ?>
-                    
+
                         <div class="row justify-content-md-end mb-3">
                             <div class="col-md-9 col-lg-8">
                                 <dl class="row text-sm-right">
-                                    
-                                    <dt class="col-sm-6">{{\App\CPU\translate('extra_discount')}}</dt>
+
+                                    <dt class="col-sm-6">{{translate('extra_discount')}}</dt>
                                     <dd class="col-sm-6 border-bottom">
                                         <strong>- {{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($extra_discount))}}</strong>
                                     </dd>
-                                    <dt class="col-sm-6">{{\App\CPU\translate('coupon_discount')}}</dt>
+                                    <dt class="col-sm-6">{{translate('coupon_discount')}}</dt>
                                     <dd class="col-sm-6 border-bottom">
                                         <strong>- {{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($coupon_discount))}}</strong>
                                     </dd>
 
-                                    <dt class="col-sm-6">{{\App\CPU\translate('Total')}}</dt>
+                                    <dt class="col-sm-6">{{translate('Total')}}</dt>
                                     <dd class="col-sm-6">
                                         <strong>{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($total+$shipping-$extra_discount - $coupon_discount))}}</strong>
                                     </dd>
@@ -280,7 +280,7 @@
                 <div class="card">
                     <!-- Header -->
                     <div class="card-header">
-                        <h4 class="card-header-title">{{\App\CPU\translate('Customer')}}</h4>
+                        <h4 class="card-header-title">{{translate('Customer')}}</h4>
                     </div>
                     <!-- End Header -->
 
@@ -300,7 +300,7 @@
                                     class="text-body text-hover-primary">{{$order->customer['f_name'].' '.$order->customer['l_name']}}</span>
                                 </div>
                                 <div class="media-body text-right">
-                                    
+
                                 </div>
                             </div>
 
@@ -312,17 +312,17 @@
                                 </div>
                                 <div class="media-body">
                                     <span
-                                        class="text-body text-hover-primary"> {{\App\Model\Order::where('order_type','POS')->where('customer_id',$order['customer_id'])->count()}} {{\App\CPU\translate('orders')}}</span>
+                                        class="text-body text-hover-primary"> {{\App\Model\Order::where('order_type','POS')->where('customer_id',$order['customer_id'])->count()}} {{translate('orders')}}</span>
                                 </div>
                                 <div class="media-body text-right">
-                                    
+
                                 </div>
                             </div>
 
                             <hr>
 
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5>{{\App\CPU\translate('Contact')}} {{\App\CPU\translate('info')}} </h5>
+                                <h5>{{translate('Contact')}} {{translate('info')}} </h5>
                             </div>
 
                             <ul class="list-unstyled list-unstyled-py-2">
@@ -337,7 +337,7 @@
                             </ul>
 
                             <hr>
-                            
+
                         </div>
                 @endif
                 <!-- End Body -->
@@ -347,10 +347,10 @@
         </div>
         <!-- End Row -->
     </div>
-    
+
 @endsection
 
 @push('script_2')
-    
-    
+
+
 @endpush

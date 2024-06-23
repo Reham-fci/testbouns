@@ -59,7 +59,7 @@
                     <div class="card-body" style="height: 100px">
                         <form action="{{route('checkout-complete-wallet')}}" method="get" class="needs-validation">
                             <button class="btn btn-block click-if-alone" type="submit">
-                            
+
                                 <img width="150" style="margin-top: -10px"
                                         src="{{asset('public/assets/front-end/img/wallet.png')}}"/>
                             </button>
@@ -68,7 +68,7 @@
                 </div>
             </div>
         @endif
-        
+
         @php($user=\App\CPU\Helpers::get_customer())
         @php($config=\App\CPU\Helpers::get_business_settings('ssl_commerz_payment'))
         @if($config['status'])
@@ -114,7 +114,7 @@
                 <div class="card">
                     <div class="card-body" style="height: 100px">
                         <button class="btn btn-block click-if-alone" type="button" id="checkout-button">
-                            <i class="czi-card"></i> {{\App\CPU\translate('Credit / Debit card ( Stripe )')}}
+                            <i class="czi-card"></i> {{translate('Credit / Debit card ( Stripe )')}}
                         </button>
                         <script type="text/javascript">
                             // Create an instance of the Stripe object with your publishable API key
@@ -134,7 +134,7 @@
                                         alert(result.error.message);
                                     }
                                 }).catch(function (error) {
-                                    console.error("{{\App\CPU\translate('Error')}}:", error);
+                                    console.error("{{translate('Error')}}:", error);
                                 });
                             });
                         </script>
@@ -542,7 +542,7 @@
         let total = $('.checkout_details .click-if-alone').length;
         if (Number.parseInt(total) < 2) {
             $('.click-if-alone').click()
-            $('.checkout_details').html('<h1>{{\App\CPU\translate('Redirecting_to_the_payment_page')}}......</h1>');
+            $('.checkout_details').html('<h1>{{translate('Redirecting_to_the_payment_page')}}......</h1>');
         }
     }
     click_if_alone();

@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('Seller List'))
+@section('title', translate('Seller List'))
 
 @push('css_or_js')
 
@@ -10,9 +10,9 @@
     <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">{{\App\CPU\translate('Dashboard')}}</a>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">{{translate('Dashboard')}}</a>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Sellers')}}</li>
+                <li class="breadcrumb-item" aria-current="page">{{translate('Sellers')}}</li>
             </ol>
         </nav>
 
@@ -22,7 +22,7 @@
                     <div class="card-header">
                         <div class="row row justify-content-between align-items-center flex-grow-1 mx-1">
                             <div class="flex-between">
-                                <div><h5>{{\App\CPU\translate('seller_table')}}</h5></div>
+                                <div><h5>{{translate('seller_table')}}</h5></div>
                                 <div class="mx-1"><h5 style="color: red;">({{ $sellers->total() }})</h5></div>
                             </div>
                             <div style="width: 40vw">
@@ -35,8 +35,8 @@
                                             </div>
                                         </div>
                                         <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                            placeholder="{{\App\CPU\translate('Search by Name or Phone or Email')}}" aria-label="Search orders" value="{{ $search }}" required>
-                                        <button type="submit" class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
+                                            placeholder="{{translate('Search by Name or Phone or Email')}}" aria-label="Search orders" value="{{ $search }}" required>
+                                        <button type="submit" class="btn btn-primary">{{translate('search')}}</button>
                                     </div>
                                 </form>
                                 <!-- End Search -->
@@ -50,14 +50,14 @@
                                 class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">{{\App\CPU\translate('SL#')}}</th>
-                                    <th scope="col">{{\App\CPU\translate('name')}}</th>
-                                    <th scope="col">{{\App\CPU\translate('Phone')}}</th>
-                                    <th scope="col">{{\App\CPU\translate('Email')}}</th>
-                                    <th scope="col">{{\App\CPU\translate('status')}}</th>
-                                    <th scope="col">{{\App\CPU\translate('orders')}}</th>
-                                    <th scope="col">{{\App\CPU\translate('Products')}}</th>
-                                    <th scope="col" style="width: 50px">{{\App\CPU\translate('action')}}</th>
+                                    <th scope="col">{{translate('SL#')}}</th>
+                                    <th scope="col">{{translate('name')}}</th>
+                                    <th scope="col">{{translate('Phone')}}</th>
+                                    <th scope="col">{{translate('Email')}}</th>
+                                    <th scope="col">{{translate('status')}}</th>
+                                    <th scope="col">{{translate('orders')}}</th>
+                                    <th scope="col">{{translate('Products')}}</th>
+                                    <th scope="col" style="width: 50px">{{translate('action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -85,7 +85,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a  title="{{\App\CPU\translate('View')}}"
+                                            <a  title="{{translate('View')}}"
                                                 class="btn btn-info btn-sm"
                                                 href="{{route('admin.sellers.view',$seller->id)}}">
                                                 <i class="tio-visible"></i>
@@ -103,7 +103,7 @@
                     @if(count($sellers)==0)
                         <div class="text-center p-4">
                             <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                            <p class="mb-0">{{\App\CPU\translate('No data to show')}}</p>
+                            <p class="mb-0">{{translate('No data to show')}}</p>
                         </div>
                     @endif
                 </div>

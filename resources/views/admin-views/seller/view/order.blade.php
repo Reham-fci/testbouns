@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title',$seller->shop ? $seller->shop->name : \App\CPU\translate("shop name not found"))
+@section('title',$seller->shop ? $seller->shop->name : translate("shop name not found"))
 
 @push('css_or_js')
     <style>
@@ -104,36 +104,36 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a
-                        href="{{route('admin.dashboard.index')}}">{{\App\CPU\translate('Dashboard')}}</a>
+                        href="{{route('admin.dashboard.index')}}">{{translate('Dashboard')}}</a>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Seller_Details')}}</li>
+                <li class="breadcrumb-item" aria-current="page">{{translate('Seller_Details')}}</li>
             </ol>
         </nav>
 
         <!-- Page Heading -->
         <div class="flex-between d-sm-flex row align-items-center justify-content-between mb-2 mx-1">
             <div>
-                <a href="{{route('admin.sellers.seller-list')}}" class="btn btn-primary mt-3 mb-3">{{\App\CPU\translate('Back_to_seller_list')}}</a>
+                <a href="{{route('admin.sellers.seller-list')}}" class="btn btn-primary mt-3 mb-3">{{translate('Back_to_seller_list')}}</a>
             </div>
             <div>
                 @if ($seller->status=="pending")
                     <div class="mt-4 pr-2 float-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}">
                         <div class="flex-start">
                             <div class="mx-1"><h4><i class="tio-shop-outlined"></i></h4></div>
-                            <div>{{\App\CPU\translate('Seller_request_for_open_a_shop.')}}</div>
+                            <div>{{translate('Seller_request_for_open_a_shop.')}}</div>
                         </div>
                         <div class="text-center">
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="approved">
-                                <button type="submit" class="btn btn-primary">{{\App\CPU\translate('Approve')}}</button>
+                                <button type="submit" class="btn btn-primary">{{translate('Approve')}}</button>
                             </form>
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="rejected">
-                                <button type="submit" class="btn btn-danger">{{\App\CPU\translate('reject')}}</button>
+                                <button type="submit" class="btn btn-danger">{{translate('reject')}}</button>
                             </form>
                         </div>
                     </div>
@@ -152,27 +152,27 @@
                 <!-- Nav -->
                 <ul class="nav nav-tabs page-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link " href="{{ route('admin.sellers.view',$seller->id) }}">{{\App\CPU\translate('Shop')}}</a>
+                        <a class="nav-link " href="{{ route('admin.sellers.view',$seller->id) }}">{{translate('Shop')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'order']) }}">{{\App\CPU\translate('Order')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'order']) }}">{{translate('Order')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'product']) }}">{{\App\CPU\translate('Product')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'product']) }}">{{translate('Product')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'setting']) }}">{{\App\CPU\translate('Setting')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'setting']) }}">{{translate('Setting')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'transaction']) }}">{{\App\CPU\translate('Transaction')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'transaction']) }}">{{translate('Transaction')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'review']) }}">{{\App\CPU\translate('Review')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'review']) }}">{{translate('Review')}}</a>
                     </li>
 
                 </ul>
@@ -189,7 +189,7 @@
                     <div class="col-md-12">
                         <div class="card w-100">
                             <div class="card-header">
-                                {{\App\CPU\translate('Order')}} {{\App\CPU\translate('info')}} 
+                                {{translate('Order')}} {{translate('info')}}
                             </div>
                             <!-- Card -->
                             @php($pending_order = App\Model\Order::where(['seller_is'=>'seller'])->where(['seller_id'=>$seller->id])->where('order_status','pending')->where('order_type','default_type')->get())
@@ -198,7 +198,7 @@
                                     <div class="col-sm-6 col-lg-4">
                                         <div class="flex-between align-items-center" >
                                             <div class="media-body" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                                                <h6 class="card-subtitle">{{\App\CPU\translate('pending')}}</h6>
+                                                <h6 class="card-subtitle">{{translate('pending')}}</h6>
                                                 <span class="card-title h3">
                                                 {{ $pending_order->count() }}  </span>
                                             </div>
@@ -214,7 +214,7 @@
                                     <div class="col-sm-6 col-lg-4 column-divider-sm">
                                         <div class="flex-between align-items-center" >
                                             <div class="media-body" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                                                <h6 class="card-subtitle">{{\App\CPU\translate('delivered')}}</h6>
+                                                <h6 class="card-subtitle">{{translate('delivered')}}</h6>
                                                 <span class="card-title h3">
                                                     {{ $delivered_order->count() }}</span>
                                             </div>
@@ -230,7 +230,7 @@
                                     <div class="col-sm-6 col-lg-4 column-divider-sm">
                                         <div class="flex-between align-items-center" >
                                             <div class="media-body" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                                                <h6 class="card-subtitle">{{\App\CPU\translate('All')}}</h6>
+                                                <h6 class="card-subtitle">{{translate('All')}}</h6>
                                                 <span class="card-title h3">{{ $total_order->count() }}</span>
                                             </div>
                                             <div class="icon icon-sm icon-soft-secondary icon-circle ml-3">
@@ -269,15 +269,15 @@
                                     <thead class="thead-light">
                                     <tr>
                                         <th class="">
-                                            {{\App\CPU\translate('#SL')}}
+                                            {{translate('#SL')}}
                                         </th>
-                                        <th class="table-column-pl-0">{{\App\CPU\translate('Order')}}</th>
-                                        <th>{{\App\CPU\translate('Date')}}</th>
-                                        <th>{{\App\CPU\translate('Customer')}}</th>
-                                        <th>{{\App\CPU\translate('Payment')}} {{\App\CPU\translate('status')}}</th>
-                                        <th>{{\App\CPU\translate('total')}}</th>
-                                        <th>{{\App\CPU\translate('Order')}} {{\App\CPU\translate('status')}}</th>
-                                        <th>{{\App\CPU\translate('action')}}</th>
+                                        <th class="table-column-pl-0">{{translate('Order')}}</th>
+                                        <th>{{translate('Date')}}</th>
+                                        <th>{{translate('Customer')}}</th>
+                                        <th>{{translate('Payment')}} {{translate('status')}}</th>
+                                        <th>{{translate('total')}}</th>
+                                        <th>{{translate('Order')}} {{translate('status')}}</th>
+                                        <th>{{translate('action')}}</th>
                                     </tr>
                                     </thead>
 
@@ -300,7 +300,7 @@
                                                         {{isset($order->customer)?$order->customer['f_name']:''}} {{isset($order->customer)?$order->customer['l_name']:''}}
                                                     </a>
                                                 @else
-                                                    <label class="badge badge-danger">{{\App\CPU\translate('Removed')}}</label>
+                                                    <label class="badge badge-danger">{{translate('Removed')}}</label>
                                                 @endif
                                             </td>
                                             <td>
@@ -308,13 +308,13 @@
                                                     <span class="badge badge-soft-success">
                                                     <span class="legend-indicator bg-success"
                                                           style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}">
-                                                    </span>{{\App\CPU\translate('paid')}}
+                                                    </span>{{translate('paid')}}
                                                     </span>
                                                 @else
                                                     <span class="badge badge-soft-danger">
                                                 <span class="legend-indicator bg-danger"
                                                       style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}">
-                                                </span>{{\App\CPU\translate('unpaid')}}
+                                                </span>{{translate('unpaid')}}
                                                 </span>
                                                 @endif
                                             </td>
@@ -324,45 +324,45 @@
                                                     <span class="badge badge-soft-info ml-2 ml-sm-3">
                                                     <span class="legend-indicator bg-info"
                                                           style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}">
-                                                    </span>{{\App\CPU\translate('pending')}}
+                                                    </span>{{translate('pending')}}
                                                     </span>
                                                     @elseif($order['order_status']=='confirmed')
                                                         <span class="badge badge-soft-info ml-2 ml-sm-3">
                                                     <span class="legend-indicator bg-info"
                                                           style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}">
-                                                    </span>{{\App\CPU\translate('confirmed')}}
+                                                    </span>{{translate('confirmed')}}
                                                     </span>
                                                     @elseif($order['order_status']=='processing')
                                                         <span class="badge badge-soft-warning ml-2 ml-sm-3">
                                                     <span class="legend-indicator bg-warning"
                                                           style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}">
-                                                    </span>{{\App\CPU\translate('processing')}}
+                                                    </span>{{translate('processing')}}
                                                     </span>
                                                     @elseif($order['order_status']=='out_for_delivery')
                                                         <span class="badge badge-soft-warning ml-2 ml-sm-3">
                                                     <span class="legend-indicator bg-warning"
                                                           style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}">
-                                                    </span>{{\App\CPU\translate('out_for_delivery')}}
+                                                    </span>{{translate('out_for_delivery')}}
                                                     </span>
                                                     @elseif($order['order_status']=='delivered')
                                                         <span class="badge badge-soft-success ml-2 ml-sm-3">
                                                     <span class="legend-indicator bg-success"
                                                           style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}">
-                                                    </span>{{\App\CPU\translate('delivered')}}
+                                                    </span>{{translate('delivered')}}
                                                     </span>
                                                     @else
                                                         <span class="badge badge-soft-danger ml-2 ml-sm-3">
                                                     <span class="legend-indicator bg-danger"
                                                           style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}">
-                                                    </span>{{\App\CPU\translate(str_replace('_',' ',$order['order_status']))}}
+                                                    </span>{{translate(str_replace('_',' ',$order['order_status']))}}
                                                     </span>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a  title="{{\App\CPU\translate('View')}}"
+                                                <a  title="{{translate('View')}}"
                                                     class="btn btn-info btn-sm"
                                                     href="{{route('admin.sellers.order-details',['order_id'=>$order['id'],'seller_id'=>$order['customer_id']])}}"><i
-                                                        class="tio-visible"></i> 
+                                                        class="tio-visible"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -392,7 +392,7 @@
                                     <img class="mb-3"
                                          src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg"
                                          alt="Image Description" style="width: 7rem;">
-                                    <p class="mb-0">{{\App\CPU\translate('No_data_to_show')}}</p>
+                                    <p class="mb-0">{{translate('No_data_to_show')}}</p>
                                 </div>
                         @endif
                         <!-- End Footer -->

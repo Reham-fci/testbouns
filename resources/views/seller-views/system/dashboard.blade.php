@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app-seller')
 
-@section('title', \App\CPU\translate('Dashboard'))
+@section('title', translate('Dashboard'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -38,11 +38,11 @@
         <!-- Page Heading -->
         <div class="page-header pb-0" style="border-bottom: 0!important">
             <div class="flex-between row align-items-center mx-1">
-                <h1 class="page-header-title">{{\App\CPU\translate('Dashboard')}}</h1>
+                <h1 class="page-header-title">{{translate('Dashboard')}}</h1>
 
                 <div>
                     <a class="btn btn-primary" href="{{route('seller.product.list')}}">
-                        <i class="tio-premium-outlined mr-1"></i> {{\App\CPU\translate('Products')}}
+                        <i class="tio-premium-outlined mr-1"></i> {{translate('Products')}}
                     </a>
                 </div>
             </div>
@@ -54,21 +54,21 @@
                 <div class="flex-between row gx-2 gx-lg-3 mb-2">
                     <div class="col-12 col-md-6" style="{{Session::get('direction') === "rtl" ? 'margin-right:2px' : ''}};">
                         <h4><i style="font-size: 30px"
-                               class="tio-chart-bar-4"></i>{{\App\CPU\translate('dashboard_order_statistics')}}</h4>
+                               class="tio-chart-bar-4"></i>{{translate('dashboard_order_statistics')}}</h4>
                     </div>
                     <div class="col-12 col-md-4" style="width: 20vw">
                         <select class="custom-select" name="statistics_type" onchange="order_stats_update(this.value)">
                             <option
                                 value="overall" {{session()->has('statistics_type') && session('statistics_type') == 'overall'?'selected':''}}>
-                                {{\App\CPU\translate('Overall Statistics')}}
+                                {{translate('Overall Statistics')}}
                             </option>
                             <option
                                 value="today" {{session()->has('statistics_type') && session('statistics_type') == 'today'?'selected':''}}>
-                                {{\App\CPU\translate('Todays Statistics')}}
+                                {{translate('Todays Statistics')}}
                             </option>
                             <option
                                 value="this_month" {{session()->has('statistics_type') && session('statistics_type') == 'this_month'?'selected':''}}>
-                                {{\App\CPU\translate('This Months Statistics')}}
+                                {{translate('This Months Statistics')}}
                             </option>
                         </select>
                     </div>
@@ -84,7 +84,7 @@
                 <div class="flex-between gx-2 gx-lg-3 mb-2">
                     <div>
                         <h4><i style="font-size: 30px"
-                               class="tio-wallet"></i>{{\App\CPU\translate('seller_wallet')}}</h4>
+                               class="tio-wallet"></i>{{translate('seller_wallet')}}</h4>
                     </div>
                 </div>
                 <div class="row flex-between gx-2 gx-lg-3" id="order_stats">
@@ -100,7 +100,7 @@
                                 <div class="flex-between row no-gutters align-items-center">
                                     <div>
                                         <div class="font-weight-bold text-uppercase for-card-text mb-1">
-                                            {{\App\CPU\translate('Withdrawable_balance')}}
+                                            {{translate('Withdrawable_balance')}}
                                         </div>
                                         <div
                                             class="for-card-count">{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($data['total_earning']))}}</div>
@@ -109,7 +109,7 @@
                                         <a href="javascript:" style="background: #d1cfcf!important;"
                                            class="btn btn-primary text-color-1"
                                            data-toggle="modal" data-target="#balance-modal">
-                                            <i class="tio-wallet-outlined"></i> {{\App\CPU\translate('Withdraw')}}
+                                            <i class="tio-wallet-outlined"></i> {{translate('Withdraw')}}
                                         </a>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div
-                                            class="text-color-1 font-weight-bold for-card-text text-uppercase mb-1">{{\App\CPU\translate('withdrawn')}}</div>
+                                            class="text-color-1 font-weight-bold for-card-text text-uppercase mb-1">{{translate('withdrawn')}}</div>
                                         <div
                                             class="text-color-1 for-card-count">{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($data['withdrawn']))}}</div>
                                     </div>
@@ -145,7 +145,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{\App\CPU\translate('Withdraw Request')}}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{translate('Withdraw Request')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -154,20 +154,20 @@
                         <div class="modal-body">
                             @csrf
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">{{\App\CPU\translate('Amount')}}:</label>
+                                <label for="recipient-name" class="col-form-label">{{translate('Amount')}}:</label>
                                 <input type="number" name="amount" step=".01"
                                        value="{{\App\CPU\BackEndHelper::usd_to_currency($data['total_earning'])}}"
                                        class="form-control" id="">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{\App\CPU\translate('Close')}}</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{translate('Close')}}</button>
                             @if(auth('seller')->user()->account_no==null || auth('seller')->user()->bank_name==null)
                                 <button type="button" class="btn btn-primary" onclick="call_duty()">
-                                    {{\App\CPU\translate('Incomplete bank info')}}
+                                    {{translate('Incomplete bank info')}}
                                 </button>
                             @else
-                                <button type="submit" class="btn btn-primary">{{\App\CPU\translate('Request')}}</button>
+                                <button type="submit" class="btn btn-primary">{{translate('Request')}}</button>
                             @endif
                         </div>
                     </form>
@@ -185,10 +185,10 @@
                             <div class="col-12 mb-3 border-bottom">
                                 <h5 class="card-header-title float-left mb-2">
                                     <i style="font-size: 30px" class="tio-chart-pie-1"></i>
-                                    {{\App\CPU\translate('Earning statistics for business analytics')}}
+                                    {{translate('Earning statistics for business analytics')}}
                                 </h5>
                                 <!-- Legend Indicators -->
-                                <h5 class="card-header-title float-right mb-2">{{\App\CPU\translate('This Year Earning')}}
+                                <h5 class="card-header-title float-right mb-2">{{translate('This Year Earning')}}
                                     <i style="font-size: 30px" class="tio-chart-bar-2"></i>
                                 </h5>
                                 <!-- End Legend Indicators -->
@@ -198,7 +198,7 @@
                                       <span class="h6 mb-0">
                                           <i class="legend-indicator bg-success"
                                              style="background-color: #B6C867!important;"></i>
-                                         {{\App\CPU\translate('Your Earnings')}} : {{\App\CPU\BackEndHelper::usd_to_currency(array_sum($seller_data))." ".\App\CPU\BackEndHelper::currency_symbol()}}
+                                         {{translate('Your Earnings')}} : {{\App\CPU\BackEndHelper::usd_to_currency(array_sum($seller_data))." ".\App\CPU\BackEndHelper::currency_symbol()}}
                                     </span>
                                 </div>
                             </div>
@@ -207,7 +207,7 @@
                                       <span class="h6 mb-0">
                                           <i class="legend-indicator bg-danger"
                                              style="background-color: #01937C!important;"></i>
-                                        {{\App\CPU\translate('Commission Given')}} : {{\App\CPU\BackEndHelper::usd_to_currency(array_sum($commission_data))." ".\App\CPU\BackEndHelper::currency_symbol()}}
+                                        {{translate('Commission Given')}} : {{\App\CPU\BackEndHelper::usd_to_currency(array_sum($commission_data))." ".\App\CPU\BackEndHelper::currency_symbol()}}
                                     </span>
                                 </div>
                             </div>
@@ -328,7 +328,7 @@
 
     <script>
         function call_duty() {
-            toastr.warning('{{\App\CPU\translate('Update your bank info first!')}}', '{{\App\CPU\translate('Warning')}}!', {
+            toastr.warning('{{translate('Update your bank info first!')}}', '{{translate('Warning')}}!', {
                 CloseButton: true,
                 ProgressBar: true
             });

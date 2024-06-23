@@ -1,5 +1,5 @@
 <div class="card-header">
-    <h4>{{\App\CPU\translate('Product price & stock')}}</h4>
+    <h4>{{translate('Product price & stock')}}</h4>
     <input name="product_id" value="{{$product['id']}}" style="display: none">
 </div>
 <div class="card-body">
@@ -10,9 +10,9 @@
             </div>
             <div class="col-md-6" id="quantity">
                 <label
-                    class="control-label">{{\App\CPU\translate('total')}} {{\App\CPU\translate('Quantity')}}</label>
+                    class="control-label">{{translate('total')}} {{translate('Quantity')}}</label>
                 <input type="number" min="0" value={{ $product->current_stock }} step="1"
-                       placeholder="{{\App\CPU\translate('Quantity') }}"
+                       placeholder="{{translate('Quantity') }}"
                        name="current_stock" class="form-control" required>
             </div>
         </div>

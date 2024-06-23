@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('My Wallet'))
+@section('title',translate('My Wallet'))
 
 @push('css_or_js')
     <style>
@@ -84,7 +84,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-9 mt-2 sidebar_heading">
-                <h1 class="h3  mb-0 p-3 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{\App\CPU\translate('my_wallet')}}</h1>
+                <h1 class="h3  mb-0 p-3 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{translate('my_wallet')}}</h1>
             </div>
         </div>
     </div>
@@ -97,18 +97,18 @@
         @include('web-views.partials._profile-aside')
         <!-- Content  -->
             <section class="col-lg-9 col-md-9">
-                
+
                 <div class="card box-shadow-sm">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <div>
                                 <span>
-                                    {{\App\CPU\translate('transaction_history')}}
+                                    {{translate('transaction_history')}}
                                 </span>
                             </div>
                             <div>
                                 <span>
-                                    {{\App\CPU\translate('wallet_amount')}} : {{\App\CPU\Helpers::currency_converter($total_wallet_balance)}}
+                                    {{translate('wallet_amount')}} : {{\App\CPU\Helpers::currency_converter($total_wallet_balance)}}
                                 </span>
                             </div>
                         </div>
@@ -120,33 +120,33 @@
                                 <tr style="background-color: #6b6b6b;">
                                     <td class="tdBorder">
                                         <div class="py-2"><span
-                                                class="d-block spandHeadO ">{{\App\CPU\translate('sl#')}}</span></div>
+                                                class="d-block spandHeadO ">{{translate('sl#')}}</span></div>
                                     </td>
                                     <td class="tdBorder">
                                         <div class="py-2"><span
-                                                class="d-block spandHeadO">{{\App\CPU\translate('transaction_type')}} </span>
+                                                class="d-block spandHeadO">{{translate('transaction_type')}} </span>
                                         </div>
                                     </td>
                                     <td class="tdBorder">
                                         <div class="py-2"><span
-                                                class="d-block spandHeadO">{{\App\CPU\translate('credit')}} </span>
+                                                class="d-block spandHeadO">{{translate('credit')}} </span>
                                         </div>
                                     </td>
                                     <td class="tdBorder">
                                         <div class="py-2"><span
-                                                class="d-block spandHeadO"> {{\App\CPU\translate('debit')}}</span></div>
+                                                class="d-block spandHeadO"> {{translate('debit')}}</span></div>
                                     </td>
                                     <td class="tdBorder">
                                         <div class="py-2"><span
-                                                class="d-block spandHeadO"> {{\App\CPU\translate('balance')}}</span></div>
+                                                class="d-block spandHeadO"> {{translate('balance')}}</span></div>
                                     </td>
                                     <td class="tdBorder">
                                         <div class="py-2"><span
-                                                class="d-block spandHeadO"> {{\App\CPU\translate('date')}}</span></div>
+                                                class="d-block spandHeadO"> {{translate('date')}}</span></div>
                                     </td>
                                 </tr>
                                 </thead>
-    
+
                                 <tbody>
                                 @foreach($wallet_transactio_list as $key=>$item)
                                     <tr>
@@ -158,20 +158,20 @@
                                         <td class="bodytr orderDate"><span class="">{{\App\CPU\Helpers::currency_converter($item['debit'])}}</span></td>
                                         <td class="bodytr orderDate"><span class="">{{\App\CPU\Helpers::currency_converter($item['balance'])}}</span></td>
                                         <td class="bodytr orderDate"><span class="">{{$item['created_at']}}</span></td>
-                                        
+
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
                             @if($wallet_transactio_list->count()==0)
-                                <center class="mt-3 mb-2">{{\App\CPU\translate('no_transaction_found')}}</center>
+                                <center class="mt-3 mb-2">{{translate('no_transaction_found')}}</center>
                             @endif
 
                             <div class="card-footer">
                                 {{$wallet_transactio_list->links()}}
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </section>
@@ -180,5 +180,5 @@
 @endsection
 
 @push('script')
-    
+
 @endpush

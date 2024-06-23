@@ -10,9 +10,9 @@
     <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('seller.dashboard.index')}}">{{\App\CPU\translate('Dashboard')}}</a></li>
-                <li class="breadcrumb-item" aria-current="page"><a href="{{route('seller.product.list')}}">{{\App\CPU\translate('Product')}}</a></li>
-                <li class="breadcrumb-item">{{\App\CPU\translate('Add_new')}}</li>
+                <li class="breadcrumb-item"><a href="{{route('seller.dashboard.index')}}">{{translate('Dashboard')}}</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{{route('seller.product.list')}}">{{translate('Product')}}</a></li>
+                <li class="breadcrumb-item">{{translate('Add_new')}}</li>
             </ol>
         </nav>
 
@@ -46,7 +46,7 @@
                                 <div class="{{$lang != $default_lang ? 'd-none':''}} lang_form"
                                      id="{{$lang}}-form">
                                     <div class="form-group">
-                                        <label class="input-label" for="{{$lang}}_name">{{\App\CPU\translate('name')}}
+                                        <label class="input-label" for="{{$lang}}_name">{{translate('name')}}
                                             ({{strtoupper($lang)}})</label>
                                         <input type="text" {{$lang == $default_lang? 'required':''}} name="name[]"
                                                id="{{$lang}}_name" class="form-control" placeholder="New Product" required>
@@ -54,7 +54,7 @@
                                     <input type="hidden" name="lang[]" value="{{$lang}}">
                                     <div class="form-group pt-4">
                                         <label class="input-label"
-                                               for="{{$lang}}_description">{{\App\CPU\translate('description')}}
+                                               for="{{$lang}}_description">{{translate('description')}}
                                             ({{strtoupper($lang)}})</label>
                                         <textarea name="description[]" class="editor textarea" cols="30"
                                                   rows="10" required>{{old('details')}}</textarea>
@@ -66,19 +66,19 @@
 
                     <div class="card mt-2 rest-part">
                         <div class="card-header">
-                            <h4>{{\App\CPU\translate('General_info')}}</h4>
+                            <h4>{{translate('General_info')}}</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label for="name">{{\App\CPU\translate('Category')}}</label>
+                                        <label for="name">{{translate('Category')}}</label>
                                         <select
                                             class="js-example-basic-multiple form-control"
                                             name="category_id"
                                             onchange="getRequest('{{url('/')}}/seller/product/get-categories?parent_id='+this.value,'sub-category-select','select')"
                                             required>
-                                            <option value="{{old('category_id')}}" selected disabled>---{{\App\CPU\translate('Select')}}---</option>
+                                            <option value="{{old('category_id')}}" selected disabled>---{{translate('Select')}}---</option>
                                             @foreach($cat as $c)
                                                 <option value="{{$c['id']}}" {{old('name')==$c['id']? 'selected': ''}}>
                                                     {{$c['name']}}
@@ -87,14 +87,14 @@
                                         </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="name">{{\App\CPU\translate('Sub_category')}}</label>
+                                        <label for="name">{{translate('Sub_category')}}</label>
                                         <select class="js-example-basic-multiple form-control"
                                                 name="sub_category_id" id="sub-category-select"
                                                 onchange="getRequest('{{url('/')}}/seller/product/get-categories?parent_id='+this.value,'sub-sub-category-select','select')">
                                         </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="name">{{\App\CPU\translate('Sub_sub_category')}}</label>
+                                        <label for="name">{{translate('Sub_sub_category')}}</label>
                                         <select
                                             class="js-example-basic-multiple form-control"
                                             name="sub_sub_category_id" id="sub-sub-category-select">
@@ -107,11 +107,11 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label for="name">{{\App\CPU\translate('Brand')}}</label>
+                                        <label for="name">{{translate('Brand')}}</label>
                                         <select
                                             class="js-example-basic-multiple js-states js-example-responsive form-control"
                                             name="brand_id" required>
-                                            <option value="{{null}}" selected disabled>---{{\App\CPU\translate('Select')}}---</option>
+                                            <option value="{{null}}" selected disabled>---{{translate('Select')}}---</option>
                                             @foreach($br as $b)
                                                 <option value="{{$b['id']}}">{{$b['name']}}</option>
                                             @endforeach
@@ -119,7 +119,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="name">{{\App\CPU\translate('Unit')}}</label>
+                                        <label for="name">{{translate('Unit')}}</label>
                                         <select
                                             class="js-example-basic-multiple form-control"
                                             name="unit">
@@ -136,7 +136,7 @@
 
                     <div class="card mt-2 rest-part">
                         <div class="card-header">
-                            <h4>{{\App\CPU\translate('Variations')}}</h4>
+                            <h4>{{translate('Variations')}}</h4>
                         </div>
                         <div class="card-body">
 
@@ -144,7 +144,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="colors">
-                                            {{\App\CPU\translate('Colors')}} :
+                                            {{translate('Colors')}} :
                                         </label>
                                         <label class="switch">
                                             <input type="checkbox" class="status" name="colors_active" value="{{old('colors_active')}}" >
@@ -163,7 +163,7 @@
 
                                     <div class="col-md-6">
                                         <label for="attributes" style="padding-bottom: 3px">
-                                            {{\App\CPU\translate('Attributes')}} :
+                                            {{translate('Attributes')}} :
                                         </label>
                                         <select
                                             class="js-example-basic-multiple js-states js-example-responsive form-control"
@@ -188,76 +188,76 @@
 
                     <div class="card mt-2 rest-part">
                         <div class="card-header">
-                            <h4>{{\App\CPU\translate('Product_price_&_stock')}}</h4>
+                            <h4>{{translate('Product_price_&_stock')}}</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label class="control-label">{{\App\CPU\translate('Unit_price')}}</label>
+                                        <label class="control-label">{{translate('Unit_price')}}</label>
                                         <input type="number" min="0" value="0" step="0.01"
-                                               placeholder="{{\App\CPU\translate('Unit_price')}}"
+                                               placeholder="{{translate('Unit_price')}}"
                                                name="unit_price" value="{{old('unit_price')}}"  class="form-control" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label
-                                            class="control-label">{{\App\CPU\translate('Purchase_price')}}</label>
+                                            class="control-label">{{translate('Purchase_price')}}</label>
                                         <input type="number" min="0" value="0" step="0.01"
-                                               placeholder="{{\App\CPU\translate('Purchase_price')}}"
+                                               placeholder="{{translate('Purchase_price')}}"
                                                name="purchase_price" value="{{old('purchase_price')}}"  class="form-control" required>
                                     </div>
                                 </div>
 
                                 <div class="row pt-4">
                                     <div class="col-md-6">
-                                        <label class="control-label">{{\App\CPU\translate('Tax')}}</label>
-                                        <label class="badge badge-info">{{\App\CPU\translate('Percent')}} ( % )</label>
+                                        <label class="control-label">{{translate('Tax')}}</label>
+                                        <label class="badge badge-info">{{translate('Percent')}} ( % )</label>
                                         <input type="number" min="0" value="0" step="0.01"
-                                               placeholder="{{\App\CPU\translate('Tax')}}" name="tax" value="{{old('tax')}}"
+                                               placeholder="{{translate('Tax')}}" name="tax" value="{{old('tax')}}"
                                                class="form-control">
                                         <input name="tax_type" value="percent" style="display: none">
                                     </div>
 
                                     <div class="col-md-2" >
-                                        <label class="control-label">{{\App\CPU\translate('discount_type')}}</label>
+                                        <label class="control-label">{{translate('discount_type')}}</label>
                                         <select
                                             class="form-control js-select2-custom"
                                             name="discount_type">
-                                            <option value="flat">{{\App\CPU\translate('Flat')}}</option>
-                                            <option value="percent">{{\App\CPU\translate('Percent')}}</option>
+                                            <option value="flat">{{translate('Flat')}}</option>
+                                            <option value="percent">{{translate('Percent')}}</option>
                                         </select>
                                     </div>
-                                    
+
                                     <div class="col-md-4">
-                                        <label class="control-label">{{\App\CPU\translate('Discount')}}</label>
+                                        <label class="control-label">{{translate('Discount')}}</label>
                                         <input type="number" min="0" value="0" step="0.01"
-                                               placeholder="{{\App\CPU\translate('Discount')}}" name="discount" value="{{old('discount')}}"
+                                               placeholder="{{translate('Discount')}}" name="discount" value="{{old('discount')}}"
                                                class="form-control" required>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="sku_combination" id="sku_combination">
 
                                 </div>
                                 <div class="row pt-4">
                                     <div class="col-sm-6 col-md-6 col-lg-4" id="quantity">
-                                        <label class="control-label">{{\App\CPU\translate('total')}} {{\App\CPU\translate('Quantity')}}</label>
+                                        <label class="control-label">{{translate('total')}} {{translate('Quantity')}}</label>
                                         <input type="number" min="0" value="0" step="1"
-                                               placeholder="{{\App\CPU\translate('Quantity')}}"
+                                               placeholder="{{translate('Quantity')}}"
                                                name="current_stock" value="{{old('current_stock')}}" class="form-control" required>
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-4" id="shipping_cost">
                                         <label
-                                            class="control-label">{{\App\CPU\translate('shipping_cost')}} </label>
+                                            class="control-label">{{translate('shipping_cost')}} </label>
                                         <input type="number" min="0" value="0" step="1"
-                                               placeholder="{{\App\CPU\translate('shipping_cost')}}"
+                                               placeholder="{{translate('shipping_cost')}}"
                                                name="shipping_cost" class="form-control" required>
                                     </div>
                                     <div class="col-md-6 col-lg-4 mt-sm-1" id="shipping_cost_multy">
                                         <div>
                                             <label
-                                            class="control-label">{{\App\CPU\translate('shipping_cost_multiply_with_quantity')}} </label>
-                                        
+                                            class="control-label">{{translate('shipping_cost_multiply_with_quantity')}} </label>
+
                                         </div>
                                         <div>
                                             <label class="switch">
@@ -276,23 +276,23 @@
 
                     <div class="card mt-2 mb-2 rest-part">
                         <div class="card-header">
-                            <h4>{{\App\CPU\translate('seo_section')}}</h4>
+                            <h4>{{translate('seo_section')}}</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12 mb-4">
-                                    <label class="control-label">{{\App\CPU\translate('Meta_title')}}</label>
+                                    <label class="control-label">{{translate('Meta_title')}}</label>
                                     <input type="text" name="meta_title" placeholder="" class="form-control">
                                 </div>
 
                                 <div class="col-md-8 mb-4">
-                                    <label class="control-label">{{\App\CPU\translate('Meta_description')}}</label>
+                                    <label class="control-label">{{translate('Meta_description')}}</label>
                                     <textarea rows="10" type="text" name="meta_description" class="form-control"></textarea>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group mb-0">
-                                        <label>{{\App\CPU\translate('Meta_image')}}</label>
+                                        <label>{{translate('Meta_image')}}</label>
                                     </div>
                                     <div class="border border-dashed">
                                         <div class="row" id="meta_img"></div>
@@ -306,15 +306,15 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12 mb-4">
-                                    <label class="control-label">{{\App\CPU\translate('Youtube video link')}}</label>
-                                    <small class="badge badge-soft-danger"> ( {{\App\CPU\translate('optional, please provide embed link not direct link')}}. )</small>
+                                    <label class="control-label">{{translate('Youtube video link')}}</label>
+                                    <small class="badge badge-soft-danger"> ( {{translate('optional, please provide embed link not direct link')}}. )</small>
                                     <input type="text" name="video_link" placeholder="EX : https://www.youtube.com/embed/5R06LRdUCSE" class="form-control" required>
                                 </div>
 
                                 <div class="col-md-8">
                                     <div class="form-group">
-                                        <label>{{\App\CPU\translate('Upload_product_images')}}</label><small
-                                            style="color: red">* ( {{\App\CPU\translate('ratio 1:1')}}  )</small>
+                                        <label>{{translate('Upload_product_images')}}</label><small
+                                            style="color: red">* ( {{translate('ratio 1:1')}}  )</small>
                                     </div>
                                     <div  class="p-2 border border-dashed"  style="max-width:430px;">
                                         <div class="row" id="coba"></div>
@@ -323,8 +323,8 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('Upload_thumbnail')}}</label><small
-                                            style="color: red">* ( {{\App\CPU\translate('ratio 1:1')}} )</small>
+                                        <label for="name">{{translate('Upload_thumbnail')}}</label><small
+                                            style="color: red">* ( {{translate('ratio 1:1')}} )</small>
                                     </div>
                                     <div style="max-width:200px;">
                                         <div class="row" id="thumbnail"></div>
@@ -337,7 +337,7 @@
                     <div class="card ">
                         <div class="row">
                             <div class="col-md-12" style="padding-top: 20px">
-                                <button type="button" onclick="check()" class="btn btn-primary">{{\App\CPU\translate('Submit')}}</button>
+                                <button type="button" onclick="check()" class="btn btn-primary">{{translate('Submit')}}</button>
                             </div>
                         </div>
                     </div>
@@ -374,13 +374,13 @@
 
                 },
                 onExtensionErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('Please only input png or jpg type file')}}', {
+                    toastr.error('{{translate('Please only input png or jpg type file')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 },
                 onSizeErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('File size too big')}}', {
+                    toastr.error('{{translate('File size too big')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
@@ -408,13 +408,13 @@
 
                 },
                 onExtensionErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('Please only input png or jpg type file')}}', {
+                    toastr.error('{{translate('Please only input png or jpg type file')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 },
                 onSizeErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('File size too big')}}', {
+                    toastr.error('{{translate('File size too big')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
@@ -442,13 +442,13 @@
 
                 },
                 onExtensionErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('Please only input png or jpg type file')}}', {
+                    toastr.error('{{translate('Please only input png or jpg type file')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
                 },
                 onSizeErr: function (index, file) {
-                    toastr.error('{{\App\CPU\translate('File size too big')}}', {
+                    toastr.error('{{translate('File size too big')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
@@ -553,7 +553,7 @@
     <script>
         function check(){
             Swal.fire({
-                title: '{{\App\CPU\translate('Are you sure')}}?',
+                title: '{{translate('Are you sure')}}?',
                 text: '',
                 type: 'warning',
                 showCancelButton: true,
@@ -586,7 +586,7 @@
                                 });
                             }
                         } else {
-                            toastr.success('{{\App\CPU\translate('product updated successfully!')}}', {
+                            toastr.success('{{translate('product updated successfully!')}}', {
                                 CloseButton: true,
                                 ProgressBar: true
                             });

@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app-seller')
 
-@section('title',\App\CPU\translate('Deliveryman List'))
+@section('title',translate('Deliveryman List'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -13,7 +13,7 @@
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
                     <h1 class="page-header-title"><i class="tio-filter-list"></i>
-                        {{\App\CPU\translate('deliveryman')}} {{\App\CPU\translate('list')}}
+                        {{translate('deliveryman')}} {{translate('list')}}
                         ( {{ $delivery_men->total() }} )
                     </h1>
                 </div>
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                         <a href="{{route('seller.delivery-man.add')}}" class="btn btn-primary pull-right"><i
-                                class="tio-add-circle"></i> {{\App\CPU\translate('add')}} {{\App\CPU\translate('deliveryman')}}
+                                class="tio-add-circle"></i> {{translate('add')}} {{translate('deliveryman')}}
                         </a>
                     </div>
                     <!-- End Header -->
@@ -57,13 +57,13 @@
                             class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                             <thead class="thead-light">
                             <tr>
-                                <th>{{\App\CPU\translate('#')}}</th>
-                                <th style="width: 30%">{{\App\CPU\translate('name')}}</th>
-                                <th style="width: 25%">{{\App\CPU\translate('image')}}</th>
-                                <th>{{\App\CPU\translate('email')}}</th>
-                                <th>{{\App\CPU\translate('phone')}}</th>
-                                <th>{{\App\CPU\translate('status')}}</th>
-                                <th>{{\App\CPU\translate('action')}}</th>
+                                <th>{{translate('#')}}</th>
+                                <th style="width: 30%">{{translate('name')}}</th>
+                                <th style="width: 25%">{{translate('image')}}</th>
+                                <th>{{translate('email')}}</th>
+                                <th>{{translate('phone')}}</th>
+                                <th>{{translate('status')}}</th>
+                                <th>{{translate('action')}}</th>
                             </tr>
                             </thead>
 
@@ -97,23 +97,23 @@
                                         </label>
                                     </td>
                                     <td>
-                                        
+
                                                 <a  class="btn btn-primary btn-sm"
-                                                    title="{{\App\CPU\translate('Edit')}}"
+                                                    title="{{translate('Edit')}}"
                                                     href="{{route('seller.delivery-man.edit',[$dm['id']])}}">
                                                     <i class="tio-edit"></i>
                                                 </a>
-                                                <a class="btn btn-danger btn-sm" 
-                                                    title="{{\App\CPU\translate('Delete')}}"
+                                                <a class="btn btn-danger btn-sm"
+                                                    title="{{translate('Delete')}}"
                                                     href="javascript:"
                                                    onclick="form_alert('delivery-man-{{$dm['id']}}','Want to remove this information ?')">
-                                                   <i class="tio-add-to-trash"></i> 
+                                                   <i class="tio-add-to-trash"></i>
                                                 </a>
                                                 <form action="{{route('seller.delivery-man.delete',[$dm['id']])}}"
                                                       method="post" id="delivery-man-{{$dm['id']}}">
                                                     @csrf @method('delete')
                                                 </form>
-                                            
+
                                     </td>
                                 </tr>
                             @endforeach
@@ -161,7 +161,7 @@
                     status: status
                 },
                 success: function (data) {
-                    toastr.success('{{\App\CPU\translate('Status updated successfully')}}');
+                    toastr.success('{{translate('Status updated successfully')}}');
                 }
             });
         });

@@ -32,58 +32,58 @@
             @endforeach
             @php($total_shipping_cost=$shipping_cost)
         @else
-            <span>{{\App\CPU\translate('empty_cart')}}</span>
+            <span>{{translate('empty_cart')}}</span>
         @endif
         @if(isset($wallet))
         <div class="d-flex justify-content-between">
             <span class="cart_title">
-                {{\App\CPU\translate('bouns_value')}} 
+                {{translate('bouns_value')}}
                 <span class="wallet-value">{{\App\CPU\Helpers::currency_converter($wallet)}}</span>
             </span>
-            
+
         </div>
         @endif
         <div class="d-flex justify-content-between">
-            <span class="cart_title">{{\App\CPU\translate('sub_total')}}</span>
+            <span class="cart_title">{{translate('sub_total')}}</span>
             <span class="cart_value">
                 {{\App\CPU\Helpers::currency_converter($sub_total)}}
             </span>
         </div>
         <div class="d-flex justify-content-between">
-            <span class="cart_title">{{\App\CPU\translate('tax')}}</span>
+            <span class="cart_title">{{translate('tax')}}</span>
             <span class="cart_value">
                 {{\App\CPU\Helpers::currency_converter($total_tax)}}
             </span>
         </div>
         <div class="d-flex justify-content-between">
-            <span class="cart_title">{{\App\CPU\translate('shipping')}}</span>
+            <span class="cart_title">{{translate('shipping')}}</span>
             <span class="cart_value">
                 {{\App\CPU\Helpers::currency_converter($total_shipping_cost)}}
             </span>
         </div>
         <div class="d-flex justify-content-between">
-            <span class="cart_title">{{\App\CPU\translate('discount_on_product')}}</span>
+            <span class="cart_title">{{translate('discount_on_product')}}</span>
             <span class="cart_value">
                 - {{\App\CPU\Helpers::currency_converter($total_discount_on_product)}}
             </span>
         </div>
-        
+
         <div class="d-flex justify-content-between">
-            <span class="cart_title">{{\App\CPU\translate('wallet')}}</span>
+            <span class="cart_title">{{translate('wallet')}}</span>
             <span class="cart_value wallet_value">
                 {{\App\CPU\Helpers::currency_converter(0)}}
             </span>
         </div>
         @if(isset($max_amount))
         <div class="mt-2">
-            <form class="needs-validation <?php if(!isset($ispayment)){echo "d-none";}elseif(!$ispayment){echo "d-none";} ?>" action="javascript:" method="post" novalidate 
+            <form class="needs-validation <?php if(!isset($ispayment)){echo "d-none";}elseif(!$ispayment){echo "d-none";} ?>" action="javascript:" method="post" novalidate
             id="walletValueForm">
                 <div class="form-group">
-                    <input class="form-control walletValue" type="number" step="any" min="0" max="{{$max_amount}}" name="walletValue" placeholder="{{\App\CPU\translate('use_bonus_value')}}"
+                    <input class="form-control walletValue" type="number" step="any" min="0" max="{{$max_amount}}" name="walletValue" placeholder="{{translate('use_bonus_value')}}"
                            required>
-                           
+
                 </div>
-                <button class="btn btn-primary btn-block" type="button" onclick="apply_wallet()">{{\App\CPU\translate('apply_wallet')}}
+                <button class="btn btn-primary btn-block" type="button" onclick="apply_wallet()">{{translate('apply_wallet')}}
                 </button>
             </form>
         </div>
@@ -94,7 +94,7 @@
             @php($coupon_dis=0)
         @endif
         <div class="d-flex justify-content-between">
-            <span class="cart_title">{{\App\CPU\translate('coupon_discount')}}</span>
+            <span class="cart_title">{{translate('coupon_discount')}}</span>
             <span class="cart_value" id="coupon-discount-amount">
                 - {{session()->has('coupon_discount')?\App\CPU\Helpers::currency_converter(session('coupon_discount')):0}}
             </span>
@@ -102,17 +102,17 @@
         <div class="mt-2">
             <form class="needs-validation <?php if(!isset($ispayment)){echo "d-none";}elseif(!$ispayment){echo "d-none";} ?>" action="javascript:" method="post" novalidate id="coupon-code-ajax">
                 <div class="form-group">
-                    <input class="form-control input_code" type="text" name="code" placeholder="{{\App\CPU\translate('Coupon code')}}"
+                    <input class="form-control input_code" type="text" name="code" placeholder="{{translate('Coupon code')}}"
                            required>
-                    <div class="invalid-feedback">{{\App\CPU\translate('please_provide_coupon_code')}}</div>
+                    <div class="invalid-feedback">{{translate('please_provide_coupon_code')}}</div>
                 </div>
-                <button class="btn btn-primary btn-block" type="button" onclick="couponCode()">{{\App\CPU\translate('apply_code')}}
+                <button class="btn btn-primary btn-block" type="button" onclick="couponCode()">{{translate('apply_code')}}
                 </button>
             </form>
         </div>
         <hr class="mt-2 mb-2">
         <div class="d-flex justify-content-between">
-            <span class="cart_title">{{\App\CPU\translate('total')}}</span>
+            <span class="cart_title">{{translate('total')}}</span>
             <span class="cart_value">
                {{\App\CPU\Helpers::currency_converter($sub_total+$total_tax+$total_shipping_cost-$coupon_dis-$total_discount_on_product)}}
             </span>
@@ -128,20 +128,20 @@
         <div class="row p-0">
             <div class="col-md-3 p-0 text-center mobile-padding">
                 <img class="order-summery-footer-image" src="{{asset("public/assets/front-end/png/delivery.png")}}" alt="">
-                <div class="deal-title">3 {{\App\CPU\translate('days_free_delivery')}} </div>
+                <div class="deal-title">3 {{translate('days_free_delivery')}} </div>
             </div>
 
             <div class="col-md-3 p-0 text-center">
                 <img class="order-summery-footer-image" src="{{asset("public/assets/front-end/png/money.png")}}" alt="">
-                <div class="deal-title">{{\App\CPU\translate('money_back_guarantee')}}</div>
+                <div class="deal-title">{{translate('money_back_guarantee')}}</div>
             </div>
             <div class="col-md-3 p-0 text-center">
                 <img class="order-summery-footer-image" src="{{asset("public/assets/front-end/png/Genuine.png")}}" alt="">
-                <div class="deal-title">100% {{\App\CPU\translate('genuine')}} {{\App\CPU\translate('product')}}</div>
+                <div class="deal-title">100% {{translate('genuine')}} {{translate('product')}}</div>
             </div>
             <div class="col-md-3 p-0 text-center">
                 <img class="order-summery-footer-image" src="{{asset("public/assets/front-end/png/Payment.png")}}" alt="">
-                <div class="deal-title">{{\App\CPU\translate('authentic_payment')}}</div>
+                <div class="deal-title">{{translate('authentic_payment')}}</div>
             </div>
         </div>
     </div>

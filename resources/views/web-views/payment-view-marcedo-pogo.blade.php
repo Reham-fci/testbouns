@@ -32,7 +32,7 @@
                         <p class="item-name">Book x <span id="summary-quantity"></span></p>
                     </div> -->
                     <p class="alert alert-danger" role="alert" id="error_alert" style="display:none;"></p>
-                    <div class="total">{{\App\CPU\translate('amount_to_be_paid')}}<span class="price">{{\App\CPU\Helpers::set_symbol($order_amount)}}</span></div>
+                    <div class="total">{{translate('amount_to_be_paid')}}<span class="price">{{\App\CPU\Helpers::set_symbol($order_amount)}}</span></div>
                 </div>
                 <div class="payment-details">
                     <form id="form-checkout">
@@ -93,7 +93,7 @@
 <script>
     const publicKey = document.getElementById("mercado-pago-public-key").value;
     const mercadopago = new MercadoPago(publicKey);
-    
+
     loadCardForm();
     function loadCardForm() {
         const productCost = '{{$order_amount}}';
@@ -105,15 +105,15 @@
                 id: "form-checkout",
                 cardholderName: {
                     id: "form-checkout__cardholderName",
-                    placeholder: "{{\App\CPU\translate('card_holder_name')}}",
+                    placeholder: "{{translate('card_holder_name')}}",
                 },
                 cardholderEmail: {
                     id: "form-checkout__cardholderEmail",
-                    placeholder: "{{\App\CPU\translate('card_holder_email')}}",
+                    placeholder: "{{translate('card_holder_email')}}",
                 },
                 cardNumber: {
                     id: "form-checkout__cardNumber",
-                    placeholder: "{{\App\CPU\translate('card_number')}}",
+                    placeholder: "{{translate('card_number')}}",
                 },
                 cardExpirationMonth: {
                     id: "form-checkout__cardExpirationMonth",
@@ -125,22 +125,22 @@
                 },
                 securityCode: {
                     id: "form-checkout__securityCode",
-                    placeholder: "{{\App\CPU\translate('security_code')}}",
+                    placeholder: "{{translate('security_code')}}",
                 },
                 installments: {
                     id: "form-checkout__installments",
-                    placeholder: "{{\App\CPU\translate('installments')}}",
+                    placeholder: "{{translate('installments')}}",
                 },
                 identificationType: {
                     id: "form-checkout__identificationType",
                 },
                 identificationNumber: {
                     id: "form-checkout__identificationNumber",
-                    placeholder: "{{\App\CPU\translate('identification_number')}}",
+                    placeholder: "{{translate('identification_number')}}",
                 },
                 issuer: {
                     id: "form-checkout__issuer",
-                    placeholder: "{{\App\CPU\translate('issuer')}}",
+                    placeholder: "{{translate('issuer')}}",
                 },
             },
             callbacks: {
@@ -168,7 +168,7 @@
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": "{{csrf_token()}}"  
+                            "X-CSRF-TOKEN": "{{csrf_token()}}"
                         },
                         body: JSON.stringify({
                             token,

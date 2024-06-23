@@ -33,14 +33,14 @@
                      style="display: none;">
                     <i class="ace-icon fa fa-check green"></i>
                     <strong class="green">
-                        {{\App\CPU\translate('Image uploaded successfully')}}.
+                        {{translate('Image uploaded successfully')}}.
                     </strong>
                 </div>
 
                 <div class="alert alert-block alert-danger" id="img-err-{{$modal_id}}"
                      style="display: none;">
                     <strong class="red">
-                        {{\App\CPU\translate('Error , Something went wrong')}} !
+                        {{translate('Error , Something went wrong')}} !
                     </strong>
                 </div>
 
@@ -54,7 +54,7 @@
                     </div>
                     <div class="form-group" id="select-img-{{$modal_id}}">
                         <label for="image-set-{{$modal_id}}" class="custom-file-upload">
-                            {{\App\CPU\translate('Choose Image')}} <i class="fa fa-plus-circle"></i>
+                            {{translate('Choose Image')}} <i class="fa fa-plus-circle"></i>
                         </label>
                         <input type="file" name="image" onchange="cropView('{{$modal_id}}')"
                                id="image-set-{{$modal_id}}" required>
@@ -63,10 +63,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    {{\App\CPU\translate('Close')}}
+                    {{translate('Close')}}
                 </button>
                 <button type="button" class="btn btn-primary btn-upload-image-{{$modal_id}}" style="display: none">
-                    {{\App\CPU\translate('Add')}}
+                    {{translate('Add')}}
                 </button>
             </div>
         </div>

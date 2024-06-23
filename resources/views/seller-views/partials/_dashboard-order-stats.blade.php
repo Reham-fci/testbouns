@@ -4,7 +4,7 @@
         <div class="card-body">
             <div class="flex-between align-items-center mb-1">
                 <div style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                    <h6 class="card-subtitle" style="color: #F14A16!important;">{{\App\CPU\translate('pending')}}</h6>
+                    <h6 class="card-subtitle" style="color: #F14A16!important;">{{translate('pending')}}</h6>
                     <span class="card-title h2" style="color: #F14A16!important;">
                         {{$data['pending']}}
                     </span>
@@ -25,7 +25,7 @@
         <div class="card-body">
             <div class="flex-between align-items-center mb-1">
                 <div style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                    <h6 class="card-subtitle" style="color: #F14A16!important;">{{\App\CPU\translate('confirmed')}}</h6>
+                    <h6 class="card-subtitle" style="color: #F14A16!important;">{{translate('confirmed')}}</h6>
                     <span class="card-title h2" style="color: #F14A16!important;">
                          {{$data['confirmed']}}
                      </span>
@@ -47,7 +47,7 @@
         <div class="card-body">
             <div class="flex-between align-items-center gx-2 mb-1">
                 <div style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                    <h6 class="card-subtitle" style="color: #F14A16!important;">{{\App\CPU\translate('Processing')}}</h6>
+                    <h6 class="card-subtitle" style="color: #F14A16!important;">{{translate('Processing')}}</h6>
                     <span class="card-title h2" style="color: #F14A16!important;">
                         {{$data['processing']}}
                     </span>
@@ -69,7 +69,7 @@
         <div class="card-body">
             <div class="flex-between align-items-center gx-2 mb-1">
                 <div style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                    <h6 class="card-subtitle" style="color: #F14A16!important;">{{\App\CPU\translate('out_for_delivery')}}</h6>
+                    <h6 class="card-subtitle" style="color: #F14A16!important;">{{translate('out_for_delivery')}}</h6>
                     <span class="card-title h2" style="color: #F14A16!important;">
                         {{$data['out_for_delivery']}}
                     </span>
@@ -92,7 +92,7 @@
                 <div class="media flex-between align-items-center" style="cursor: pointer"
                      onclick="location.href='{{route('seller.orders.list',['delivered'])}}'">
                     <div class="media-body" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                        <h6 class="card-subtitle">{{\App\CPU\translate('delivered')}}</h6>
+                        <h6 class="card-subtitle">{{translate('delivered')}}</h6>
                         <span class="card-title h3">{{$data['delivered']}}</span>
                     </div>
                     <div>
@@ -110,7 +110,7 @@
                 <div class="media flex-between align-items-center" style="cursor: pointer"
                      onclick="location.href='{{route('seller.orders.list',['canceled'])}}'">
                     <div class="media-body" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                        <h6 class="card-subtitle">{{\App\CPU\translate('canceled')}}</h6>
+                        <h6 class="card-subtitle">{{translate('canceled')}}</h6>
                         <span class="card-title h3">{{$data['canceled']}}</span>
                     </div>
                     <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
@@ -126,7 +126,7 @@
                 <div class="media flex-between align-items-center" style="cursor: pointer"
                      onclick="location.href='{{route('seller.orders.list',['returned'])}}'">
                     <div class="media-body" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                        <h6 class="card-subtitle">{{\App\CPU\translate('returned')}}</h6>
+                        <h6 class="card-subtitle">{{translate('returned')}}</h6>
                         <span class="card-title h3">{{$data['returned']}}</span>
                     </div>
                     <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
@@ -142,7 +142,7 @@
                 <div class="media flex-between align-items-center" style="cursor: pointer"
                      onclick="location.href='{{route('seller.orders.list',['failed'])}}'">
                     <div class="media-body" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
-                        <h6 class="card-subtitle">{{\App\CPU\translate('failed')}}</h6>
+                        <h6 class="card-subtitle">{{translate('failed')}}</h6>
                         <span
                             class="card-title h3">{{$data['failed']}}</span>
                     </div>

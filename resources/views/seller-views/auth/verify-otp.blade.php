@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Title -->
-    <title>{{\App\CPU\translate('forgot_password')}}</title>
+    <title>{{translate('forgot_password')}}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
@@ -73,26 +73,26 @@
         <div class="container py-4 py-lg-5 my-4">
             <div class="row justify-content-center">
                 <div class="col-lg-4 col-md-6">
-                    <h2 class="h3 mb-4">{{\App\CPU\translate('provide_your_otp_and_proceed')}}?</h2>
+                    <h2 class="h3 mb-4">{{translate('provide_your_otp_and_proceed')}}?</h2>
                     <div class="card py-2 mt-4">
                         <form class="card-body needs-validation" action="{{route('seller.auth.otp-verification')}}"
                               method="post">
                             @csrf
                             <div class="form-group">
-                                <label>{{\App\CPU\translate('Enter your OTP')}}</label>
+                                <label>{{translate('Enter your OTP')}}</label>
                                 <div id="divOuter">
                                     <div id="divInner">
                                         <input id="partitioned" class="form-control" name="otp" type="text" maxlength="4" />
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary" type="submit">{{\App\CPU\translate('proceed')}}</button>
+                            <button class="btn btn-primary" type="submit">{{translate('proceed')}}</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </div>
     <!-- End Content -->
 </main>

@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('My Transaction History'))
+@section('title',translate('My Transaction History'))
 
 @push('css_or_js')
     <style>
@@ -103,7 +103,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-9 sidebar_heading">
-                <h1 class="h3  mb-0 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{\App\CPU\translate('purchase_statement')}}</h1>
+                <h1 class="h3  mb-0 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{translate('purchase_statement')}}</h1>
             </div>
         </div>
     </div>
@@ -120,16 +120,16 @@
                         <thead>
                         <tr style="background: {{$web_config['secondary_color']}}">
                             <td class="tdBorder">
-                                <div class="py-2"><span class="d-block spandHeadO ">{{\App\CPU\translate('Tranx')}} {{\App\CPU\translate('ID')}}</span></div>
+                                <div class="py-2"><span class="d-block spandHeadO ">{{translate('Tranx')}} {{translate('ID')}}</span></div>
                             </td>
                             <td class="tdBorder">
-                                <div class="py-2 {{Session::get('direction') === "rtl" ? 'mr-2' : 'ml-2'}}"><span class="d-block spandHeadO ">{{\App\CPU\translate('payment_method')}}</span></div>
+                                <div class="py-2 {{Session::get('direction') === "rtl" ? 'mr-2' : 'ml-2'}}"><span class="d-block spandHeadO ">{{translate('payment_method')}}</span></div>
                             </td>
                             <td class="tdBorder">
-                                <div class="py-2"><span class="d-block spandHeadO">{{\App\CPU\translate('Status')}} </span></div>
+                                <div class="py-2"><span class="d-block spandHeadO">{{translate('Status')}} </span></div>
                             </td>
                             <td class="tdBorder">
-                                <div class="py-2"><span class="d-block spandHeadO"> {{\App\CPU\translate('Total')}}</span></div>
+                                <div class="py-2"><span class="d-block spandHeadO"> {{translate('Total')}}</span></div>
                             </td>
                         </tr>
                         </thead>

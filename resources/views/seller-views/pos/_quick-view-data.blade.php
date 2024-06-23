@@ -43,7 +43,7 @@
         border:2px;
         border-style:solid;
     }
-    
+
 }
 </style>
 <div class="modal-header p-2">
@@ -86,8 +86,8 @@
                         id="set-discount-amount">{{\App\CPU\BackEndHelper::usd_to_currency(\App\CPU\Helpers::get_product_discount($product, $product['unit_price']))}}</strong>
                 </div>
             @endif
-        
-            
+
+
         </div>
     </div>
     <div class="row pt-2">
@@ -113,19 +113,19 @@
                 <div class="position-relative {{Session::get('direction') === "rtl" ? 'ml-n4' : 'mr-n4'}} mb-3">
                     @if (count(json_decode($product->colors)) > 0)
                         <div class="flex-start">
-                            <div class="product-description-label mt-2">{{\App\CPU\translate('color')}}:
+                            <div class="product-description-label mt-2">{{translate('color')}}:
                             </div>
                             <div class="d-flex justify-content-left flex-wrap" id="option1" style="height: 16px;">
-                                @foreach (json_decode($product->colors) as $key => $color)          
+                                @foreach (json_decode($product->colors) as $key => $color)
                                     <input class="btn-check" type="radio" onclick="color_change(this);"
                                             id="{{ $product->id }}-color-{{ $key }}"
                                             name="color" value="{{ $color }}"
                                             @if($key == 0) checked @endif autocomplete="off">
                                     <label id="label-{{ $product->id }}-color-{{ $key }}" class="btn m-2 color-border {{$key==0?'border-add':""}}" style="background: {{ $color }};"
                                             for="{{ $product->id }}-color-{{ $key }}"
-                                            data-toggle="tooltip"></label> 
+                                            data-toggle="tooltip"></label>
                                 @endforeach
-                            
+
                             </div>
                         </div>
                     @endif
@@ -157,7 +157,7 @@
 
             <!-- Quantity + Add to cart -->
                 <div class="d-flex justify-content-between">
-                    <div class="product-description-label mt-2 text-dark h3">{{\App\CPU\translate('Quantity')}}:</div>
+                    <div class="product-description-label mt-2 text-dark h3">{{translate('Quantity')}}:</div>
                     <div class="product-quantity d-flex align-items-center">
                         <div class="input-group input-group--style-2 pr-3"
                              style="width: 160px;">
@@ -180,10 +180,10 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row no-gutters mt-2 text-dark" id="chosen_price_div">
                     <div class="col-2">
-                        <div class="product-description-label">{{\App\CPU\translate('Total Price')}}:</div>
+                        <div class="product-description-label">{{translate('Total Price')}}:</div>
                     </div>
                     <div class="col-10">
                         <div class="product-price">
@@ -198,7 +198,7 @@
                             type="button"
                             style="width:37%; height: 45px">
                         <i class="tio-shopping-cart"></i>
-                        {{\App\CPU\translate('add')}}
+                        {{translate('add')}}
                     </button>
                 </div>
             </form>

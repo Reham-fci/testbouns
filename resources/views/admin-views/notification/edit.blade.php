@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('Update Notification'))
+@section('title', translate('Update Notification'))
 
 @push('css_or_js')
 
@@ -11,9 +11,9 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{\App\CPU\translate('Dashboard')}}</a>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{translate('Dashboard')}}</a>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Notification')}}</li>
+                <li class="breadcrumb-item" aria-current="page">{{translate('Notification')}}</li>
             </ol>
         </nav>
 
@@ -22,7 +22,7 @@
             <div class="col-sm-12 col-lg-12 mb-3 mb-lg-2">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="page-header-title">{{\App\CPU\translate('Notification Update')}}</h1>
+                        <h1 class="page-header-title">{{translate('Notification Update')}}</h1>
                     </div>
                     <div class="card-body">
                         <form action="{{route('admin.notification.update',[$notification['id']])}}" method="post"
@@ -30,21 +30,21 @@
                               enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{\App\CPU\translate('Title')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('Title')}}</label>
                                 <input type="text" value="{{$notification['title']}}" name="title" class="form-control"
-                                       placeholder="{{\App\CPU\translate('New notification')}}" required>
+                                       placeholder="{{translate('New notification')}}" required>
                             </div>
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{\App\CPU\translate('Description')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('Description')}}</label>
                                 <textarea name="description" class="form-control"
                                           required>{{$notification['description']}}</textarea>
                             </div>
                             <div class="form-group" style="text-align: left">
-                                <label>{{\App\CPU\translate('Image')}}</label><small style="color: red">* ( {{\App\CPU\translate('Ratio_1:1')}}  )</small>
+                                <label>{{translate('Image')}}</label><small style="color: red">* ( {{translate('Ratio_1:1')}}  )</small>
                                 <div class="custom-file">
                                     <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                            accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                    <label class="custom-file-label" for="customFileEg1">{{\App\CPU\translate('Choose file')}}</label>
+                                    <label class="custom-file-label" for="customFileEg1">{{translate('Choose file')}}</label>
                                 </div>
                                 <hr>
                                 <center>
@@ -53,8 +53,8 @@
                                          alt="image"/>
                                 </center>
                             </div>
-                          
-                            <button type="submit" class="btn btn-primary float-right">{{\App\CPU\translate('Update')}}</button>
+
+                            <button type="submit" class="btn btn-primary float-right">{{translate('Update')}}</button>
                         </form>
                     </div>
                 </div>

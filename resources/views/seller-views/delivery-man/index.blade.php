@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app-seller')
 
-@section('title',\App\CPU\translate('Add new delivery-man'))
+@section('title',translate('Add new delivery-man'))
 
 @push('css_or_js')
 
@@ -12,7 +12,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title"><i class="tio-add-circle-outlined"></i> {{\App\CPU\translate('add')}} {{\App\CPU\translate('new')}} {{\App\CPU\translate('deliveryman')}}</h1>
+                    <h1 class="page-header-title"><i class="tio-add-circle-outlined"></i> {{translate('add')}} {{translate('new')}} {{translate('deliveryman')}}</h1>
                 </div>
             </div>
         </div>
@@ -26,32 +26,15 @@
                             <div class="row">
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label class="input-label" for="exampleFormControlInput1">{{\App\CPU\translate('first')}} {{\App\CPU\translate('name')}}</label>
-                                        <input type="text" name="f_name" class="form-control" placeholder="{{\App\CPU\translate('first')}} {{\App\CPU\translate('name')}}"
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('first')}} {{translate('name')}}</label>
+                                        <input type="text" name="f_name" class="form-control" placeholder="{{translate('first')}} {{translate('name')}}"
                                                required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label class="input-label" for="exampleFormControlInput1">{{\App\CPU\translate('last')}} {{\App\CPU\translate('name')}}</label>
-                                        <input type="text" name="l_name" class="form-control" placeholder="{{\App\CPU\translate('last')}} {{\App\CPU\translate('name')}}"
-                                               required>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label class="input-label" for="exampleFormControlInput1">{{\App\CPU\translate('email')}}</label>
-                                        <input type="email" name="email" class="form-control" placeholder="{{\App\CPU\translate('Ex : ex@example.com')}}"
-                                               required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label class="input-label" for="exampleFormControlInput1">{{\App\CPU\translate('phone')}}</label>
-                                        <input type="text" name="phone" class="form-control" placeholder="{{\App\CPU\translate('Ex : 017********')}}"
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('last')}} {{translate('name')}}</label>
+                                        <input type="text" name="l_name" class="form-control" placeholder="{{translate('last')}} {{translate('name')}}"
                                                required>
                                     </div>
                                 </div>
@@ -60,18 +43,35 @@
                             <div class="row">
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label class="input-label" for="exampleFormControlInput1">{{\App\CPU\translate('identity')}} {{\App\CPU\translate('type')}}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('email')}}</label>
+                                        <input type="email" name="email" class="form-control" placeholder="{{translate('Ex : ex@example.com')}}"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('phone')}}</label>
+                                        <input type="text" name="phone" class="form-control" placeholder="{{translate('Ex : 017********')}}"
+                                               required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('identity')}} {{translate('type')}}</label>
                                         <select name="identity_type" class="form-control">
-                                            <option value="passport">{{\App\CPU\translate('passport')}}</option>
-                                            <option value="driving_license">{{\App\CPU\translate('driving')}} {{\App\CPU\translate('license')}}</option>
-                                            <option value="nid">{{\App\CPU\translate('nid')}}</option>
-                                            <option value="company_id">{{\App\CPU\translate('company')}} {{\App\CPU\translate('id')}}</option>
+                                            <option value="passport">{{translate('passport')}}</option>
+                                            <option value="driving_license">{{translate('driving')}} {{translate('license')}}</option>
+                                            <option value="nid">{{translate('nid')}}</option>
+                                            <option value="company_id">{{translate('company')}} {{translate('id')}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label class="input-label" for="exampleFormControlInput1">{{\App\CPU\translate('identity')}} {{\App\CPU\translate('number')}}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('identity')}} {{translate('number')}}</label>
                                         <input type="text" name="identity_number" class="form-control"
                                                placeholder="Ex : DH-23434-LS"
                                                required>
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="col-md-12 col-12">
                                     <div class="form-group">
-                                        <label class="input-label" for="exampleFormControlInput1">{{\App\CPU\translate('identity')}} {{\App\CPU\translate('image')}}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('identity')}} {{translate('image')}}</label>
                                         <div>
                                             <div class="row" id="coba"></div>
                                         </div>
@@ -88,17 +88,17 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{\App\CPU\translate('password')}}</label>
-                                <input type="text" name="password" class="form-control" placeholder="{{\App\CPU\translate('Ex : password')}}"
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('password')}}</label>
+                                <input type="text" name="password" class="form-control" placeholder="{{translate('Ex : password')}}"
                                        required>
                             </div>
 
                             <div class="form-group">
-                                <label>{{\App\CPU\translate('deliveryman')}} {{\App\CPU\translate('image')}}</label><small style="color: red">* ( {{\App\CPU\translate('ratio')}} 1:1 )</small>
+                                <label>{{translate('deliveryman')}} {{translate('image')}}</label><small style="color: red">* ( {{translate('ratio')}} 1:1 )</small>
                                 <div class="custom-file">
                                     <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                            accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
-                                    <label class="custom-file-label" for="customFileEg1">{{\App\CPU\translate('choose')}} {{\App\CPU\translate('file')}}</label>
+                                    <label class="custom-file-label" for="customFileEg1">{{translate('choose')}} {{translate('file')}}</label>
                                 </div>
                                 <hr>
                                 <center>
@@ -106,8 +106,8 @@
                                          src="{{asset('public\assets\back-end\img\400x400\img2.jpg')}}" alt="delivery-man image"/>
                                 </center>
                             </div>
-                            
-                            <button type="submit" class="btn btn-primary float-right">{{\App\CPU\translate('submit')}}</button>
+
+                            <button type="submit" class="btn btn-primary float-right">{{translate('submit')}}</button>
                         </form>
                     </div>
                 </div>

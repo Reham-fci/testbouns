@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title',\App\CPU\translate('Deliveryman List'))
+@section('title',translate('Deliveryman List'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -13,7 +13,7 @@
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
                     <h1 class="page-header-title"><i class="tio-filter-list"></i>
-                        {{\App\CPU\translate('Salesperson')}} {{\App\CPU\translate('list')}}
+                        {{translate('Salesperson')}} {{translate('list')}}
                         ( {{ $delivery_men->total() }} )
                     </h1>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="card">
                     <!-- Header -->
                     <div class="card-header">
-                        
+
                         <div class="col-12 ">
                             <div class="row flex-between justify-content-between align-items-center">
                                 <div class="mb-1 col-md-4">
@@ -40,21 +40,21 @@
                                             </div>
                                             <input id="datatableSearch_" type="search" name="search" class="form-control"
                                                     placeholder="Search" aria-label="Search" value="{{$search}}" required>
-                                            <button type="submit" class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
-    
+                                            <button type="submit" class="btn btn-primary">{{translate('search')}}</button>
+
                                         </div>
                                         <!-- End Search -->
                                     </form>
                                 </div>
-                                
+
                                 <div class="col-md-3 ">
                                     <a href="{{route('admin.Salesperson.add')}}" class="btn btn-primary float-right"><i
-                                            class="tio-add-circle"></i> {{\App\CPU\translate('add')}} {{\App\CPU\translate('Salesperson')}}
+                                            class="tio-add-circle"></i> {{translate('add')}} {{translate('Salesperson')}}
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                     <!-- End Header -->
 
@@ -64,13 +64,13 @@
                             class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                             <thead class="thead-light">
                             <tr>
-                                <th>{{\App\CPU\translate('#')}}</th>
-                                <th style="width: 30%">{{\App\CPU\translate('name')}}</th>
-                                <th style="width: 25%">{{\App\CPU\translate('image')}}</th>
-                                <th>{{\App\CPU\translate('email')}}</th>
-                                <th>{{\App\CPU\translate('phone')}}</th>
-                                <th>{{\App\CPU\translate('status')}}</th>
-                                <th>{{\App\CPU\translate('action')}}</th>
+                                <th>{{translate('#')}}</th>
+                                <th style="width: 30%">{{translate('name')}}</th>
+                                <th style="width: 25%">{{translate('image')}}</th>
+                                <th>{{translate('email')}}</th>
+                                <th>{{translate('phone')}}</th>
+                                <th>{{translate('status')}}</th>
+                                <th>{{translate('action')}}</th>
                             </tr>
                             </thead>
 
@@ -104,14 +104,14 @@
                                         </label>
                                     </td>
                                     <td>
-                                    
+
                                         <a  class="btn btn-primary btn-sm edit"
-                                            title="{{\App\CPU\translate('edit')}}"
+                                            title="{{translate('edit')}}"
                                             href="{{route('admin.Salesperson.edit',[$dm['id']])}}">
                                             <i class="tio-edit"></i></a>
                                         <a class="btn btn-danger btn-sm delete" href="javascript:"
                                             onclick="form_alert('delivery-man-{{$dm['id']}}','Want to remove this information ?')"
-                                            title="{{ \App\CPU\translate('Delete')}}">
+                                            title="{{ translate('Delete')}}">
                                             <i class="tio-add-to-trash"></i>
                                         </a>
                                         <form action="{{route('admin.Salesperson.delete',[$dm['id']])}}"
@@ -165,7 +165,7 @@
                     status: status
                 },
                 success: function (data) {
-                    toastr.success('{{\App\CPU\translate('Status updated successfully')}}');
+                    toastr.success('{{translate('Status updated successfully')}}');
                 }
             });
         });

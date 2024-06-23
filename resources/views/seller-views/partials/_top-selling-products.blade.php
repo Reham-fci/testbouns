@@ -1,7 +1,7 @@
 <!-- Header -->
 <div class="card-header">
     <h5 class="card-header-title">
-        <i class="tio-align-to-top"></i> {{\App\CPU\translate('top_selling_products')}}
+        <i class="tio-align-to-top"></i> {{translate('top_selling_products')}}
     </h5>
     <i class="tio-gift" style="font-size: 45px"></i>
 </div>
@@ -16,7 +16,7 @@
                      onclick="location.href='{{route('seller.product.view',[$item['product_id']])}}'"
                      style="cursor: pointer;padding-right: 6px;padding-left: 6px">
                     <div class="grid-card">
-                        <label class="label_1">{{\App\CPU\translate('Sold')}} : {{$item['count']}}</label>
+                        <label class="label_1">{{translate('Sold')}} : {{$item['count']}}</label>
                         <div class="text-center mt-3">
                             <img style="height: 90px"
                                  src="{{\App\CPU\ProductManager::product_image_path('thumbnail')}}/{{$item->product['thumbnail']}}"

@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('add_new_seller'))
+@section('title', translate('add_new_seller'))
 
 @push('css_or_js')
 
@@ -10,9 +10,9 @@
 <div class="content container-fluid main-card rtl" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">{{\App\CPU\translate('Dashboard')}}</a>
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">{{translate('Dashboard')}}</a>
             </li>
-            <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('add_new_seller')}}</li>
+            <li class="breadcrumb-item" aria-current="page">{{translate('add_new_seller')}}</li>
         </ol>
     </nav>
     <div class="row">
@@ -24,36 +24,36 @@
                         <div class="col-lg-12">
                             <div class="p-5">
                                 <div class="text-center mb-2 ">
-                                    <h3 class="" > {{\App\CPU\translate('Shop')}} {{\App\CPU\translate('Application')}}</h3>
+                                    <h3 class="" > {{translate('Shop')}} {{translate('Application')}}</h3>
                                     <hr>
                                 </div>
                                 <form class="user" action="{{route('shop.apply')}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="status" value="approved">
-                                    <h5 class="black">{{\App\CPU\translate('Seller')}} {{\App\CPU\translate('Info')}} </h5>
+                                    <h5 class="black">{{translate('Seller')}} {{translate('Info')}} </h5>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user" id="exampleFirstName" name="f_name" value="{{old('f_name')}}" placeholder="{{\App\CPU\translate('first_name')}}" required>
+                                            <input type="text" class="form-control form-control-user" id="exampleFirstName" name="f_name" value="{{old('f_name')}}" placeholder="{{translate('first_name')}}" required>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-user" id="exampleLastName" name="l_name" value="{{old('l_name')}}" placeholder="{{\App\CPU\translate('last_name')}}" required>
+                                            <input type="text" class="form-control form-control-user" id="exampleLastName" name="l_name" value="{{old('l_name')}}" placeholder="{{translate('last_name')}}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0 mt-4">
-                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email" value="{{old('email')}}" placeholder="{{\App\CPU\translate('email_address')}}" required>
+                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email" value="{{old('email')}}" placeholder="{{translate('email_address')}}" required>
                                         </div>
-                                        <div class="col-sm-6"><small class="text-danger">( * {{\App\CPU\translate('country_code_is_must')}} {{\App\CPU\translate('like_for_BD_880')}} )</small>
-                                            <input type="number" class="form-control form-control-user" id="exampleInputPhone" name="phone" value="{{old('phone')}}" placeholder="{{\App\CPU\translate('phone_number')}}" required>
+                                        <div class="col-sm-6"><small class="text-danger">( * {{translate('country_code_is_must')}} {{translate('like_for_BD_880')}} )</small>
+                                            <input type="number" class="form-control form-control-user" id="exampleInputPhone" name="phone" value="{{old('phone')}}" placeholder="{{translate('phone_number')}}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="password" class="form-control form-control-user" minlength="6" id="exampleInputPassword" name="password" placeholder="{{\App\CPU\translate('password')}}" required>
+                                            <input type="password" class="form-control form-control-user" minlength="6" id="exampleInputPassword" name="password" placeholder="{{translate('password')}}" required>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="password" class="form-control form-control-user" minlength="6" id="exampleRepeatPassword" placeholder="{{\App\CPU\translate('repeat_password')}}" required>
-                                            <div class="pass invalid-feedback">{{\App\CPU\translate('Repeat')}}  {{\App\CPU\translate('password')}} {{\App\CPU\translate('not match')}} .</div>
+                                            <input type="password" class="form-control form-control-user" minlength="6" id="exampleRepeatPassword" placeholder="{{translate('repeat_password')}}" required>
+                                            <div class="pass invalid-feedback">{{translate('Repeat')}}  {{translate('password')}} {{translate('not match')}} .</div>
                                         </div>
                                     </div>
                                     <div class="">
@@ -63,24 +63,24 @@
                                                     src="{{asset('public\assets\back-end\img\400x400\img2.jpg')}}" alt="banner image"/>
                                             </center>
                                         </div>
-        
+
                                         <div class="form-group">
                                             <div class="custom-file" style="text-align: left">
                                                 <input type="file" name="image" id="customFileUpload" class="custom-file-input"
                                                     accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                                <label class="custom-file-label" for="customFileUpload">{{\App\CPU\translate('Upload')}} {{\App\CPU\translate('image')}}</label>
+                                                <label class="custom-file-label" for="customFileUpload">{{translate('Upload')}} {{translate('image')}}</label>
                                             </div>
                                         </div>
                                     </div>
-        
-        
-                                    <h5 class="black">{{\App\CPU\translate('Shop')}} {{\App\CPU\translate('Info')}}</h5>
+
+
+                                    <h5 class="black">{{translate('Shop')}} {{translate('Info')}}</h5>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0 ">
-                                            <input type="text" class="form-control form-control-user" id="shop_name" name="shop_name" placeholder="{{\App\CPU\translate('shop_name')}}" value="{{old('shop_name')}}"required>
+                                            <input type="text" class="form-control form-control-user" id="shop_name" name="shop_name" placeholder="{{translate('shop_name')}}" value="{{old('shop_name')}}"required>
                                         </div>
                                         <div class="col-sm-6">
-                                            <textarea name="shop_address" class="form-control" id="shop_address"rows="1" placeholder="{{\App\CPU\translate('shop_address')}}">{{old('shop_address')}}</textarea>
+                                            <textarea name="shop_address" class="form-control" id="shop_address"rows="1" placeholder="{{translate('shop_address')}}">{{old('shop_address')}}</textarea>
                                         </div>
                                     </div>
                                     <div class="">
@@ -90,12 +90,12 @@
                                                     src="{{asset('public\assets\back-end\img\400x400\img2.jpg')}}" alt="banner image"/>
                                             </center>
                                         </div>
-        
+
                                         <div class="form-group">
                                             <div class="custom-file" style="text-align: left">
                                                 <input type="file" name="logo" id="LogoUpload" class="custom-file-input"
                                                     accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                                <label class="custom-file-label" for="LogoUpload">{{\App\CPU\translate('Upload')}} {{\App\CPU\translate('logo')}}</label>
+                                                <label class="custom-file-label" for="LogoUpload">{{translate('Upload')}} {{translate('logo')}}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -106,20 +106,20 @@
                                                      src="{{asset('public\assets\back-end\img\400x400\img2.jpg')}}" alt="banner image"/>
                                             </center>
                                         </div>
-        
+
                                         <div class="form-group">
                                             <div class="custom-file" style="text-align: left">
                                                 <input type="file" name="banner" id="BannerUpload" class="custom-file-input"
                                                        accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" style="overflow: hidden; padding: 2%">
-                                                <label class="custom-file-label" for="BannerUpload">{{\App\CPU\translate('Upload')}} {{\App\CPU\translate('Banner')}}</label>
+                                                <label class="custom-file-label" for="BannerUpload">{{translate('Upload')}} {{translate('Banner')}}</label>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">{{\App\CPU\translate('Apply')}} {{\App\CPU\translate('Shop')}} </button>
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">{{translate('Apply')}} {{translate('Shop')}} </button>
                                 </form>
                                 <hr>
-                                
+
                             </div>
                         </div>
                     </div>

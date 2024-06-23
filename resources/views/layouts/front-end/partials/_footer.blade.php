@@ -62,9 +62,9 @@
     }
     @media only screen and (max-width: 800px) {
         .end-footer{
-            
+
             display: block;
-            
+
             align-items: center;
         }
     }
@@ -90,11 +90,11 @@
                             alt="">
                 </div>
                 <div style="text-align: center;">
-                    
+
                         <p>
-                            {{ \App\CPU\translate('About Company')}}
+                            {{ translate('About Company')}}
                         </p>
-                    
+
                 </div>
             </a>
         </div>
@@ -108,7 +108,7 @@
                 </div>
                 <div style="text-align: center;">
                     <p>
-                    {{ \App\CPU\translate('Contact Us')}}
+                    {{ translate('Contact Us')}}
                 </p>
                 </div>
             </a>
@@ -123,7 +123,7 @@
                 </div>
                 <div style="text-align: center;">
                     <p>
-                    {{ \App\CPU\translate('FAQ')}}
+                    {{ translate('FAQ')}}
                 </p>
                 </div>
             </a>
@@ -154,86 +154,86 @@
                 </div>
                 <div class="col-md-9" >
                     <div class="row">
-                        
+
                         <div class="col-md-3 footer-padding-bottom" >
-                            <h6 class="text-uppercase mb-4 font-weight-bold footer-heder">{{\App\CPU\translate('special')}}</h6>
+                            <h6 class="text-uppercase mb-4 font-weight-bold footer-heder">{{translate('special')}}</h6>
                             <ul class="widget-list" style="padding-bottom: 10px">
                                 @php($flash_deals=\App\Model\FlashDeal::where(['status'=>1,'deal_type'=>'flash_deal'])->whereDate('start_date','<=',date('Y-m-d'))->whereDate('end_date','>=',date('Y-m-d'))->first())
                                 @if(isset($flash_deals))
                                     <li class="widget-list-item">
                                         <a class="widget-list-link"
                                         href="{{route('flash-deals',[$flash_deals['id']])}}">
-                                            {{\App\CPU\translate('flash_deal')}}
+                                            {{translate('flash_deal')}}
                                         </a>
                                     </li>
                                 @endif
                                 <li class="widget-list-item"><a class="widget-list-link"
-                                                                href="{{route('products',['data_from'=>'featured','page'=>1])}}">{{\App\CPU\translate('featured_products')}}</a>
+                                                                href="{{route('products',['data_from'=>'featured','page'=>1])}}">{{translate('featured_products')}}</a>
                                 </li>
                                 <li class="widget-list-item"><a class="widget-list-link"
-                                                                href="{{route('products',['data_from'=>'latest','page'=>1])}}">{{\App\CPU\translate('latest_products')}}</a>
+                                                                href="{{route('products',['data_from'=>'latest','page'=>1])}}">{{translate('latest_products')}}</a>
                                 </li>
                                 <li class="widget-list-item"><a class="widget-list-link"
-                                                                href="{{route('products',['data_from'=>'best-selling','page'=>1])}}">{{\App\CPU\translate('best_selling_product')}}</a>
+                                                                href="{{route('products',['data_from'=>'best-selling','page'=>1])}}">{{translate('best_selling_product')}}</a>
                                 </li>
                                 <li class="widget-list-item"><a class="widget-list-link"
-                                                                href="{{route('products',['data_from'=>'top-rated','page'=>1])}}">{{\App\CPU\translate('top_rated_product')}}</a>
+                                                                href="{{route('products',['data_from'=>'top-rated','page'=>1])}}">{{translate('top_rated_product')}}</a>
                                 </li>
-    
+
                             </ul>
                         </div>
                         <div class="col-md-4 footer-padding-bottom" style="{{Session::get('direction') === "rtl" ? 'padding-right:20px;' : ''}}">
-                            <h6 class="text-uppercase mb-4 font-weight-bold footer-heder">{{\App\CPU\translate('account_&_shipping_info')}}</h6>
+                            <h6 class="text-uppercase mb-4 font-weight-bold footer-heder">{{translate('account_&_shipping_info')}}</h6>
                             @if(auth('customer')->check())
                                 <ul class="widget-list" style="padding-bottom: 10px">
                                     <li class="widget-list-item"><a class="widget-list-link"
-                                                                    href="{{route('user-account')}}">{{\App\CPU\translate('profile_info')}}</a>
+                                                                    href="{{route('user-account')}}">{{translate('profile_info')}}</a>
                                     </li>
                                     <li class="widget-list-item"><a class="widget-list-link"
-                                                                    href="{{route('wishlists')}}">{{\App\CPU\translate('wish_list')}}</a>
+                                                                    href="{{route('wishlists')}}">{{translate('wish_list')}}</a>
                                     </li>
-                                    
+
                                     <li class="widget-list-item"><a class="widget-list-link"
-                                                                    href="{{route('track-order.index')}}">{{\App\CPU\translate('track_order')}}</a>
+                                                                    href="{{route('track-order.index')}}">{{translate('track_order')}}</a>
                                     </li>
                                     <li class="widget-list-item"><a class="widget-list-link"
-                                                                    href="{{ route('account-address') }}">{{\App\CPU\translate('address')}}</a>
+                                                                    href="{{ route('account-address') }}">{{translate('address')}}</a>
                                     </li>
-                                    
+
                                 </ul>
                             @else
                                 <ul class="widget-list" style="padding-bottom: 10px">
                                     <li class="widget-list-item"><a class="widget-list-link"
-                                                                    href="{{route('customer.auth.login')}}">{{\App\CPU\translate('profile_info')}}</a>
+                                                                    href="{{route('customer.auth.login')}}">{{translate('profile_info')}}</a>
                                     </li>
                                     <li class="widget-list-item"><a class="widget-list-link"
-                                                                    href="{{route('customer.auth.login')}}">{{\App\CPU\translate('wish_list')}}</a>
+                                                                    href="{{route('customer.auth.login')}}">{{translate('wish_list')}}</a>
                                     </li>
-                                    
+
                                     <li class="widget-list-item"><a class="widget-list-link"
-                                                                    href="{{route('track-order.index')}}">{{\App\CPU\translate('track_order')}}</a>
+                                                                    href="{{route('track-order.index')}}">{{translate('track_order')}}</a>
                                     </li>
                                     <li class="widget-list-item"><a class="widget-list-link"
-                                                                    href="{{route('customer.auth.login')}}">{{\App\CPU\translate('address')}}</a>
+                                                                    href="{{route('customer.auth.login')}}">{{translate('address')}}</a>
                                     </li>
-                                    
-                                    
+
+
                                 </ul>
                             @endif
                         </div>
                         <div class="col-md-5 footer-padding-bottom" >
                                 @php($ios = \App\CPU\Helpers::get_business_settings('download_app_apple_stroe'))
                                 @php($android = \App\CPU\Helpers::get_business_settings('download_app_google_stroe'))
-            
+
                                 @if($ios['status'] || $android['status'])
                                     <div class="d-flex justify-content-center">
                                         <h6 class="text-uppercase font-weight-bold footer-heder align-items-center">
-                                            {{\App\CPU\translate('download_our_app')}}
+                                            {{translate('download_our_app')}}
                                         </h6>
                                     </div>
                                 @endif
-            
-            
+
+
                                 <div class="store-contents d-flex justify-content-center" >
                                     @if($ios['status'])
                                         <div class="{{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}} mb-2">
@@ -243,7 +243,7 @@
                                             </a>
                                         </div>
                                     @endif
-            
+
                                     @if($android['status'])
                                         <div class="{{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}} mb-2">
                                             <a href="{{ $android['link'] }}" role="button">
@@ -254,17 +254,17 @@
                                     @endif
                                 </div>
                                 <div class="text-nowrap mb-2">
-                                    <span style="font-weight: 700;font-size: 14.3208px;">{{\App\CPU\translate('NEWS LETTER')}}</span><br>
-                                    <span style="font-weight: 400;font-size: 11.066px;">{{\App\CPU\translate('subscribe to our new channel to get latest updates')}}</span>
+                                    <span style="font-weight: 700;font-size: 14.3208px;">{{translate('NEWS LETTER')}}</span><br>
+                                    <span style="font-weight: 400;font-size: 11.066px;">{{translate('subscribe to our new channel to get latest updates')}}</span>
                                 </div>
                                 <div class="text-nowrap mb-4" style="position:relative;">
                                     <form action="{{ route('subscription') }}" method="post">
                                         @csrf
                                         <input type="email" name="subscription_email" class="form-control subscribe-border"
-                                            placeholder="{{\App\CPU\translate('Your Email Address')}}" required style="padding: 11px;text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
+                                            placeholder="{{translate('Your Email Address')}}" required style="padding: 11px;text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                                         <button class="subscribe-button" type="submit"
                                             style="{{Session::get('direction') === "rtl" ? 'float:right;left:0px;border-radius:5px 0px 0px 5px;' : 'float:right;right:0px; border-radius:0px 5px 5px 0px;'}};font-size: .94rem;">
-                                            {{\App\CPU\translate('subscribe')}}
+                                            {{translate('subscribe')}}
                                         </button>
                                     </form>
                                 </div>
@@ -274,7 +274,7 @@
                         <div class="col-md-7">
                             <div class="row d-flex align-items-center mobile-view-center-align {{Session::get('direction') === "rtl" ? ' flex-row-reverse' : ''}}">
                                 <div style="{{Session::get('direction') === "rtl" ? 'margin-right:23px;' : ''}}">
-                                    <span class="mb-4 font-weight-bold footer-heder">{{ \App\CPU\translate('Start a conversation')}}</span>
+                                    <span class="mb-4 font-weight-bold footer-heder">{{ translate('Start a conversation')}}</span>
                                 </div>
                                 <div class="{{Session::get('direction') === "rtl" ? 'mr-3' : 'ml-3'}}">
                                     <hr class="start_address_under_line" style="border: 1px solid #E0E0E0;"/>
@@ -286,7 +286,7 @@
                                         <a class="widget-list-link" href="tel: {{$web_config['phone']->value}}">
                                             <span ><i class="fa fa-phone m-2"></i>{{\App\CPU\Helpers::get_business_settings('company_phone')}} </span>
                                         </a>
-                                        
+
                                     </div>
                                     <div style=""class="">
                                         <a class="widget-list-link" href="email:">
@@ -296,11 +296,11 @@
                                     <div style="" class="">
                                         @if(auth('customer')->check())
                                             <a class="widget-list-link" href="{{route('account-tickets')}}">
-                                                <span ><i class="fa fa-user-o m-2"></i> {{ \App\CPU\translate('Support Ticket')}} </span>
+                                                <span ><i class="fa fa-user-o m-2"></i> {{ translate('Support Ticket')}} </span>
                                             </a><br>
                                         @else
                                             <a class="widget-list-link" href="{{route('customer.auth.login')}}">
-                                                <span ><i class="fa fa-user-o m-2"></i> {{ \App\CPU\translate('Support Ticket')}} </span>
+                                                <span ><i class="fa fa-user-o m-2"></i> {{ translate('Support Ticket')}} </span>
                                             </a><br>
                                         @endif
                                     </div>
@@ -310,7 +310,7 @@
                         <div class="col-md-5 ">
                             <div class="row pl-2 d-flex align-items-center mobile-view-center-align {{Session::get('direction') === "rtl" ? ' flex-row-reverse' : ''}}">
                                 <div>
-                                    <span class="mb-4 font-weight-bold footer-heder">{{ \App\CPU\translate('address')}}</span>
+                                    <span class="mb-4 font-weight-bold footer-heder">{{ translate('address')}}</span>
                                 </div>
                                 <div class="{{Session::get('direction') === "rtl" ? 'mr-3 ' : 'ml-3'}}">
                                     <hr class="address_under_line" style="border: 1px solid #E0E0E0;"/>
@@ -322,16 +322,16 @@
                         </div>
                     </div>
                 </div>
-                
-    
-                
+
+
+
                 <!-- Grid column -->
             </div>
             <!-- Footer links -->
         </div>
     </div>
 
-    
+
     <!-- Grid row -->
     <div style="background: {{$web_config['primary_color']}}10;">
         <div class="container">
@@ -355,14 +355,14 @@
                 <div class="d-flex" style="font-size: 14px;">
                     <div class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}" >
                         <a class="widget-list-link"
-                        href="{{route('terms')}}">{{\App\CPU\translate('terms_&_conditions')}}</a>
+                        href="{{route('terms')}}">{{translate('terms_&_conditions')}}</a>
                     </div>
                     <div>
                         <a class="widget-list-link" href="{{route('privacy-policy')}}">
-                            {{\App\CPU\translate('privacy_policy')}}
+                            {{translate('privacy_policy')}}
                         </a>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

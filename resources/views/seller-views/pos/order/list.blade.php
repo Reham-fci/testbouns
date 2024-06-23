@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app-seller')
 
-@section('title', \App\CPU\translate('POS Order List'))
+@section('title', translate('POS Order List'))
 
 @push('css_or_js')
 
@@ -12,7 +12,7 @@
         <div class="page-header mb-1">
             <div class="flex-between align-items-center">
                 <div>
-                    <h1 class="page-header-title">{{\App\CPU\translate('pos_orders')}} <span
+                    <h1 class="page-header-title">{{translate('pos_orders')}} <span
                             class="badge badge-soft-dark mx-2">{{$orders->total()}}</span></h1>
                 </div>
                 <div>
@@ -38,7 +38,7 @@
                 <!-- Nav -->
                 <ul class="nav nav-tabs page-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">{{\App\CPU\translate('order_list')}}</a>
+                        <a class="nav-link active" href="#">{{translate('order_list')}}</a>
                     </li>
                 </ul>
                 <!-- End Nav -->
@@ -62,28 +62,28 @@
                                     </div>
                                 </div>
                                 <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                       placeholder="{{\App\CPU\translate('Search orders')}}" aria-label="Search orders" value="{{ $search }}"
+                                       placeholder="{{translate('Search orders')}}" aria-label="Search orders" value="{{ $search }}"
                                        required>
-                                <button type="submit" class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
+                                <button type="submit" class="btn btn-primary">{{translate('search')}}</button>
                             </div>
                             <!-- End Search -->
                         </form>
                     </div>
                     <div class="col-12 col-sm-6 mt-2 mt-sm-0">
                         <form action="{{ url()->current() }}" method="GET">
-                            
+
                             <div class="row">
-                                
+
                                 <div class="col-12 col-sm-5">
                                     <input type="date" name="from" value="{{$from}}" id="from_date"
                                             class="form-control" required>
                                 </div>
                                 <div class="col-12 col-sm-5 mt-2 mt-sm-0">
                                     <input type="date" value="{{$to}}" name="to" id="to_date"
-                                            class="form-control" required> 
+                                            class="form-control" required>
                                 </div>
                                 <div class="col-12 col-sm-2 mt-2 mt-sm-0  ">
-                                    <button type="submit" class="btn btn-primary float-right float-sm-none">{{\App\CPU\translate('filter')}}</button>
+                                    <button type="submit" class="btn btn-primary float-right float-sm-none">{{translate('filter')}}</button>
                                 </div>
                             </div>
                         </form>
@@ -100,15 +100,15 @@
                     <thead class="thead-light">
                     <tr>
                         <th class="">
-                            {{\App\CPU\translate('SL')}}#
+                            {{translate('SL')}}#
                         </th>
-                        <th>{{\App\CPU\translate('Order')}}</th>
-                        <th>{{\App\CPU\translate('Date')}}</th>
-                        <th>{{\App\CPU\translate('customer_name')}}</th>
-                        <th>{{\App\CPU\translate('Status')}}</th>
-                        <th>{{\App\CPU\translate('Total')}}</th>
-                        <th>{{\App\CPU\translate('Order')}} {{\App\CPU\translate('Status')}} </th>
-                        <th>{{\App\CPU\translate('Action')}}</th>
+                        <th>{{translate('Order')}}</th>
+                        <th>{{translate('Date')}}</th>
+                        <th>{{translate('customer_name')}}</th>
+                        <th>{{translate('Status')}}</th>
+                        <th>{{translate('Total')}}</th>
+                        <th>{{translate('Order')}} {{translate('Status')}} </th>
+                        <th>{{translate('Action')}}</th>
                     </tr>
                     </thead>
 
@@ -128,19 +128,19 @@
                                     <a class="text-body text-capitalize"
                                        href="{{route('seller.orders.details',['id'=>$order['id']])}}">{{$order->customer['f_name'].' '.$order->customer['l_name']}}</a>
                                 @else
-                                    <label class="badge badge-danger">{{\App\CPU\translate('invalid_customer_data')}}</label>
+                                    <label class="badge badge-danger">{{translate('invalid_customer_data')}}</label>
                                 @endif
                             </td>
                             <td>
                                 @if($order->payment_status=='paid')
                                     <span class="badge badge-soft-success">
                                       <span class="legend-indicator bg-success"
-                                             ></span>{{\App\CPU\translate('paid')}}
+                                             ></span>{{translate('paid')}}
                                     </span>
                                 @else
                                     <span class="badge badge-soft-danger">
                                       <span class="legend-indicator bg-danger"
-                                             ></span>{{\App\CPU\translate('unpaid')}}
+                                             ></span>{{translate('unpaid')}}
                                     </span>
                                 @endif
                             </td>
@@ -180,18 +180,18 @@
                                 @endif
                             </td>
                             <td>
-                                
+
                                 <a  class="btn btn-primary btn-sm mr-1"
-                                    title="{{\App\CPU\translate('view')}}"
+                                    title="{{translate('view')}}"
                                     href="{{route('seller.pos.order-details',['id'=>$order['id']])}}"><i
                                         class="tio-visible"></i>
                                 </a>
                                 <a  class="btn btn-info btn-sm mr-1" target="_blank"
-                                    title="{{\App\CPU\translate('invoice')}}"
+                                    title="{{translate('invoice')}}"
                                     href="{{route('seller.orders.generate-invoice',[$order['id']])}}"><i
-                                        class="tio-download"></i> 
+                                        class="tio-download"></i>
                                 </a>
-                                    
+
                             </td>
                         </tr>
                     @endforeach
@@ -200,7 +200,7 @@
                 @if(count($orders)==0)
                     <div class="text-center p-4">
                         <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                        <p class="mb-0">{{ \App\CPU\translate('No_data_to_show')}}</p>
+                        <p class="mb-0">{{ translate('No_data_to_show')}}</p>
                     </div>
                 @endif
             </div>
@@ -226,5 +226,5 @@
 @endsection
 
 @push('script_2')
-    
+
 @endpush

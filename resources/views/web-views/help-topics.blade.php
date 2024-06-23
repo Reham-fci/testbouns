@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('FAQ'))
+@section('title',translate('FAQ'))
 
 @push('css_or_js')
     <meta property="og:image" content="{{asset('storage/app/public/company')}}/{{$web_config['web_logo']->value}}"/>
@@ -77,7 +77,7 @@
     <div class="container rtl">
         <div class="row">
             <div class="col-md-12 sidebar_heading text-center mb-2">
-                <h1 class="h3  mb-0 folot-left headerTitle">{{\App\CPU\translate('frequently_asked_question')}}</h1>
+                <h1 class="h3  mb-0 folot-left headerTitle">{{translate('frequently_asked_question')}}</h1>
             </div>
         </div>
         <hr>

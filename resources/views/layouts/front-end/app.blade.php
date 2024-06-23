@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="{{asset('public/assets/front-end')}}/css/home.css"/>
     <link rel="stylesheet" href="{{asset('public/assets/front-end')}}/css/responsive1.css"/>
 
-    
+
     {{--dont touch this--}}
     <meta name="_token" content="{{csrf_token()}}">
     {{--dont touch this--}}
@@ -640,7 +640,7 @@
             border-top-right-radius: 0px;
         }
     </style>
-    
+
     @php($google_tag_manager_id = \App\CPU\Helpers::get_business_settings('google_tag_manager_id'))
     @if($google_tag_manager_id )
     <!-- Google Tag Manager -->
@@ -650,7 +650,7 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','{{$google_tag_manager_id}}');</script>
     <!-- End Google Tag Manager -->
-        
+
     @endif
 
     @php($pixel_analytices_user_code =\App\CPU\Helpers::get_business_settings('pixel_analytics'))
@@ -669,13 +669,13 @@
             fbq('track', 'PageView');
             </script>
             <noscript>
-            <img height="1" width="1" style="display:none" 
+            <img height="1" width="1" style="display:none"
                 src="https://www.facebook.com/tr?id={your-pixel-id-goes-here}&ev=PageView&noscript=1"/>
             </noscript>
         <!-- End Facebook Pixel Code -->
     @endif
-    
-    
+
+
     <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
@@ -910,7 +910,7 @@
             Swal.fire({
                 type: 'info',
                 title: 'Cart',
-                text: '{{\App\CPU\translate('please_choose_all_the_options')}}'
+                text: '{{translate('please_choose_all_the_options')}}'
             });
         }
     }
@@ -933,7 +933,7 @@
                 currency_code: currency_code
             },
             success: function (data) {
-                toastr.success('{{\App\CPU\translate('Currency changed to')}}' + data.name);
+                toastr.success('{{translate('Currency changed to')}}' + data.name);
                 location.reload();
             }
         });
@@ -944,7 +944,7 @@
             console.log(response)
             updateNavCart();
             $('#cart-summary').empty().html(response.data);
-            toastr.info('{{\App\CPU\translate('Item has been removed from cart')}}', {
+            toastr.info('{{translate('Item has been removed from cart')}}', {
                 CloseButton: true,
                 ProgressBar: true
             });
@@ -1008,7 +1008,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Cart',
-                    text: '{{\App\CPU\translate('Sorry, the minimum value was reached')}}'
+                    text: '{{translate('Sorry, the minimum value was reached')}}'
                 });
                 $(this).val($(this).data('oldValue'));
             }
@@ -1018,7 +1018,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Cart',
-                    text: '{{\App\CPU\translate('Sorry, stock limit exceeded')}}.'
+                    text: '{{translate('Sorry, stock limit exceeded')}}.'
                 });
                 $(this).val($(this).data('oldValue'));
             }
@@ -1092,7 +1092,7 @@
     $('body').on('change','#add-to-cart-form input[type="radio"]', function () {
         getVariantPrice();
         $('.cart-qty-field').val(1).change();
-        
+
     });
 
     function getVariantPrice() {
@@ -1111,13 +1111,13 @@
                     $('#add-to-cart-form #chosen_price_div').removeClass('d-none');
                     $('#add-to-cart-form #chosen_price_div #chosen_price').html(data.price);
                     if(data.discountValue > 0){
-                        
+
                         $('.unit-price').html(
-                          `<strike style="color: #E96A6A!important;">`+data.unitprice+`</strike> - `+data.price_after_tax_and_discount+``      
+                          `<strike style="color: #E96A6A!important;">`+data.unitprice+`</strike> - `+data.price_after_tax_and_discount+``
                         );
                     }
                     else{
-                        
+
                         $('.unit-price').html(data.price);
                     }
                     $('#set-tax-amount').html(data.tax);
@@ -1213,16 +1213,16 @@
     }
     @if(isset($walletValuesAndRates))
     function apply_wallet() {
-        
+
         var amount = (parseFloat($('.walletValue').val()));
         if(amount > {{$max_amount}}){
             amount = {{$max_amount}};
             $('.walletValue').val({{$max_amount}})
-            
+
                 Swal.fire({
                     icon: 'error',
                     title: 'Wallet',
-                    text: '{{\App\CPU\translate('Sorry, the minimum for wallet value was reached')}}'
+                    text: '{{translate('Sorry, the minimum for wallet value was reached')}}'
                 });
         }
         var amountfloat = (parseFloat($('.walletValue').val())).toFixed(2);
@@ -1298,14 +1298,14 @@
 
     function route_alert(route, message) {
         Swal.fire({
-            title: '{{\App\CPU\translate('Are you sure')}}?',
+            title: '{{translate('Are you sure')}}?',
             text: message,
             type: 'warning',
             showCancelButton: true,
             cancelButtonColor: 'default',
             confirmButtonColor: '{{$web_config['primary_color']}}',
-            cancelButtonText: '{{\App\CPU\translate('No')}}',
-            confirmButtonText: '{{\App\CPU\translate('Yes')}}',
+            cancelButtonText: '{{translate('No')}}',
+            confirmButtonText: '{{translate('Yes')}}',
             reverseButtons: true
         }).then((result) => {
             if (result.value) {

@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', $seller->shop? $seller->shop->name : \App\CPU\translate("Shop Name"))
+@section('title', $seller->shop? $seller->shop->name : translate("Shop Name"))
 
 @push('css_or_js')
 <style>
@@ -8,7 +8,7 @@
         width: 18%;
     }
     @media (max-width: 500px) {
-            
+
         .seller-wallet {
                 width: 100%;
             }
@@ -20,36 +20,36 @@
 <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">{{\App\CPU\translate('Dashboard')}}</a>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">{{translate('Dashboard')}}</a>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Seller_Details')}}</li>
+                <li class="breadcrumb-item" aria-current="page">{{translate('Seller_Details')}}</li>
             </ol>
         </nav>
 
         <!-- Page Heading -->
         <div class="flex-between d-sm-flex row align-items-center justify-content-between mb-2 mx-1">
             <div>
-                <a href="{{route('admin.sellers.seller-list')}}" class="btn btn-primary mt-3 mb-3">{{\App\CPU\translate('Back_to_seller_list')}}</a>
+                <a href="{{route('admin.sellers.seller-list')}}" class="btn btn-primary mt-3 mb-3">{{translate('Back_to_seller_list')}}</a>
             </div>
             <div>
                 @if ($seller->status=="pending")
                     <div class="mt-4 pr-2 float-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}">
                         <div class="flex-start">
                             <h4 class="mx-1"><i class="tio-shop-outlined"></i></h4>
-                            <div><h4>{{\App\CPU\translate('Seller_request_for_open_a_shop.')}}</h4></div>
+                            <div><h4>{{translate('Seller_request_for_open_a_shop.')}}</h4></div>
                         </div>
                         <div class="text-center">
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="approved">
-                                <button type="submit" class="btn btn-primary">{{\App\CPU\translate('Approve')}}</button>
+                                <button type="submit" class="btn btn-primary">{{translate('Approve')}}</button>
                             </form>
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="rejected">
-                                <button type="submit" class="btn btn-danger">{{\App\CPU\translate('reject')}}</button>
+                                <button type="submit" class="btn btn-danger">{{translate('reject')}}</button>
                             </form>
                         </div>
                     </div>
@@ -68,27 +68,27 @@
             <!-- Nav -->
             <ul class="nav nav-tabs page-header-tabs">
                 <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('admin.sellers.view',$seller->id) }}">{{\App\CPU\translate('Shop')}}</a>
+                        <a class="nav-link active" href="{{ route('admin.sellers.view',$seller->id) }}">{{translate('Shop')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'order']) }}">{{\App\CPU\translate('Order')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'order']) }}">{{translate('Order')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'product']) }}">{{\App\CPU\translate('Product')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'product']) }}">{{translate('Product')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'setting']) }}">{{\App\CPU\translate('Setting')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'setting']) }}">{{translate('Setting')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'transaction']) }}">{{\App\CPU\translate('Transaction')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'transaction']) }}">{{translate('Transaction')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'review']) }}">{{\App\CPU\translate('Review')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'review']) }}">{{translate('Review')}}</a>
                     </li>
 
             </ul>
@@ -102,42 +102,42 @@
                 <div class=" gx-2 gx-lg-3 mb-2">
                     <div>
                         <h4><i style="font-size: 30px"
-                               class="tio-wallet"></i>{{\App\CPU\translate('seller_wallet')}}</h4>
+                               class="tio-wallet"></i>{{translate('seller_wallet')}}</h4>
                     </div>
                     <div class="row gx-2 gx-lg-3 " id="order_stats">
                         <div class="flex-between row no-gutters align-items-center" style="width: 100%">
                             <div class="mb-3 mb-lg-0 seller-wallet" >
                                 <div class="card card-body card-hover-shadow h-100 text-white text-center" style="background-color: #22577A;">
                                     <h1 class="p-2 text-white">{{ $seller->wallet ? \App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($seller->wallet->commission_given)) : 0}}</h1>
-                                    <div class="text-uppercase">{{\App\CPU\translate('commission_given')}}</div>
+                                    <div class="text-uppercase">{{translate('commission_given')}}</div>
                                 </div>
                             </div>
 
                             <div class="mb-3 mb-lg-0 seller-wallet" >
                                 <div class="card card-body card-hover-shadow h-100 text-white text-center" style="background-color: #595260;">
                                     <h1 class="p-2 text-white">{{ $seller->wallet ? \App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($seller->wallet->pending_withdraw)) : 0}}</h1>
-                                    <div class="text-uppercase">{{\App\CPU\translate('pending_withdraw')}}</div>
+                                    <div class="text-uppercase">{{translate('pending_withdraw')}}</div>
                                 </div>
                             </div>
 
                             <div class="mb-3 mb-lg-0 seller-wallet" >
                                 <div class="card card-body card-hover-shadow h-100 text-white text-center" style="background-color: #a66f2e;">
                                     <h1 class="p-2 text-white">{{ $seller->wallet ? \App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($seller->wallet->delivery_charge_earned)) : 0}}</h1>
-                                    <div class="text-uppercase">{{\App\CPU\translate('delivery_charge_earned')}}</div>
+                                    <div class="text-uppercase">{{translate('delivery_charge_earned')}}</div>
                                 </div>
                             </div>
 
                             <div class="mb-3 mb-lg-0 seller-wallet" >
                                 <div class="card card-body card-hover-shadow h-100 text-white text-center" style="background-color: #6E85B2;">
                                     <h1 class="p-2 text-white">{{ $seller->wallet ? \App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($seller->wallet->collected_cash)) : 0}}</h1>
-                                    <div class="text-uppercase">{{\App\CPU\translate('collected_cash')}}</div>
+                                    <div class="text-uppercase">{{translate('collected_cash')}}</div>
                                 </div>
                             </div>
 
                             <div class="mb-3 mb-lg-0 seller-wallet">
                                 <div class="card card-body card-hover-shadow h-100 text-white text-center" style="background-color: #6D9886;">
                                     <h1 class="p-2 text-white">{{ $seller->wallet ? \App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($seller->wallet->total_tax_collected)) : 0}}</h1>
-                                    <div class="text-uppercase">{{\App\CPU\translate('total_collected_tax')}}</div>
+                                    <div class="text-uppercase">{{translate('total_collected_tax')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                                 <div class="flex-between row no-gutters align-items-center">
                                     <div>
                                         <div class="font-weight-bold text-uppercase for-card-text mb-1">
-                                            {{\App\CPU\translate('Withdrawable_balance')}}
+                                            {{translate('Withdrawable_balance')}}
                                         </div>
                                         <div
                                             class="for-card-count">{{ $seller->wallet ? \App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($seller->wallet->total_earning)) : 0 }}</div>
@@ -170,7 +170,7 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div
-                                            class=" font-weight-bold for-card-text text-uppercase mb-1">{{\App\CPU\translate('withdrawn')}}</div>
+                                            class=" font-weight-bold for-card-text text-uppercase mb-1">{{translate('withdrawn')}}</div>
                                         <div
                                             class="for-card-count">{{$seller->wallet ? \App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($seller->wallet->withdrawn)) : 0}}</div>
                                     </div>
@@ -191,14 +191,14 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header text-capitalize">
-                        {{\App\CPU\translate('Seller')}} {{\App\CPU\translate('Account')}} <br>
+                        {{translate('Seller')}} {{translate('Account')}} <br>
                         @if($seller->status=='approved')
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="suspended">
                                 <button type="submit"
-                                        class="btn btn-outline-danger">{{\App\CPU\translate('suspend')}}</button>
+                                        class="btn btn-outline-danger">{{translate('suspend')}}</button>
                             </form>
                         @elseif($seller->status=='rejected' || $seller->status=='suspended')
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
@@ -206,26 +206,26 @@
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="approved">
                                 <button type="submit"
-                                        class="btn btn-outline-success">{{\App\CPU\translate('activate')}}</button>
+                                        class="btn btn-outline-success">{{translate('activate')}}</button>
                             </form>
                         @endif
                     </div>
                     <div class="card-body">
                         <div class="card-body" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                             <div class="flex-start">
-                                <div><h4>{{\App\CPU\translate('Status')}} : </h4></div>
+                                <div><h4>{{translate('Status')}} : </h4></div>
                                 <div class="mx-1"><h4>{!! $seller->status=='approved'?'<label class="badge badge-success">Active</label>':'<label class="badge badge-danger">In-Active</label>' !!}</h4></div>
                             </div>
                             <div class="flex-start">
-                                <div><h5>{{\App\CPU\translate('name')}} : </h5></div>
+                                <div><h5>{{translate('name')}} : </h5></div>
                                 <div class="mx-1"><h5>{{$seller->f_name}} {{$seller->l_name}}</h5></div>
                             </div>
                             <div class="flex-start">
-                                <div><h5>{{\App\CPU\translate('Email')}} : </h5></div>
+                                <div><h5>{{translate('Email')}} : </h5></div>
                                 <div class="mx-1"><h5>{{$seller->email}}</h5></div>
                             </div>
                             <div class="flex-start">
-                                <div><h5>{{\App\CPU\translate('Phone')}} : </h5></div>
+                                <div><h5>{{translate('Phone')}} : </h5></div>
                                 <div class="mx-1"><h5>{{$seller->phone}}</h5></div>
                             </div>
                         </div>
@@ -236,19 +236,19 @@
                 <div class="col-md-6 mt-2 mt-md-0">
                     <div class="card">
                         <div class="card-header">
-                            {{\App\CPU\translate('Shop')}} {{\App\CPU\translate('info')}}
+                            {{translate('Shop')}} {{translate('info')}}
                         </div>
                         <div class="card-body" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                             <div class="flex-start">
-                                <div><h5>{{\App\CPU\translate('seller')}} : </h5></div>
+                                <div><h5>{{translate('seller')}} : </h5></div>
                                 <div class="mx-1"><h5>{{$seller->shop->name}}</h5></div>
                             </div>
                             <div class="flex-start">
-                                <div><h5>{{\App\CPU\translate('Phone')}} : </h5></div>
+                                <div><h5>{{translate('Phone')}} : </h5></div>
                                 <div class="mx-1"><h5>{{$seller->shop->contact}}</h5></div>
                             </div>
                             <div class="flex-start">
-                                <div><h5>{{\App\CPU\translate('address')}} : </h5></div>
+                                <div><h5>{{translate('address')}} : </h5></div>
                                 <div class="mx-1"><h5>{{$seller->shop->address}}</h5></div>
                             </div>
                         </div>
@@ -259,32 +259,32 @@
             <div class="col-md-6 mt-3">
                 <div class="card">
                     <div class="card-header">
-                        {{\App\CPU\translate('bank_info')}}
+                        {{translate('bank_info')}}
                     </div>
                     <div class="card-body" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                         <div class="col-md-8 mt-2">
                             <div class="flex-start">
-                                <div><h4>{{\App\CPU\translate('bank_name')}} : </h4></div>
-                                <div class="mx-1"><h4>{{$seller->bank_name ? $seller->bank_name : \App\CPU\translate('No Data found')}}</h4></div>
+                                <div><h4>{{translate('bank_name')}} : </h4></div>
+                                <div class="mx-1"><h4>{{$seller->bank_name ? $seller->bank_name : translate('No Data found')}}</h4></div>
                             </div>
                             <div class="flex-start">
-                                <div><h6>{{\App\CPU\translate('Branch')}} : </h6></div>
-                                <div class="mx-1"><h6>{{$seller->branch ? $seller->branch : \App\CPU\translate('No Data found')}}</h6></div>
+                                <div><h6>{{translate('Branch')}} : </h6></div>
+                                <div class="mx-1"><h6>{{$seller->branch ? $seller->branch : translate('No Data found')}}</h6></div>
                             </div>
                             <div class="flex-start">
-                                <div><h6>{{\App\CPU\translate('holder_name')}} : </h6></div>
-                                <div class="mx-1"><h6>{{$seller->holder_name ? $seller->holder_name : \App\CPU\translate('No Data found')}}</h6></div>
+                                <div><h6>{{translate('holder_name')}} : </h6></div>
+                                <div class="mx-1"><h6>{{$seller->holder_name ? $seller->holder_name : translate('No Data found')}}</h6></div>
                             </div>
                             <div class="flex-start">
-                                <div><h6>{{\App\CPU\translate('account_no')}} : </h6></div>
-                                <div class="mx-1"><h6>{{$seller->account_no ? $seller->account_no : \App\CPU\translate('No Data found')}}</h6></div>
+                                <div><h6>{{translate('account_no')}} : </h6></div>
+                                <div class="mx-1"><h6>{{$seller->account_no ? $seller->account_no : translate('No Data found')}}</h6></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            
+
         </div>
 </div>
 @endsection

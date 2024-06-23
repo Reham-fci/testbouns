@@ -1,11 +1,11 @@
 @extends('layouts.back-end.app')
-@section('title', \App\CPU\translate('About Us'))
+@section('title', translate('About Us'))
 @section('content')
 <div class="content container-fluid">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{\App\CPU\translate('Dashboard')}}</a></li>
-            <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('about_us')}}</li>
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{translate('Dashboard')}}</a></li>
+            <li class="breadcrumb-item" aria-current="page">{{translate('about_us')}}</li>
         </ol>
     </nav>
 
@@ -15,7 +15,7 @@
                 <div class="card-header">
                     <div class="row justify-content-between pl-4 pr-4">
                         <div>
-                            <h5><b>{{\App\CPU\translate('about_us')}}</b></h5>
+                            <h5><b>{{translate('about_us')}}</b></h5>
                         </div>
                     </div>
                 </div>

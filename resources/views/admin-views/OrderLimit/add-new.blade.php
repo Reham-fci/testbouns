@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('Coupon Add'))
+@section('title', translate('Coupon Add'))
 
 @push('css_or_js')
     <link href="{{asset('public/assets/back-end')}}/css/select2.min.css" rel="stylesheet"/>
@@ -10,12 +10,12 @@
     .forAll{
         display: none;
     }
-    
+
     .city-non-active{
             display: none;
     }
     .city-active{
-        
+
         display: block;
     }
 </style>
@@ -27,7 +27,7 @@
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
                     <h1 class="page-header-title"><i
-                            class="tio-add-circle-outlined"></i> {{\App\CPU\translate('Add')}} {{\App\CPU\translate('New')}} {{\App\CPU\translate('Coupon')}}
+                            class="tio-add-circle-outlined"></i> {{translate('Add')}} {{translate('New')}} {{translate('Coupon')}}
                     </h1>
                 </div>
             </div>
@@ -45,24 +45,24 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('Type')}}</label>
+                                        <label for="name">{{translate('Type')}}</label>
                                         <select class="form-control" name="coupon_type"
                                                 style="width: 100%" required>
                                             {{--<option value="delivery_charge_free">Delivery Charge Free</option>--}}
-                                            <option value="discount_on_purchase">{{\App\CPU\translate('Discount_on_Purchase')}}</option>
+                                            <option value="discount_on_purchase">{{translate('Discount_on_Purchase')}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('Title')}}</label>
+                                        <label for="name">{{translate('Title')}}</label>
                                         <input type="text" name="title" class="form-control" id="title"
-                                               placeholder="{{\App\CPU\translate('Title')}}" required>
+                                               placeholder="{{translate('Title')}}" required>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('Code')}}</label>
+                                        <label for="name">{{translate('Code')}}</label>
                                         <input type="text" name="code" value="{{\Illuminate\Support\Str::random(10)}}"
                                                class="form-control" id="code"
                                                placeholder="" required>
@@ -73,34 +73,34 @@
                             <div class="row">
                                 <div class="col-md-3 col-6">
                                     <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('start_date')}}</label>
-                                        <input id="start_date" type="date" name="start_date" class="form-control" 
-                                               placeholder="{{\App\CPU\translate('start date')}}" required>
+                                        <label for="name">{{translate('start_date')}}</label>
+                                        <input id="start_date" type="date" name="start_date" class="form-control"
+                                               placeholder="{{translate('start date')}}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-6">
                                     <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('expire_date')}}</label>
-                                        <input id="expire_date" type="date" name="expire_date" class="form-control" 
-                                               placeholder="{{\App\CPU\translate('expire date')}}" required>
+                                        <label for="name">{{translate('expire_date')}}</label>
+                                        <input id="expire_date" type="date" name="expire_date" class="form-control"
+                                               placeholder="{{translate('expire date')}}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-6">
                                     <div class="form-group">
                                         <label
-                                            for="exampleFormControlInput1">{{\App\CPU\translate('limit')}} {{\App\CPU\translate('for')}} {{\App\CPU\translate('same')}} {{\App\CPU\translate('user')}}</label>
+                                            for="exampleFormControlInput1">{{translate('limit')}} {{translate('for')}} {{translate('same')}} {{translate('user')}}</label>
                                         <input type="number" name="limit" id="coupon_limit" class="form-control"
-                                               placeholder="{{\App\CPU\translate('EX')}}: {{\App\CPU\translate('10')}}">
+                                               placeholder="{{translate('EX')}}: {{translate('10')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-6">
                                     <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('discount_type')}}</label>
+                                        <label for="name">{{translate('discount_type')}}</label>
                                         <select id="discount_type" class="form-control" name="discount_type"
                                                 onchange="checkDiscountType(this.value)"
                                                 style="width: 100%">
-                                            <option value="amount">{{\App\CPU\translate('Amount')}}</option>
-                                            <option value="percentage">{{\App\CPU\translate('percentage')}}</option>
+                                            <option value="amount">{{translate('Amount')}}</option>
+                                            <option value="percentage">{{translate('percentage')}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -109,76 +109,76 @@
                             <div class="row">
                                 <div class="col-md-3 col-6">
                                     <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('Discount')}}</label>
+                                        <label for="name">{{translate('Discount')}}</label>
                                         <input type="number" step="any" min="1" max="1000000" name="discount" class="form-control"
                                                id="discount"
-                                               placeholder="{{\App\CPU\translate('discount')}}" required>
+                                               placeholder="{{translate('discount')}}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-6">
-                                    <label for="name">{{\App\CPU\translate('minimum_purchase')}}</label>
+                                    <label for="name">{{translate('minimum_purchase')}}</label>
                                     <input type="number" min="1" max="1000000" name="min_purchase" class="form-control"
                                            id="minimum purchase"
-                                           placeholder="{{\App\CPU\translate('minimum purchase')}}" required>
+                                           placeholder="{{translate('minimum purchase')}}" required>
                                 </div>
                                 <div id="max-discount" class="col-md-3 col-6">
                                     <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('maximum_discount')}}</label>
-                                        <input type="number" min="1" max="1000000" name="max_discount" 
+                                        <label for="name">{{translate('maximum_discount')}}</label>
+                                        <input type="number" min="1" max="1000000" name="max_discount"
                                                class="form-control" id="maximum discount"
-                                               placeholder="{{\App\CPU\translate('maximum discount')}}" >
+                                               placeholder="{{translate('maximum discount')}}" >
                                     </div>
                                 </div>
 
                                 <div id="max-discount" class="col-md-3 col-6">
                                     <div class="form-group">
-                                        <label for="name">{{\App\CPU\translate('Quantity')}}</label>
-                                        <input type="number" min="1" max="1000000" name="qty" 
+                                        <label for="name">{{translate('Quantity')}}</label>
+                                        <input type="number" min="1" max="1000000" name="qty"
                                                class="form-control" id="Quantity"
-                                               placeholder="{{\App\CPU\translate('Quantity')}}" >
+                                               placeholder="{{translate('Quantity')}}" >
                                     </div>
                                 </div>
-                                
-                                
+
+
                                 <div class="col-md-3 col-6">
-                                    <label>{{\App\CPU\translate('ForAll')}}</label>
+                                    <label>{{translate('ForAll')}}</label>
                                     <select class="form-control" id="ForAll" name="ForAll">
-                                        <option value="1">{{\App\CPU\translate('yes')}}</option>
-                                        <option value="0">{{\App\CPU\translate('no')}}</option>
+                                        <option value="1">{{translate('yes')}}</option>
+                                        <option value="0">{{translate('no')}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('fromDateRegister')}}</label>
+                                    <label>{{translate('fromDateRegister')}}</label>
                                     <input type="date" name="fromDate2" value="{{$seaerchData['fromDate'] ? $seaerchData['fromDate'] : ""}}"  id="from_date"
                                             class="form-control" >
                                 </div>
                                 <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('toDateRegister')}}</label>
+                                    <label>{{translate('toDateRegister')}}</label>
                                     <input type="date"  name="toDate2" value="{{$seaerchData['toDate'] ? $seaerchData['toDate'] : ""}}" id="to_date"
-                                            class="form-control" > 
+                                            class="form-control" >
                                 </div>
                                 <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('fromOrder')}}</label>
+                                    <label>{{translate('fromOrder')}}</label>
                                     <input type="number" name="fromOrder2" value=""  id="from_date"
                                             class="form-control" >
                                 </div>
                                 <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('toOrder')}}</label>
+                                    <label>{{translate('toOrder')}}</label>
                                     <input type="number"  name="toOrder2" value="" id="to_date"
-                                    class="form-control" > 
+                                    class="form-control" >
                                 </div>
                                 <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('fromOrderprice')}}</label>
+                                    <label>{{translate('fromOrderprice')}}</label>
                                     <input type="number" name="fromOrderprice2" value=""  id="from_date"
                                             class="form-control" >
                                 </div>
                                 <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('toOrderprice')}}</label>
+                                    <label>{{translate('toOrderprice')}}</label>
                                     <input type="number"  name="toOrderprice2" value="" id="to_date"
-                                    class="form-control" > 
+                                    class="form-control" >
                                 </div>
                                 <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('city')}}</label>
+                                    <label>{{translate('city')}}</label>
                                     <select class="form-select form-control select-areas" name="city2[]" multiple type="city" id="si-city"
                                         style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
                                         >
@@ -189,7 +189,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('area')}}</label>
+                                    <label>{{translate('area')}}</label>
                                     <select class="form-select form-control select-areas" name="area2[]" multiple type="country" id="si-area"
                                         style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
                                         >
@@ -200,7 +200,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3 col-6 forAll">
-                                    <label>{{\App\CPU\translate('Type')}}</label>
+                                    <label>{{translate('Type')}}</label>
                                     <select class="form-select form-control" name="type2" type="type" id="si-Type"
                                         style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
                                         >
@@ -210,20 +210,20 @@
                                         @endforeach
                                     </select>
                                 </div>
-    
-                            
+
+
 
                             </div>
 
                             <div class="">
-                                <button type="submit" class="btn btn-primary float-right">{{\App\CPU\translate('Submit')}}</button>
+                                <button type="submit" class="btn btn-primary float-right">{{translate('Submit')}}</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        
+
 
         <div class="row" style="margin-top: 20px">
             <div class="col-md-12">
@@ -231,7 +231,7 @@
                     <div class="card-header">
                         <div class="row justify-content-between align-items-center flex-grow-1">
                             <div class="col-lg-3 mb-3 mb-lg-0">
-                                <h5>{{\App\CPU\translate('coupons_table')}} <span style="color: red;">({{ $cou->total() }})</span>
+                                <h5>{{translate('coupons_table')}} <span style="color: red;">({{ $cou->total() }})</span>
                                 </h5>
                             </div>
                             <div class="col-lg-6">
@@ -244,9 +244,9 @@
                                             </div>
                                         </div>
                                         <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                               placeholder="{{\App\CPU\translate('Search by Title or Code or Discount Type')}}"
+                                               placeholder="{{translate('Search by Title or Code or Discount Type')}}"
                                                value="{{ $search }}" aria-label="Search orders" required>
-                                        <button type="submit" class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
+                                        <button type="submit" class="btn btn-primary">{{translate('search')}}</button>
                                     </div>
                                 </form>
                                 <!-- End Search -->
@@ -260,19 +260,19 @@
                                    style="width: 100%">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th>{{\App\CPU\translate('SL')}}#</th>
-                                    <th>{{\App\CPU\translate('coupon_type')}}</th>
-                                    <th>{{\App\CPU\translate('Title')}}</th>
-                                    <th>{{\App\CPU\translate('Code')}}</th>
-                                    <th>{{ \App\CPU\translate('user') }} {{ \App\CPU\translate('limit') }}</th>
-                                    <th>{{\App\CPU\translate('minimum_purchase')}}</th>
-                                    <th>{{\App\CPU\translate('maximum_discount')}}</th>
-                                    <th>{{\App\CPU\translate('Discount')}}</th>
-                                    <th>{{\App\CPU\translate('discount_type')}}</th>
-                                    <th>{{\App\CPU\translate('start_date')}}</th>
-                                    <th>{{\App\CPU\translate('expire_date')}}</th>
-                                    <th>{{\App\CPU\translate('Status')}}</th>
-                                    <th>{{\App\CPU\translate('Action')}}</th>
+                                    <th>{{translate('SL')}}#</th>
+                                    <th>{{translate('coupon_type')}}</th>
+                                    <th>{{translate('Title')}}</th>
+                                    <th>{{translate('Code')}}</th>
+                                    <th>{{ translate('user') }} {{ translate('limit') }}</th>
+                                    <th>{{translate('minimum_purchase')}}</th>
+                                    <th>{{translate('maximum_discount')}}</th>
+                                    <th>{{translate('Discount')}}</th>
+                                    <th>{{translate('discount_type')}}</th>
+                                    <th>{{translate('start_date')}}</th>
+                                    <th>{{translate('expire_date')}}</th>
+                                    <th>{{translate('Status')}}</th>
+                                    <th>{{translate('Action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -305,14 +305,14 @@
                                             <div class="d-flex">
                                                 <a class="btn btn-primary btn-sm edit m-1"
                                                 href="{{route('admin.coupon.update',[$c['id']])}}"
-                                                title="{{ \App\CPU\translate('Edit')}}"
+                                                title="{{ translate('Edit')}}"
                                                 >
                                                 <i class="tio-edit"></i>
                                             </a><br>
                                             <a class="btn btn-danger btn-sm delete m-1"
                                                 href="javascript:"
                                                 onclick="form_alert('coupon-{{$c['id']}}','Want to delete this coupon ?')"
-                                                title="{{\App\CPU\translate('delete')}}"   
+                                                title="{{translate('delete')}}"
                                                 >
                                                 <i class="tio-add-to-trash"></i>
                                             </a>
@@ -321,7 +321,7 @@
                                                 @csrf @method('delete')
                                             </form>
                                             </div>
-                                            
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -336,7 +336,7 @@
                         <div class="text-center p-4">
                             <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg"
                                  alt="Image Description" style="width: 7rem;">
-                            <p class="mb-0">{{\App\CPU\translate('No data to show')}}</p>
+                            <p class="mb-0">{{translate('No data to show')}}</p>
                         </div>
                     @endif
                 </div>
@@ -348,48 +348,48 @@
 @push('script')
 
 <script>
-    
+
     $('#btn-export').on('click',function(e){
         e.preventDefault();
-        
+
         var search = $('[name="search"]').val();
-        
+
         search = (typeof(search) == "undefined") ? "" : search;
-        
+
         var fromDate = $('[name="fromDate"]').val();
-        
+
         fromDate = (typeof(fromDate) == "undefined") ? "" : fromDate;
-        
+
         var toDate = $('[name="toDate"]').val();
-        
+
         toDate = (typeof(toDate) == "undefined") ? "" : toDate;
-        
+
         var fromOrder = $('[name="fromOrder"]').val();
-        
+
         fromOrder = (typeof(fromOrder) == "undefined") ? "" : fromOrder;
-        
+
         var toOrder = $('[name="toOrder"]').val();
-        
+
         toOrder = (typeof(toOrder) == "undefined") ? "" : toOrder;
-        
+
         var fromOrderprice = $('[name="fromOrderprice"]').val();
-        
+
         fromOrderprice = (typeof(fromOrderprice) == "undefined") ? "" : fromOrderprice;
-        
+
         var toOrderprice = $('[name="toOrderprice"]').val();
-        
+
         toOrderprice = (typeof(toOrderprice) == "undefined") ? "" : toOrderprice;
-        
+
         var city = $('[name="city"]').val();
-        
+
         city = (typeof(city) == "undefined") ? "" : city;
-        
+
         var area = $('[name="area"]').val();
-        
+
         area = (typeof(area) == "undefined") ? "" : area;
-        
+
         var type = $('[name="type"]').val();
-        
+
         type = (typeof(type) == "undefined") ? "" : type;
         var url = `search=`+search+`&fromDate=`+fromDate+`&toDate=`+toDate+`&fromOrder=`+fromOrder+`&toOrder=`+toOrder+`&fromOrderprice=`+fromOrderprice+`&toOrderprice=`+toOrderprice+`&city=`+city+`&area=`+area+`&type=`+type;
         console.log("<?=URL::to('admin/customer/export');?>"+url );
@@ -400,10 +400,10 @@
         $('#si-area option').removeClass('city-active');
         for (let index = 0; index < cities.length; index++) {
             var city = $(cities[index]).val();
-            $('#si-area option[ data-parent="'+city+'"]').addClass('city-active');            
+            $('#si-area option[ data-parent="'+city+'"]').addClass('city-active');
         }
     })
-    
+
     $('#si-city2').on('change',function(){
         var city = $('#si-city2 option:selected').val();
         $('#si-area2 option').removeClass('city-active');
@@ -439,7 +439,7 @@
         $("#expire_date").on("change", function () {
             $('#start_date').attr('max',$(this).val());
         });
-        
+
         function checkDiscountType(val) {
             if (val == 'amount') {
                 $('#max-discount').hide()
@@ -448,9 +448,9 @@
             }
         }
 
-    
+
 </script>
-    
+
     <script src="{{asset('public/assets/back-end')}}/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {

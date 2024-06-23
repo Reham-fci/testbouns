@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app-seller')
 
-@section('title', \App\CPU\translate('Product Preview'))
+@section('title', translate('Product Preview'))
 
 @push('css_or_js')
     <style>
@@ -36,7 +36,7 @@
                 </div>
                 <div>
                     <a href="{{url()->previous()}}" class="btn btn-primary float-right">
-                        <i class="tio-back-ui"></i> {{\App\CPU\translate('Back')}}
+                        <i class="tio-back-ui"></i> {{translate('Back')}}
                     </a>
                 </div>
             </div>
@@ -53,7 +53,7 @@
             <ul class="nav nav-tabs page-header-tabs">
                 <li class="nav-item">
                     <a class="nav-link active" href="javascript:">
-                        {{\App\CPU\translate('Product reviews')}}
+                        {{translate('Product reviews')}}
                     </a>
                 </li>
             </ul>
@@ -75,7 +75,7 @@
 
                             <div class="d-block">
                                 <h4 class="display-2 text-dark mb-0">{{count($product->rating)>0?number_format($product->rating[0]->average, 2, '.', ' '):0}}</h4>
-                                <p> of {{$product->reviews->count()}} {{\App\CPU\translate('reviews')}}
+                                <p> of {{$product->reviews->count()}} {{translate('reviews')}}
                                     <span class="badge badge-soft-dark badge-pill {{Session::get('direction') === "rtl" ? 'mr-1' : 'ml-1'}}"></span>
                                 </p>
                             </div>
@@ -90,7 +90,7 @@
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($five=\App\CPU\Helpers::rating_count($product['id'],5))
                                 <span
-                                    class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">5 {{\App\CPU\translate('star')}}</span>
+                                    class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">5 {{translate('star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                          style="width: {{$total==0?0:($five/$total)*100}}%;"
@@ -104,7 +104,7 @@
                             <!-- Review Ratings -->
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($four=\App\CPU\Helpers::rating_count($product['id'],4))
-                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">4 {{\App\CPU\translate('star')}}</span>
+                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">4 {{translate('star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                          style="width: {{$total==0?0:($four/$total)*100}}%;"
@@ -118,7 +118,7 @@
                             <!-- Review Ratings -->
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($three=\App\CPU\Helpers::rating_count($product['id'],3))
-                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">3 {{\App\CPU\translate('star')}}</span>
+                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">3 {{translate('star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                          style="width: {{$total==0?0:($three/$total)*100}}%;"
@@ -132,7 +132,7 @@
                             <!-- Review Ratings -->
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($two=\App\CPU\Helpers::rating_count($product['id'],2))
-                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">2 {{\App\CPU\translate('star')}}</span>
+                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">2 {{translate('star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                          style="width: {{$total==0?0:($two/$total)*100}}%;"
@@ -146,7 +146,7 @@
                             <!-- Review Ratings -->
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($one=\App\CPU\Helpers::rating_count($product['id'],1))
-                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">1 {{\App\CPU\translate('star')}}</span>
+                                <span class="{{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}}">1 {{translate('star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                          style="width: {{$total==0?0:($one/$total)*100}}%;"
@@ -167,24 +167,24 @@
                             <h4 class="border-bottom">{{$product['name']}}</h4>
                         </div>
                         <div class="flex-start">
-                            <span>{{\App\CPU\translate('Price')}} : </span>
+                            <span>{{translate('Price')}} : </span>
                             <span class="mx-1">{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($product['unit_price']))}}</span>
                         </div>
                         <div class="flex-start">
-                            <span>{{\App\CPU\translate('TAX')}} : </span>
+                            <span>{{translate('TAX')}} : </span>
                             <span class="mx-1">{{($product['tax'])}} % </span>
                         </div>
                         <div class="flex-start">
-                            <span>{{\App\CPU\translate('Discount')}} : </span>
+                            <span>{{translate('Discount')}} : </span>
                             <span class="mx-1">{{ $product->discount_type=='flat'?\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($product->discount)): $product->discount.''.'%'}}</span>
                         </div>
                         <div class="flex-start">
-                            <span>{{\App\CPU\translate('shipping Cost')}} : </span>
+                            <span>{{translate('shipping Cost')}} : </span>
                             <span class="mx-1">{{ \App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($product->shipping_cost))}}</span>
                         </div>
-                        
+
                         <div class="flex-start">
-                            <span>{{\App\CPU\translate('Current Stock')}} : </span>
+                            <span>{{translate('Current Stock')}} : </span>
                             <span class="mx-1">{{ $product->current_stock }}</span>
                         </div>
                     </div>
@@ -194,7 +194,7 @@
                         <span> @if(count(json_decode($product->colors)) > 0)
                                 <div class="row no-gutters">
                                 <div class="col-2">
-                                    <div class="product-description-label mt-2">{{\App\CPU\translate('Available color')}}:
+                                    <div class="product-description-label mt-2">{{translate('Available color')}}:
                                     </div>
                                 </div>
                                 <div class="col-10">
@@ -212,7 +212,7 @@
                             </div>
                             @endif</span><br>
                         <span>
-                        {{\App\CPU\translate('Product Image')}}
+                        {{translate('Product Image')}}
 
                      <div class="row">
                          @foreach (json_decode($product->images) as $key => $photo)
@@ -244,9 +244,9 @@
                        style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                     <thead class="thead-light">
                     <tr>
-                        <th>{{\App\CPU\translate('Reviewer')}}</th>
-                        <th>{{\App\CPU\translate('Review')}}</th>
-                        <th>{{\App\CPU\translate('Date')}}</th>
+                        <th>{{translate('Reviewer')}}</th>
+                        <th>{{translate('Review')}}</th>
+                        <th>{{translate('Date')}}</th>
                     </tr>
                     </thead>
 
@@ -283,11 +283,11 @@
                                         {{$review['comment']}}
                                     </p>
                                     @foreach (json_decode($review->attachment) as $img)
-                                                
+
                                         <a class="float-left" href="{{asset('storage/app/public/review')}}/{{$img}}" data-lightbox="mygallery">
                                             <img style="width: 60px;height:60px;padding:10px; " src="{{asset('storage/app/public/review')}}/{{$img}}" alt="">
                                         </a>
-                                    
+
                                     @endforeach
                                 </div>
                             </td>
@@ -304,7 +304,7 @@
             @if(count($reviews)==0)
                 <div class="text-center p-4">
                     <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                    <p class="mb-0">{{\App\CPU\translate('No data to show')}}</p>
+                    <p class="mb-0">{{translate('No data to show')}}</p>
                 </div>
             @endif
             <!-- Footer -->

@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app-seller')
 
-@section('title',\App\CPU\translate('Chatting Page'))
+@section('title',translate('Chatting Page'))
 
 @push('css_or_js')
     <style>
@@ -263,7 +263,7 @@
     <div class="content container-fluid">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="h3 mb-0 text-black-50">{{\App\CPU\translate('Chatting List')}}</h1>
+            <h1 class="h3 mb-0 text-black-50">{{translate('Chatting List')}}</h1>
         </div>
 
         <!-- Page Content-->
@@ -279,7 +279,7 @@
                                     <input
                                         class="form-control form-control-sm {{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}} w-75"
                                         id="myInput" type="text"
-                                        placeholder="{{\App\CPU\translate('Search')}}"
+                                        placeholder="{{translate('Search')}}"
                                         aria-label="Search">
                                     <i class="fa fa-search" style="color: #92C6FF" aria-hidden="true"></i>
                                 </form>
@@ -354,10 +354,10 @@
                                                 <input
                                                     class="form-control form-control-sm {{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}} w-75"
                                                     id="msgInputValue"
-                                                    type="text" placeholder="{{\App\CPU\translate('Send a message')}}"
+                                                    type="text" placeholder="{{translate('Send a message')}}"
                                                     aria-label="Search">
                                                 <input class="aSend" type="submit" id="msgSendBtn" style="width: 45px;"
-                                                       value="{{\App\CPU\translate('Send')}}">
+                                                       value="{{translate('Send')}}">
                                                 <i class="fa fa-send" style="color: #92C6FF" aria-hidden="true"></i>
 
                                             </form>
@@ -373,7 +373,7 @@
 
             @else
                 <div class="offset-md-1 col-md-10" style="display:flex; justify-content: center; align-items: center;">
-                    <p>{{\App\CPU\translate('No conversation found')}}</p>
+                    <p>{{translate('No conversation found')}}</p>
                 </div>
             @endif
 
@@ -448,7 +448,7 @@
                                 $('#hidden_value').attr("value", user_id);
                             });
                         } else {
-                            $(".msg_history").html(`<p> {{\App\CPU\translate('No Message available')}} </p>`);
+                            $(".msg_history").html(`<p> {{translate('No Message available')}} </p>`);
                             data = [];
                         }
                         data = "";

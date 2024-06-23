@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Title -->
-    <title>{{\App\CPU\translate('forgot_password')}}</title>
+    <title>{{translate('forgot_password')}}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
@@ -47,12 +47,12 @@
 
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
-                <h2 class="h3 mb-4">{{\App\CPU\translate('forgot_password?')}}</h2>
-                <p class="font-size-md">{{\App\CPU\translate('follow_steps')}}</p>
+                <h2 class="h3 mb-4">{{translate('forgot_password?')}}</h2>
+                <p class="font-size-md">{{translate('follow_steps')}}</p>
                 <ol class="list-unstyled font-size-md">
-                    <li><span class="text-primary mr-2">1.</span>{{\App\CPU\translate('Fill in your email address below')}}.</li>
-                    <li><span class="text-primary mr-2">2.</span>{{\App\CPU\translate('We will send email you a temporary code')}}.</li>
-                    <li><span class="text-primary mr-2">3.</span>{{\App\CPU\translate('Use the code to change your password on our secure
+                    <li><span class="text-primary mr-2">1.</span>{{translate('Fill in your email address below')}}.</li>
+                    <li><span class="text-primary mr-2">2.</span>{{translate('We will send email you a temporary code')}}.</li>
+                    <li><span class="text-primary mr-2">3.</span>{{translate('Use the code to change your password on our secure
                         website')}}.
                     </li>
                 </ol>
@@ -63,11 +63,11 @@
                             method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="recover-email">{{\App\CPU\translate('Enter your email address')}}</label>
+                                <label for="recover-email">{{translate('Enter your email address')}}</label>
                                 <input class="form-control" type="email" name="identity" id="recover-email" required>
-                                <div class="invalid-feedback">{{\App\CPU\translate('Please provide valid email address')}}.</div>
+                                <div class="invalid-feedback">{{translate('Please provide valid email address')}}.</div>
                             </div>
-                            <button class="btn btn-primary" type="submit">{{\App\CPU\translate('Get new password')}}</button>
+                            <button class="btn btn-primary" type="submit">{{translate('Get new password')}}</button>
                         </form>
                     </div>
                 @else
@@ -76,11 +76,11 @@
                             method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="recover-email">{{\App\CPU\translate('Enter your phone number')}}</label>
+                                <label for="recover-email">{{translate('Enter your phone number')}}</label>
                                 <input class="form-control" type="text" name="identity" id="recover-email" required>
-                                <div class="invalid-feedback">{{\App\CPU\translate('Please provide valid phone number')}}.</div>
+                                <div class="invalid-feedback">{{translate('Please provide valid phone number')}}.</div>
                             </div>
-                            <button class="btn btn-primary" type="submit">{{\App\CPU\translate('Get new password')}}</button>
+                            <button class="btn btn-primary" type="submit">{{translate('Get new password')}}</button>
                         </form>
                     </div>
                 @endif

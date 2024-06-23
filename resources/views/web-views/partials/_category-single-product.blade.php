@@ -13,7 +13,7 @@
         background: #ffffff;
     }
     .product-single-hover:hover > .single-product-details {
-        
+
         margin-top:-39px;
     }
     .product-single-hover:hover >  .quick-view{
@@ -22,35 +22,35 @@
 </style>
 
 <div class="product-single-hover" >
-    
-        
-        
-    <?php 
+
+
+
+    <?php
         $variation = json_decode($product->variation);
         $price = 0;
         $discount = 0;
         $discount_type = 'flat';
         $discount_precient = 0;
         if(isset($variation[0])){
-        
+
             $price = $variation[0]->price;
             if(isset($variation[0]->discount)){
                 $discount = $variation[0]->discount;
-                $discount_type = $variation[0]->discount_type; 
+                $discount_type = $variation[0]->discount_type;
                 if($variation[0]->discount_type == "percent"){
-                
+
                     $discount_precient = $variation[0]->discount;
                     $discount = round((($variation[0]->discount * $variation[0]->price) / 100) ,2);
                 }
             }
-            
-            
+
+
         }
     ?>
     @if($product->current_stock <= 0)
-        <span style="position: absolute;z-index: 999;background: rgb(255 0 0 / 100%);text-align: center;color: #000;font-weight: bolder;top: 0;left: 0;width: 150px;">{{\App\CPU\translate('not_available')}}</span>
+        <span style="position: absolute;z-index: 999;background: rgb(255 0 0 / 100%);text-align: center;color: #000;font-weight: bolder;top: 0;left: 0;width: 150px;">{{translate('not_available')}}</span>
     @endif
-    <div class=" inline_product clickable d-flex justify-content-center" 
+    <div class=" inline_product clickable d-flex justify-content-center"
             style="cursor: pointer;background:{{$web_config['primary_color']}}10;max-height: 195px;">
         @if($product->discount > 0)
             <div class="d-flex" style="left:5px;top:0px;position: absolute">
@@ -60,7 +60,7 @@
                         @elseif($product->discount_type =='flat')
                             {{\App\CPU\Helpers::currency_converter($product->discount)}}
                         @endif
-                        {{\App\CPU\translate('off')}}
+                        {{translate('off')}}
                     </span>
             </div>
         @else
@@ -111,23 +111,23 @@
                 </span>
             </div>
         </div>
-        
+
     </div>
     <div class="text-center quick-view" >
         @if(Request::is('product/*'))
             <a class="btn btn-primary btn-sm" href="{{route('product',$product->slug)}}">
                 <i class="czi-forward align-middle {{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}"></i>
-                {{\App\CPU\translate('View')}}
+                {{translate('View')}}
             </a>
         @else
             <a class="btn btn-primary btn-sm"
             style="margin-top:0px;padding-top:5px;padding-bottom:5px;padding-left:10px;padding-right:10px;" href="javascript:"
                onclick="quickView('{{$product->id}}')">
                 <i class="czi-eye align-middle {{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}"></i>
-                {{\App\CPU\translate('Quick')}}   {{\App\CPU\translate('View')}}
+                {{translate('Quick')}}   {{translate('View')}}
             </a>
         @endif
     </div>
 </div>
-    
+
 

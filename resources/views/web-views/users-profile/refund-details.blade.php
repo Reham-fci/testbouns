@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('Refund Details'))
+@section('title',translate('Refund Details'))
 
 @push('css_or_js')
     <link href="{{asset('public/assets/back-end/css/tags-input.min.css')}}" rel="stylesheet">
@@ -31,7 +31,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-9 mt-2 sidebar_heading">
             <h1 class="h3  mb-0 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">
-                {{\App\CPU\translate('refund_request')}}
+                {{translate('refund_request')}}
             </h1>
         </div>
     </div>
@@ -54,7 +54,7 @@
                             <div class="row">
                                 <div class="col-6 col-sm-6 col-md-2">
                                     <div>
-                                        <img 
+                                        <img
                                         onerror="this.src='{{asset('public/assets/front-end/img/image-place-holder.png')}}'"
                                         src="{{\App\CPU\ProductManager::product_image_path('thumbnail')}}/{{$refund->product!=null?$refund->product->thumbnail:''}}"
                                         alt="VR Collection" style="width: 70%; height:70%;">
@@ -67,13 +67,13 @@
                                                 {{$refund->product->name}}
                                             </a>
                                         @else
-                                            {{\App\CPU\translate('product_name_not_found')}}
+                                            {{translate('product_name_not_found')}}
                                         @endif
                                     </span> <br>
-                                    <span >{{\App\CPU\translate('QTY')}} : {{$refund->order_details->qty}}</span><br>
-                                    <span>{{\App\CPU\translate('price')}} : {{\App\CPU\Helpers::currency_converter($refund->order_details->price)}}</span><br>
+                                    <span >{{translate('QTY')}} : {{$refund->order_details->qty}}</span><br>
+                                    <span>{{translate('price')}} : {{\App\CPU\Helpers::currency_converter($refund->order_details->price)}}</span><br>
                                     @if ($order_details->variant!=null)
-                                        <span>{{\App\CPU\translate('variant')}} : </span>
+                                        <span>{{translate('variant')}} : </span>
                                         {{$order_details->variant}}
                                     @endif
                                 </div>
@@ -81,17 +81,17 @@
                                     <div class="row justify-content-md-end mb-3">
                                         <div class="col-md-10 col-lg-10">
                                             <dl class="row text-sm-right">
-                                                <dt class="col-sm-7">{{\App\CPU\translate('total_price')}} : </dt>
+                                                <dt class="col-sm-7">{{translate('total_price')}} : </dt>
                                                 <dd class="col-sm-5 ">
                                                     <strong>{{\App\CPU\Helpers::currency_converter($refund->order_details->price*$refund->order_details->qty)}}</strong>
                                                 </dd>
-            
-                                                <dt class="col-sm-7">{{\App\CPU\translate('total_discount')}} :</dt>
+
+                                                <dt class="col-sm-7">{{translate('total_discount')}} :</dt>
                                                 <dd class="col-sm-5 ">
                                                     <strong>{{\App\CPU\Helpers::currency_converter($refund->order_details->discount)}}</strong>
                                                 </dd>
-            
-                                                <dt class="col-sm-7">{{\App\CPU\translate('total_tax')}} :</dt>
+
+                                                <dt class="col-sm-7">{{translate('total_tax')}} :</dt>
                                                 <dd class="col-sm-5">
                                                     <strong>{{\App\CPU\Helpers::currency_converter($refund->order_details->tax)}}</strong>
                                                 </dd>
@@ -106,11 +106,11 @@
                     <?php
                     $total_product_price = 0;
                     foreach ($order->details as $key => $or_d) {
-                        $total_product_price += ($or_d->qty*$or_d->price) + $or_d->tax - $or_d->discount; 
+                        $total_product_price += ($or_d->qty*$or_d->price) + $or_d->tax - $or_d->discount;
                     }
                         $refund_amount = 0;
                         $subtotal = ($order_details->price * $order_details->qty) - $order_details->discount + $order_details->tax;
-                        
+
                         $coupon_discount = ($order->discount_amount*$subtotal)/$total_product_price;
 
                         $refund_amount = $subtotal - $coupon_discount;
@@ -119,20 +119,20 @@
                     <div class="card mt-2">
                         <div class="card-body">
                             <div class="row text-center">
-                                <span class="col-sm-2">{{\App\CPU\translate('subtotal')}} : {{\App\CPU\Helpers::currency_converter($subtotal)}}</span>
-                                <span class="col-sm-5">{{\App\CPU\translate('coupon_discount')}} : {{\App\CPU\Helpers::currency_converter($coupon_discount)}}</span>
-                                <span class="col-sm-5">{{\App\CPU\translate('total_refund_amount')}} : {{\App\CPU\Helpers::currency_converter($refund_amount)}}</span>
+                                <span class="col-sm-2">{{translate('subtotal')}} : {{\App\CPU\Helpers::currency_converter($subtotal)}}</span>
+                                <span class="col-sm-5">{{translate('coupon_discount')}} : {{\App\CPU\Helpers::currency_converter($coupon_discount)}}</span>
+                                <span class="col-sm-5">{{translate('total_refund_amount')}} : {{\App\CPU\Helpers::currency_converter($refund_amount)}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="card mt-2">
                         <div class="card-body">
                             <div class="col-12">
-                                <b>{{\App\CPU\translate('refund_id')}}</b> :
+                                <b>{{translate('refund_id')}}</b> :
                                 <span>{{$refund->id}}</span>
                             </div>
-                            <div class="col-12">     
-                                <b>{{\App\CPU\translate('refund_status')}}</b> :
+                            <div class="col-12">
+                                <b>{{translate('refund_status')}}</b> :
                                 @if ($refund->status == 'pending')
                                 <span class="text-capitalize" style="color: coral"> {{$refund->status}}</span>
                                 @elseif($refund->status == 'approved')
@@ -145,12 +145,12 @@
                             </div>
                             @if ($refund->status == 'rejected')
                             <div class="col-12">
-                               <span><b>{{\App\CPU\translate('rejected_reason')}}</b> : </span> {{$refund->rejected_note}}
+                               <span><b>{{translate('rejected_reason')}}</b> : </span> {{$refund->rejected_note}}
                             </div>
                             @endif
                             @if ($refund->status == 'refunded')
                             <div class="col-12">
-                               <span><b>{{\App\CPU\translate('payment_info')}}</b> : </span> {{$refund->payment_info}}
+                               <span><b>{{translate('payment_info')}}</b> : </span> {{$refund->payment_info}}
                             </div>
                             @endif
                         </div>
@@ -165,9 +165,9 @@
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-6">
-                                            <h5>{{\App\CPU\translate('refund_reason')}}</h5>
+                                            <h5>{{translate('refund_reason')}}</h5>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -186,7 +186,7 @@
                         <div style="">
                 <div class="card">
                     <div class="card-header">
-                        <h5>{{\App\CPU\translate('attachment')}}</h5>
+                        <h5>{{translate('attachment')}}</h5>
                     </div>
                     <div class="row">
                         <div class="card-body">
@@ -199,7 +199,7 @@
                                     @endforeach
                             </div>
                             @else
-                                <p>{{\App\CPU\translate('no_attachment_found')}}</p>
+                                <p>{{translate('no_attachment_found')}}</p>
                             @endif
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('My Address'))
+@section('title',translate('My Address'))
 
 @push('css_or_js')
     <link rel="stylesheet" media="screen"
@@ -180,12 +180,12 @@
                 height: 200px;
             }
         }
-        
+
         .city-non-active{
                 display: none;
         }
         .city-active{
-            
+
             display: block;
         }
     </style>
@@ -199,7 +199,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="row">
-                        <div class="col-md-12"><h5 class="modal-title font-name ">{{\App\CPU\translate('add_new_address')}}</h5></div>
+                        <div class="col-md-12"><h5 class="modal-title font-name ">{{translate('add_new_address')}}</h5></div>
                     </div>
                 </div>
                 <div class="modal-body">
@@ -213,15 +213,15 @@
                                 <ul class="donate-now">
                                     <li>
                                         <input type="radio" id="a25" name="addressAs" value="permanent"/>
-                                        <label for="a25" class="component">{{\App\CPU\translate('permanent')}}</label>
+                                        <label for="a25" class="component">{{translate('permanent')}}</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="a50" name="addressAs" value="home"/>
-                                        <label for="a50" class="component">{{\App\CPU\translate('Home')}}</label>
+                                        <label for="a50" class="component">{{translate('Home')}}</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="a75" name="addressAs" value="office" checked="checked"/>
-                                        <label for="a75" class="component">{{\App\CPU\translate('Office')}}</label>
+                                        <label for="a75" class="component">{{translate('Office')}}</label>
                                     </li>
 
                                 </ul>
@@ -233,11 +233,11 @@
                                 <ul class="donate-now">
                                     <li>
                                         <input type="radio" name="is_billing" id="b25" value="0"/>
-                                        <label for="b25" class="billing_component">{{\App\CPU\translate('shipping')}}</label>
+                                        <label for="b25" class="billing_component">{{translate('shipping')}}</label>
                                     </li>
                                     <li>
                                         <input type="radio" name="is_billing" id="b50" value="1"/>
-                                        <label for="b50" class="billing_component">{{\App\CPU\translate('billing')}}</label>
+                                        <label for="b50" class="billing_component">{{translate('billing')}}</label>
                                     </li>
                                 </ul>
                             </div>
@@ -250,24 +250,24 @@
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="name">{{\App\CPU\translate('contact_person_name')}}</label>
+                                        <label for="name">{{translate('contact_person_name')}}</label>
                                         <input class="form-control" type="text" id="name" name="name" required>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="firstName">{{\App\CPU\translate('Phone')}}</label>
+                                        <label for="firstName">{{translate('Phone')}}</label>
                                         <input class="form-control" type="text" id="phone" name="phone" required>
                                     </div>
 
                                 </div>
                                 <div class="form-row">
-                                    
-                                    <div class="form-group col-md-6">
-                                        <label for="city">{{\App\CPU\translate('City')}}</label>
 
-                                        
-                                        
+                                    <div class="form-group col-md-6">
+                                        <label for="city">{{translate('City')}}</label>
+
+
+
                                         {{--  --}}
-                                        
+
                                         <select class="form-select form-control select-areas" name="city" type="country" id="si-area"
                                             style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
                                             >
@@ -279,9 +279,9 @@
                                         {{--  --}}
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="zip_code">{{\App\CPU\translate('zip_code')}}</label>
-                                        
-                                        
+                                        <label for="zip_code">{{translate('zip_code')}}</label>
+
+
 
                                         <select class="form-select form-control select-areas" name="zip" type="zip" id="si-city"
                                             style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"
@@ -293,17 +293,17 @@
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <label for="address">{{\App\CPU\translate('address')}}</label>
-                                        
+                                        <label for="address">{{translate('address')}}</label>
+
                                         <textarea class="form-control" id="address"
                                                             type="text"  name="address" required></textarea>
                                     </div>
                                     @php($default_location=\App\CPU\Helpers::get_business_settings('default_location'))
                                     <div class="form-group col-md-12">
-                                        <input id="pac-input" class="controls rounded" style="height: 3em;width:fit-content;" title="{{\App\CPU\translate('search_your_location_here')}}" type="text" placeholder="{{\App\CPU\translate('search_here')}}"/>
+                                        <input id="pac-input" class="controls rounded" style="height: 3em;width:fit-content;" title="{{translate('search_your_location_here')}}" type="text" placeholder="{{translate('search_here')}}"/>
                                         <div style="height: 200px;" id="location_map_canvas"></div>
                                     </div>
                                 </div>
@@ -315,8 +315,8 @@
                                 name="longitude" class="form-control"
                                 placeholder="Ex : 103.344322" id="longitude" value="{{$default_location?$default_location['lng']:0}}" required readonly>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{\App\CPU\translate('close')}}</button>
-                                <button type="submit" class="btn btn-primary">{{\App\CPU\translate('Add')}} {{\App\CPU\translate('Informations')}}  </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{translate('close')}}</button>
+                                <button type="submit" class="btn btn-primary">{{translate('Add')}} {{translate('Informations')}}  </button>
                             </div>
                         </div>
                     </form>
@@ -338,40 +338,40 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12  d-flex justify-content-between overflow-hidden">
                         <div class="col-sm-4">
-                            <h1 class="h3  mb-0 folot-left headerTitle">{{\App\CPU\translate('ADDRESSES')}}</h1>
+                            <h1 class="h3  mb-0 folot-left headerTitle">{{translate('ADDRESSES')}}</h1>
                         </div>
                         <div class="mt-2 col-sm-4">
                             <button type="submit" class="btn btn-primary float-right" data-toggle="modal"
-                                data-target="#exampleModal" id="add_new_address">{{\App\CPU\translate('add_new_address')}}
+                                data-target="#exampleModal" id="add_new_address">{{translate('add_new_address')}}
                             </button>
                         </div>
                     </div>
                     @foreach($shippingAddresses as $shippingAddress)
                         <section class="col-lg-6 col-md-6 mb-4 mt-5">
                             <div class="card" style="text-transform: capitalize;">
-                                
+
                                     <div class="card-header d-flex justify-content-between" style="padding: 5px;">
                                         <div>
                                             <i class="fa fa-thumb-tack fa-2x iconHad" aria-hidden="true"></i>
                                         </div>
                                         <div>
-                                            <span> {{$shippingAddress['address_type']}} {{\App\CPU\translate('address')}} ({{$shippingAddress['is_billing']==1?\App\CPU\translate('Billing_address'):\App\CPU\translate('shipping_address')}}) </span>
+                                            <span> {{$shippingAddress['address_type']}} {{translate('address')}} ({{$shippingAddress['is_billing']==1?translate('Billing_address'):translate('shipping_address')}}) </span>
                                         </div>
-                                        
+
                                         <div class="d-flex justify-content-between">
-                                            
-                                                
+
+
                                                 <a class="" id="edit" href="{{route('address-edit',$shippingAddress->id)}}">
                                                     <i class="fa fa-edit fa-lg"></i>
                                                 </a>
-    
-                                                <a class="" href="{{ route('address-delete',['id'=>$shippingAddress->id])}}" onclick="return confirm('{{\App\CPU\translate('Are you sure you want to Delete')}}?');" id="delete">
+
+                                                <a class="" href="{{ route('address-delete',['id'=>$shippingAddress->id])}}" onclick="return confirm('{{translate('Are you sure you want to Delete')}}?');" id="delete">
                                                     <i class="fa fa-trash fa-lg"></i>
                                                 </a>
-                                            
+
                                         </div>
                                     </div>
-                                        
+
 
                                     {{-- Modal Address Edit --}}
                                     <div class="modal fade" id="editAddress_{{$shippingAddress->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -379,7 +379,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                 <div class="row">
-                                                    <div class="col-md-12"> <h5 class="modal-title font-name ">{{\App\CPU\translate('update')}} {{\App\CPU\translate('address')}}  </h5></div>
+                                                    <div class="col-md-12"> <h5 class="modal-title font-name ">{{translate('update')}} {{translate('address')}}  </h5></div>
                                                 </div>
                                                 </div>
                                                 <div class="modal-body">
@@ -392,59 +392,59 @@
                                                                 <ul class="donate-now">
                                                                     <li class="address_type_li">
                                                                         <input type="radio" class="address_type" id="a25" name="addressAs" value="permanent"  {{ $shippingAddress->address_type == 'permanent' ? 'checked' : ''}} />
-                                                                        <label for="a25" class="component">{{\App\CPU\translate('permanent')}}</label>
+                                                                        <label for="a25" class="component">{{translate('permanent')}}</label>
                                                                     </li>
                                                                     <li class="address_type_li">
                                                                         <input type="radio" class="address_type" id="a50" name="addressAs" value="home" {{ $shippingAddress->address_type == 'home' ? 'checked' : ''}} />
-                                                                        <label for="a50" class="component">{{\App\CPU\translate('Home')}}</label>
+                                                                        <label for="a50" class="component">{{translate('Home')}}</label>
                                                                     </li>
                                                                     <li class="address_type_li">
                                                                         <input type="radio" class="address_type" id="a75" name="addressAs" value="office" {{ $shippingAddress->address_type == 'office' ? 'checked' : ''}}/>
-                                                                        <label for="a75" class="component">{{\App\CPU\translate('Office')}}</label>
+                                                                        <label for="a75" class="component">{{translate('Office')}}</label>
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            
+
                                                         </div>
                                                         <!-- Tab panes -->
                                                         <div class="form-row">
                                                             <div class="form-group col-md-6">
-                                                                <label for="person_name">{{\App\CPU\translate('contact_person_name')}}</label>
+                                                                <label for="person_name">{{translate('contact_person_name')}}</label>
                                                                 <input class="form-control" type="text" id="person_name"
                                                                     name="name"
                                                                     value="{{$shippingAddress->contact_person_name}}"
                                                                     required>
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                                <label for="own_phone">{{\App\CPU\translate('Phone')}}</label>
+                                                                <label for="own_phone">{{translate('Phone')}}</label>
                                                                 <input class="form-control" type="text" id="own_phone" name="phone" value="{{$shippingAddress->phone}}" required="required">
                                                             </div>
                                                         </div>
                                                         <div class="form-row">
                                                             <div class="form-group col-md-6">
-                                                                <label for="city">{{\App\CPU\translate('City')}}</label>
+                                                                <label for="city">{{translate('City')}}</label>
 
                                                                 <input class="form-control" type="text" id="city" name="city" value="{{$shippingAddress->city}}" required>
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                                <label for="zip_code">{{\App\CPU\translate('zip_code')}}</label>
+                                                                <label for="zip_code">{{translate('zip_code')}}</label>
                                                                 <input class="form-control" type="number" id="zip_code" name="zip" value="{{$shippingAddress->zip}}" required>
                                                             </div>
                                                         </div>
                                                         <div class="form-row">
                                                             <div class="form-group col-md-6">
-                                                            <label for="own_state">{{\App\CPU\translate('State')}}</label>
+                                                            <label for="own_state">{{translate('State')}}</label>
                                                                 <input type="text" class="form-control" name="state" value="{{ $shippingAddress->state }}" id="own_state"  placeholder="" required>
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                            <label for="own_country">{{\App\CPU\translate('Country')}}</label>
+                                                            <label for="own_country">{{translate('Country')}}</label>
                                                                 <input type="text" class="form-control" id="own_country" name="country" value="{{ $shippingAddress->country }}" placeholder="" required>
                                                             </div>
                                                         </div>
                                                         <div class="form-row">
 
                                                             <div class="form-group col-md-12">
-                                                                <label for="own_address">{{\App\CPU\translate('address')}}</label>
+                                                                <label for="own_address">{{translate('address')}}</label>
                                                                 <input class="form-control" type="text" id="own_address"
                                                                     name="address"
                                                                     value="{{$shippingAddress->address}}" required>
@@ -457,8 +457,8 @@
                                                             name="longitude" class="form-control"
                                                             placeholder="Ex : 103.344322" id="longitude" value="{{$default_location?$default_location['lng']:0}}" required readonly>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="closeB btn btn-secondary" data-dismiss="modal">{{\App\CPU\translate('close')}}</button>
-                                                            <button type="submit" class="btn btn-primary" id="addressUpdate" data-id="{{$shippingAddress->id}}">{{\App\CPU\translate('update')}}  </button>
+                                                            <button type="button" class="closeB btn btn-secondary" data-dismiss="modal">{{translate('close')}}</button>
+                                                            <button type="submit" class="btn btn-primary" id="addressUpdate" data-id="{{$shippingAddress->id}}">{{translate('update')}}  </button>
                                                         </div>
                                                     </form>
                                             </div>
@@ -469,17 +469,17 @@
                                     <div class="card-body" style="padding: {{Session::get('direction') === "rtl" ? '0 13px 15px 15px' : '0 15px 15px 13px'}};">
                                         <div class="font-name"><span>{{$shippingAddress['contact_person_name']}}</span>
                                         </div>
-                                        <div><span class="font-nameA"> <strong>{{\App\CPU\translate('Phone')}}  :</strong>  {{$shippingAddress['phone']}}</span>
+                                        <div><span class="font-nameA"> <strong>{{translate('Phone')}}  :</strong>  {{$shippingAddress['phone']}}</span>
                                         </div>
-                                        <div><span class="font-nameA"> <strong>{{\App\CPU\translate('City')}}  :</strong>  {{$shippingAddress['city']}}</span>
+                                        <div><span class="font-nameA"> <strong>{{translate('City')}}  :</strong>  {{$shippingAddress['city']}}</span>
                                         </div>
-                                        <div><span class="font-nameA"> <strong> {{\App\CPU\translate('zip_code')}} :</strong> {{$shippingAddress['zip']}}</span>
+                                        <div><span class="font-nameA"> <strong> {{translate('zip_code')}} :</strong> {{$shippingAddress['zip']}}</span>
                                         </div>
-                                        <div><span class="font-nameA"> <strong>{{\App\CPU\translate('address')}} :</strong> {{$shippingAddress['address']}}</span>
+                                        <div><span class="font-nameA"> <strong>{{translate('address')}} :</strong> {{$shippingAddress['address']}}</span>
                                         </div>
-                                        
+
                                     </div>
-                                
+
                             </div>
                         </section>
                     @endforeach
@@ -545,14 +545,14 @@
                         phone: phone
                     },
                     success: function () {
-                        toastr.success('{{\App\CPU\translate('Address Update Successfully')}}.');
+                        toastr.success('{{translate('Address Update Successfully')}}.');
                         location.reload();
-                        
+
 
                     }
                 });
             }else{
-                toastr.error('{{\App\CPU\translate('All input field required')}}.');
+                toastr.error('{{translate('All input field required')}}.');
             }
 
         });
@@ -565,19 +565,19 @@
     </style>
 <script src="https://maps.googleapis.com/maps/api/js?key={{\App\CPU\Helpers::get_business_settings('map_api_key')}}&libraries=places&v=3.49"></script>
 <script>
-    
+
     $('#si-city').on('change',function(){
         var cities = $('#si-city option:selected');
         $('#si-area option').removeClass('city-active');
         for (let index = 0; index < cities.length; index++) {
             var city = $(cities[index]).val();
-            $('#si-area option[ data-parent="'+city+'"]').addClass('city-active');            
+            $('#si-area option[ data-parent="'+city+'"]').addClass('city-active');
         }
     })
-    
-    
+
+
     function initAutocomplete(lat = -33.8688 , lng = 151.2195) {
-        
+
         let markers = [];
         var myLatLng = { lat: lat, lng: lng };
 
@@ -601,7 +601,7 @@
         // marker.setMap( map );
         markers.push(marker);
         var geocoder = geocoder = new google.maps.Geocoder();
-        google.maps.event.addListener(map, 'click', function (mapsMouseEvent) 
+        google.maps.event.addListener(map, 'click', function (mapsMouseEvent)
         {
             var coordinates = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2);
             var coordinates = JSON.parse(coordinates);
@@ -632,7 +632,7 @@
                 console.log("test here change 2");
                 if (status == google.maps.GeocoderStatus.OK) {
                     if (results[1]) {
-                        
+
                         console.log(results);
                         document.getElementById('address').value = results[1].formatted_address;
                         console.log(results[1].formatted_address);
@@ -649,7 +649,7 @@
         map.addListener("bounds_changed", () => {
             searchBox.setBounds(map.getBounds());
         });
-        
+
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
         searchBox.addListener("places_changed", () => {
@@ -664,7 +664,7 @@
             markers = [];
             // For each place, get the icon, name and location.
             const bounds = new google.maps.LatLngBounds();
-            places.forEach((place) => 
+            places.forEach((place) =>
             {
                 if (!place.geometry || !place.geometry.location) {
                     console.log("Returned place contains no geometry");

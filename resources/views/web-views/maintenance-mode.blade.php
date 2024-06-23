@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        {{\App\CPU\translate('Maintenance Mode on')}}
+        {{translate('Maintenance Mode on')}}
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="180x180"
@@ -39,8 +39,8 @@
         <div class="col-12 mt-5">
             <center>
                 <img style="width: 350px!important;" src="{{asset('public/assets/front-end')}}/img/maintenance-mode.jpg">
-                <h1>{{\App\CPU\translate('Website is under Maintenance')}}.</h1><br>
-                <h5>{{\App\CPU\translate('Plese come back later')}}.</h5>
+                <h1>{{translate('Website is under Maintenance')}}.</h1><br>
+                <h5>{{translate('Plese come back later')}}.</h5>
             </center>
         </div>
     </div>

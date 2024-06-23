@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('Product List'))
+@section('title', translate('Product List'))
 
 @push('css_or_js')
 
@@ -13,10 +13,10 @@
             <div class="row align-items-center">
                 <div class="col-12 mb-2 mb-sm-0">
                     <h1 class="page-header-title text-capitalize"><i
-                            class="tio-files"></i> {{\App\CPU\translate('stock_limit_products_list')}}
+                            class="tio-files"></i> {{translate('stock_limit_products_list')}}
                         <span class="badge badge-soft-dark ml-2">{{$pro->total()}}</span>
                     </h1>
-                    <span>{{ \App\CPU\translate('the_products_are_shown_in_this_list,_which_quantity_is_below') }} {{ \App\Model\BusinessSetting::where(['type'=>'stock_limit'])->first()->value }}</span>
+                    <span>{{ translate('the_products_are_shown_in_this_list,_which_quantity_is_below') }} {{ \App\Model\BusinessSetting::where(['type'=>'stock_limit'])->first()->value }}</span>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
                         <div class="row flex-between justify-content-between align-items-center flex-grow-1">
                             <div class="col-12 col-md-12 col-lg-4">
                                 <h5>
-                                    {{\App\CPU\translate('product_table')}} ({{ $pro->total() }})
+                                    {{translate('product_table')}} ({{ $pro->total() }})
                                 </h5>
                             </div>
                             <div class="col-12 mt-1 col-md-6 col-lg-4">
@@ -42,12 +42,12 @@
                                             </div>
                                         </div>
                                         <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                               placeholder="{{\App\CPU\translate('Search Product Name')}}"
+                                               placeholder="{{translate('Search Product Name')}}"
                                                aria-label="Search orders"
                                                value="{{ $search }}" required>
                                         <input type="hidden" value="{{ $request_status }}" name="status">
                                         <button type="submit"
-                                                class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
+                                                class="btn btn-primary">{{translate('search')}}</button>
                                     </div>
                                 </form>
                                 <!-- End Search -->
@@ -56,15 +56,15 @@
                                 <select name="qty_ordr_sort" class="form-control"
                                         onchange="location.href='{{route('admin.product.stock-limit-list',['in_house', ''])}}/?sort_oqrderQty='+this.value">
                                     <option
-                                        value="default" {{ $sort_oqrderQty== "default"?'selected':''}}>{{\App\CPU\translate('default_sort')}}</option>
+                                        value="default" {{ $sort_oqrderQty== "default"?'selected':''}}>{{translate('default_sort')}}</option>
                                     <option
-                                        value="quantity_asc" {{ $sort_oqrderQty== "quantity_asc"?'selected':''}}>{{\App\CPU\translate('quantity_sort_by_(low_to_high)')}}</option>
+                                        value="quantity_asc" {{ $sort_oqrderQty== "quantity_asc"?'selected':''}}>{{translate('quantity_sort_by_(low_to_high)')}}</option>
                                     <option
-                                        value="quantity_desc" {{ $sort_oqrderQty== "quantity_desc"?'selected':''}}>{{\App\CPU\translate('quantity_sort_by_(high_to_low)')}}</option>
+                                        value="quantity_desc" {{ $sort_oqrderQty== "quantity_desc"?'selected':''}}>{{translate('quantity_sort_by_(high_to_low)')}}</option>
                                     <option
-                                        value="order_asc" {{ $sort_oqrderQty== "order_asc"?'selected':''}}>{{\App\CPU\translate('order_sort_by_(low_to_high)')}}</option>
+                                        value="order_asc" {{ $sort_oqrderQty== "order_asc"?'selected':''}}>{{translate('order_sort_by_(low_to_high)')}}</option>
                                     <option
-                                        value="order_desc" {{ $sort_oqrderQty== "order_desc"?'selected':''}}>{{\App\CPU\translate('order_sort_by_(high_to_low)')}}</option>
+                                        value="order_desc" {{ $sort_oqrderQty== "order_desc"?'selected':''}}>{{translate('order_sort_by_(high_to_low)')}}</option>
                                 </select>
                             </div>
                         </div>
@@ -77,12 +77,12 @@
                                    style="width: 100%">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th>{{\App\CPU\translate('SL#')}}</th>
-                                    <th>{{\App\CPU\translate('Product Name')}}</th>
-                                    <th>{{\App\CPU\translate('purchase_price')}}</th>
-                                    <th>{{\App\CPU\translate('selling_price')}}</th>
-                                    <th>{{\App\CPU\translate('quantity')}}</th>
-                                    <th>{{\App\CPU\translate('orders')}}</th>
+                                    <th>{{translate('SL#')}}</th>
+                                    <th>{{translate('Product Name')}}</th>
+                                    <th>{{translate('purchase_price')}}</th>
+                                    <th>{{translate('selling_price')}}</th>
+                                    <th>{{translate('quantity')}}</th>
+                                    <th>{{translate('orders')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -105,7 +105,7 @@
                                             <button class="btn btn-sm" id="{{ $p->id }}"
                                                     onclick="update_quantity({{ $p->id }})" type="button"
                                                     data-toggle="modal" data-target="#update-quantity"
-                                                    title="{{ \App\CPU\translate('update_quantity') }}">
+                                                    title="{{ translate('update_quantity') }}">
                                                 <i class="tio-add-circle"></i>
 
                                             </button>
@@ -126,7 +126,7 @@
                         <div class="text-center p-4">
                             <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg"
                                  alt="Image Description" style="width: 7rem;">
-                            <p class="mb-0">{{\App\CPU\translate('No data to show')}}</p>
+                            <p class="mb-0">{{translate('No data to show')}}</p>
                         </div>
                     @endif
                 </div>
@@ -141,9 +141,9 @@
                         @csrf
                         <div class="card mt-2 rest-part" style="width: 100%"></div>
                         <div class="form-group col-sm-12 card card-footer">
-                            <button class="btn btn-primary" class="btn btn-primary" type="submit">{{\App\CPU\translate('submit')}}</button>
+                            <button class="btn btn-primary" class="btn btn-primary" type="submit">{{translate('submit')}}</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
-                                {{\App\CPU\translate('close')}}
+                                {{translate('close')}}
                             </button>
                         </div>
                     </form>

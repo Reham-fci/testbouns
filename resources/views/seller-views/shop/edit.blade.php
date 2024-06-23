@@ -1,6 +1,6 @@
 
 @extends('layouts.back-end.app-seller')
-@section('title', \App\CPU\translate('Shop Edit'))
+@section('title', translate('Shop Edit'))
 @push('css_or_js')
     <!-- Custom styles for this page -->
     <link href="{{asset('public/assets/back-end')}}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="h3 mb-0 ">{{\App\CPU\translate('Edit Shop Info')}}</h1>
+                    <h1 class="h3 mb-0 ">{{translate('Edit Shop Info')}}</h1>
                 </div>
                 <div class="card-body">
                     <form action="{{route('seller.shop.update',[$shop->id])}}" method="post"
@@ -25,28 +25,28 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="name">{{\App\CPU\translate('Shop Name')}} <span class="text-danger">*</span></label>
+                                    <label for="name">{{translate('Shop Name')}} <span class="text-danger">*</span></label>
                                     <input type="text" name="name" value="{{$shop->name}}" class="form-control" id="name"
                                             required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">{{\App\CPU\translate('Contact')}} <small class="text-danger">( * {{\App\CPU\translate('country_code_is_must')}} {{\App\CPU\translate('like_for_BD_880')}} )</small></label>
+                                    <label for="name">{{translate('Contact')}} <small class="text-danger">( * {{translate('country_code_is_must')}} {{translate('like_for_BD_880')}} )</small></label>
                                     <input type="number" name="contact" value="{{$shop->contact}}" class="form-control" id="name"
                                             required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="address">{{\App\CPU\translate('Address')}} <span class="text-danger">*</span></label>
+                                    <label for="address">{{translate('Address')}} <span class="text-danger">*</span></label>
                                     <textarea type="text" rows="4" name="address" value="" class="form-control" id="address"
                                             required>{{$shop->address}}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="name">{{\App\CPU\translate('Upload')}} {{\App\CPU\translate('image')}}</label>
+                                    <label for="name">{{translate('Upload')}} {{translate('image')}}</label>
                                     <div class="custom-file text-left">
                                         <input type="file" name="image" id="customFileUpload" class="custom-file-input"
                                             accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                        <label class="custom-file-label" for="customFileUpload">{{\App\CPU\translate('choose')}} {{\App\CPU\translate('file')}}</label>
+                                        <label class="custom-file-label" for="customFileUpload">{{translate('choose')}} {{translate('file')}}</label>
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -58,13 +58,13 @@
                             <div class="col-md-6 mb-4 mt-2">
                                 <div class="form-group">
                                     <div class="flex-start">
-                                        <div for="name">{{\App\CPU\translate('Upload')}} {{\App\CPU\translate('Banner')}} </div>
-                                        <div class="mx-1" for="ratio"><small style="color: red">{{\App\CPU\translate('Ratio')}} : ( 6:1 )</small></div>
+                                        <div for="name">{{translate('Upload')}} {{translate('Banner')}} </div>
+                                        <div class="mx-1" for="ratio"><small style="color: red">{{translate('Ratio')}} : ( 6:1 )</small></div>
                                     </div>
                                     <div class="custom-file text-left">
                                         <input type="file" name="banner" id="BannerUpload" class="custom-file-input"
                                                accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                        <label class="custom-file-label" for="BannerUpload">{{\App\CPU\translate('choose')}} {{\App\CPU\translate('file')}}</label>
+                                        <label class="custom-file-label" for="BannerUpload">{{translate('choose')}} {{translate('file')}}</label>
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -75,8 +75,8 @@
                             </div>
                         </div>
                         <hr>
-                        <button type="submit" class="btn btn-primary float-right" id="btn_update">{{\App\CPU\translate('Update')}}</button>
-                        <a class="btn btn-danger" href="{{route('seller.shop.view')}}">{{\App\CPU\translate('Cancel')}}</a>
+                        <button type="submit" class="btn btn-primary float-right" id="btn_update">{{translate('Update')}}</button>
+                        <a class="btn btn-danger" href="{{route('seller.shop.view')}}">{{translate('Cancel')}}</a>
                     </form>
                 </div>
             </div>

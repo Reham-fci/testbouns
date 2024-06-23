@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('All Category Page'))
+@section('title',translate('All Category Page'))
 
 @push('css_or_js')
     <meta property="og:image" content="{{asset('storage/app/public/company')}}/{{$web_config['web_logo']->value}}"/>
@@ -38,7 +38,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-9">
-                <h4>{{\App\CPU\translate('category')}}</h4>
+                <h4>{{translate('category')}}</h4>
             </div>
         </div>
         <div class="row">
@@ -61,8 +61,8 @@
                     @if($view)
                         <?=$view?>
                     @else
-                    
-                    <label class="col-md-12 text-center mt-5">{{\App\CPU\translate('Select your desire category')}}.</label>
+
+                    <label class="col-md-12 text-center mt-5">{{translate('Select your desire category')}}.</label>
                     @endif
                 </div>
                 <!-- Pagination-->

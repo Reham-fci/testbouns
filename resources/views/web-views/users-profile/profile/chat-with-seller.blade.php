@@ -124,7 +124,7 @@
             transition: .2s ease-in-out;
         }
 
-        
+
 
         img {
             max-width: 100%;
@@ -416,7 +416,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="sidebar_heading col-md-9">
-                <h1 class="h3  mb-0 folot-left headerTitle">{{\App\CPU\translate('chat_with_seller')}}</h1>
+                <h1 class="h3  mb-0 folot-left headerTitle">{{translate('chat_with_seller')}}</h1>
             </div>
         </div>
     </div>
@@ -440,8 +440,8 @@
                                     <input
                                         class="form-control form-control-sm {{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}} w-75"
                                         id="myInput" type="text"
-                                        placeholder="{{\App\CPU\translate('Search')}}"
-                                        aria-label="Search" 
+                                        placeholder="{{translate('Search')}}"
+                                        aria-label="Search"
                                         style="border: none !important;">
                                     <i class="fa fa-search" style="color: #92C6FF" aria-hidden="true"></i>
                                 </form>
@@ -529,9 +529,9 @@
                                                 <input
                                                     class="form-control form-control-sm {{Session::get('direction') === "rtl" ? 'ml-3' : 'mr-3'}} w-75"
                                                     id="msgInputValue"
-                                                    type="text" placeholder="{{\App\CPU\translate('Send a message')}}" aria-label="Search">
+                                                    type="text" placeholder="{{translate('Send a message')}}" aria-label="Search">
                                                 <input class="aSend" type="submit" id="msgSendBtn" style="width: 45px;"
-                                                       value="{{\App\CPU\translate('Send')}}">
+                                                       value="{{translate('Send')}}">
                                                 {{-- <a class="aSend" id="msgSendBtn">Send</a> --}}
                                                 {{-- <i class="fa fa-send" style="color: #92C6FF" aria-hidden="true"></i> --}}
 
@@ -545,7 +545,7 @@
                 </section>
             @else
                 <div class="col-md-8" style="display: flex; justify-content: center;align-items: center;">
-                    <p>{{\App\CPU\translate('No conversation found')}}</p>
+                    <p>{{translate('No conversation found')}}</p>
                 </div>
             @endif
         </div>

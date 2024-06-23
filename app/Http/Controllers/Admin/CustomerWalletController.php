@@ -23,9 +23,9 @@ class CustomerWalletController extends Controller
         $cities = DB::table('cities')->get();
         if(BusinessSetting::where('type','wallet_status')->first()->value != 1)
         {
-            Toastr::error(\App\CPU\translate('customer_wallet_is_disabled'));
+            Toastr::error(translate('customer_wallet_is_disabled'));
             return back();
-        } 
+        }
         return view('admin-views.customer.wallet.add_fund',compact('customertypes','governorates','cities'));
     }
 
@@ -39,7 +39,7 @@ class CustomerWalletController extends Controller
 
         return $where;
     }
-    
+
     private function getusers($request , $notificationId){
         $condation = '';
         // order_amount >= '.$request->fromOrderprice2.'  and order_amount <= '.$request->toOrderprice2.'
@@ -72,39 +72,39 @@ class CustomerWalletController extends Controller
         }
         $condation = $this->where($condation , 'cm_firebase_token is not null');
         // SELECT `id`, `notificationId`, `userId` FROM `notifiUser` WHERE 1
-        
-        DB::insert('insert into notifiUser (notificationId, userId) 
+
+        DB::insert('insert into notifiUser (notificationId, userId)
             select  '.$notificationId.' , users.id
-            from users 
+            from users
             left join (
                 SELECT COUNT(*) as ordercount , sum(order_amount) as order_amount , customer_id
                 FROM `orders`
                 GROUP by customer_id
-            ) as orders on orders.customer_id = users.id 
+            ) as orders on orders.customer_id = users.id
             ' . $condation . '
         ');
         return DB::select('
             select  cm_firebase_token , users.id
-            from users 
+            from users
             left join (
                 SELECT COUNT(*) as ordercount , sum(order_amount) as order_amount , customer_id
                 FROM `orders`
                 GROUP by customer_id
-            ) as orders on orders.customer_id = users.id 
+            ) as orders on orders.customer_id = users.id
             ' . $condation . '
         ');
     }
-    
+
     public function add_fund(Request $request)
     {
         ini_set('max_execution_time', 60*60*24);
         ini_set('memory_limit',-1);
         if($request->ForAll == 0){
-            
+
             $validator = Validator::make($request->all(), [
                 'amount'=>'numeric|min:.01',
             ]);
-            
+
             // $users = $this->getusers($request);
         }
         else{
@@ -112,20 +112,20 @@ class CustomerWalletController extends Controller
                 'customer_id'=>'exists:users,id',
                 'amount'=>'numeric|min:.01',
             ]);
-            
+
             $users = [];
             foreach($request->customer_id as $customer_id){
                 $usr =  DB::table('users')->where('id' , $customer_id)->select(DB::raw("id , cm_firebase_token"))->first();
-                $users[] = $usr; 
+                $users[] = $usr;
             }
-            
+
         }
 
         if ($validator->fails()) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
         }
-        
-        
+
+
         $notification = new Notification;
         $notification->title = $request->notification;
         $notification->description = $request->notification;
@@ -133,56 +133,56 @@ class CustomerWalletController extends Controller
         $notification->send = 1;
         $notification->status = 1;
         $notification->save();
-        
+
         if($request->ForAll == 0){
-            
-            
-            
+
+
+
             $users = $this->getusers($request , $notification->id);
         }
         else{
-            
+
             foreach($users as $user){
                 // var_dump($user);exit;
                 DB::table('notifiUser')->insert([
                         'notificationId' => $notification->id,
                         'userId' => $user->id
                     ]);
-            }    
-            
+            }
+
         }
-        
+
         $request->expiredDate = isset($request->expiredDate) ? $request->expiredDate : null;
         $count = 0;
         foreach($users as $user){
             $wallet_transaction = CustomerManager::create_wallet_transaction($user->id, $request->amount, 'add_fund_by_admin',$request->referance , $request->expiredDate);
-    
-            
+
+
             if($wallet_transaction)
             {
-                
+
                 $data = [
                     'title' => "",
                     'description' => $request->notification,
                     'image' => '',
                 ];
                 $resultNotification = Helpers::send_push_notif_to_device($user->cm_firebase_token, $data);
-                
+
                 try{
                     Mail::to($wallet_transaction->user->email)->send(new \App\Mail\AddFundToWallet($wallet_transaction));
                 }catch(\Exception $ex)
                 {
                     info($ex);
                 }
-                $count += 1;    
+                $count += 1;
             }
         }
         if($count > 0){
             return response()->json([], 200);
         }
         return response()->json(['errors'=>[
-            'message'=>\App\CPU\translate('failed_to_create_transaction')
-        ]], 200);  
+            'message'=>translate('failed_to_create_transaction')
+        ]], 200);
     }
 
     public function report(Request $request)
@@ -198,7 +198,7 @@ class CustomerWalletController extends Controller
             $query->where('user_id',$request->customer_id);
         })
         ->get();
-        
+
         $transactions = WalletTransaction::
         when(($request->from && $request->to),function($query)use($request){
             $query->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59']);

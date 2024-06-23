@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app-seller')
 
-@section('title', \App\CPU\translate('Add Shipping'))
+@section('title', translate('Add Shipping'))
 
 @push('css_or_js')
 
@@ -10,9 +10,9 @@
     <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('seller.dashboard.index')}}">{{\App\CPU\translate('Dashboard')}}</a>
+                <li class="breadcrumb-item"><a href="{{route('seller.dashboard.index')}}">{{translate('Dashboard')}}</a>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('shipping_method')}}</li>
+                <li class="breadcrumb-item" aria-current="page">{{translate('shipping_method')}}</li>
 
             </ol>
         </nav>
@@ -21,21 +21,21 @@
             <div class="col-md-12 ">
                 <div class="card" style="height: 200px;">
                     <div class="card-header text-capitalize">
-                        <h4>{{\App\CPU\translate('choose_shipping_method')}}</h4>
+                        <h4>{{translate('choose_shipping_method')}}</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 text-capitalize" style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                                 <select class="form-control text-capitalize" name="shippingCategory" onchange="seller_shipping_type(this.value);"
                                             style="width: 100%">
-                                    <option value="0" selected disabled>---{{\App\CPU\translate('select')}}---</option>
-                                    <option value="order_wise" {{$shippingType=='order_wise'?'selected':'' }} >{{\App\CPU\translate('order_wise')}} </option>
-                                    <option  value="category_wise" {{$shippingType=='category_wise'?'selected':'' }} >{{\App\CPU\translate('category_wise')}}</option>
-                                    <option  value="product_wise" {{$shippingType=='product_wise'?'selected':'' }}>{{\App\CPU\translate('product_wise')}}</option>
+                                    <option value="0" selected disabled>---{{translate('select')}}---</option>
+                                    <option value="order_wise" {{$shippingType=='order_wise'?'selected':'' }} >{{translate('order_wise')}} </option>
+                                    <option  value="category_wise" {{$shippingType=='category_wise'?'selected':'' }} >{{translate('category_wise')}}</option>
+                                    <option  value="product_wise" {{$shippingType=='product_wise'?'selected':'' }}>{{translate('product_wise')}}</option>
                                 </select>
                             </div>
                             <div class="col-12 mt-2" id="product_wise_note">
-                                <p class="m-2" style="color: red;">{{\App\CPU\translate('note')}}: {{\App\CPU\translate("Please_make_sure_all_the product's_delivery_charges_are_up_to_date.")}}</p>
+                                <p class="m-2" style="color: red;">{{translate('note')}}: {{translate("Please_make_sure_all_the product's_delivery_charges_are_up_to_date.")}}</p>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h1 class="h3 mb-0 text-black-50 text-capitalize">{{\App\CPU\translate('add_order_wise_shipping')}} </h1>
+                            <h1 class="h3 mb-0 text-black-50 text-capitalize">{{translate('add_order_wise_shipping')}} </h1>
                         </div>
                         <div class="card-body">
                             <form action="{{route('seller.business-settings.shipping-method.add')}}" method="post"
@@ -57,37 +57,37 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="title">{{\App\CPU\translate('title')}}</label>
+                                            <label for="title">{{translate('title')}}</label>
                                             <input type="text" name="title" class="form-control" placeholder="">
                                         </div>
-    
+
                                         <div class="col-md-3">
-                                            <label for="duration">{{\App\CPU\translate('duration')}}</label>
+                                            <label for="duration">{{translate('duration')}}</label>
                                             <input type="text" name="duration" class="form-control"
-                                                   placeholder="{{\App\CPU\translate('Ex')}} : 4-6 {{\App\CPU\translate('days')}}">
+                                                   placeholder="{{translate('Ex')}} : 4-6 {{translate('days')}}">
                                         </div>
-    
+
                                         <div class="col-md-3">
-                                            <label for="cost">{{\App\CPU\translate('cost')}}</label>
-                                            <input type="number" min="0" max="1000000" name="cost" class="form-control" placeholder="{{\App\CPU\translate('Ex')}} : 10 $">
+                                            <label for="cost">{{translate('cost')}}</label>
+                                            <input type="number" min="0" max="1000000" name="cost" class="form-control" placeholder="{{translate('Ex')}} : 10 $">
                                         </div>
                                     </div>
                                 </div>
-    
+
                                 <div class="card-footer" style="padding-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}: 0">
-                                    <button type="submit" class="btn btn-primary float-right">{{\App\CPU\translate('Submit')}}</button>
+                                    <button type="submit" class="btn btn-primary float-right">{{translate('Submit')}}</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-    
+
             <div class="row" style="margin-top: 20px">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="text-capitalize">{{\App\CPU\translate('order_wise_shipping_method')}}  <span style="color: red;">({{ $shipping_methods->total() }})</span></h5>
+                            <h5 class="text-capitalize">{{translate('order_wise_shipping_method')}}  <span style="color: red;">({{ $shipping_methods->total() }})</span></h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -96,12 +96,12 @@
                                    style="width: 100%">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th>{{\App\CPU\translate('sl#')}}</th>
-                                    <th>{{\App\CPU\translate('title')}}</th>
-                                    <th>{{\App\CPU\translate('duration')}}</th>
-                                    <th>{{\App\CPU\translate('cost')}}</th>
-                                    <th>{{\App\CPU\translate('status')}}</th>
-                                    <th scope="col" style="width: 50px">{{\App\CPU\translate('action')}}</th>
+                                    <th>{{translate('sl#')}}</th>
+                                    <th>{{translate('title')}}</th>
+                                    <th>{{translate('duration')}}</th>
+                                    <th>{{translate('cost')}}</th>
+                                    <th>{{translate('status')}}</th>
+                                    <th scope="col" style="width: 50px">{{translate('action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -115,7 +115,7 @@
                                         <td>
                                             {{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($method['cost']))}}
                                         </td>
-    
+
                                         <td>
                                             <label class="switch">
                                                     <input type="checkbox" class="status"
@@ -124,19 +124,19 @@
                                                 </label>
                                         </td>
                                         <td>
-                                            
+
                                             <a  class="btn btn-primary btn-sm"
-                                                title="{{\App\CPU\translate('Edit')}}"
+                                                title="{{translate('Edit')}}"
                                                 href="{{route('seller.business-settings.shipping-method.edit',[$method['id']])}}">
                                                 <i class="tio-edit"></i>
                                             </a>
-                                            <a  class="btn btn-danger btn-sm delete" 
-                                                title="{{\App\CPU\translate('Delete')}}"
+                                            <a  class="btn btn-danger btn-sm delete"
+                                                title="{{translate('Delete')}}"
                                                 style="cursor: pointer;"
                                                 id="{{ $method['id'] }}">
                                                 <i class="tio-add-to-trash"></i>
                                             </a>
-                                                
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -151,10 +151,10 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="card mt-2" id="update_category_shipping_cost">
             <div class="card-header text-capitalize">
-                <h4>{{\App\CPU\translate('update_category_shipping_cost')}}</h4>
+                <h4>{{translate('update_category_shipping_cost')}}</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -163,10 +163,10 @@
                             style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                             <thead>
                                 <tr>
-                                    <th scope="col">{{\App\CPU\translate('sl#')}}</th>
-                                    <th scope="col">{{\App\CPU\translate('category_name')}}</th>
-                                    <th scope="col">{{\App\CPU\translate('cost_per_product')}}</th>
-                                    <th scope="col">{{\App\CPU\translate('multiply_with_QTY')}}</th>
+                                    <th scope="col">{{translate('sl#')}}</th>
+                                    <th scope="col">{{translate('category_name')}}</th>
+                                    <th scope="col">{{translate('cost_per_product')}}</th>
+                                    <th scope="col">{{translate('multiply_with_QTY')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -178,7 +178,7 @@
                                                 {{$key+1}}
                                             </td>
                                             <td>
-                                                {{$item->category!=null?$item->category->name:\App\CPU\translate('not_found')}}
+                                                {{$item->category!=null?$item->category->name:translate('not_found')}}
                                             </td>
                                             <td>
                                                 <input type="hidden" class="form-control" name="ids[]" value="{{$item->id}}">
@@ -195,15 +195,15 @@
                                     @endforeach
                                     <tr>
                                         <td colspan="4">
-                                            <button type="submit" class="btn btn-primary ">{{\App\CPU\translate('Update')}}</button>
+                                            <button type="submit" class="btn btn-primary ">{{translate('Update')}}</button>
                                         </td>
                                     </tr>
                                 </form>
                             </tbody>
-                            
+
                         </table>
-                        
-                        
+
+
                     </div>
                 </div>
             </div>
@@ -229,7 +229,7 @@
                 $('#update_category_shipping_cost').hide();
                 $('#order_wise_shipping').show();
             }else{
-                
+
                 $('#update_category_shipping_cost').hide();
                 $('#order_wise_shipping').hide();
                 $('#product_wise_note').show();
@@ -256,19 +256,19 @@
                     status: status
                 },
                 success: function () {
-                    toastr.success('{{\App\CPU\translate('order wise shipping method Status updated successfully')}}');
+                    toastr.success('{{translate('order wise shipping method Status updated successfully')}}');
                 }
             });
         });
         $(document).on('click', '.delete', function () {
             var id = $(this).attr("id");
             Swal.fire({
-                title: '{{\App\CPU\translate('Are you sure delete this ?')}}',
-                text: "{{\App\CPU\translate('You wont be able to revert this!')}}",
+                title: '{{translate('Are you sure delete this ?')}}',
+                text: "{{translate('You wont be able to revert this!')}}",
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: '{{\App\CPU\translate('Yes, delete it!')}}'
+                confirmButtonText: '{{translate('Yes, delete it!')}}'
             }).then((result) => {
                 if (result.value) {
                     $.ajaxSetup({
@@ -281,7 +281,7 @@
                         method: 'POST',
                         data: {id: id},
                         success: function () {
-                            toastr.success('{{\App\CPU\translate('Shipping Method deleted successfully')}}');
+                            toastr.success('{{translate('Shipping Method deleted successfully')}}');
                             location.reload();
                         }
                     });
@@ -305,9 +305,9 @@
             }else{
                 $('#update_category_shipping_cost').hide();
                 $('#order_wise_shipping').hide();
-                $('#product_wise_note').show(); 
+                $('#product_wise_note').show();
             }
-            
+
             $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -320,7 +320,7 @@
                         shippingType: val
                     },
                     success: function (data) {
-                        toastr.success('{{\App\CPU\translate('shipping_method_updated_successfully!!')}}');
+                        toastr.success('{{translate('shipping_method_updated_successfully!!')}}');
                     }
                 });
         }

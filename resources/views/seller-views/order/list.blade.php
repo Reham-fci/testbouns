@@ -1,5 +1,5 @@
 @extends('layouts.back-end.app-seller')
-@section('title', \App\CPU\translate('Order List'))
+@section('title', translate('Order List'))
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
@@ -11,7 +11,7 @@
     <div class="content container-fluid">
         <div class="row align-items-center mb-3">
             <div class="col-sm">
-                <h1 class="page-header-title">{{\App\CPU\translate('Orders')}} <span
+                <h1 class="page-header-title">{{translate('Orders')}} <span
                         class="badge badge-soft-dark ml-2">{{$orders->total()}}</span>
                 </h1>
             </div>
@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row  justify-content-between align-items-center flex-grow-1">
-                        
+
                             <div class="col-12 col-sm-6 col-md-4">
 
                                 <form action="{{ url()->current() }}" method="GET">
@@ -34,28 +34,28 @@
                                             </div>
                                         </div>
                                         <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                            placeholder="{{\App\CPU\translate('search')}}" aria-label="Search orders" value="{{ $search }}" required>
-                                        <button type="submit" class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
+                                            placeholder="{{translate('search')}}" aria-label="Search orders" value="{{ $search }}" required>
+                                        <button type="submit" class="btn btn-primary">{{translate('search')}}</button>
                                     </div>
                                     <!-- End Search -->
                                 </form>
-                                
+
                             </div>
                             <div class="col-12 col-sm-6 col-md-6 mt-2 mt-sm-0">
                                 <form action="{{ url()->current() }}" method="GET">
-                                    
+
                                     <div class="row">
-                                        
+
                                         <div class="col-12 col-sm-5">
                                             <input type="date" name="from" value="{{$from}}" id="from_date"
                                                     class="form-control" required>
                                         </div>
                                         <div class="col-12 col-sm-5 mt-2 mt-sm-0">
                                             <input type="date" value="{{$to}}" name="to" id="to_date"
-                                                    class="form-control" required> 
+                                                    class="form-control" required>
                                         </div>
                                         <div class="col-12 col-sm-2 mt-2 mt-sm-0  ">
-                                            <button type="submit" class="btn btn-primary float-right float-sm-none">{{\App\CPU\translate('filter')}}</button>
+                                            <button type="submit" class="btn btn-primary float-right float-sm-none">{{translate('filter')}}</button>
                                         </div>
                                     </div>
                                 </form>
@@ -69,14 +69,14 @@
                                    style="width: 100%">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th>{{\App\CPU\translate('SL#')}}</th>
-                                    <th>{{\App\CPU\translate('Order')}}</th>
-                                    <th>{{\App\CPU\translate('Date')}}</th>
-                                    <th>{{\App\CPU\translate('customer_name')}}</th>
-                                    <th>{{\App\CPU\translate('Phone')}}</th>
-                                    <th>{{\App\CPU\translate('Payment')}}</th>
-                                    <th>{{\App\CPU\translate('Status')}} </th>
-                                    <th style="width: 30px">{{\App\CPU\translate('Action')}}</th>
+                                    <th>{{translate('SL#')}}</th>
+                                    <th>{{translate('Order')}}</th>
+                                    <th>{{translate('Date')}}</th>
+                                    <th>{{translate('customer_name')}}</th>
+                                    <th>{{translate('Phone')}}</th>
+                                    <th>{{translate('Payment')}}</th>
+                                    <th>{{translate('Status')}} </th>
+                                    <th style="width: 30px">{{translate('Action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -94,11 +94,11 @@
                                         <td>
                                             @if($order->payment_status=='paid')
                                                 <span class="badge badge-soft-success">
-                                                <span class="legend-indicator bg-success" style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}"></span>{{\App\CPU\translate('paid')}}
+                                                <span class="legend-indicator bg-success" style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}"></span>{{translate('paid')}}
                                                 </span>
                                             @else
                                                 <span class="badge badge-soft-danger">
-                                                <span class="legend-indicator bg-danger" style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}"></span>{{\App\CPU\translate('unpaid')}}
+                                                <span class="legend-indicator bg-danger" style="{{Session::get('direction') === "rtl" ? 'margin-right: 0;margin-left: .4375rem;' : 'margin-left: 0;margin-right: .4375rem;'}}"></span>{{translate('unpaid')}}
                                                 </span>
                                             @endif
                                             </td>
@@ -121,17 +121,17 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                
+
                                                         <a  class="btn btn-primary btn-sm mr-1"
-                                                            title="{{\App\CPU\translate('view')}}"
+                                                            title="{{translate('view')}}"
                                                             href="{{route('seller.orders.details',[$order['id']])}}">
-                                                            <i class="tio-visible"></i> 
-                                                            
+                                                            <i class="tio-visible"></i>
+
                                                         </a>
                                                         <a  class="btn btn-info btn-sm mr-1" target="_blank"
-                                                            title="{{\App\CPU\translate('invoice')}}"
+                                                            title="{{translate('invoice')}}"
                                                             href="{{route('seller.orders.generate-invoice',[$order['id']])}}">
-                                                            <i class="tio-download"></i> 
+                                                            <i class="tio-download"></i>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -150,7 +150,7 @@
                     @if(count($orders)==0)
                         <div class="text-center p-4">
                             <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                            <p class="mb-0">{{\App\CPU\translate('No data to show')}}</p>
+                            <p class="mb-0">{{translate('No data to show')}}</p>
                         </div>
                     @endif
                     <!-- End Footer -->

@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('Track Order Result'))
+@section('title',translate('Track Order Result'))
 
 @push('css_or_js')
     <meta property="og:image" content="{{asset('storage/app/public/company')}}/{{$web_config['web_logo']->value}}"/>
@@ -42,7 +42,7 @@
 
                     <div class="box-shadow-sm order-track">
                         <div style="margin: 0 auto; padding: 15px;">
-                            <h1 style="padding: 20px; text-align: center;">{{\App\CPU\translate('track_order')}}</h1>
+                            <h1 style="padding: 20px; text-align: center;">{{translate('track_order')}}</h1>
 
                             <form action="{{route('track-order.result')}}" type="submit" method="post"
                                   style="padding: 15px;">
@@ -57,14 +57,14 @@
 
                                 <div class="form-group">
                                     <input class="form-control prepended-form-control" type="text" name="order_id"
-                                           placeholder="{{\App\CPU\translate('order_id')}}" required>
+                                           placeholder="{{translate('order_id')}}" required>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control prepended-form-control" type="text" name="phone_number"
-                                           placeholder="{{\App\CPU\translate('your_phone_number')}}" required>
+                                           placeholder="{{translate('your_phone_number')}}" required>
                                 </div>
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit" name="trackOrder">{{\App\CPU\translate('track_order')}}</button>
+                                    <button class="btn btn-primary" type="submit" name="trackOrder">{{translate('track_order')}}</button>
                                 </div>
                             </form>
                         </div>

@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('Welcome To').' '.$web_config['name']->value)
+@section('title',translate('Welcome To').' '.$web_config['name']->value)
 
 @push('css_or_js')
     <meta property="og:image" content="{{asset('storage/app/public/company')}}/{{$web_config['web_logo']->value}}"/>
@@ -33,9 +33,9 @@
             margin-right: 0px !important;
             display: flex;
 	        flex-direction: column;
-            -ms-flex: .4;  /* IE 10 */  
+            -ms-flex: .4;  /* IE 10 */
             flex: 1;
-            
+
         }
 
         .cz-countdown-hours {
@@ -47,7 +47,7 @@
             margin-right: 0px !important;
             display: flex;
 	        flex-direction: column;
-            -ms-flex: .4;  /* IE 10 */  
+            -ms-flex: .4;  /* IE 10 */
             flex: 1;
         }
 
@@ -60,7 +60,7 @@
             margin-right: 0px !important;
             display: flex;
 	        flex-direction: column;
-            -ms-flex: .4;  /* IE 10 */  
+            -ms-flex: .4;  /* IE 10 */
             flex: 1;
         }
 
@@ -72,7 +72,7 @@
             border-radius: 3px;
             display: flex;
 	        flex-direction: column;
-            -ms-flex: .4;  /* IE 10 */  
+            -ms-flex: .4;  /* IE 10 */
             flex: 1;
         }
 
@@ -161,7 +161,7 @@
                 /* font-family: "Roboto", sans-serif; */
                 font-size: 11px !important;
                 font-weight: 700 !important;
-            
+
             }
 
             .featured_deal {
@@ -216,7 +216,7 @@
         }
         }
 
-        
+
         @media (max-width: 360px) {
             .featured_for_mobile {
                 max-width: 100%;
@@ -239,14 +239,14 @@
             .featured_deal {
                 opacity: 1 !important;
             }
-            
+
         }
 
         @media (min-width: 768px) {
             .displayTab {
                 display: block !important;
             }
-            
+
         }
 
         @media (max-width: 800px) {
@@ -277,7 +277,7 @@
             .seller-list-title{
                 {{Session::get('direction') === "rtl" ? 'margin-right: 0px;' : 'margin-left: 10px;'}}
             }
-            .seller-list-view-all { 
+            .seller-list-view-all {
                 {{Session::get('direction') === "rtl" ? 'margin-left: 20px;' : 'margin-right: 10px;'}}
             }
             .seller-card {
@@ -310,7 +310,7 @@
             .seller-list-title{
                 {{Session::get('direction') === "rtl" ? 'margin-right: 6px;' : 'margin-left: 10px;'}}
             }
-            .seller-list-view-all { 
+            .seller-list-view-all {
                 {{Session::get('direction') === "rtl" ? 'margin-left: 12px;' : 'margin-right: 10px;'}}
             }
             .seller-card {
@@ -329,7 +329,7 @@
                 text-align: center;
                 margin-top: 63px;
             }
-            
+
         }
 
         .featured_deal_carosel .carousel-inner {
@@ -345,7 +345,7 @@
             background:{{$web_config['primary_color']}}10;
             height: 150px!important;
             border-radius:5px;
-            
+
         }
         .flash-deal-text{
             color: {{$web_config['primary_color']}};
@@ -372,11 +372,11 @@
             justify-content: space-between;
             width: 100%;
         }
-     }  
+     }
      .owl-prev{
          float: left;
-         
-     } 
+
+     }
      .owl-next{
          float: right;
      }
@@ -431,7 +431,7 @@
         font-weight: bold;
         font-size: 12px;
      }
-     
+
      .feature-product .owl-nav{
         top: 40%;
         position: absolute;
@@ -473,11 +473,11 @@
     .bonus-product:hover > .quick-view , .flash_deal_product:hover > .quick-view {
         display: block;
     }
-    
+
     .bonus-product {
         min-height: 210px;
     }
-    
+
     /**/
     .icons-open{
         position: fixed;
@@ -494,18 +494,18 @@
         bottom: 12%;
         z-index:9999;
     }
-    
+
     .bonus-icon {
         display:none;
     }
     .icons-open .bonus-icon{
         display:flex;
     }
-    
+
     .bonus-icon-open {
-        
+
     }
-    
+
     .bonus-icon {
         color:#fff;
         font-size:22px;
@@ -520,53 +520,53 @@
         position: absolute;
         background-color:#040458;
     }
-    
+
     .sub-icon.sub-icon-1.bonus-icon {}
-    
+
     .sub-icon.sub-icon-1.bonus-icon {
         top: -60px;
     }
     .bonus-icon-facebook{
-        
+
         background-color:#1877F2;
     }
-    
+
     .sub-icon.sub-icon-2.bonus-icon {
         left: 60px;
         top: -25px;
     }
     .bonus-icon-WhatsApp{
-        
+
         background-color:#25d366;
     }
-    
+
     .sub-icon.sub-icon-3.bonus-icon {
         left: 60px;
         top: 40px;
     }
     .bonus-icon-phone{
-        
+
         background-color:red;
     }
-    
+
     .sub-icon.sub-icon-4.bonus-icon {
         top: 60px;
     }
     .bonus-icon-telegram{
-        
+
         background-color:#0088cc;
     }
     .main-icon.bonus-icon {
         background: #1458a7;
     }
-    
+
     .bonus-icon {
         display: none;
     }
-    
+
     \ {
     }
-    
+
     .main-icon.bonus-icon {
         display: flex;
     }
@@ -608,17 +608,17 @@
     <div class="container">
         <div class="flash-deal-view-all-web row d-flex justify-content-{{Session::get('direction') === "rtl" ? 'start' : 'end'}}" style="{{Session::get('direction') === "rtl" ? 'margin-left: 2px;' : 'margin-right:2px;'}}">
             <a class="text-capitalize view-all-text" href="{{route('flash-deals',[isset($flash_deals)?$flash_deals['id']:0])}}">
-                {{ \App\CPU\translate('view_all')}}
+                {{ translate('view_all')}}
                 <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left-circle mr-1 ml-n1 mt-1 float-left' : 'right-circle ml-1 mr-n1'}}"></i>
             </a>
         </div>
         <div class="row d-flex {{Session::get('direction') === "rtl" ? 'flex-row-reverse' : 'flex-row'}}">
-            
-            
+
+
             <div class="col-md-3 mt-2 countdown-card" >
                 <div class="m-2">
                     <div class="flash-deal-text">
-                        <span>{{ \App\CPU\translate('flash deal')}}</span>
+                        <span>{{ translate('flash deal')}}</span>
                     </div>
                     <div style=" text-align: center;color: #ffffff !important;">
                         <div class="countdown-background">
@@ -626,22 +626,22 @@
                                 data-countdown="{{isset($flash_deals)?date('m/d/Y',strtotime($flash_deals['end_date'])):''}} 11:59:00 PM">
                                 <span class="cz-countdown-days">
                                     <span class="cz-countdown-value"></span>
-                                    <span>{{ \App\CPU\translate('day')}}</span>
+                                    <span>{{ translate('day')}}</span>
                                 </span>
                                 <span class="cz-countdown-value p-1">:</span>
                                 <span class="cz-countdown-hours">
                                     <span class="cz-countdown-value"></span>
-                                    <span>{{ \App\CPU\translate('hrs')}}</span>
+                                    <span>{{ translate('hrs')}}</span>
                                 </span>
                                 <span class="cz-countdown-value p-1">:</span>
                                 <span class="cz-countdown-minutes">
                                     <span class="cz-countdown-value"></span>
-                                    <span>{{ \App\CPU\translate('min')}}</span>
+                                    <span>{{ translate('min')}}</span>
                                 </span>
                                 <span class="cz-countdown-value p-1">:</span>
                                 <span class="cz-countdown-seconds">
                                     <span class="cz-countdown-value"></span>
-                                    <span>{{ \App\CPU\translate('sec')}}</span>
+                                    <span>{{ translate('sec')}}</span>
                                 </span>
                             </span>
                         </div>
@@ -650,7 +650,7 @@
             </div>
             <div class="flash-deal-view-all-mobile col-md-12" style="{{Session::get('direction') === "rtl" ? 'margin-left: 2px;' : 'margin-right:2px;'}}">
                 <a class="{{Session::get('direction') === "rtl" ? 'float-left' : 'float-right'}} mt-2 text-capitalize view-all-text" href="{{route('flash-deals',[isset($flash_deals)?$flash_deals['id']:0])}}">
-                    {{ \App\CPU\translate('view_all')}}
+                    {{ translate('view_all')}}
                     <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left-circle mr-1 ml-n1 mt-1 float-left' : 'right-circle ml-1 mr-n1'}}"></i>
                 </a>
             </div>
@@ -679,18 +679,18 @@
                         <div class="card-body">
                             <div class="row d-flex justify-content-between">
                                 <div class="categories-title">
-                                    <span style="font-weight: 600;font-size: 16px;">{{ \App\CPU\translate('categories')}}</span>
+                                    <span style="font-weight: 600;font-size: 16px;">{{ translate('categories')}}</span>
                                 </div>
                                 <div class="categories-view-all">
                                     <a class="text-capitalize view-all-text"
-                                    href="{{route('categories')}}">{{ \App\CPU\translate('view_all')}}
+                                    href="{{route('categories')}}">{{ translate('view_all')}}
                                     <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left-circle mr-1 ml-n1 mt-1 float-left' : 'right-circle ml-1 mr-n1'}}"></i>
                                     </a>
                                 </div>
                             </div>
                             <div class="row d-flex justify-content-center mt-3">
                                 @foreach($categories as $key=>$category)
-                                    
+
                                     @if ($key<10)
                                     <div class="text-center"  style="margin: 5px;">
                                         <a href="{{route('products',['id'=> $category['id'],'data_from'=>'category','page'=>1])}}">
@@ -703,23 +703,23 @@
                                         </a>
                                     </div>
                                     @endif
-                                    
-                                @endforeach    
+
+                                @endforeach
                             </div>
-                        </div>    
-                    </div>    
-                </div> 
+                        </div>
+                    </div>
+                </div>
             @else
                 <div class="col-md-12 pl-0 pr-0">
                     <div class="card" style="min-height: 232px;">
                         <div class="card-body">
                             <div class="row d-flex justify-content-between">
                                 <div style="{{Session::get('direction') === "rtl" ? 'margin-right: 20px;' : 'margin-left: 22px;'}}">
-                                    <span style="font-weight: 600;font-size: 16px;">{{ \App\CPU\translate('categories')}}</span>
+                                    <span style="font-weight: 600;font-size: 16px;">{{ translate('categories')}}</span>
                                 </div>
                                 <div style="{{Session::get('direction') === "rtl" ? 'margin-left: 15px;' : 'margin-right: 13px;'}}">
                                     <a class="text-capitalize view-all-text"
-                                    href="{{route('categories')}}">{{ \App\CPU\translate('view_all')}}
+                                    href="{{route('categories')}}">{{ translate('view_all')}}
                                     <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left-circle mr-1 ml-n1 mt-1 float-left' : 'right-circle ml-1 mr-n1'}}"></i>
                                     </a>
                                 </div>
@@ -738,15 +738,15 @@
                                                 style="margin-top: 5px">{{Str::limit($category->name, 12)}}</p>
                                             </a>
                                         </div>
-                                    @endif 
-                                @endforeach    
+                                    @endif
+                                @endforeach
                             </div>
-                        </div>    
-                    </div>    
-                </div> 
+                        </div>
+                    </div>
+                </div>
             @endif
             <!-- top sellers -->
-        
+
         @if ($business_mode == 'multi')
             @if(count($top_sellers) > 0)
                 <div class="col-md-12 mt-2 mt-md-0 seller-card" >
@@ -754,11 +754,11 @@
                         <div class="card-body">
                             <div class="row d-flex justify-content-between">
                                 <div class="seller-list-title">
-                                    <span style="font-weight: 600;font-size: 18px;">{{ \App\CPU\translate('sellers')}}</span>
+                                    <span style="font-weight: 600;font-size: 18px;">{{ translate('sellers')}}</span>
                                 </div>
                                 <div class="seller-list-view-all">
                                     <a class="text-capitalize view-all-text"
-                                    href="{{route('sellers')}}">{{ \App\CPU\translate('view_all')}}
+                                    href="{{route('sellers')}}">{{ translate('view_all')}}
                                     <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left-circle mr-1 ml-n1 mt-1 float-left' : 'right-circle ml-1 mr-n1'}}"></i>
                                     </a>
                                 </div>
@@ -766,7 +766,7 @@
                             <div class="row d-flex justify-content-between mt-3">
                                 @foreach($top_sellers as $key=>$seller)
                                     @if ($key<10)
-                                    
+
                                         @if($seller->shop)
                                             <div style="margin: 5px;">
                                                 <center>
@@ -781,13 +781,13 @@
                                             </div>
                                         @endif
                                     @endif
-                                @endforeach    
+                                @endforeach
                             </div>
-                        </div>    
-                    </div>    
-                </div> 
-            @endif  
-        @endif   
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endif
         </div>
     </div>
     {{--brands--}}
@@ -796,18 +796,18 @@
         <div class="section-header">
             <div style="color: black;font-weight: 700;
             font-size: 22px;">
-                <span> {{\App\CPU\translate('brands')}}</span>
+                <span> {{translate('brands')}}</span>
             </div>
             <div style="margin-right:2px;">
                 <a class="text-capitalize view-all-text" href="{{route('brands')}}">
-                    {{ \App\CPU\translate('view_all')}}
+                    {{ translate('view_all')}}
                     <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left-circle mr-1 ml-n1 mt-1 float-left' : 'right-circle ml-1 mr-n1'}}"></i>
                 </a>
             </div>
         </div>
     {{--<hr class="view_border">--}}
     <!-- Grid-->
-    
+
         <div class="mt-3 mb-3 brand-slider">
             <div class="owl-carousel owl-theme p-2" id="brands-slider">
                 @foreach($brands as $brand)
@@ -832,7 +832,7 @@
         <div class="row" style="background: white;box-shadow: 0px 3px 6px #0000000d;border-radius: 5px;">
             <div class="col-md-12" >
                 <div class="feature-product-title">
-                    {{ \App\CPU\translate('featured_products')}}
+                    {{ translate('featured_products')}}
                 </div>
             </div>
             <div class="col-md-12">
@@ -842,7 +842,7 @@
                             @foreach($featured_products as $product)
                                 <div  style="margin:5px;margin-bottom: 30px;">
                                     @include('web-views.partials._feature-product',['product'=>$product, 'decimal_point_settings'=>$decimal_point_settings])
-                                    
+
                                 </div>
                             @endforeach
                         </div>
@@ -868,20 +868,20 @@
                 <div class="col-12 pb-2" >
                     <a class="text-capitalize mt-2 mt-md-0 {{Session::get('direction') === "rtl" ? 'float-left' : 'float-right'}}" href="{{route('products',['data_from'=>'featured_deal'])}}"
                         style="color: white !important;{{Session::get('direction') === "rtl" ? 'margin-left: 21px;' : 'margin-right: 21px;'}}">
-                        {{ \App\CPU\translate('view_all')}}
+                        {{ translate('view_all')}}
                         <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left-circle mr-1 ml-n1 mt-1 float-left' : 'right-circle ml-1 mr-n1'}}"></i>
                     </a>
                 </div>
                 <div class="col-xl-3 col-md-4 d-flex align-items-center justify-content-center right">
                     <div class="m-4">
                         <span class="featured_deal_title"
-                            style="padding-top: 12px">{{ \App\CPU\translate('featured_deal')}}</span>
+                            style="padding-top: 12px">{{ translate('featured_deal')}}</span>
                         <br>
-                        
-                        <span style="color: white;text-align: left !important;">{{ \App\CPU\translate('See the latest deals and exciting new offers ')}}!</span>
-                        
+
+                        <span style="color: white;text-align: left !important;">{{ translate('See the latest deals and exciting new offers ')}}!</span>
+
                     </div>
-                    
+
                 </div>
 
                 <div class="col-xl-9 col-md-8 d-flex align-items-center justify-content-center {{Session::get('direction') === "rtl" ? 'pl-4' : 'pr-4'}}">
@@ -905,17 +905,17 @@
                 <div class="latest-product-margin" style="margin-{{Session::get('direction') === "rtl" ? 'right:30px' : 'left:30px'}}">
                     <div class="d-flex justify-content-between">
                         <div class="" style="text-align: center;">
-                            <span class="for-feature-title" style="text-align: center;font-size:22px !important; font-weight:700">{{ \App\CPU\translate('latest_products')}}</span>
+                            <span class="for-feature-title" style="text-align: center;font-size:22px !important; font-weight:700">{{ translate('latest_products')}}</span>
                         </div>
                         <div style="margin-right: 4px;">
                             <a class="text-capitalize view-all-text"
                                href="{{route('products',['data_from'=>'latest'])}}">
-                                {{ \App\CPU\translate('view_all')}}
+                                {{ translate('view_all')}}
                                 <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left-circle mr-1 ml-n1 mt-1 float-left' : 'right-circle ml-1 mr-n1'}}"></i>
                             </a>
                         </div>
                     </div>
-                    
+
                     <div class="row mt-2">
                         @foreach($latest_products as $product)
                             <div class="col-xl-3 col-sm-6 col-md-6 col-6 mb-4">
@@ -932,7 +932,7 @@
         </div>
     </div>
 
-     
+
 @php($main_section_banner = \App\Model\Banner::where('banner_type','Main Section Banner')->where('published',1)->orderBy('id','desc')->latest()->first())
     @if (isset($main_section_banner))
     <div class="container rtl mb-3">
@@ -949,32 +949,32 @@
     </div>
     @endif
 
-    
-    
+
+
     <div class="container rtl mt-3">
             <div class="row d-flex justify-content-between align-items-baseline">
             <div class="d-flex">
                 <div style="height: 90px;width:90px;">
                     <img  src="{{asset("public/assets/front-end/png/new-arrivals.png")}}"
                                      alt="">
-                                    
+
                 </div>
                 <div style="margin-top:24px;font-weight: 700;font-size: 26px;">
-                    <p style="float: right">{{ \App\CPU\translate('ARRIVALS')}}</p>
+                    <p style="float: right">{{ translate('ARRIVALS')}}</p>
                 </div>
-            </div>  
-            
-            
+            </div>
+
+
             <div style="margin-right: 4px;">
                 <a class="text-capitalize view-all-text"
                    href="{{route('products',['data_from'=>'latest'])}}">
-                    {{ \App\CPU\translate('view_all')}}
+                    {{ translate('view_all')}}
                     <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left-circle mr-1 ml-n1 mt-1 float-left' : 'right-circle ml-1 mr-n1'}}"></i>
                 </a>
             </div>
         </div>
-        
-        
+
+
     </div>
     <div class="container rtl mb-3" style="">
         <div class="col-md-12" style="background-color:white;padding:20px;border-radius:10px;">
@@ -982,9 +982,9 @@
                 <div class="carousel-wrap" >
                     <div class="owl-carousel owl-theme p-2" id="new-arrivals-product">
                         @foreach($latest_products as $key=>$product)
-                            
+
                                 @include('web-views.partials._product-card-1',['product'=>$product,'decimal_point_settings'=>$decimal_point_settings])
-                            
+
                         @endforeach
                     </div>
                 </div>
@@ -1000,12 +1000,12 @@
                         <div class="row d-flex justify-content-between m-3">
                             <div>
                                 <img style="height:30px;width:30px;"  src="{{asset("public/assets/front-end/png/best sellings.png")}}"
-                                         alt=""> 
-                                    <span style="margin-left:10px;text-transform: uppercase;font-weight: 700;">{{ \App\CPU\translate('best sellings')}}</span>
+                                         alt="">
+                                    <span style="margin-left:10px;text-transform: uppercase;font-weight: 700;">{{ translate('best sellings')}}</span>
                             </div>
                             <div>
                                 <a class="text-capitalize view-all-text"
-                                    href="{{route('products',['data_from'=>'best-selling','page'=>1])}}">{{ \App\CPU\translate('view_all')}}
+                                    href="{{route('products',['data_from'=>'best-selling','page'=>1])}}">{{ translate('view_all')}}
                                     <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left-circle mr-1 ml-n1 mt-1 float-left' : 'right-circle ml-1 mr-n1'}}"></i>
                                 </a>
                             </div>
@@ -1013,9 +1013,9 @@
                         <div class="row ml-2 mr-3 mb-2">
                             @foreach($bestSellProduct as $key=>$bestSell)
                                 @if($bestSell->product && $key<3)
-                                    
-                                    
-                                    <?php 
+
+
+                                    <?php
                                         $variation = json_decode($bestSell->product->variation);
                                         $price = 0;
                                         $discount = 0;
@@ -1023,25 +1023,25 @@
                                         $discount_precient = 0;
                                         if(isset($variation[0]))
                                         {
-                                        
+
                                             $price = $variation[0]->price;
                                             if(isset($variation[0]->discount))
                                             {
                                                 $discount = $variation[0]->discount;
-                                                $discount_type = $variation[0]->discount_type; 
+                                                $discount_type = $variation[0]->discount_type;
                                                 if($variation[0]->discount_type == "percent")
                                                 {
-                                                
+
                                                     $discount_precient = $variation[0]->discount;
                                                     $discount = round((($variation[0]->discount * $variation[0]->price) / 100) ,2);
                                                 }
                                             }
-                                            
-                                            
+
+
                                         }
                                     ?>
-                                
-                                
+
+
                                     <div class="col-12 m-1 bonus-product" style="border-style: solid;
                                     border-color: #0000000d; border-radius:5px;"
                                          data-href="{{route('product',$bestSell->product->slug)}}">
@@ -1052,12 +1052,12 @@
                                                             {{round($discount_precient,$decimal_point_settings)}}%
                                                         @elseif($bestSell->product->discount_type =='flat')
                                                             {{\App\CPU\Helpers::currency_converter($discount)}}
-                                                        @endif {{\App\CPU\translate('off')}}
+                                                        @endif {{translate('off')}}
                                                     </span>
                                                 </div>
                                             @endif
                                         <div class="row" style="padding:8px;">
-                                            
+
                                             <div class="best-selleing-image"  >
                                                 <a class="d-block d-flex justify-content-center" style="width:100%;height:100%;"
                                                     href="{{route('product',$bestSell->product->slug)}}">
@@ -1098,24 +1098,24 @@
                                                     <span class="text-accent">
                                                         {{\App\CPU\Helpers::currency_converter(
                                                         $price-$discount
-                                                        )}} 
+                                                        )}}
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="text-center quick-view" >
                                             @if(Request::is('product/*'))
                                                 <a class="btn btn-primary btn-sm" href="{{route('product',$product->slug)}}">
                                                     <i class="czi-forward align-middle {{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}"></i>
-                                                    {{\App\CPU\translate('View')}}
+                                                    {{translate('View')}}
                                                 </a>
                                             @else
                                                 <a class="btn btn-primary btn-sm"
                                                 style="margin-top:0px;padding-top:5px;padding-bottom:5px;padding-left:10px;padding-right:10px;" href="javascript:"
                                                    onclick="quickView('{{$bestSell->product->id}}')">
                                                     <i class="czi-eye align-middle {{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}"></i>
-                                                    {{\App\CPU\translate('Quick')}}   {{\App\CPU\translate('View')}}
+                                                    {{translate('Quick')}}   {{translate('View')}}
                                                 </a>
                                             @endif
                                         </div>
@@ -1132,12 +1132,12 @@
                         <div class="row d-flex justify-content-between m-3">
                             <div>
                                 <img style="height:30px;width:30px;"  src="{{asset("public/assets/front-end/png/top-rated.png")}}"
-                                         alt=""> 
-                                    <span style="margin-left:10px;text-transform: uppercase;font-weight: 700;">{{ \App\CPU\translate('top rated')}}</span>
+                                         alt="">
+                                    <span style="margin-left:10px;text-transform: uppercase;font-weight: 700;">{{ translate('top rated')}}</span>
                             </div>
                             <div>
                                 <a class="text-capitalize view-all-text"
-                                    href="{{route('products',['data_from'=>'top-rated','page'=>1])}}">{{ \App\CPU\translate('view_all')}}
+                                    href="{{route('products',['data_from'=>'top-rated','page'=>1])}}">{{ translate('view_all')}}
                                     <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left-circle mr-1 ml-n1 mt-1 float-left' : 'right-circle ml-1 mr-n1'}}"></i>
                                 </a>
                             </div>
@@ -1145,9 +1145,9 @@
                         <div class="row ml-2 mr-3 mb-2">
                             @foreach($topRated as $key=>$top)
                                 @if($top->product && $key<3)
-                                
-                                    
-                                    <?php 
+
+
+                                    <?php
                                         $variation = json_decode($top->product->variation);
                                         $price = 0;
                                         $discount = 0;
@@ -1155,21 +1155,21 @@
                                         $discount_precient = 0;
                                         if(isset($variation[0]))
                                         {
-                                        
+
                                             $price = $variation[0]->price;
                                             if(isset($variation[0]->discount))
                                             {
                                                 $discount = $variation[0]->discount;
-                                                $discount_type = $variation[0]->discount_type; 
+                                                $discount_type = $variation[0]->discount_type;
                                                 if($variation[0]->discount_type == "percent")
                                                 {
-                                                
+
                                                     $discount_precient = $variation[0]->discount;
                                                     $discount = round((($variation[0]->discount * $variation[0]->price) / 100) ,2);
                                                 }
                                             }
-                                            
-                                            
+
+
                                         }
                                     ?>
                                     <div class="col-12 m-1 bonus-product" style="border-style: solid;
@@ -1182,12 +1182,12 @@
                                                             {{round($discount_precient,$decimal_point_settings)}}%
                                                         @elseif($top->product->discount_type =='flat')
                                                             {{\App\CPU\Helpers::currency_converter($discount)}}
-                                                        @endif {{\App\CPU\translate('off')}}
+                                                        @endif {{translate('off')}}
                                                     </span>
                                                 </div>
                                             @endif
                                         <div class="row" style="padding:8px;">
-                                            
+
                                             <div class="top-rated-image">
                                                 <a class="d-block d-flex justify-content-center" style="width:100%;height:100%;"
                                                     href="{{route('product',$top->product->slug)}}">
@@ -1228,7 +1228,7 @@
                                                     <span class="text-accent">
                                                         {{\App\CPU\Helpers::currency_converter(
                                                         $price - $discount
-                                                        )}} 
+                                                        )}}
                                                     </span>
                                                 </div>
                                             </div>
@@ -1237,23 +1237,23 @@
                                             @if(Request::is('product/*'))
                                                 <a class="btn btn-primary btn-sm" href="{{route('product',$product->slug)}}">
                                                     <i class="czi-forward align-middle {{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}"></i>
-                                                    {{\App\CPU\translate('View')}}
+                                                    {{translate('View')}}
                                                 </a>
                                             @else
                                                 <a class="btn btn-primary btn-sm"
                                                 style="margin-top:0px;padding-top:5px;padding-bottom:5px;padding-left:10px;padding-right:10px;" href="javascript:"
                                                    onclick="quickView('{{$top->product->id}}')">
                                                     <i class="czi-eye align-middle {{Session::get('direction') === "rtl" ? 'ml-1' : 'mr-1'}}"></i>
-                                                    {{\App\CPU\translate('Quick')}}   {{\App\CPU\translate('View')}}
+                                                    {{translate('Quick')}}   {{translate('View')}}
                                                 </a>
                                             @endif
                                         </div>
-                                        
+
                                     </div>
                                 @endif
                             @endforeach
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -1282,20 +1282,20 @@
             <div style="background: #ffffff; padding:20px;border-radius:5px;">
                 <div class="flex-between pl-4">
                     <div class="category-product-view-title" >
-                        <span class="for-feature-title {{Session::get('direction') === "rtl" ? 'float-right' : 'float-left'}}" 
+                        <span class="for-feature-title {{Session::get('direction') === "rtl" ? 'float-right' : 'float-left'}}"
                                 style="font-weight: 700;font-size: 20px;text-transform: uppercase;{{Session::get('direction') === "rtl" ? 'text-align:right;' : 'text-align:left;'}}">
                                 {{Str::limit($category['name'],18)}}
                         </span>
                     </div>
                     <div class="category-product-view-all" >
                         <a class="text-capitalize view-all-text "
-                            href="{{route('products',['id'=> $category['id'],'data_from'=>'category','page'=>1])}}">{{ \App\CPU\translate('view_all')}}
+                            href="{{route('products',['id'=> $category['id'],'data_from'=>'category','page'=>1])}}">{{ translate('view_all')}}
                             <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left-circle mr-1 ml-n1 mt-1 float-left' : 'right-circle ml-1 mr-n1'}}"></i>
                         </a>
-                        
+
                     </div>
                 </div>
-    
+
                 <div class="row mt-2 mb-3 d-flex justify-content-between">
                     <div class="col-md-3 col-12 pl-3 pr-3">
                         <a href="{{route('products',['id'=> $category['id'],'data_from'=>'category','page'=>1])}}"
@@ -1316,8 +1316,8 @@
                         @endforeach
                          </div>
                     </div>
-                            
-                        
+
+
                 </div>
             </div>
         </section>
@@ -1335,7 +1335,7 @@
                     </div>
                     <div style="text-align: center;">
                         <p>
-                        {{ \App\CPU\translate('Fast Delivery all accross the country')}}
+                        {{ translate('Fast Delivery all accross the country')}}
                     </p>
                     </div>
                 </div>
@@ -1348,7 +1348,7 @@
                     </div>
                     <div style="text-align: center;">
                         <p>
-                        {{ \App\CPU\translate('Safe Payment')}}
+                        {{ translate('Safe Payment')}}
                     </p>
                     </div>
                 </div>
@@ -1361,7 +1361,7 @@
                     </div>
                     <div style="text-align: center;">
                         <p>
-                        {{ \App\CPU\translate('7 Days Return Policy')}}
+                        {{ translate('7 Days Return Policy')}}
                     </p>
                     </div>
                 </div>
@@ -1374,7 +1374,7 @@
                     </div>
                     <div style="text-align: center;">
                         <p>
-                        {{ \App\CPU\translate('100% Authentic Products')}}
+                        {{ translate('100% Authentic Products')}}
                     </p>
                     </div>
                 </div>
@@ -1388,12 +1388,12 @@
         <div class="main-icon-close bonus-icon">
             X
         </div>
-        
+
         <?php
         $socialI = 0;
         ?>
         @if(($socialMedia['bonus_facebook']))
-            <?php 
+            <?php
             $socialI ++;
             ?>
                 <a href="<?=$socialMedia['bonus_facebook']?>">
@@ -1402,9 +1402,9 @@
                     </div>
                 </a>
         @endif
-        
+
         @if(($socialMedia['bonus_WhatsApp']))
-            <?php 
+            <?php
             $socialI ++;
             ?>
                 <a href="<?=$socialMedia['bonus_WhatsApp']?>">
@@ -1413,9 +1413,9 @@
                     </div>
                 </a>
         @endif
-        
+
         @if(($socialMedia['bonus_phone']))
-            <?php 
+            <?php
             $socialI ++;
             ?>
                 <a href="<?=$socialMedia['bonus_phone']?>">
@@ -1424,9 +1424,9 @@
                     </div>
                 </a>
         @endif
-        
+
         @if(($socialMedia['bonus_telegram']))
-            <?php 
+            <?php
             $socialI ++;
             ?>
                 <a href="<?=$socialMedia['bonus_telegram']?>">
@@ -1435,7 +1435,7 @@
                     </div>
                 </a>
         @endif
-        
+
     </div>
 @endsection
 
@@ -1729,7 +1729,7 @@
                 }
             }
         })
-        
+
         $('.main-icon').on("click",function(e){
            $('.icons').addClass("icons-open");
         });

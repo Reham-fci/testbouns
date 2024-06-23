@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title',$seller->shop ? $seller->shop->name : \App\CPU\translate("shop name not found"))
+@section('title',$seller->shop ? $seller->shop->name : translate("shop name not found"))
 
 @push('css_or_js')
 
@@ -10,36 +10,36 @@
 <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">{{\App\CPU\translate('Dashboard')}}</a>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">{{translate('Dashboard')}}</a>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Seller_Details')}}</li>
+                <li class="breadcrumb-item" aria-current="page">{{translate('Seller_Details')}}</li>
             </ol>
         </nav>
 
         <!-- Page Heading -->
         <div class="flex-between d-sm-flex row align-items-center justify-content-between mb-2 mx-1">
             <div>
-                <a href="{{route('admin.sellers.seller-list')}}" class="btn btn-primary mt-3 mb-3">{{\App\CPU\translate('Back_to_seller_list')}}</a>
+                <a href="{{route('admin.sellers.seller-list')}}" class="btn btn-primary mt-3 mb-3">{{translate('Back_to_seller_list')}}</a>
             </div>
             <div>
                 @if ($seller->status=="pending")
                     <div class="mt-4">
                         <div class="flex-start">
                             <div class="mx-1"><h4><i class="tio-shop-outlined"></i></h4></div>
-                            <div>{{\App\CPU\translate('Seller_request_for_open_a_shop.')}}</div>
+                            <div>{{translate('Seller_request_for_open_a_shop.')}}</div>
                         </div>
                         <div class="text-center">
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="approved">
-                                <button type="submit" class="btn btn-primary">{{\App\CPU\translate('Approve')}}</button>
+                                <button type="submit" class="btn btn-primary">{{translate('Approve')}}</button>
                             </form>
                             <form class="d-inline-block" action="{{route('admin.sellers.updateStatus')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller->id}}">
                                 <input type="hidden" name="status" value="rejected">
-                                <button type="submit" class="btn btn-danger">{{\App\CPU\translate('reject')}}</button>
+                                <button type="submit" class="btn btn-danger">{{translate('reject')}}</button>
                             </form>
                         </div>
                     </div>
@@ -59,27 +59,27 @@
             <!-- Nav -->
             <ul class="nav nav-tabs page-header-tabs">
                 <li class="nav-item">
-                        <a class="nav-link " href="{{ route('admin.sellers.view',$seller->id) }}">{{\App\CPU\translate('Shop')}}</a>
+                        <a class="nav-link " href="{{ route('admin.sellers.view',$seller->id) }}">{{translate('Shop')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'order']) }}">{{\App\CPU\translate('Order')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'order']) }}">{{translate('Order')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'product']) }}">{{\App\CPU\translate('Product')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'product']) }}">{{translate('Product')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'setting']) }}">{{\App\CPU\translate('Setting')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'setting']) }}">{{translate('Setting')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'transaction']) }}">{{\App\CPU\translate('Transaction')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'transaction']) }}">{{translate('Transaction')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'review']) }}">{{\App\CPU\translate('Review')}}</a>
+                           href="{{ route('admin.sellers.view',['id'=>$seller->id, 'tab'=>'review']) }}">{{translate('Review')}}</a>
                     </li>
 
             </ul>
@@ -95,7 +95,7 @@
                     <div class="card h-100">
                         <div class="card-header">
                             <div class="flex-start">
-                                <div class="mx-1"><h3>{{\App\CPU\translate('products')}}</h3></div>
+                                <div class="mx-1"><h3>{{translate('products')}}</h3></div>
                                 <div><h3><span style="color: red;">({{$products->total()}})</span></h3></div>
                             </div>
                         </div>
@@ -110,13 +110,13 @@
                                     }'>
                                 <thead class="thead-light">
                                     <tr>
-                                        <th>{{\App\CPU\translate('SL#')}}</th>
-                                <th>{{\App\CPU\translate('Product Name')}}</th>
-                                <th>{{\App\CPU\translate('purchase_price')}}</th>
-                                <th>{{\App\CPU\translate('selling_price')}}</th>
-                                <th>{{\App\CPU\translate('featured')}}</th>
-                                <th>{{\App\CPU\translate('Active')}} {{\App\CPU\translate('status')}}</th>
-                                <th style="width: 5px" class="text-center">{{\App\CPU\translate('Action')}}</th>
+                                        <th>{{translate('SL#')}}</th>
+                                <th>{{translate('Product Name')}}</th>
+                                <th>{{translate('purchase_price')}}</th>
+                                <th>{{translate('selling_price')}}</th>
+                                <th>{{translate('featured')}}</th>
+                                <th>{{translate('Active')}} {{translate('status')}}</th>
+                                <th style="width: 5px" class="text-center">{{translate('Action')}}</th>
                                     </tr>
                                 </thead>
 
@@ -152,11 +152,11 @@
                                     <td>
                                         <a class="btn btn-primary btn-sm"
                                            href="{{route('admin.product.edit',[$p['id']])}}">
-                                            <i class="tio-edit"></i>{{\App\CPU\translate('Edit')}}
+                                            <i class="tio-edit"></i>{{translate('Edit')}}
                                         </a>
                                         <a class="btn btn-danger btn-sm" href="javascript:"
                                            onclick="form_alert('product-{{$p['id']}}','Want to delete this item ?')">
-                                            <i class="tio-add-to-trash"></i> {{\App\CPU\translate('Delete')}}
+                                            <i class="tio-add-to-trash"></i> {{translate('Delete')}}
                                         </a>
                                         <form action="{{route('admin.product.delete',[$p['id']])}}"
                                               method="post" id="product-{{$p['id']}}">
@@ -176,7 +176,7 @@
                 @if(count($products)==0)
                     <div class="text-center p-4">
                         <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                        <p class="mb-0">{{\App\CPU\translate('No_data_to_show')}}</p>
+                        <p class="mb-0">{{translate('No_data_to_show')}}</p>
                     </div>
                 @endif
                     </div>
@@ -215,9 +215,9 @@
                 },
                 success: function (data) {
                     if (data.success == true) {
-                        toastr.success('{{\App\CPU\translate('Status updated successfully')}}');
+                        toastr.success('{{translate('Status updated successfully')}}');
                     } else {
-                        toastr.error('{{\App\CPU\translate('Status updated failed. Product must be approved')}}');
+                        toastr.error('{{translate('Status updated failed. Product must be approved')}}');
                         location.reload();
                     }
                 }
@@ -237,7 +237,7 @@
                     id: id
                 },
                 success: function () {
-                    toastr.success('{{\App\CPU\translate('Featured status updated successfully')}}');
+                    toastr.success('{{translate('Featured status updated successfully')}}');
                 }
             });
         }

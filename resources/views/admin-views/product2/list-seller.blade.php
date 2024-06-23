@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('Product List'))
+@section('title', translate('Product List'))
 
 @push('css_or_js')
 
@@ -11,18 +11,18 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a
-                        href="{{route('admin.dashboard')}}">{{\App\CPU\translate('Dashboard')}}</a></li>
+                        href="{{route('admin.dashboard')}}">{{translate('Dashboard')}}</a></li>
                 @if($pro['data'] != null && $pro->first()->request_status == 0)
                     <li class="breadcrumb-item"
-                        aria-current="page">{{\App\CPU\translate('New')}} {{\App\CPU\translate('Products')}}</li>
+                        aria-current="page">{{translate('New')}} {{translate('Products')}}</li>
                 @elseif($pro['data'] != null && $pro->first()->request_status == 1)
                     <li class="breadcrumb-item"
-                        aria-current="page">{{\App\CPU\translate('Approved')}} {{\App\CPU\translate('Products')}}</li>
+                        aria-current="page">{{translate('Approved')}} {{translate('Products')}}</li>
                 @elseif($pro['data'] != null && $pro->first()->request_status == 2)
                     <li class="breadcrumb-item"
-                        aria-current="page">{{\App\CPU\translate('Denied')}} {{\App\CPU\translate('Products')}}</li>
+                        aria-current="page">{{translate('Denied')}} {{translate('Products')}}</li>
                 @else
-                    <li class="breadcrumb-item" aria-current="page">{{\App\CPU\translate('Products')}}  </li>
+                    <li class="breadcrumb-item" aria-current="page">{{translate('Products')}}  </li>
                 @endif
             </ol>
         </nav>
@@ -32,10 +32,10 @@
                 <div class="card">
                     @if($pro->first() != null && $pro->first()->added_by == 'in_house')
                         <div class="card-header">
-                            <h5>{{\App\CPU\translate('product_table')}}</h5>
+                            <h5>{{translate('product_table')}}</h5>
                             <a href="{{route('admin.product.add-new')}}" class="btn btn-primary  float-right">
                                 <i class="tio-add-circle"></i>
-                                <span class="text">{{\App\CPU\translate('Add new product')}}</span>
+                                <span class="text">{{translate('Add new product')}}</span>
                             </a>
                         </div>
                     @endif
@@ -46,16 +46,16 @@
                                    style="width: 100%">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th>{{\App\CPU\translate('SL#')}}</th>
-                                    <th>{{\App\CPU\translate('Product Name')}}</th>
-                                    <th>{{\App\CPU\translate('purchase_price')}}</th>
-                                    <th>{{\App\CPU\translate('selling_price')}}</th>
-                                    <th>{{\App\CPU\translate('verify_status')}}</th>
+                                    <th>{{translate('SL#')}}</th>
+                                    <th>{{translate('Product Name')}}</th>
+                                    <th>{{translate('purchase_price')}}</th>
+                                    <th>{{translate('selling_price')}}</th>
+                                    <th>{{translate('verify_status')}}</th>
                                     @if($pro->first() != null && $pro->first()->request_status != 2)
-                                        <th>{{\App\CPU\translate('featured')}}</th>
-                                        <th>{{\App\CPU\translate('Active')}} {{\App\CPU\translate('status')}}</th>
+                                        <th>{{translate('featured')}}</th>
+                                        <th>{{translate('Active')}} {{translate('status')}}</th>
                                     @endif
-                                    <th style="width: 5px" class="text-center">{{\App\CPU\translate('Action')}}</th>
+                                    <th style="width: 5px" class="text-center">{{translate('Action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -75,11 +75,11 @@
                                         </td>
                                         <td>
                                             @if($p->request_status == 0)
-                                                <label class="badge badge-warning">{{\App\CPU\translate('New Request')}}</label>
+                                                <label class="badge badge-warning">{{translate('New Request')}}</label>
                                             @elseif($p->request_status == 1)
-                                                <label class="badge badge-success">{{\App\CPU\translate('Approved')}}</label>
+                                                <label class="badge badge-success">{{translate('Approved')}}</label>
                                             @elseif($p->request_status == 2)
-                                                <label class="badge badge-danger">{{\App\CPU\translate('Denied')}}</label>
+                                                <label class="badge badge-danger">{{translate('Denied')}}</label>
                                             @endif
                                         </td>
                                         @if($p->request_status != 2)
@@ -101,11 +101,11 @@
                                         <td>
                                             <a class="btn btn-primary btn-sm"
                                                href="{{route('admin.product.edit',[$p['id']])}}">
-                                                <i class="tio-edit"></i>{{\App\CPU\translate('Edit')}}
+                                                <i class="tio-edit"></i>{{translate('Edit')}}
                                             </a>
                                             <a class="btn btn-danger btn-sm" href="javascript:"
                                                onclick="form_alert('product-{{$p['id']}}','Want to delete this item ?')">
-                                                <i class="tio-add-to-trash"></i> {{\App\CPU\translate('Delete')}}
+                                                <i class="tio-add-to-trash"></i> {{translate('Delete')}}
                                             </a>
                                             <form action="{{route('admin.product.delete',[$p['id']])}}"
                                                   method="post" id="product-{{$p['id']}}">
@@ -156,9 +156,9 @@
                 success: function (data) {
                     console.log(data)
                     if (data.success == true) {
-                        toastr.success('{{\App\CPU\translate('Status updated successfully')}}');
+                        toastr.success('{{translate('Status updated successfully')}}');
                     } else {
-                        toastr.error('{{\App\CPU\translate('Status updated failed. Product must be approved')}}');
+                        toastr.error('{{translate('Status updated failed. Product must be approved')}}');
                         location.reload();
                     }
                 }
@@ -178,7 +178,7 @@
                     id: id
                 },
                 success: function () {
-                    toastr.success('{{\App\CPU\translate('Featured status updated successfully')}}');
+                    toastr.success('{{translate('Featured status updated successfully')}}');
                 }
             });
         }

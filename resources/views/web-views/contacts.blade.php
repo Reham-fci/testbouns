@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('Contact Us'))
+@section('title',translate('Contact Us'))
 
 @push('css_or_js')
     <meta property="og:image" content="{{asset('storage/app/public/company')}}/{{$web_config['web_logo']->value}}"/>
@@ -55,7 +55,7 @@
     <div class="container rtl">
         <div class="row">
             <div class="col-md-12 sidebar_heading text-center mb-2">
-                <h1 class="h3  mb-0 folot-left headerTitle">{{\App\CPU\translate('contact_us')}}</h1>
+                <h1 class="h3  mb-0 folot-left headerTitle">{{translate('contact_us')}}</h1>
             </div>
         </div>
     </div>
@@ -68,22 +68,22 @@
             </div>
             <div class="col-lg-6 for-send-message px-4 px-xl-5  box-shadow-sm">
                 <h2 class="h4 mb-4 text-center"
-                    style="color: #030303; font-weight:600;">{{\App\CPU\translate('send_us_a_message')}}</h2>
+                    style="color: #030303; font-weight:600;">{{translate('send_us_a_message')}}</h2>
                     <form action="{{route('contact.store')}}" method="POST" id="getResponse">
                         @csrf
                         <div class="row">
                           <div class="col-sm-6">
                               <div class="form-group">
-                                <label >{{\App\CPU\translate('your_name')}}</label>
-                                <input class="form-control name" name="name" type="text" 
+                                <label >{{translate('your_name')}}</label>
+                                <input class="form-control name" name="name" type="text"
                                   value="{{ old('name') }}" placeholder="John Doe" required>
 
                               </div>
                             </div>
                           <div class="col-sm-6">
                               <div class="form-group">
-                                <label for="cf-email">{{\App\CPU\translate('email_address')}}</label>
-                                <input class="form-control email" name="email" type="email" 
+                                <label for="cf-email">{{translate('email_address')}}</label>
+                                <input class="form-control email" name="email" type="email"
                                   value="{{ old('email') }}"
                                   placeholder="johndoe@email.com" required >
 
@@ -91,23 +91,23 @@
                             </div>
                             <div class="col-sm-6">
                               <div class="form-group">
-                                <label for="cf-phone">{{\App\CPU\translate('your_phone')}}</label>
+                                <label for="cf-phone">{{translate('your_phone')}}</label>
                                 <input class="form-control mobile_number"  type="text" name="mobile_number"
-                                  value="{{ old('mobile_number') }}"  placeholder="{{\App\CPU\translate('Contact Number')}}" required>
+                                  value="{{ old('mobile_number') }}"  placeholder="{{translate('Contact Number')}}" required>
 
                               </div>
                             </div>
                             <div class="col-sm-6">
                               <div class="form-group">
-                                <label for="cf-subject">{{\App\CPU\translate('Subject')}}:</label>
-                                <input class="form-control subject" type="text" name="subject" 
-                                  value="{{ old('subject') }}"   placeholder="{{\App\CPU\translate('Short title')}}" required>
+                                <label for="cf-subject">{{translate('Subject')}}:</label>
+                                <input class="form-control subject" type="text" name="subject"
+                                  value="{{ old('subject') }}"   placeholder="{{translate('Short title')}}" required>
 
                               </div>
                             </div>
                              <div class="col-md-12">
                             <div class="form-group">
-                              <label for="cf-message">{{\App\CPU\translate('Message')}}</label>
+                              <label for="cf-message">{{translate('Message')}}</label>
                               <textarea class="form-control message" name="message"   rows="6" required>{{ old('subject') }}</textarea>
                             </div>
                           </div>
@@ -121,7 +121,7 @@
                             <div class="row p-2">
                                 <div class="col-6 pr-0">
                                     <input type="text" class="form-control form-control-lg" name="default_captcha_value" value=""
-                                        placeholder="{{\App\CPU\translate('Enter captcha value')}}" style="border: none" autocomplete="off">
+                                        placeholder="{{translate('Enter captcha value')}}" style="border: none" autocomplete="off">
                                 </div>
                                 <div class="col-6 input-icons" style="border-radius: 5px;">
                                     <a onclick="javascript:re_captcha();">
@@ -132,7 +132,7 @@
                             </div>
                         @endif
                         <div class=" ">
-                          <button class="btn btn-primary" type="submit" >{{\App\CPU\translate('send')}}</button>
+                          <button class="btn btn-primary" type="submit" >{{translate('send')}}</button>
                       </div>
                     </form>
             </div>
@@ -157,10 +157,10 @@
     <script>
         $("#getResponse").on('submit', function (e) {
             var response = grecaptcha.getResponse();
-        
+
             if (response.length === 0) {
                 e.preventDefault();
-                toastr.error("{{\App\CPU\translate('Please check the recaptcha')}}");
+                toastr.error("{{translate('Please check the recaptcha')}}");
             }
         });
     </script>

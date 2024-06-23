@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', \App\CPU\translate('updated_product_list'))
+@section('title', translate('updated_product_list'))
 
 @push('css_or_js')
 
@@ -16,7 +16,7 @@
                     <div class="row flex-between justify-content-between align-items-center flex-grow-1">
                         <div class="col-12 mb-1 col-md-4">
                             <h5 class="flex-between">
-                                <div>{{\App\CPU\translate('product_table')}} ({{ $pro->total() }})</div>
+                                <div>{{translate('product_table')}} ({{ $pro->total() }})</div>
                             </h5>
                         </div>
                         <div class="col-12 mb-1 col-md-3" style="width: 40vw">
@@ -29,14 +29,14 @@
                                         </div>
                                     </div>
                                     <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                           placeholder="{{\App\CPU\translate('Search Product Name')}}" aria-label="Search orders"
+                                           placeholder="{{translate('Search Product Name')}}" aria-label="Search orders"
                                            value="{{ $search }}" required>
-                                    <button type="submit" class="btn btn-primary">{{\App\CPU\translate('search')}}</button>
+                                    <button type="submit" class="btn btn-primary">{{translate('search')}}</button>
                                 </div>
                             </form>
                             <!-- End Search -->
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="card-body" style="padding: 0">
@@ -46,11 +46,11 @@
                                style="width: 100%">
                             <thead class="thead-light">
                             <tr>
-                                <th>{{\App\CPU\translate('SL#')}}</th>
-                                <th>{{\App\CPU\translate('Product Name')}}</th>
-                                <th>{{\App\CPU\translate('previous_shipping_cost')}}</th>
-                                <th>{{\App\CPU\translate('new_shipping_cost')}}</th>
-                                <th style="width: 5px" class="text-center">{{\App\CPU\translate('Action')}}</th>
+                                <th>{{translate('SL#')}}</th>
+                                <th>{{translate('Product Name')}}</th>
+                                <th>{{translate('previous_shipping_cost')}}</th>
+                                <th>{{translate('new_shipping_cost')}}</th>
+                                <th style="width: 5px" class="text-center">{{translate('Action')}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -68,15 +68,15 @@
                                     <td>
                                         {{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($p['temp_shipping_cost']))}}
                                     </td>
-                                    
+
                                     <td>
                                         <button class="btn btn-primary btn-sm"
                                          onclick="update_shipping_status({{$p['id']}},1)">
-                                            {{\App\CPU\translate('approved')}}
+                                            {{translate('approved')}}
                                         </button>
                                         <button class="btn btn-danger btn-sm"
                                             onclick="update_shipping_status({{$p['id']}},0)">
-                                            {{\App\CPU\translate('deneid')}}
+                                            {{translate('deneid')}}
                                         </button>
                                     </td>
                                 </tr>
@@ -91,7 +91,7 @@
                 @if(count($pro)==0)
                     <div class="text-center p-4">
                         <img class="mb-3" src="{{asset('public/assets/back-end')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">
-                        <p class="mb-0">{{\App\CPU\translate('No data to show')}}</p>
+                        <p class="mb-0">{{translate('No data to show')}}</p>
                     </div>
                 @endif
             </div>
@@ -103,7 +103,7 @@
 @push('script')
 <script>
     function update_shipping_status(product_id,status) {
-        
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -117,8 +117,8 @@
                     status:status
                 },
                 success: function (data) {
-                    
-                    toastr.success('{{\App\CPU\translate('status updated successfully')}}');
+
+                    toastr.success('{{translate('status updated successfully')}}');
                     location.reload();
                 }
             });

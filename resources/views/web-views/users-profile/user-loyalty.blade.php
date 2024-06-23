@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('My Loyalty Point'))
+@section('title',translate('My Loyalty Point'))
 
 @push('css_or_js')
     <style>
@@ -84,7 +84,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-9 mt-2 sidebar_heading">
-                <h1 class="h3  mb-0 p-3 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{\App\CPU\translate('my_loyalty_point')}}</h1>
+                <h1 class="h3  mb-0 p-3 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{translate('my_loyalty_point')}}</h1>
             </div>
         </div>
     </div>
@@ -106,18 +106,18 @@
                         <div class="d-flex justify-content-between">
                             <div>
                                 <span>
-                                    {{\App\CPU\translate('loyalty_point_history')}}
+                                    {{translate('loyalty_point_history')}}
                                 </span>
                             </div>
                             <div>
                                 <span>
-                                    {{\App\CPU\translate('total_loyalty_point')}} : {{$total_loyalty_point}}
+                                    {{translate('total_loyalty_point')}} : {{$total_loyalty_point}}
                                 </span>
                             </div>
                             <div>
                                 @if ($wallet_status == 1 && $loyalty_point_status == 1)
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#convertToCurrency">
-                                    {{\App\CPU\translate('convert_to_currency')}} 
+                                    {{translate('convert_to_currency')}}
                                 </button>
                                 @endif
                             </div>
@@ -130,33 +130,33 @@
                                 <tr style="background-color: #6b6b6b;">
                                     <td class="tdBorder">
                                         <div class="py-2"><span
-                                                class="d-block spandHeadO ">{{\App\CPU\translate('sl#')}}</span></div>
+                                                class="d-block spandHeadO ">{{translate('sl#')}}</span></div>
                                     </td>
                                     <td class="tdBorder">
                                         <div class="py-2"><span
-                                                class="d-block spandHeadO">{{\App\CPU\translate('transaction_type')}} </span>
+                                                class="d-block spandHeadO">{{translate('transaction_type')}} </span>
                                         </div>
                                     </td>
                                     <td class="tdBorder">
                                         <div class="py-2"><span
-                                                class="d-block spandHeadO">{{\App\CPU\translate('credit')}} </span>
+                                                class="d-block spandHeadO">{{translate('credit')}} </span>
                                         </div>
                                     </td>
                                     <td class="tdBorder">
                                         <div class="py-2"><span
-                                                class="d-block spandHeadO"> {{\App\CPU\translate('debit')}}</span></div>
+                                                class="d-block spandHeadO"> {{translate('debit')}}</span></div>
                                     </td>
                                     <td class="tdBorder">
                                         <div class="py-2"><span
-                                                class="d-block spandHeadO"> {{\App\CPU\translate('balance')}}</span></div>
+                                                class="d-block spandHeadO"> {{translate('balance')}}</span></div>
                                     </td>
                                     <td class="tdBorder">
                                         <div class="py-2"><span
-                                                class="d-block spandHeadO"> {{\App\CPU\translate('date')}}</span></div>
+                                                class="d-block spandHeadO"> {{translate('date')}}</span></div>
                                     </td>
                                 </tr>
                                 </thead>
-    
+
                                 <tbody>
                                 @foreach($loyalty_point_list as $key=>$item)
                                     <tr>
@@ -168,32 +168,32 @@
                                         <td class="bodytr orderDate"><span class="">{{ $item['debit']}}</span></td>
                                         <td class="bodytr orderDate"><span class="">{{ $item['balance']}}</span></td>
                                         <td class="bodytr orderDate"><span class="">{{$item['created_at']}}</span></td>
-                                        
+
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
                             @if($loyalty_point_list->count()==0)
-                                <center class="mt-3 mb-2">{{\App\CPU\translate('no_transaction_found')}}</center>
+                                <center class="mt-3 mb-2">{{translate('no_transaction_found')}}</center>
                             @endif
                             <div class="card-footer">
                                 {{$loyalty_point_list->links()}}
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </section>
         </div>
     </div>
 
-  
+
   <!-- Modal -->
   <div class="modal fade" id="convertToCurrency" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">{{\App\CPU\translate('convert_to_currency')}}</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">{{translate('convert_to_currency')}}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -203,31 +203,31 @@
         <div class="modal-body">
             <div>
                 <span>
-                    {{\App\CPU\translate('your loyalty point will convert to currency and transfer to your wallet')}}
+                    {{translate('your loyalty point will convert to currency and transfer to your wallet')}}
                 </span>
             </div>
             <div class="text-center">
                 <span class="text-warning">
-                    {{\App\CPU\translate('minimum point for convert to currency is :')}} {{App\CPU\Helpers::get_business_settings('loyalty_point_minimum_point')}} {{\App\CPU\translate('point')}}
+                    {{translate('minimum point for convert to currency is :')}} {{App\CPU\Helpers::get_business_settings('loyalty_point_minimum_point')}} {{translate('point')}}
                 </span>
             </div>
             <div class="text-center">
                 <span >
-                    {{App\CPU\Helpers::get_business_settings('loyalty_point_exchange_rate')}} {{\App\CPU\translate('point')}} = {{\App\CPU\Helpers::currency_converter(1)}}
+                    {{App\CPU\Helpers::get_business_settings('loyalty_point_exchange_rate')}} {{translate('point')}} = {{\App\CPU\Helpers::currency_converter(1)}}
                 </span>
             </div>
-          
+
             <div class="form-row">
                 <div class="form-group col-12">
-                    
+
                     <input class="form-control" type="number" id="city" name="point" required>
                 </div>
             </div>
-          
+
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{\App\CPU\translate('close')}}</button>
-          <button type="submit" class="btn btn-primary">{{\App\CPU\translate('submit')}}</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{translate('close')}}</button>
+          <button type="submit" class="btn btn-primary">{{translate('submit')}}</button>
         </div>
     </form>
       </div>
@@ -236,5 +236,5 @@
 @endsection
 
 @push('script')
-    
+
 @endpush

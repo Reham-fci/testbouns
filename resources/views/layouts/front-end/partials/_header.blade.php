@@ -220,7 +220,7 @@
                     <form action="{{route('products')}}" type="submit" class="search_form">
                         <input class="form-control appended-form-control search-bar-input" type="text"
                                autocomplete="off"
-                               placeholder="{{\App\CPU\translate('search')}}"
+                               placeholder="{{translate('search')}}"
                                name="name">
                         <button class="input-group-append-overlay search_button" type="submit"
                                 style="border-radius: {{Session::get('direction') === "rtl" ? '7px 0px 0px 7px; right: unset; left: 0' : '0px 7px 7px 0px; left: unset; right: 0'}};top:0">
@@ -240,7 +240,7 @@
                 <!-- Toolbar-->
                 <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center" style="margin-right: 10px;">
                     <a class="navbar-tool navbar-stuck-toggler" href="#">
-                        <span class="navbar-tool-tooltip">{{\App\CPU\translate('Expand menu')}}</span>
+                        <span class="navbar-tool-tooltip">{{translate('Expand menu')}}</span>
                         <div class="navbar-tool-icon-box">
                             <i class="navbar-tool-icon czi-menu"></i>
                         </div>
@@ -267,18 +267,18 @@
                                     </div>
                                 </div>
                                 <div class="navbar-tool-text">
-                                    <small>{{\App\CPU\translate('hello')}}, {{auth('customer')->user()->f_name}}</small>
-                                    {{\App\CPU\translate('dashboard')}}
+                                    <small>{{translate('hello')}}, {{auth('customer')->user()->f_name}}</small>
+                                    {{translate('dashboard')}}
                                 </div>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item"
-                                   href="{{route('account-oder')}}"> {{ \App\CPU\translate('my_order')}} </a>
+                                   href="{{route('account-oder')}}"> {{ translate('my_order')}} </a>
                                 <a class="dropdown-item"
-                                   href="{{route('user-account')}}"> {{ \App\CPU\translate('my_profile')}}</a>
+                                   href="{{route('user-account')}}"> {{ translate('my_profile')}}</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item"
-                                   href="{{route('customer.auth.logout')}}">{{ \App\CPU\translate('logout')}}</a>
+                                   href="{{route('customer.auth.logout')}}">{{ translate('logout')}}</a>
                             </div>
                         </div>
                     @else
@@ -295,11 +295,11 @@
                             <div class="dropdown-menu dropdown-menu-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}" aria-labelledby="dropdownMenuButton"
                                  style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                                 <a class="dropdown-item" href="{{route('customer.auth.login')}}">
-                                    <i class="fa fa-sign-in {{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}}"></i> {{\App\CPU\translate('sing_in')}}
+                                    <i class="fa fa-sign-in {{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}}"></i> {{translate('sing_in')}}
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{route('customer.auth.sign-up')}}">
-                                    <i class="fa fa-user-circle {{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}}"></i>{{\App\CPU\translate('sing_up')}}
+                                    <i class="fa fa-user-circle {{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}}"></i>{{translate('sing_up')}}
                                 </a>
                             </div>
                         </div>
@@ -320,7 +320,7 @@
                         <form action="{{route('products')}}" type="submit" class="search_form">
                             <input class="form-control appended-form-control search-bar-input-mobile" type="text"
                                    autocomplete="off"
-                                   placeholder="{{\App\CPU\translate('search')}}" name="name">
+                                   placeholder="{{translate('search')}}" name="name">
                             <input name="data_from" value="search" hidden>
                             <input name="page" value="1" hidden>
                             <button class="input-group-append-overlay search_button" type="submit"
@@ -346,7 +346,7 @@
                                 <i class="czi-menu align-middle mt-n1 {{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}}"></i>
                                 <span
                                     style="margin-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}: 40px !important;margin-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}: 50px">
-                                    {{ \App\CPU\translate('categories')}}
+                                    {{ translate('categories')}}
                                 </span>
                             </a>
                             @if(request()->is('/'))
@@ -412,7 +412,7 @@
                                     @endforeach
                                     <a class="dropdown-item text-capitalize" href="{{route('categories')}}"
                                        style="color: {{$web_config['primary_color']}} !important;{{Session::get('direction') === "rtl" ? 'right' : 'left'}}: 29%">
-                                        {{\App\CPU\translate('view_more')}}
+                                        {{translate('view_more')}}
 
                                         <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}" style="font-size: 8px !important;background:none !important;color:#4B5864;"></i>
                                     </a>
@@ -476,7 +476,7 @@
                                     @endforeach
                                     <a class="dropdown-item" href="{{route('categories')}}"
                                        style="color: {{$web_config['primary_color']}} !important;{{Session::get('direction') === "rtl" ? 'right' : 'left'}}: 29%">
-                                        {{\App\CPU\translate('view_more')}}
+                                        {{translate('view_more')}}
 
                                         <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left' : 'right'}}" style="font-size: 8px !important;background:none !important;color:{{$web_config['primary_color']}} !important;"></i>
                                     </a>
@@ -491,7 +491,7 @@
                                href="#" data-toggle="dropdown">
                                 <i class="czi-menu align-middle mt-n1 {{Session::get('direction') === "rtl" ? 'ml-2' : 'mr-2'}}"></i>
                                 <span
-                                    style="margin-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}: 20px !important;">{{ \App\CPU\translate('categories')}}</span>
+                                    style="margin-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}: 20px !important;">{{ translate('categories')}}</span>
                             </a>
                             <ul class="dropdown-menu"
                                 style="right: 0%; text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
@@ -538,12 +538,12 @@
                     <!-- Primary menu-->
                     <ul class="navbar-nav" style="{{Session::get('direction') === "rtl" ? 'padding-right: 0px' : ''}}">
                         <li class="nav-item dropdown {{request()->is('/')?'active':''}}">
-                            <a class="nav-link" href="{{route('home')}}">{{ \App\CPU\translate('Home')}}</a>
+                            <a class="nav-link" href="{{route('home')}}">{{ translate('Home')}}</a>
                         </li>
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#"
-                               data-toggle="dropdown">{{ \App\CPU\translate('brand') }}</a>
+                               data-toggle="dropdown">{{ translate('brand') }}</a>
                             <ul class="dropdown-menu dropdown-menu-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} scroll-bar"
                                 style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                                 @foreach(\App\CPU\BrandManager::get_brands() as $brand)
@@ -565,7 +565,7 @@
                                     <div>
                                         <a class="dropdown-item" href="{{route('brands')}}"
                                         style="color: {{$web_config['primary_color']}} !important;">
-                                            {{ \App\CPU\translate('View_more') }}
+                                            {{ translate('View_more') }}
                                         </a>
                                     </div>
                                 </li>
@@ -574,14 +574,14 @@
                         @php($discount_product = App\Model\Product::with(['reviews'])->active()->where('discount', '!=', 0)->count())
                         @if ($discount_product>0)
                             <li class="nav-item dropdown {{request()->is('/')?'active':''}}">
-                                <a class="nav-link text-capitalize" href="{{route('products',['data_from'=>'discounted','page'=>1])}}">{{ \App\CPU\translate('discounted_products')}}</a>
+                                <a class="nav-link text-capitalize" href="{{route('products',['data_from'=>'discounted','page'=>1])}}">{{ translate('discounted_products')}}</a>
                             </li>
                         @endif
 
                         @php($business_mode=\App\CPU\Helpers::get_business_settings('business_mode'))
                         @if ($business_mode == 'multi')
                             <li class="nav-item dropdown {{request()->is('/')?'active':''}}">
-                                <a class="nav-link" href="{{route('sellers')}}">{{ \App\CPU\translate('Sellers')}}</a>
+                                <a class="nav-link" href="{{route('sellers')}}">{{ translate('Sellers')}}</a>
                             </li>
 
                             @php($seller_registration=\App\Model\BusinessSetting::where(['type'=>'seller_registration'])->first()->value)
@@ -591,16 +591,16 @@
                                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                                 style="color: white;margin-top: 5px; padding-{{Session::get('direction') === "rtl" ? 'right' : 'left'}}: 0">
-                                            {{ \App\CPU\translate('Seller')}}  {{ \App\CPU\translate('zone')}}
+                                            {{ translate('Seller')}}  {{ translate('zone')}}
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
                                             style="min-width: 165px !important; text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};">
                                             <a class="dropdown-item" href="{{route('shop.apply')}}">
-                                                {{ \App\CPU\translate('Become a')}} {{ \App\CPU\translate('Seller')}}
+                                                {{ translate('Become a')}} {{ translate('Seller')}}
                                             </a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="{{route('seller.auth.login')}}">
-                                                {{ \App\CPU\translate('Seller')}}  {{ \App\CPU\translate('login')}}
+                                                {{ translate('Seller')}}  {{ translate('login')}}
                                             </a>
                                         </div>
                                     </div>

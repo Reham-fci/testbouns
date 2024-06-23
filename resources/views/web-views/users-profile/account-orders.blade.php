@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',\App\CPU\translate('My Order List'))
+@section('title',translate('My Order List'))
 
 @push('css_or_js')
     <style>
@@ -84,7 +84,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-9 mt-2 sidebar_heading">
-                <h1 class="h3  mb-0 p-3 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{\App\CPU\translate('my_order')}}</h1>
+                <h1 class="h3  mb-0 p-3 float-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} headerTitle">{{translate('my_order')}}</h1>
             </div>
         </div>
     </div>
@@ -104,25 +104,25 @@
                             <tr style="background-color: #6b6b6b;">
                                 <td class="tdBorder">
                                     <div class="py-2"><span
-                                            class="d-block spandHeadO ">{{\App\CPU\translate('Order#')}}</span></div>
+                                            class="d-block spandHeadO ">{{translate('Order#')}}</span></div>
                                 </td>
 
                                 <td class="tdBorder orderDate">
                                     <div class="py-2"><span
-                                            class="d-block spandHeadO">{{\App\CPU\translate('Order')}} {{\App\CPU\translate('Date')}}</span>
+                                            class="d-block spandHeadO">{{translate('Order')}} {{translate('Date')}}</span>
                                     </div>
                                 </td>
                                 <td class="tdBorder">
                                     <div class="py-2"><span
-                                            class="d-block spandHeadO"> {{\App\CPU\translate('Status')}}</span></div>
+                                            class="d-block spandHeadO"> {{translate('Status')}}</span></div>
                                 </td>
                                 <td class="tdBorder">
                                     <div class="py-2"><span
-                                            class="d-block spandHeadO"> {{\App\CPU\translate('Total')}}</span></div>
+                                            class="d-block spandHeadO"> {{translate('Total')}}</span></div>
                                 </td>
                                 <td class="tdBorder">
                                     <div class="py-2"><span
-                                            class="d-block spandHeadO"> {{\App\CPU\translate('action')}}</span></div>
+                                            class="d-block spandHeadO"> {{translate('action')}}</span></div>
                                 </td>
                             </tr>
                             </thead>
@@ -131,21 +131,21 @@
                             @foreach($orders as $order)
                                 <tr>
                                     <td class="bodytr font-weight-bold">
-                                        {{\App\CPU\translate('ID')}}: {{$order['id']}}
+                                        {{translate('ID')}}: {{$order['id']}}
                                     </td>
                                     <td class="bodytr orderDate"><span class="">{{$order['created_at']}}</span></td>
                                     <td class="bodytr">
                                         @if($order['order_status']=='failed' || $order['order_status']=='canceled')
                                             <span class="badge badge-danger text-capitalize">
-                                                {{\App\CPU\translate($order['order_status'])}}
+                                                {{translate($order['order_status'])}}
                                             </span>
                                         @elseif($order['order_status']=='confirmed' || $order['order_status']=='processing' || $order['order_status']=='delivered')
                                             <span class="badge badge-success text-capitalize">
-                                                {{\App\CPU\translate($order['order_status'])}}
+                                                {{translate($order['order_status'])}}
                                             </span>
                                         @else
                                             <span class="badge badge-info text-capitalize">
-                                                {{\App\CPU\translate($order['order_status'])}}
+                                                {{translate($order['order_status'])}}
                                             </span>
                                         @endif
                                     </td>
@@ -155,17 +155,17 @@
                                     <td class="bodytr">
                                         <a href="{{ route('account-order-details', ['id'=>$order->id]) }}"
                                            class="btn btn-primary p-2">
-                                            <i class="fa fa-eye"></i> {{\App\CPU\translate('view')}}
+                                            <i class="fa fa-eye"></i> {{translate('view')}}
                                         </a>
                                         @if($order['payment_method']=='cash_on_delivery' && $order['order_status']=='pending')
                                             <a href="javascript:"
-                                               onclick="route_alert('{{ route('order-cancel',[$order->id]) }}','{{\App\CPU\translate('want_to_cancel_this_order?')}}')"
+                                               onclick="route_alert('{{ route('order-cancel',[$order->id]) }}','{{translate('want_to_cancel_this_order?')}}')"
                                                class="btn btn-danger p-2 top-margin">
-                                                <i class="fa fa-trash"></i> {{\App\CPU\translate('cancel')}}
+                                                <i class="fa fa-trash"></i> {{translate('cancel')}}
                                             </a>
                                         @else
                                             <button class="btn btn-danger p-2 top-margin" onclick="cancel_message()">
-                                                <i class="fa fa-trash"></i> {{\App\CPU\translate('cancel')}}
+                                                <i class="fa fa-trash"></i> {{translate('cancel')}}
                                             </button>
                                         @endif
                                     </td>
@@ -174,7 +174,7 @@
                             </tbody>
                         </table>
                         @if($orders->count()==0)
-                            <center class="mt-3 mb-2">{{\App\CPU\translate('no_order_found')}}</center>
+                            <center class="mt-3 mb-2">{{translate('no_order_found')}}</center>
                         @endif
 
                         <div class="card-footer">
@@ -190,7 +190,7 @@
 @push('script')
     <script>
         function cancel_message() {
-            toastr.info('{{\App\CPU\translate('order_can_be_canceled_only_when_pending.')}}', {
+            toastr.info('{{translate('order_can_be_canceled_only_when_pending.')}}', {
                 CloseButton: true,
                 ProgressBar: true
             });
